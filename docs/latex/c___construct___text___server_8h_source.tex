@@ -1,0 +1,1564 @@
+\doxysection{c\+\_\+\+Construct\+\_\+\+Text\+\_\+\+Server.\+h}
+\hypertarget{c___construct___text___server_8h_source}{}\label{c___construct___text___server_8h_source}\index{include/NT4/c\_Construct\_Text\_Server.h@{include/NT4/c\_Construct\_Text\_Server.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{const}\ std::string\ RETURN\_FILE\ =\ \textcolor{stringliteral}{"{}./Output/returned.ssv"{}};}
+\DoxyCodeLine{00052\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classc___construct___text___server}{c\_Construct\_Text\_Server}}}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//The\ construct\ to\ hook\ into.}}
+\DoxyCodeLine{00057\ \ \ \ \ NT4::c\_Construct\_API\ API;}
+\DoxyCodeLine{00058\ \ \ \ \ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//Current\ server\ tick.}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{int}\ Tick;}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==\ \ write\_to\_output\ \ ==-\/-\/-\/}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{int}\ write\_to\_output(std::string\ p\_FName,\ uint64\_t\ p\_Data)}
+\DoxyCodeLine{00064\ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ write\_to\_output\ |"{};}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\ -\/\ FName\ \(\backslash\)"{}"{}\ <<\ p\_FName\ <<\ "{}\(\backslash\)"{}\ Data:"{}\ <<\ p\_Data;}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ std::ofstream\ tmp\_Out(p\_FName,\ std::ios::app);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ flag\ file\ exists\ and\ can\ be\ opened}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Out.is\_open())}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Out\ <<\ p\_Data;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ tmp\_Out.close();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00079\ \ \ \ \ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==\ \ write\_to\_output\ \ ==-\/-\/-\/}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{int}\ write\_to\_output(std::string\ p\_FName,\ std::string\ p\_Data)}
+\DoxyCodeLine{00083\ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ write\_to\_output\ |"{};}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ std::ofstream\ tmp\_Out(p\_FName,\ std::ios::app);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ flag\ file\ exists\ and\ can\ be\ opened}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Out.is\_open())}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Out\ <<\ p\_Data;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ tmp\_Out.close();}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{int}\ eval\_Command(std::string\ p\_Command,\ std::ifstream*\ p\_File)}
+\DoxyCodeLine{00104\ \ \ \ \ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Meta\ commands\ for\ the\ engine\ rather\ than\ the\ nodes\ and\ internal\ structures.}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}exit"{}})\ \{\ \textcolor{keywordflow}{return}\ -\/1;\ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Data\ Loading\ and\ Preparation:}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}reset\_Input"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ad4eebf315113910670ef8f01b5bebc9f}{reset\_Input}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}set\_Input"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a04ecf7c8d1e5a740d9a33fe12d10a5ad}{set\_Input}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}set\_Input\_uint"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a5d02da651068631fb3407d219d0c0d8e}{set\_Input\_uint}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}set\_2D\_Input\_uint"{}})\ \{\ set\_2D\_Input\_uint(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}set\_3D\_Input\_uint"{}})\ \{\ set\_3D\_Input\_uint(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}load\_Input"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ae2a5e745eb4e47fee0064ca92aa0c2ed}{load\_Input}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}load\_Input\_uint"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_addd245de8b70cde87aeec9ef5f9ee7e2}{load\_Input\_uint}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Neural\ Network\ Construction\ and\ Initialization:}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}register\_New\_Construct"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ad8f22746a98dc6ed0e3bb3e5ac6a01fc}{register\_New\_Construct}}();\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}register\_Assembly"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_aaf226802b28f9c9a48b49ef4fa0e56a8}{register\_Assembly}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}set\_State\_Nodes\_Index"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a3be6c291b0c5ad8be48b09bc144bed68}{set\_State\_Nodes\_Index}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Saving\ and\ loading\ the\ whole\ thing.}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}save"{}})\ \{\ save(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}load"{}})\ \{\ load(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Node\ Manipulations}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}set\_Type"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a475eb56659e2ddb166163704d42bafc4}{set\_Type}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}add\_Axon\_Index"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_af9c1608480eecd776b3bd4a182956a47}{add\_Axon\_Index}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}set\_Dendrites"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a09404fc5ad69a0b09826d03b21dd2bc1}{set\_Dendrites}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}does\_Upper\_Tier\_Connection\_Exist"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ae1e8fcbb11b03289e2a011cf464224fa}{does\_Upper\_Tier\_Connection\_Exist}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}does\_Lower\_Connection\_Exist"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_af740c907e03325e299d611e270bb6e40}{does\_Lower\_Connection\_Exist}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}bind\_State"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ae006adef321f75481453c3478006d68d}{bind\_State}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}bp\_O"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a9516daf43b865cb75bb98949b375ab49}{bp\_O}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Network\ Manipulations}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}get\_Upper\_Tier\_Node"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ab00c38697a0af6242ebe8d03f3622edc}{get\_Upper\_Tier\_Node}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}does\_State\_Node\_Exist"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a90e2882099251f5f94fafa9598955e5d}{does\_State\_Node\_Exist}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}get\_State\_Node"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a87101ad825a93638ec15d1c9411f10c6}{get\_State\_Node}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}does\_Upper\_Tier\_Connection\_Exist\_Network"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a9f472fb6461e3a1460b81e20b5e43c94}{does\_Upper\_Tier\_Connection\_Exist\_Network}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}new\_Node"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_af800a27f84cbcbaaf20778342fef8bb5}{new\_Node}}();\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}new\_State\_Node"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a692f286375b7b06c646a8f5f549b49d0}{new\_State\_Node}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}create\_Connections"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a48748e63a8fc09caec37456702194a6c}{create\_Connections}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Network\ Encoding}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}encode"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_aa850c7ca8094730d117ef52c0bb63f93}{encode}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Network\ Evaluation\ and\ Inference:}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}query"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_adc7c049185d08bb31ffd5a54564572ad}{query}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}query\_Spacial"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a6d33fb55089f40f7b4821750c1cedcbb}{query\_Spacial}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}query\_Given\_Index"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ac3a9a9996d29030fc6165ff49eeb79cf}{query\_Given\_Index}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}query\_Given\_Legs"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a0d6b56adab575328125b8650ff74ac6d}{query\_Given\_Legs}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}submit\_Set"{}})\ \{\ submit\_Set(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Network\ Output\ Gathering}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}get\_Treetop\_NID"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ad42ad6252407a2a611c6a05bf4d0704f}{get\_Treetop\_NID}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_Given\_Trace"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a35dd21a221a907189867c9de4795189f}{gather\_Given\_Trace}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_All\_Traces"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a11e8037394004a42a8b735c6b19280ba}{gather\_All\_Traces}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_Given\_Node"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a94d09c754a3899a0b1c75a57624e3715}{gather\_Given\_Node}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_Given\_Node\_uint"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a6662cc0306ac130aaa444daf461e5028}{gather\_Given\_Node\_uint}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_All\_Nodes"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ace28357789021a38f7a2eda4b5cfc569}{gather\_All\_Nodes}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_All\_Nodes\_uint"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ade341194e7e36688780577a8394029df}{gather\_All\_Nodes\_uint}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_Output"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a7e0aa5a19bde777d70075936f32e8574}{gather\_Output}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_Output\_uint"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a22244e0f8ca7d9dd0a2d024878196e48}{gather\_Output\_uint}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_Treetop\_Node"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ad7f78ebe85659943e8acbcddf9241b29}{gather\_Treetop\_Node}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_Treetop\_Node\_uint"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a01af422b47451f4761ea60e74b59eb16}{gather\_Treetop\_Node\_uint}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}gather\_Treetop\_NID"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a7dd787a6e3a33287c796d314f26795a3}{gather\_Treetop\_NID}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{comment}{//File\ Output:}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}clear\_Output"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a07c25f72831938747ca959cc423e2985}{clear\_Output}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Newline"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a67d6675fb0650c609d6f89940bd1c487}{output\_Newline}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Console\ Output:}}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Node\_Raw"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a4e20c3d32f5b1eb8e4f83f0299b4e470}{output\_Node\_Raw}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Node\_Char"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a2f0c3b3e6c10ba5c94c7047dbd18e9e8}{output\_Node\_Char}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_BP"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a3dfdd52bd54ac00e3931579ec47038f6}{output\_BP}}();\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_BP\_NID"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a984325640662d83bd03cd50cb49a2341}{output\_BP\_NID}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Scaffold"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_acc16f0b743a80c04e0e47fd83ffb97bb}{output\_Scaffold}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Input"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_af346f81c04d6cfa0712ca66db150cd89}{output\_Input}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Input\_uint"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a833cfaa472bf0da4bd535545d531cbad}{output\_Input\_uint}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Output"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ae1031c653941bdb9c55e6c8aca08bf40}{output\_Output}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Output\_uint"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a9279e34a8b5696e5f1ae82d4c22f305e}{output\_Output\_uint}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Scaffold\_Char"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a23c3f4474c46f982f07317f9e6c274e3}{output\_Scaffold\_Char}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Node\_Network"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ad011c9a43a83319a0041c71e9ed00502}{output\_Node\_Network}}();\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Node"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_a659a1d8e9f942ea65a0e675000759478}{output\_Node}}(p\_File);\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Command\ ==\ \textcolor{stringliteral}{"{}output\_Assemblies"{}})\ \{\ \mbox{\hyperlink{classc___construct___text___server_ae4a689488b78d6000e0591bb50589e98}{output\_Assemblies}}();\ \textcolor{keywordflow}{return}\ 1;\ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{comment}{//See\ if\ they\ submitted\ a\ command,\ these\ scripts\ are\ retrieved\ from\ the\ ./Scripts/\ dir.}}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ std::string\ tmp\_Command\ =\ \textcolor{stringliteral}{"{}./Scripts/"{}}\ +\ p\_Command;}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ interpret\_File(tmp\_Command);}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00192\ \ \ \ \ \}}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{comment}{//\ Load\ Control\_Panel.ssc\ \&\ issue\ commands}}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{int}\ interpret\_File(std::string\ p\_LFName)}
+\DoxyCodeLine{00197\ \ \ \ \ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ std::ifstream\ LF(p\_LFName);}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ std::string\ tmp\_In\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (LF.is\_open())}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!LF.eof())}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LF\ >>\ tmp\_In;}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_In\ ==\ \textcolor{stringliteral}{"{}"{}})\ \{\ \textcolor{keywordflow}{continue};\ \}}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\ -\/\ [\ "{}\ <<\ tmp\_Count\ <<\ "{}\ ]:\ "{}\ <<\ tmp\_In;}}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Count++;}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Result\ =\ 0;}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Result\ =\ eval\_Command(tmp\_In,\ \&LF);}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Result\ ==\ -\/1)\ \{\ \textcolor{keywordflow}{return}\ -\/1;\ \}}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ Unable\ to\ open\ ScriptFile\ "{}}\ <<\ p\_LFName\ <<\ \textcolor{stringliteral}{"{}...\(\backslash\)n"{}};}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00234\ \ \ \ \ \}}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{comment}{//Control\_Panel\_Flag.ssv\ -\/\ Used\ to\ signal\ that\ there\ is\ a\ live\ message\ to\ read.\ Set\ by\ the\ user\ or\ an\ external\ program\ after\ inputs\ and\ controls\ are\ set\ and\ ready\ to\ have\ a\ function\ executed.}}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{int}\ check\_Control\_Panel\_Flag()}
+\DoxyCodeLine{00239\ \ \ \ \ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ std::ifstream\ flagFile(\textcolor{stringliteral}{"{}Control\_Panel\_Flag.ssv"{}});}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ std::string\ flagValue\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ flag\ file\ exists\ and\ can\ be\ opened}}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flagFile.is\_open())}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ flagFile\ >>\ flagValue;}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Read\ the\ value\ from\ the\ flag\ file}}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flagValue\ !=\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ value\ is\ 1}}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flagValue\ ==\ \textcolor{stringliteral}{"{}1"{}})}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flagFile.close();}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flagFile.close();}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flagFile.close();}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nUnable\ to\ open\ flag\ file.\(\backslash\)n"{}};}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00273\ \ \ \ \ \}}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{int}\ execute\_Control\_Panel\_Buffer()}
+\DoxyCodeLine{00276\ \ \ \ \ \{}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Result\ =\ 0;}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \textcolor{comment}{//tmp\_Result\ =\ interpret\_Control\_Panel();}}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ tmp\_Result\ =\ interpret\_File(\textcolor{stringliteral}{"{}Control\_Panel.ssv"{}});}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Result)}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ std::ofstream\ clsFinishFlagFile(\textcolor{stringliteral}{"{}Control\_Panel\_Finished.ssv"{}},\ std::ios::ate);}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ flag\ file\ exists\ and\ can\ be\ opened}}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (clsFinishFlagFile.is\_open())}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clsFinishFlagFile\ <<\ \textcolor{stringliteral}{"{}1"{}};}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ clsFinishFlagFile.close();}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Result\ ==\ 0)}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ >>==-\/-\/\ ERROR:\ Unable\ to\ interpret\ the\ control\ panel\ file...\ -\/-\/==<<\(\backslash\)n"{}};}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Result\ ==\ -\/1)}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ std::ofstream\ clsFinishFlagFile(\textcolor{stringliteral}{"{}Control\_Panel\_Finished.ssv"{}},\ std::ios::ate);}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ flag\ file\ exists\ and\ can\ be\ opened}}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (clsFinishFlagFile.is\_open())}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ clsFinishFlagFile\ <<\ \textcolor{stringliteral}{"{}1"{}};}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ clsFinishFlagFile.close();}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ std::ofstream\ clsFlagFile(\textcolor{stringliteral}{"{}Control\_Panel\_Flag.ssv"{}},\ std::ios::ate);}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Make\ sure\ the\ file\ was\ opened.}}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!clsFlagFile.is\_open())}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ >>==-\/-\/\ ERROR:\ Unable\ to\ interpret\ the\ clsFlagFile\ file\ for\ truncation!...\ -\/-\/==<<\(\backslash\)n"{}};}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ clsFlagFile.close();}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00330\ \ \ \ \ \}}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \ \ \ \ \textcolor{keywordtype}{int}\ view\_File(std::string\ p\_FileName)}
+\DoxyCodeLine{00334\ \ \ \ \ \{}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ std::ifstream\ InputFile(p\_FileName);}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ std::string\ tmp\_In\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (InputFile.is\_open())}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!InputFile.eof())}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ InputFile\ >>\ tmp\_In;}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ -\/\ [\ "{}}\ <<\ tmp\_Count\ <<\ \textcolor{stringliteral}{"{}\ ]:\ "{}}\ <<\ tmp\_In;}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Count++;}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Neuralman.output\_Input();}}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ "{}}\ <<\ p\_FileName\ <<\ \textcolor{stringliteral}{"{}\ loaded\ successfully.\(\backslash\)n"{}};}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ Unable\ to\ open\ "{}}\ <<\ p\_FileName\ <<\ \textcolor{stringliteral}{"{}\ ...\(\backslash\)n"{}};}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00361\ \ \ \ \ \}}
+\DoxyCodeLine{00362\ }
+\DoxyCodeLine{00363\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \ \ \ \ \mbox{\hyperlink{classc___construct___text___server}{c\_Construct\_Text\_Server}}()}
+\DoxyCodeLine{00366\ \ \ \ \ \{}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ Tick\ =\ 0;}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ -\/-\/==<<\ BOOTING\ UP\ >>==-\/-\/"{}};}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Load\ the\ boot\ sequence\ }}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (interpret\_File(\textcolor{stringliteral}{"{}autoexec.ssv"{}}))}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ -\/-\/==<<\ SUCCESSFULLLY\ BOOTED\ >>==-\/-\/"{}};}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ >>==-\/-\/\ FAILED\ TO\ BOOT\ PROPERLY\ -\/-\/==<<"{}};}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00380\ \ \ \ \ \}}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ -\/-\/-\/==================-\/-\/-\/}}
+\DoxyCodeLine{00384\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ -\/-\/-\/====================-\/-\/-\/}}
+\DoxyCodeLine{00385\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ -\/-\/-\/======================-\/-\/-\/}}
+\DoxyCodeLine{00386\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ -\/-\/-\/========================-\/-\/-\/}}
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==\ \ \ NT4\ Deep\ Control\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{00388\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ -\/-\/-\/========================-\/-\/-\/}}
+\DoxyCodeLine{00389\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ -\/-\/-\/======================-\/-\/-\/}}
+\DoxyCodeLine{00390\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ -\/-\/-\/====================-\/-\/-\/}}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ \ -\/-\/-\/==================-\/-\/-\/}}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ -\/-\/-\/==========-\/-\/-\/}}
+\DoxyCodeLine{00395\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ -\/-\/-\/============-\/-\/-\/}}
+\DoxyCodeLine{00396\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==\ \ \ Node\ \ \ ==-\/-\/-\/\ }}
+\DoxyCodeLine{00397\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ -\/-\/-\/============-\/-\/-\/}}
+\DoxyCodeLine{00398\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ -\/-\/-\/==========-\/-\/-\/}}
+\DoxyCodeLine{00399\ }
+\DoxyCodeLine{00431\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a475eb56659e2ddb166163704d42bafc4}{set\_Type}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{00432\ \ \ \ \ \{}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ set\_Type\ NID\ TYPE\ |"{}};}
+\DoxyCodeLine{00434\ }
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Type\ =\ 0;}
+\DoxyCodeLine{00440\ }
+\DoxyCodeLine{00441\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Type;}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ \ \ \ \ \ \ \ \ API.set\_Type(tmp\_NID,\ tmp\_Type);}
+\DoxyCodeLine{00444\ \ \ \ \ \}}
+\DoxyCodeLine{00445\ }
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00480\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_af9c1608480eecd776b3bd4a182956a47}{add\_Axon\_Index}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{00481\ \ \ \ \ \{}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ add\_axon\_index\ NID\ Axon\_NID\ HILLOCK\_INDEX\ |"{}};}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{00485\ }
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Axon\_NID\ =\ 0;}
+\DoxyCodeLine{00489\ }
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Axon\_NID;}
+\DoxyCodeLine{00491\ }
+\DoxyCodeLine{00492\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Index\ =\ 0;}
+\DoxyCodeLine{00493\ }
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Index;}
+\DoxyCodeLine{00495\ }
+\DoxyCodeLine{00496\ \ \ \ \ \ \ \ \ API.add\_Axon\_Index(tmp\_NID,\ tmp\_Axon\_NID,\ tmp\_Index);}
+\DoxyCodeLine{00497\ \ \ \ \ \}}
+\DoxyCodeLine{00498\ }
+\DoxyCodeLine{00499\ }
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00534\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a09404fc5ad69a0b09826d03b21dd2bc1}{set\_Dendrites}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{00535\ \ \ \ \ \{}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ set\_Dendrites\ NID\ COUNT\ DENDRITES[]\ |"{}};}
+\DoxyCodeLine{00537\ }
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{00539\ }
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{00541\ }
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{00543\ }
+\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Count;}
+\DoxyCodeLine{00545\ }
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ uint64\_t\ *\ tmp\_Dendrites\ =\ NULL;}
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ tmp\_Dendrites\ =\ \textcolor{keyword}{new}\ uint64\_t\ [tmp\_Count];}
+\DoxyCodeLine{00548\ }
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Count;\ cou\_Index++)}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Dendrites[cou\_Index];}
+\DoxyCodeLine{00552\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00553\ }
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ API.set\_Dendrites(tmp\_NID,\ tmp\_Count,\ tmp\_Dendrites);}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Dendrites\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ tmp\_Dendrites;\ tmp\_Dendrites\ =\ NULL;\ \}}
+\DoxyCodeLine{00557\ \ \ \ \ \}}
+\DoxyCodeLine{00558\ }
+\DoxyCodeLine{00559\ }
+\DoxyCodeLine{00592\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classc___construct___text___server_ae1e8fcbb11b03289e2a011cf464224fa}{does\_Upper\_Tier\_Connection\_Exist}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{00593\ \ \ \ \ \{}
+\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ does\_Upper\_Tier\_Connection\_Exist\ NODE\_COUNT\ NODES[]\ |"{}};}
+\DoxyCodeLine{00595\ }
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Return\_NID\ =\ 0;}
+\DoxyCodeLine{00597\ }
+\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{00599\ }
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Count;}
+\DoxyCodeLine{00601\ }
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ uint64\_t*\ tmp\_Nodes\ =\ NULL;}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ tmp\_Nodes\ =\ \textcolor{keyword}{new}\ uint64\_t[tmp\_Count];}
+\DoxyCodeLine{00604\ }
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Count;\ cou\_Index++)}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Nodes[cou\_Index];}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00609\ }
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ tmp\_Return\_NID\ =\ API.does\_Upper\_Tier\_Connection\_Exist(tmp\_Count,\ tmp\_Nodes);}
+\DoxyCodeLine{00611\ }
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Nodes\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ tmp\_Nodes;\ tmp\_Nodes\ =\ NULL;\ \}}
+\DoxyCodeLine{00613\ }
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Return\_NID);}
+\DoxyCodeLine{00615\ }
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Return\_NID;}
+\DoxyCodeLine{00617\ \ \ \ \ \}}
+\DoxyCodeLine{00618\ }
+\DoxyCodeLine{00619\ }
+\DoxyCodeLine{00659\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classc___construct___text___server_af740c907e03325e299d611e270bb6e40}{does\_Lower\_Connection\_Exist}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{00660\ \ \ \ \ \{}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ does\_Lower\_Connection\_Exist\ NID\ NODE\_COUNT\ NODES[]\ |"{}};}
+\DoxyCodeLine{00662\ }
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ tmp\_Return\_Result\ =\ 0;}
+\DoxyCodeLine{00664\ }
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{00666\ }
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{00668\ }
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{00670\ }
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Count;}
+\DoxyCodeLine{00672\ }
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ uint64\_t*\ tmp\_Nodes\ =\ NULL;}
+\DoxyCodeLine{00674\ \ \ \ \ \ \ \ \ tmp\_Nodes\ =\ \textcolor{keyword}{new}\ uint64\_t[tmp\_Count];}
+\DoxyCodeLine{00675\ }
+\DoxyCodeLine{00676\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Count;\ cou\_Index++)}
+\DoxyCodeLine{00677\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Nodes[cou\_Index];}
+\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00680\ }
+\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ tmp\_Return\_Result\ =\ API.does\_Lower\_Connection\_Exist(tmp\_NID,\ tmp\_Count,\ tmp\_Nodes);}
+\DoxyCodeLine{00682\ }
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Nodes\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ tmp\_Nodes;\ tmp\_Nodes\ =\ NULL;\ \}}
+\DoxyCodeLine{00684\ }
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Return\_Result);}
+\DoxyCodeLine{00686\ }
+\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Return\_Result;}
+\DoxyCodeLine{00688\ \ \ \ \ \}}
+\DoxyCodeLine{00689\ }
+\DoxyCodeLine{00690\ }
+\DoxyCodeLine{00691\ }
+\DoxyCodeLine{00724\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_ae006adef321f75481453c3478006d68d}{bind\_State}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{00725\ \ \ \ \ \{}
+\DoxyCodeLine{00726\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ bind\_State\ NID\ STATE\ |"{}};}
+\DoxyCodeLine{00727\ }
+\DoxyCodeLine{00728\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{00729\ }
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00732\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_State\ =\ 0;}
+\DoxyCodeLine{00733\ }
+\DoxyCodeLine{00734\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{00735\ }
+\DoxyCodeLine{00736\ \ \ \ \ \ \ \ \ API.bind\_State(tmp\_NID,\ tmp\_State);}
+\DoxyCodeLine{00737\ \ \ \ \ \}}
+\DoxyCodeLine{00738\ }
+\DoxyCodeLine{00739\ }
+\DoxyCodeLine{00740\ }
+\DoxyCodeLine{00780\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a9516daf43b865cb75bb98949b375ab49}{bp\_O}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{00781\ \ \ \ \ \{}
+\DoxyCodeLine{00782\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ bp\_O\ NID\ |"{}};}
+\DoxyCodeLine{00783\ }
+\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{00785\ }
+\DoxyCodeLine{00786\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{00787\ }
+\DoxyCodeLine{00788\ \ \ \ \ \ \ \ \ API.bp\_O(tmp\_NID);}
+\DoxyCodeLine{00789\ \ \ \ \ \}}
+\DoxyCodeLine{00790\ }
+\DoxyCodeLine{00791\ }
+\DoxyCodeLine{00792\ }
+\DoxyCodeLine{00860\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a4e20c3d32f5b1eb8e4f83f0299b4e470}{output\_Node\_Raw}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{00861\ \ \ \ \ \{}
+\DoxyCodeLine{00862\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ output\_Node\_Raw\ NID\ |"{}};}
+\DoxyCodeLine{00863\ }
+\DoxyCodeLine{00864\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{00865\ }
+\DoxyCodeLine{00866\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{00867\ }
+\DoxyCodeLine{00868\ \ \ \ \ \ \ \ \ API.output\_Node\_Raw(tmp\_NID);}
+\DoxyCodeLine{00869\ \ \ \ \ \}}
+\DoxyCodeLine{00870\ }
+\DoxyCodeLine{00871\ }
+\DoxyCodeLine{00872\ }
+\DoxyCodeLine{00902\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a2f0c3b3e6c10ba5c94c7047dbd18e9e8}{output\_Node\_Char}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{00903\ \ \ \ \ \{}
+\DoxyCodeLine{00904\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ output\_Node\_Char\ NID\ |"{}};}
+\DoxyCodeLine{00905\ }
+\DoxyCodeLine{00906\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{00907\ }
+\DoxyCodeLine{00908\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{00909\ }
+\DoxyCodeLine{00910\ \ \ \ \ \ \ \ \ API.output\_Node\_Char(tmp\_NID);}
+\DoxyCodeLine{00911\ \ \ \ \ \}}
+\DoxyCodeLine{00912\ }
+\DoxyCodeLine{00913\ }
+\DoxyCodeLine{00914\ }
+\DoxyCodeLine{00915\ }
+\DoxyCodeLine{00916\ }
+\DoxyCodeLine{00917\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==================-\/-\/-\/}}
+\DoxyCodeLine{00918\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/====================-\/-\/-\/}}
+\DoxyCodeLine{00919\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ Node\_Network\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{00920\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/====================-\/-\/-\/}}
+\DoxyCodeLine{00921\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==================-\/-\/-\/}}
+\DoxyCodeLine{00922\ \ \ }
+\DoxyCodeLine{00950\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_ad8f22746a98dc6ed0e3bb3e5ac6a01fc}{register\_New\_Construct}}()}
+\DoxyCodeLine{00951\ \ \ \ \ \{}
+\DoxyCodeLine{00952\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ register\_New\_Construct\ |"{}};}
+\DoxyCodeLine{00953\ }
+\DoxyCodeLine{00954\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\_Return\_ID\ =\ API.register\_New\_Construct();}
+\DoxyCodeLine{00955\ }
+\DoxyCodeLine{00956\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Construct\_Return\_ID);}
+\DoxyCodeLine{00957\ }
+\DoxyCodeLine{00958\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Construct\_Return\_ID;}
+\DoxyCodeLine{00959\ \ \ \ \ \}}
+\DoxyCodeLine{00960\ }
+\DoxyCodeLine{00961\ }
+\DoxyCodeLine{00989\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classc___construct___text___server_af800a27f84cbcbaaf20778342fef8bb5}{new\_Node}}()}
+\DoxyCodeLine{00990\ \ \ \ \ \{}
+\DoxyCodeLine{00991\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ new\_Node\ |"{}};}
+\DoxyCodeLine{00992\ }
+\DoxyCodeLine{00993\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Return\_NID\ =\ API.new\_Node();}
+\DoxyCodeLine{00994\ }
+\DoxyCodeLine{00995\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Return\_NID);}
+\DoxyCodeLine{00996\ }
+\DoxyCodeLine{00997\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Return\_NID;}
+\DoxyCodeLine{00998\ \ \ \ \ \}}
+\DoxyCodeLine{00999\ }
+\DoxyCodeLine{01000\ }
+\DoxyCodeLine{01030\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classc___construct___text___server_a692f286375b7b06c646a8f5f549b49d0}{new\_State\_Node}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{01031\ \ \ \ \ \{}
+\DoxyCodeLine{01032\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ new\_State\_Node\ CONSTRUCT\_ID\ STATE\ |"{}};}
+\DoxyCodeLine{01033\ }
+\DoxyCodeLine{01034\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{01035\ }
+\DoxyCodeLine{01036\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{01037\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{01038\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_State\ =\ 0;}
+\DoxyCodeLine{01039\ }
+\DoxyCodeLine{01040\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_State;}
+\DoxyCodeLine{01041\ }
+\DoxyCodeLine{01042\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Return\_NID\ =\ API.new\_State\_Node(tmp\_Construct,\ tmp\_State);}
+\DoxyCodeLine{01043\ }
+\DoxyCodeLine{01044\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Return\_NID);}
+\DoxyCodeLine{01045\ }
+\DoxyCodeLine{01046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Return\_NID;}
+\DoxyCodeLine{01047\ \ \ \ \ \}}
+\DoxyCodeLine{01048\ }
+\DoxyCodeLine{01049\ }
+\DoxyCodeLine{01106\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a48748e63a8fc09caec37456702194a6c}{create\_Connections}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{01107\ \ \ \ \ \{}
+\DoxyCodeLine{01108\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ create\_Connections\ TO\_NID\ COUNT\ FROM\_NIDS[]\ |"{}};}
+\DoxyCodeLine{01109\ }
+\DoxyCodeLine{01110\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_To\_NID\ =\ 0;}
+\DoxyCodeLine{01111\ }
+\DoxyCodeLine{01112\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_To\_NID;}
+\DoxyCodeLine{01113\ }
+\DoxyCodeLine{01114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{01115\ }
+\DoxyCodeLine{01116\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Count;}
+\DoxyCodeLine{01117\ }
+\DoxyCodeLine{01118\ \ \ \ \ \ \ \ \ uint64\_t*\ tmp\_Nodes\ =\ NULL;}
+\DoxyCodeLine{01119\ \ \ \ \ \ \ \ \ tmp\_Nodes\ =\ \textcolor{keyword}{new}\ uint64\_t[tmp\_Count];}
+\DoxyCodeLine{01120\ }
+\DoxyCodeLine{01121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Count;\ cou\_Index++)}
+\DoxyCodeLine{01122\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01123\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Nodes[cou\_Index];}
+\DoxyCodeLine{01124\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01125\ }
+\DoxyCodeLine{01126\ \ \ \ \ \ \ \ \ API.create\_Connections(tmp\_To\_NID,\ tmp\_Count,\ tmp\_Nodes);}
+\DoxyCodeLine{01127\ }
+\DoxyCodeLine{01128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Nodes\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ tmp\_Nodes;\ tmp\_Nodes\ =\ NULL;\ \}}
+\DoxyCodeLine{01129\ \ \ \ \ \}}
+\DoxyCodeLine{01130\ }
+\DoxyCodeLine{01131\ }
+\DoxyCodeLine{01164\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classc___construct___text___server_a9f472fb6461e3a1460b81e20b5e43c94}{does\_Upper\_Tier\_Connection\_Exist\_Network}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{01165\ \ \ \ \ \{}
+\DoxyCodeLine{01166\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ does\_Upper\_Tier\_Connection\_Exist\_Network\ NODE\_COUNT\ NODES[]\ |"{}};}
+\DoxyCodeLine{01167\ }
+\DoxyCodeLine{01168\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Return\_NID\ =\ 0;}
+\DoxyCodeLine{01169\ }
+\DoxyCodeLine{01170\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{01171\ }
+\DoxyCodeLine{01172\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{01173\ }
+\DoxyCodeLine{01174\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{01175\ }
+\DoxyCodeLine{01176\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Count;}
+\DoxyCodeLine{01177\ }
+\DoxyCodeLine{01178\ \ \ \ \ \ \ \ \ uint64\_t*\ tmp\_Nodes\ =\ NULL;}
+\DoxyCodeLine{01179\ \ \ \ \ \ \ \ \ tmp\_Nodes\ =\ \textcolor{keyword}{new}\ uint64\_t[tmp\_Count];}
+\DoxyCodeLine{01180\ }
+\DoxyCodeLine{01181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Count;\ cou\_Index++)}
+\DoxyCodeLine{01182\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01183\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Nodes[cou\_Index];}
+\DoxyCodeLine{01184\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01185\ }
+\DoxyCodeLine{01186\ \ \ \ \ \ \ \ \ tmp\_Return\_NID\ =\ API.does\_Upper\_Tier\_Connection\_Exist\_Network(tmp\_Count,\ tmp\_Nodes);}
+\DoxyCodeLine{01187\ }
+\DoxyCodeLine{01188\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Nodes\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ tmp\_Nodes;\ tmp\_Nodes\ =\ NULL;\ \}}
+\DoxyCodeLine{01189\ }
+\DoxyCodeLine{01190\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Return\_NID);}
+\DoxyCodeLine{01191\ }
+\DoxyCodeLine{01192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Return\_NID;}
+\DoxyCodeLine{01193\ \ \ \ \ \}}
+\DoxyCodeLine{01194\ }
+\DoxyCodeLine{01195\ }
+\DoxyCodeLine{01228\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classc___construct___text___server_ab00c38697a0af6242ebe8d03f3622edc}{get\_Upper\_Tier\_Node}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{01229\ \ \ \ \ \{}
+\DoxyCodeLine{01230\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ get\_Upper\_Tier\_Node\ NODE\_COUNT\ NODES[]\ |"{}};}
+\DoxyCodeLine{01231\ }
+\DoxyCodeLine{01232\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Return\_NID\ =\ 0;}
+\DoxyCodeLine{01233\ }
+\DoxyCodeLine{01234\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{01235\ }
+\DoxyCodeLine{01236\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{01237\ }
+\DoxyCodeLine{01238\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{01239\ }
+\DoxyCodeLine{01240\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Count;}
+\DoxyCodeLine{01241\ }
+\DoxyCodeLine{01242\ \ \ \ \ \ \ \ \ uint64\_t*\ tmp\_Nodes\ =\ NULL;}
+\DoxyCodeLine{01243\ \ \ \ \ \ \ \ \ tmp\_Nodes\ =\ \textcolor{keyword}{new}\ uint64\_t[tmp\_Count];}
+\DoxyCodeLine{01244\ }
+\DoxyCodeLine{01245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Count;\ cou\_Index++)}
+\DoxyCodeLine{01246\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{01247\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Nodes[cou\_Index];}
+\DoxyCodeLine{01248\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{01249\ }
+\DoxyCodeLine{01250\ \ \ \ \ \ \ \ \ tmp\_Return\_NID\ =\ API.get\_Upper\_Tier\_Node(tmp\_Count,\ tmp\_Nodes);}
+\DoxyCodeLine{01251\ }
+\DoxyCodeLine{01252\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Nodes\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ tmp\_Nodes;\ tmp\_Nodes\ =\ NULL;\ \}}
+\DoxyCodeLine{01253\ }
+\DoxyCodeLine{01254\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Return\_NID);}
+\DoxyCodeLine{01255\ }
+\DoxyCodeLine{01256\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Return\_NID;}
+\DoxyCodeLine{01257\ \ \ \ \ \}}
+\DoxyCodeLine{01258\ }
+\DoxyCodeLine{01259\ }
+\DoxyCodeLine{01288\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classc___construct___text___server_a90e2882099251f5f94fafa9598955e5d}{does\_State\_Node\_Exist}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{01289\ \ \ \ \ \{}
+\DoxyCodeLine{01290\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ does\_State\_Node\_Exist\ CONSTRUCT\_ID\ STATE\ |"{}};}
+\DoxyCodeLine{01291\ }
+\DoxyCodeLine{01292\ \ \ \ \ \ \ \ \ uint64\_t\ p\_Assembly\ =\ 0;}
+\DoxyCodeLine{01293\ }
+\DoxyCodeLine{01294\ \ \ \ \ \ \ \ \ *p\_File\ >>\ p\_Assembly;}
+\DoxyCodeLine{01295\ }
+\DoxyCodeLine{01296\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_State\ =\ 0;}
+\DoxyCodeLine{01297\ }
+\DoxyCodeLine{01298\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_State;}
+\DoxyCodeLine{01299\ }
+\DoxyCodeLine{01300\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Return\_NID\ =\ API.does\_State\_Node\_Exist(p\_Assembly,\ tmp\_State);}
+\DoxyCodeLine{01301\ }
+\DoxyCodeLine{01302\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Return\_NID);}
+\DoxyCodeLine{01303\ }
+\DoxyCodeLine{01304\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Return\_NID;}
+\DoxyCodeLine{01305\ \ \ \ \ \}}
+\DoxyCodeLine{01306\ }
+\DoxyCodeLine{01307\ }
+\DoxyCodeLine{01337\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classc___construct___text___server_a87101ad825a93638ec15d1c9411f10c6}{get\_State\_Node}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{01338\ \ \ \ \ \{}
+\DoxyCodeLine{01339\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ get\_State\_Node\ CONSTRUCT\_ID\ STATE\ |"{}};}
+\DoxyCodeLine{01340\ }
+\DoxyCodeLine{01341\ \ \ \ \ \ \ \ \ uint64\_t\ p\_Assembly\ =\ 0;}
+\DoxyCodeLine{01342\ }
+\DoxyCodeLine{01343\ \ \ \ \ \ \ \ \ *p\_File\ >>\ p\_Assembly;}
+\DoxyCodeLine{01344\ }
+\DoxyCodeLine{01345\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_State\ =\ 0;}
+\DoxyCodeLine{01346\ }
+\DoxyCodeLine{01347\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_State;}
+\DoxyCodeLine{01348\ }
+\DoxyCodeLine{01349\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Return\_NID\ =\ API.get\_State\_Node(p\_Assembly,\ tmp\_State);}
+\DoxyCodeLine{01350\ }
+\DoxyCodeLine{01351\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Return\_NID);}
+\DoxyCodeLine{01352\ }
+\DoxyCodeLine{01353\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Return\_NID;}
+\DoxyCodeLine{01354\ \ \ \ \ \}}
+\DoxyCodeLine{01355\ }
+\DoxyCodeLine{01356\ }
+\DoxyCodeLine{01388\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a3dfdd52bd54ac00e3931579ec47038f6}{output\_BP}}()}
+\DoxyCodeLine{01389\ \ \ \ \ \{}
+\DoxyCodeLine{01390\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ output\_BP\ |"{}};}
+\DoxyCodeLine{01391\ }
+\DoxyCodeLine{01392\ \ \ \ \ \ \ \ \ API.output\_BP();}
+\DoxyCodeLine{01393\ \ \ \ \ \}}
+\DoxyCodeLine{01394\ }
+\DoxyCodeLine{01395\ }
+\DoxyCodeLine{01422\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a984325640662d83bd03cd50cb49a2341}{output\_BP\_NID}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{01423\ \ \ \ \ \{}
+\DoxyCodeLine{01424\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ output\_BP\_NID\ NID\ |"{}};}
+\DoxyCodeLine{01425\ }
+\DoxyCodeLine{01426\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{01427\ }
+\DoxyCodeLine{01428\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{01429\ }
+\DoxyCodeLine{01430\ \ \ \ \ \ \ \ \ API.output\_BP\_NID(tmp\_NID);}
+\DoxyCodeLine{01431\ \ \ \ \ \}}
+\DoxyCodeLine{01432\ }
+\DoxyCodeLine{01433\ }
+\DoxyCodeLine{01434\ }
+\DoxyCodeLine{01435\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/=========-\/-\/-\/}}
+\DoxyCodeLine{01436\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/===========-\/-\/-\/}}
+\DoxyCodeLine{01437\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ CAN\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{01438\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/===========-\/-\/-\/}}
+\DoxyCodeLine{01439\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/=========-\/-\/-\/}}
+\DoxyCodeLine{01440\ }
+\DoxyCodeLine{01441\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/=============================================-\/-\/-\/}}
+\DoxyCodeLine{01442\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ Encoding\ and\ querying\ the\ assemblies.\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{01443\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/=============================================-\/-\/-\/}}
+\DoxyCodeLine{01444\ }
+\DoxyCodeLine{01540\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_aa850c7ca8094730d117ef52c0bb63f93}{encode}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{01541\ \ \ \ \ \{}
+\DoxyCodeLine{01542\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ encode\ CONSTRUCT\_ID\ |"{}};}
+\DoxyCodeLine{01543\ }
+\DoxyCodeLine{01544\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{01545\ }
+\DoxyCodeLine{01546\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{01547\ }
+\DoxyCodeLine{01548\ \ \ \ \ \ \ \ \ API.encode(tmp\_Construct);}
+\DoxyCodeLine{01549\ \ \ \ \ \}}
+\DoxyCodeLine{01550\ }
+\DoxyCodeLine{01551\ }
+\DoxyCodeLine{01552\ \ \ \ \ }
+\DoxyCodeLine{01553\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ }}
+\DoxyCodeLine{01554\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Passes\ the\ values\ to\ an\ assembly\ to\ encode.}}
+\DoxyCodeLine{01776\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_adc7c049185d08bb31ffd5a54564572ad}{query}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{01777\ \ \ \ \ \{}
+\DoxyCodeLine{01778\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ query\ CONSTRUCT\_ID\ |"{}};}
+\DoxyCodeLine{01779\ }
+\DoxyCodeLine{01780\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{01781\ }
+\DoxyCodeLine{01782\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{01783\ }
+\DoxyCodeLine{01784\ \ \ \ \ \ \ \ \ API.query(tmp\_Construct);}
+\DoxyCodeLine{01785\ \ \ \ \ \}}
+\DoxyCodeLine{01786\ }
+\DoxyCodeLine{02081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a6d33fb55089f40f7b4821750c1cedcbb}{query\_Spacial}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{02082\ \ \ \ \ \{}
+\DoxyCodeLine{02083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{02084\ }
+\DoxyCodeLine{02085\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{02086\ }
+\DoxyCodeLine{02087\ \ \ \ \ \ \ \ \ API.query\_Spacial(tmp\_Construct);}
+\DoxyCodeLine{02088\ \ \ \ \ \}}
+\DoxyCodeLine{02089\ }
+\DoxyCodeLine{02310\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_ac3a9a9996d29030fc6165ff49eeb79cf}{query\_Given\_Index}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{02311\ \ \ \ \ \{}
+\DoxyCodeLine{02312\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{02313\ }
+\DoxyCodeLine{02314\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{02315\ }
+\DoxyCodeLine{02316\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Index\ =\ 0;}
+\DoxyCodeLine{02317\ }
+\DoxyCodeLine{02318\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Index;}
+\DoxyCodeLine{02319\ }
+\DoxyCodeLine{02320\ \ \ \ \ \ \ \ \ API.query\_Given\_Index(tmp\_Construct,\ tmp\_Index);}
+\DoxyCodeLine{02321\ \ \ \ \ \}}
+\DoxyCodeLine{02322\ }
+\DoxyCodeLine{02446\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a0d6b56adab575328125b8650ff74ac6d}{query\_Given\_Legs}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{02447\ \ \ \ \ \{}
+\DoxyCodeLine{02448\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{02449\ }
+\DoxyCodeLine{02450\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{02451\ }
+\DoxyCodeLine{02452\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{02453\ }
+\DoxyCodeLine{02454\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Count;}
+\DoxyCodeLine{02455\ }
+\DoxyCodeLine{02456\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}*\ tmp\_Legs\ =\ NULL;}
+\DoxyCodeLine{02457\ \ \ \ \ \ \ \ \ tmp\_Legs\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[tmp\_Count];}
+\DoxyCodeLine{02458\ }
+\DoxyCodeLine{02459\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Count;\ cou\_Index++)}
+\DoxyCodeLine{02460\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{02461\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Legs[cou\_Index];}
+\DoxyCodeLine{02462\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{02463\ }
+\DoxyCodeLine{02464\ \ \ \ \ \ \ \ \ API.query\_Given\_Legs(tmp\_Construct,\ tmp\_Count,\ tmp\_Legs);}
+\DoxyCodeLine{02465\ }
+\DoxyCodeLine{02466\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Legs\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ tmp\_Legs;\ tmp\_Legs\ =\ NULL;\ \}}
+\DoxyCodeLine{02467\ \ \ \ \ \}}
+\DoxyCodeLine{02468\ }
+\DoxyCodeLine{02469\ }
+\DoxyCodeLine{02470\ \ \ \ \ \textcolor{comment}{//Disabled\ this\ doxygen\ for\ the\ moment,\ I\ suspect\ this\ function\ was\ accidentally\ brought\ to\ the\ surface\ while\ high.}}
+\DoxyCodeLine{02471\ \ \ \ \ \textcolor{comment}{/*\ This\ allows\ for\ passing\ unordered\ sets\ of\ node\ IDs\ to\ be\ charged.\ }}
+\DoxyCodeLine{02472\ \textcolor{comment}{}}
+\DoxyCodeLine{02473\ \textcolor{comment}{\ \ \ \ \ \ \ \ submit\_Set\ CONSTRUCT\_ID\ COUNT\ INPUT\_UINT[]}}
+\DoxyCodeLine{02474\ \textcolor{comment}{\ \ \ \ \(\backslash\)param\ int\ CONSTRUCT\_ID\ The\ construct\ who's\ charging\ buffer\ and\ output\ will\ be\ used.}}
+\DoxyCodeLine{02475\ \textcolor{comment}{\ \ \ \ \(\backslash\)param\ COUNT\ The\ number\ of\ node\ IDs\ (NIDs)\ being\ passed.}}
+\DoxyCodeLine{02476\ \textcolor{comment}{\ \ \ \ \(\backslash\)param\ INPUT\_UINT[]\ The\ array\ of\ NIDs\ to\ charge.}}
+\DoxyCodeLine{02477\ \textcolor{comment}{\ \ \ \ \(\backslash\)retval\ None\ This\ function\ doesn't\ return\ any\ values.}}
+\DoxyCodeLine{02478\ \textcolor{comment}{}}
+\DoxyCodeLine{02479\ \textcolor{comment}{\ \ \ \ This\ function\ takes\ a\ set\ of\ NIDs\ and\ then\ directly\ submits\ them\ to\ the\ charging\ buffers,\ no\ input,\ query,\ scaffold,\ etc.\ If\ you\ have\ the\ ID\ of\ the\ node(s)\ and\ want\ to\ directly\ charge\ them\ you\ can\ use\ this\ function.}}
+\DoxyCodeLine{02480\ \textcolor{comment}{}}
+\DoxyCodeLine{02481\ \textcolor{comment}{\ \ \ \ Example\ Usage:}}
+\DoxyCodeLine{02482\ \textcolor{comment}{}}
+\DoxyCodeLine{02483\ \textcolor{comment}{\ \ \ \ To\ start\ with\ we\ encode\ a\ sample\ dataset,\ output\ the\ node\ network\ to\ get\ the\ node\ IDs\ to\ use,\ and\ then\ we\ can\ submit\_Nodes\ and\ gather\ the\ output.}}
+\DoxyCodeLine{02484\ \textcolor{comment}{}}
+\DoxyCodeLine{02485\ \textcolor{comment}{\ \ \ \ Output:}}
+\DoxyCodeLine{02486\ \textcolor{comment}{}}
+\DoxyCodeLine{02487\ \textcolor{comment}{\ \ \ \ \ \ \ \ output}}
+\DoxyCodeLine{02488\ \textcolor{comment}{}}
+\DoxyCodeLine{02489\ \textcolor{comment}{\ \ \ \ Error\ Handling:}}
+\DoxyCodeLine{02490\ \textcolor{comment}{}}
+\DoxyCodeLine{02491\ \textcolor{comment}{\ \ \ \ -\/\ No\ error\ handling\ is\ implemented\ in\ this\ function.}}
+\DoxyCodeLine{02492\ \textcolor{comment}{}}
+\DoxyCodeLine{02493\ \textcolor{comment}{\ \ \ \ Additional\ Notes:}}
+\DoxyCodeLine{02494\ \textcolor{comment}{}}
+\DoxyCodeLine{02495\ \textcolor{comment}{\ \ \ \ -\/\ None.}}
+\DoxyCodeLine{02496\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{02497\ \ \ \ \ \textcolor{keywordtype}{void}\ submit\_Set(std::ifstream*\ p\_File)}
+\DoxyCodeLine{02498\ \ \ \ \ \{}
+\DoxyCodeLine{02499\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{02500\ }
+\DoxyCodeLine{02501\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{02502\ }
+\DoxyCodeLine{02503\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{02504\ }
+\DoxyCodeLine{02505\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Count;}
+\DoxyCodeLine{02506\ }
+\DoxyCodeLine{02507\ \ \ \ \ \ \ \ \ uint64\_t*\ tmp\_Input\ =\ NULL;}
+\DoxyCodeLine{02508\ \ \ \ \ \ \ \ \ tmp\_Input\ =\ \textcolor{keyword}{new}\ uint64\_t[tmp\_Count];}
+\DoxyCodeLine{02509\ }
+\DoxyCodeLine{02510\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Count;\ cou\_Index++)}
+\DoxyCodeLine{02511\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{02512\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Input[cou\_Index];}
+\DoxyCodeLine{02513\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{02514\ }
+\DoxyCodeLine{02515\ \ \ \ \ \ \ \ \ API.submit\_Set(tmp\_Construct,\ tmp\_Count,\ tmp\_Input);}
+\DoxyCodeLine{02516\ }
+\DoxyCodeLine{02517\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Input\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ tmp\_Input;\ tmp\_Input\ =\ NULL;\ \}}
+\DoxyCodeLine{02518\ \ \ \ \ \}}
+\DoxyCodeLine{02519\ }
+\DoxyCodeLine{02520\ }
+\DoxyCodeLine{02589\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classc___construct___text___server_ad42ad6252407a2a611c6a05bf4d0704f}{get\_Treetop\_NID}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{02590\ \ \ \ \ \{}
+\DoxyCodeLine{02591\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{02592\ }
+\DoxyCodeLine{02593\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{02594\ }
+\DoxyCodeLine{02595\ \ \ \ \ \ \ \ \ uint64\_t\ tmp\_Return\_Node\ =\ API.get\_Treetop\_NID(tmp\_Construct);}
+\DoxyCodeLine{02596\ }
+\DoxyCodeLine{02597\ \ \ \ \ \ \ \ \ write\_to\_output(RETURN\_FILE,\ tmp\_Return\_Node);}
+\DoxyCodeLine{02598\ }
+\DoxyCodeLine{02599\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ tmp\_Return\_Node;}
+\DoxyCodeLine{02600\ \ \ \ \ \}}
+\DoxyCodeLine{02601\ }
+\DoxyCodeLine{02602\ }
+\DoxyCodeLine{02655\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a35dd21a221a907189867c9de4795189f}{gather\_Given\_Trace}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{02656\ \ \ \ \ \{}
+\DoxyCodeLine{02657\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{02658\ }
+\DoxyCodeLine{02659\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{02660\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{02661\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{02662\ }
+\DoxyCodeLine{02663\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{02664\ }
+\DoxyCodeLine{02665\ \ \ \ \ \ \ \ \ API.gather\_Given\_Trace(tmp\_Construct,\ tmp\_NID);}
+\DoxyCodeLine{02666\ \ \ \ \ \}}
+\DoxyCodeLine{02667\ }
+\DoxyCodeLine{02668\ }
+\DoxyCodeLine{02669\ \ \ \ \ \textcolor{comment}{//-\/-\/-\/==\ \ gather\_All\_Traces\ [CONSTRUCT]\ \ ==-\/-\/-\///}}
+\DoxyCodeLine{02670\ \ \ \ \ \textcolor{comment}{//}}
+\DoxyCodeLine{02713\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a11e8037394004a42a8b735c6b19280ba}{gather\_All\_Traces}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{02714\ \ \ \ \ \{}
+\DoxyCodeLine{02715\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{02716\ }
+\DoxyCodeLine{02717\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{02718\ }
+\DoxyCodeLine{02719\ \ \ \ \ \ \ \ \ API.gather\_All\_Traces(tmp\_Construct);}
+\DoxyCodeLine{02720\ \ \ \ \ \}}
+\DoxyCodeLine{02721\ }
+\DoxyCodeLine{02722\ }
+\DoxyCodeLine{02781\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_ad4eebf315113910670ef8f01b5bebc9f}{reset\_Input}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{02782\ \ \ \ \ \{}
+\DoxyCodeLine{02783\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{02784\ }
+\DoxyCodeLine{02785\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{02786\ }
+\DoxyCodeLine{02787\ \ \ \ \ \ \ \ \ API.reset\_Input(tmp\_Construct);}
+\DoxyCodeLine{02788\ \ \ \ \ \}}
+\DoxyCodeLine{02789\ }
+\DoxyCodeLine{02790\ }
+\DoxyCodeLine{02895\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a3be6c291b0c5ad8be48b09bc144bed68}{set\_State\_Nodes\_Index}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{02896\ \ \ \ \ \{}
+\DoxyCodeLine{02897\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{02898\ }
+\DoxyCodeLine{02899\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{02900\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{02901\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Index\ =\ 0;}
+\DoxyCodeLine{02902\ }
+\DoxyCodeLine{02903\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Index;}
+\DoxyCodeLine{02904\ }
+\DoxyCodeLine{02905\ \ \ \ \ \ \ \ \ API.set\_State\_Nodes\_Index(tmp\_Construct,\ tmp\_Index);}
+\DoxyCodeLine{02906\ \ \ \ \ \}}
+\DoxyCodeLine{02907\ }
+\DoxyCodeLine{02908\ }
+\DoxyCodeLine{02909\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==\ \ set\_input\ [CONSTRUCT\_ID]\ [INPUT\_STRING]\ \ ==-\/-\/-\/}}
+\DoxyCodeLine{03037\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a04ecf7c8d1e5a740d9a33fe12d10a5ad}{set\_Input}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03038\ \ \ \ \ \{}
+\DoxyCodeLine{03039\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ set\_Input\ CONSTRUCT\_ID\ INPUT\ |"{}};}
+\DoxyCodeLine{03040\ }
+\DoxyCodeLine{03041\ \ \ \ \ \ \ \ \ std::string\ tmp\_In\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{03042\ \ \ \ \ \ \ \ \ std::string\ tmp\_In\_Full\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{03043\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Count\ =\ 0;}
+\DoxyCodeLine{03044\ }
+\DoxyCodeLine{03045\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03046\ }
+\DoxyCodeLine{03047\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03048\ }
+\DoxyCodeLine{03049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ flg\_Gather\_Input\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{03050\ }
+\DoxyCodeLine{03051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (flg\_Gather\_Input)}
+\DoxyCodeLine{03052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03053\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{03054\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_In;}
+\DoxyCodeLine{03055\ }
+\DoxyCodeLine{03056\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ I\ -\/\ [\ "{}}\ <<\ tmp\_Count\ <<\ \textcolor{stringliteral}{"{}\ ]:\ >"{}}\ <<\ tmp\_In\ <<\ \textcolor{stringliteral}{"{}<"{}};}
+\DoxyCodeLine{03057\ }
+\DoxyCodeLine{03058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_In\ ==\ \textcolor{stringliteral}{"{}/end/"{}})}
+\DoxyCodeLine{03059\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flg\_Gather\_Input\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{03061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{03062\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03063\ }
+\DoxyCodeLine{03064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_In\ !=\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{03065\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03066\ }
+\DoxyCodeLine{03067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Count++;}
+\DoxyCodeLine{03068\ }
+\DoxyCodeLine{03069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_In\_Full\ !=\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{03070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\_Full\ =\ tmp\_In\_Full\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ tmp\_In;}
+\DoxyCodeLine{03072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03073\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{03074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\_Full\ =\ tmp\_In;}
+\DoxyCodeLine{03076\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03077\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03078\ }
+\DoxyCodeLine{03079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (flg\_Gather\_Input)}
+\DoxyCodeLine{03080\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flg\_Gather\_Input\ =\ (!p\_File-\/>eof());}
+\DoxyCodeLine{03082\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03083\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03084\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ Input\_Full:\ "{}}\ <<\ tmp\_In\_Full;}
+\DoxyCodeLine{03085\ \ \ \ \ \ \ \ \ API.set\_Input(tmp\_Construct,\ tmp\_In\_Full);}
+\DoxyCodeLine{03086\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ Done\ Input\ Setting\ String"{}};}
+\DoxyCodeLine{03087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{03088\ \ \ \ \ \}}
+\DoxyCodeLine{03089\ }
+\DoxyCodeLine{03127\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a5d02da651068631fb3407d219d0c0d8e}{set\_Input\_uint}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03128\ \ \ \ \ \{}
+\DoxyCodeLine{03129\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ set\_Input\_uint\ CONSTRUCT\_ID\ COUNT\ INPUT[]\ |"{}};}
+\DoxyCodeLine{03130\ }
+\DoxyCodeLine{03131\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Depth\ =\ 0;}
+\DoxyCodeLine{03132\ \ \ \ \ \ \ \ \ uint64\_t*\ tmp\_In\_Full\ =\ NULL;}
+\DoxyCodeLine{03133\ }
+\DoxyCodeLine{03134\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03135\ }
+\DoxyCodeLine{03136\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03137\ }
+\DoxyCodeLine{03138\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ depth}}
+\DoxyCodeLine{03139\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Depth;}
+\DoxyCodeLine{03140\ }
+\DoxyCodeLine{03141\ \ \ \ \ \ \ \ \ tmp\_In\_Full\ =\ \textcolor{keyword}{new}\ uint64\_t[tmp\_Depth];}
+\DoxyCodeLine{03142\ }
+\DoxyCodeLine{03143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Depth;\ cou\_Index++)}
+\DoxyCodeLine{03144\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03145\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\_Full[cou\_Index]\ =\ 0;}
+\DoxyCodeLine{03146\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_In\_Full[cou\_Index];}
+\DoxyCodeLine{03147\ }
+\DoxyCodeLine{03148\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ I\ -\/\ [\ "{}}\ <<\ cou\_Index\ <<\ \textcolor{stringliteral}{"{}\ ]:\ >"{}}\ <<\ tmp\_In\_Full[cou\_Index]\ <<\ \textcolor{stringliteral}{"{}<"{}};}
+\DoxyCodeLine{03149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03150\ }
+\DoxyCodeLine{03151\ \ \ \ \ \ \ \ \ API.set\_Input\_uint(tmp\_Construct,\ tmp\_Depth,\ tmp\_In\_Full);}
+\DoxyCodeLine{03152\ \ \ \ \ \}}
+\DoxyCodeLine{03153\ }
+\DoxyCodeLine{03154\ }
+\DoxyCodeLine{03155\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_2D\_Input\_uint(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03156\ \ \ \ \ \{}
+\DoxyCodeLine{03157\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ set\_2D\_Input\_uint\ CONSTRUCT\_ID\ X\_COUNT\ Y\_COUNT\ INPUT[][]\ |"{}};}
+\DoxyCodeLine{03158\ }
+\DoxyCodeLine{03159\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_X\_Depth\ =\ 0;}
+\DoxyCodeLine{03160\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Y\_Depth\ =\ 0;}
+\DoxyCodeLine{03161\ \ \ \ \ \ \ \ \ uint64\_t**\ tmp\_In\_Full\ =\ NULL;}
+\DoxyCodeLine{03162\ }
+\DoxyCodeLine{03163\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03164\ }
+\DoxyCodeLine{03165\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03166\ }
+\DoxyCodeLine{03167\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ depth}}
+\DoxyCodeLine{03168\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_X\_Depth;}
+\DoxyCodeLine{03169\ }
+\DoxyCodeLine{03170\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ depth}}
+\DoxyCodeLine{03171\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Y\_Depth;}
+\DoxyCodeLine{03172\ }
+\DoxyCodeLine{03173\ \ \ \ \ \ \ \ \ tmp\_In\_Full\ =\ \textcolor{keyword}{new}\ uint64\_t*[tmp\_X\_Depth];}
+\DoxyCodeLine{03174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ tmp\_X\_Depth;\ cou\_X++)}
+\DoxyCodeLine{03175\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03176\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\_Full[cou\_X]\ =\ \textcolor{keyword}{new}\ uint64\_t[tmp\_Y\_Depth];}
+\DoxyCodeLine{03177\ }
+\DoxyCodeLine{03178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ tmp\_Y\_Depth;\ cou\_Y++)}
+\DoxyCodeLine{03179\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\_Full[cou\_X][cou\_Y]\ =\ 0;}
+\DoxyCodeLine{03181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_In\_Full[cou\_X][cou\_Y];}
+\DoxyCodeLine{03182\ }
+\DoxyCodeLine{03183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\ I\ -\/\ [\ "{}\ <<\ cou\_X\ <<\ "{}\ ][\ "{}\ <<\ cou\_Y\ <<\ "{}\ ]:\ >"{}\ <<\ tmp\_In\_Full[cou\_X][cou\_Y]\ <<\ "{}<"{};}}
+\DoxyCodeLine{03184\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03185\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03186\ }
+\DoxyCodeLine{03187\ \ \ \ \ \ \ \ \ API.set\_2D\_Input\_uint(tmp\_Construct,\ tmp\_X\_Depth,\ tmp\_Y\_Depth,\ tmp\_In\_Full);}
+\DoxyCodeLine{03188\ \ \ \ \ \}}
+\DoxyCodeLine{03189\ }
+\DoxyCodeLine{03190\ }
+\DoxyCodeLine{03191\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_3D\_Input\_uint(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03192\ \ \ \ \ \{}
+\DoxyCodeLine{03193\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ set\_2D\_Input\_uint\ CONSTRUCT\_ID\ X\_COUNT\ Y\_COUNT\ Z\_COUNT\ INPUT[][]\ |"{}};}
+\DoxyCodeLine{03194\ }
+\DoxyCodeLine{03195\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_X\_Depth\ =\ 0;}
+\DoxyCodeLine{03196\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Y\_Depth\ =\ 0;}
+\DoxyCodeLine{03197\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Z\_Depth\ =\ 0;}
+\DoxyCodeLine{03198\ \ \ \ \ \ \ \ \ uint64\_t***\ tmp\_In\_Full\ =\ NULL;}
+\DoxyCodeLine{03199\ }
+\DoxyCodeLine{03200\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03201\ }
+\DoxyCodeLine{03202\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03203\ }
+\DoxyCodeLine{03204\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ depth}}
+\DoxyCodeLine{03205\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_X\_Depth;}
+\DoxyCodeLine{03206\ }
+\DoxyCodeLine{03207\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ depth}}
+\DoxyCodeLine{03208\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Y\_Depth;}
+\DoxyCodeLine{03209\ }
+\DoxyCodeLine{03210\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ depth}}
+\DoxyCodeLine{03211\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Z\_Depth;}
+\DoxyCodeLine{03212\ }
+\DoxyCodeLine{03213\ \ \ \ \ \ \ \ \ tmp\_In\_Full\ =\ \textcolor{keyword}{new}\ uint64\_t**[tmp\_X\_Depth];}
+\DoxyCodeLine{03214\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ tmp\_X\_Depth;\ cou\_X++)}
+\DoxyCodeLine{03215\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03216\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\_Full[cou\_X]\ =\ \textcolor{keyword}{new}\ uint64\_t*[tmp\_Y\_Depth];}
+\DoxyCodeLine{03217\ }
+\DoxyCodeLine{03218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ tmp\_Y\_Depth;\ cou\_Y++)}
+\DoxyCodeLine{03219\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\_Full[cou\_X][cou\_Y]\ =\ \textcolor{keyword}{new}\ uint64\_t\ [tmp\_Z\_Depth];}
+\DoxyCodeLine{03221\ }
+\DoxyCodeLine{03222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ tmp\_Z\_Depth;\ cou\_Z++)}
+\DoxyCodeLine{03223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{03224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_In\_Full[cou\_X][cou\_Y][cou\_Z]\ =\ 0;}
+\DoxyCodeLine{03225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_In\_Full[cou\_X][cou\_Y][cou\_Z];}
+\DoxyCodeLine{03226\ }
+\DoxyCodeLine{03227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ I\ -\/\ [\ "{}}\ <<\ cou\_X\ <<\ \textcolor{stringliteral}{"{}\ ][\ "{}}\ <<\ cou\_Y\ <<\ \textcolor{stringliteral}{"{}\ ][\ "{}}\ <<\ cou\_Z\ <<\ \textcolor{stringliteral}{"{}\ ]:\ >"{}}\ <<\ tmp\_In\_Full[cou\_X][cou\_Y][cou\_Z]\ <<\ \textcolor{stringliteral}{"{}<"{}};}
+\DoxyCodeLine{03228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03229\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03230\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{03231\ }
+\DoxyCodeLine{03232\ \ \ \ \ \ \ \ \ API.set\_3D\_Input\_uint(tmp\_Construct,\ tmp\_X\_Depth,\ tmp\_Y\_Depth,\ tmp\_Z\_Depth,\ tmp\_In\_Full);}
+\DoxyCodeLine{03233\ \ \ \ \ \}}
+\DoxyCodeLine{03234\ }
+\DoxyCodeLine{03235\ }
+\DoxyCodeLine{03236\ }
+\DoxyCodeLine{03237\ }
+\DoxyCodeLine{03281\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_acc16f0b743a80c04e0e47fd83ffb97bb}{output\_Scaffold}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03282\ \ \ \ \ \{}
+\DoxyCodeLine{03283\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \_\_COMMAND\_\_|\ output\_Scaffold\ CONSTRUCT\_ID\ |"{}};}
+\DoxyCodeLine{03284\ }
+\DoxyCodeLine{03285\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03286\ }
+\DoxyCodeLine{03287\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03288\ }
+\DoxyCodeLine{03289\ \ \ \ \ \ \ \ \ API.output\_Scaffold(tmp\_Construct);}
+\DoxyCodeLine{03290\ \ \ \ \ \}}
+\DoxyCodeLine{03291\ }
+\DoxyCodeLine{03292\ }
+\DoxyCodeLine{03327\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_af346f81c04d6cfa0712ca66db150cd89}{output\_Input}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03328\ \ \ \ \ \{}
+\DoxyCodeLine{03329\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03330\ }
+\DoxyCodeLine{03331\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03332\ }
+\DoxyCodeLine{03333\ \ \ \ \ \ \ \ \ API.output\_Input(tmp\_Construct);}
+\DoxyCodeLine{03334\ \ \ \ \ \}}
+\DoxyCodeLine{03335\ }
+\DoxyCodeLine{03336\ }
+\DoxyCodeLine{03369\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a833cfaa472bf0da4bd535545d531cbad}{output\_Input\_uint}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03370\ \ \ \ \ \{}
+\DoxyCodeLine{03371\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03372\ }
+\DoxyCodeLine{03373\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03374\ }
+\DoxyCodeLine{03375\ \ \ \ \ \ \ \ \ API.output\_Input\_uint(tmp\_Construct);}
+\DoxyCodeLine{03376\ \ \ \ \ \}}
+\DoxyCodeLine{03377\ }
+\DoxyCodeLine{03378\ }
+\DoxyCodeLine{03423\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_ae1031c653941bdb9c55e6c8aca08bf40}{output\_Output}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03424\ \ \ \ \ \{}
+\DoxyCodeLine{03425\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03426\ }
+\DoxyCodeLine{03427\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03428\ }
+\DoxyCodeLine{03429\ \ \ \ \ \ \ \ \ API.output\_Output(tmp\_Construct);}
+\DoxyCodeLine{03430\ \ \ \ \ \}}
+\DoxyCodeLine{03431\ }
+\DoxyCodeLine{03432\ }
+\DoxyCodeLine{03476\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a9279e34a8b5696e5f1ae82d4c22f305e}{output\_Output\_uint}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03477\ \ \ \ \ \{}
+\DoxyCodeLine{03478\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03479\ }
+\DoxyCodeLine{03480\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03481\ }
+\DoxyCodeLine{03482\ \ \ \ \ \ \ \ \ API.output\_Output\_uint(tmp\_Construct);}
+\DoxyCodeLine{03483\ \ \ \ \ \}}
+\DoxyCodeLine{03484\ }
+\DoxyCodeLine{03485\ }
+\DoxyCodeLine{03521\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classc___construct___text___server_a23c3f4474c46f982f07317f9e6c274e3}{output\_Scaffold\_Char}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03522\ \ \ \ \ \{}
+\DoxyCodeLine{03523\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03524\ }
+\DoxyCodeLine{03525\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03526\ }
+\DoxyCodeLine{03527\ \ \ \ \ \ \ \ \ API.output\_Scaffold\_Char(tmp\_Construct);}
+\DoxyCodeLine{03528\ \ \ \ \ \}}
+\DoxyCodeLine{03529\ }
+\DoxyCodeLine{03530\ }
+\DoxyCodeLine{03531\ }
+\DoxyCodeLine{03532\ }
+\DoxyCodeLine{03533\ }
+\DoxyCodeLine{03534\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ -\/-\/-\/====================-\/-\/-\/}}
+\DoxyCodeLine{03535\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ -\/-\/-\/======================-\/-\/-\/}}
+\DoxyCodeLine{03536\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/========================-\/-\/-\/}}
+\DoxyCodeLine{03537\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/==========================-\/-\/-\/}}
+\DoxyCodeLine{03538\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ NT4\ specific\ hooks\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{03539\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/==========================-\/-\/-\/}}
+\DoxyCodeLine{03540\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/========================-\/-\/-\/}}
+\DoxyCodeLine{03541\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ -\/-\/-\/======================-\/-\/-\/}}
+\DoxyCodeLine{03542\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ -\/-\/-\/====================-\/-\/-\/}}
+\DoxyCodeLine{03543\ }
+\DoxyCodeLine{03544\ }
+\DoxyCodeLine{03545\ }
+\DoxyCodeLine{03546\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/======================================-\/-\/-\/}}
+\DoxyCodeLine{03547\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/========================================-\/-\/-\/}}
+\DoxyCodeLine{03548\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ Used\ to\ register\ new\ assemblies.\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{03549\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/========================================-\/-\/-\/}}
+\DoxyCodeLine{03550\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/======================================-\/-\/-\/}}
+\DoxyCodeLine{03551\ }
+\DoxyCodeLine{03552\ }
+\DoxyCodeLine{03599\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_aaf226802b28f9c9a48b49ef4fa0e56a8}{register\_Assembly}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03600\ \ \ \ \ \{}
+\DoxyCodeLine{03601\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ register\_assembly\ |"{}};}
+\DoxyCodeLine{03602\ }
+\DoxyCodeLine{03603\ \ \ \ \ \ \ \ \ \textcolor{comment}{//int\ add\_Assembly(std::string\ p\_Assembly\_Name)}}
+\DoxyCodeLine{03604\ }
+\DoxyCodeLine{03605\ \ \ \ \ \ \ \ \ std::string\ tmp\_Construct\_Type\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{03606\ }
+\DoxyCodeLine{03607\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct\_Type;}
+\DoxyCodeLine{03608\ }
+\DoxyCodeLine{03609\ \ \ \ \ \ \ \ \ std::string\ tmp\_Construct\_Name\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{03610\ }
+\DoxyCodeLine{03611\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct\_Name;}
+\DoxyCodeLine{03612\ }
+\DoxyCodeLine{03613\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ API.register\_Assembly(tmp\_Construct\_Type,\ tmp\_Construct\_Name);}
+\DoxyCodeLine{03614\ \ \ \ \ \}}
+\DoxyCodeLine{03615\ }
+\DoxyCodeLine{03616\ }
+\DoxyCodeLine{03617\ }
+\DoxyCodeLine{03618\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/=====================-\/-\/-\/}}
+\DoxyCodeLine{03619\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/=======================-\/-\/-\/}}
+\DoxyCodeLine{03620\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ Input\ handling.\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{03621\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/=======================-\/-\/-\/}}
+\DoxyCodeLine{03622\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/=====================-\/-\/-\/}}
+\DoxyCodeLine{03623\ }
+\DoxyCodeLine{03676\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_ae2a5e745eb4e47fee0064ca92aa0c2ed}{load\_Input}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03677\ \ \ \ \ \{}
+\DoxyCodeLine{03678\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n|\ load\_Input\ |"{}};}
+\DoxyCodeLine{03679\ }
+\DoxyCodeLine{03680\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Outputs\ the\ input\ for\ the\ Assembly.}}
+\DoxyCodeLine{03681\ \ \ \ \ \ \ \ \ \textcolor{comment}{//output\_Input(int\ p\_Assembly)}}
+\DoxyCodeLine{03682\ }
+\DoxyCodeLine{03683\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03684\ }
+\DoxyCodeLine{03685\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03686\ }
+\DoxyCodeLine{03687\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ API.load\_Input(tmp\_Construct);}
+\DoxyCodeLine{03688\ \ \ \ \ \}}
+\DoxyCodeLine{03689\ }
+\DoxyCodeLine{03735\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_addd245de8b70cde87aeec9ef5f9ee7e2}{load\_Input\_uint}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03736\ \ \ \ \ \{}
+\DoxyCodeLine{03737\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n|\ load\_Input\_uint\ |"{}};}
+\DoxyCodeLine{03738\ }
+\DoxyCodeLine{03739\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03740\ }
+\DoxyCodeLine{03741\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03742\ }
+\DoxyCodeLine{03743\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ API.load\_Input\_uint(tmp\_Construct);}
+\DoxyCodeLine{03744\ \ \ \ \ \}}
+\DoxyCodeLine{03745\ }
+\DoxyCodeLine{03746\ }
+\DoxyCodeLine{03747\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==========================================================================-\/-\/-\/}}
+\DoxyCodeLine{03748\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/============================================================================-\/-\/-\/}}
+\DoxyCodeLine{03749\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ Different\ ways\ of\ gathering\ nodes,\ individually,\ and\ the\ entire\ set.\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{03750\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/============================================================================-\/-\/-\/}}
+\DoxyCodeLine{03751\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==========================================================================-\/-\/-\/}}
+\DoxyCodeLine{03752\ }
+\DoxyCodeLine{03832\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a94d09c754a3899a0b1c75a57624e3715}{gather\_Given\_Node}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03833\ \ \ \ \ \{}
+\DoxyCodeLine{03834\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ gather\_given\_node\ |"{}};}
+\DoxyCodeLine{03835\ }
+\DoxyCodeLine{03836\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03837\ }
+\DoxyCodeLine{03838\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03839\ }
+\DoxyCodeLine{03840\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{03841\ }
+\DoxyCodeLine{03842\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{03843\ }
+\DoxyCodeLine{03844\ \ \ \ \ \ \ \ \ API.gather\_Given\_Node(tmp\_Construct,\ tmp\_NID);}
+\DoxyCodeLine{03845\ }
+\DoxyCodeLine{03846\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{03847\ \ \ \ \ \}}
+\DoxyCodeLine{03848\ }
+\DoxyCodeLine{03849\ }
+\DoxyCodeLine{03954\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a6662cc0306ac130aaa444daf461e5028}{gather\_Given\_Node\_uint}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{03955\ \ \ \ \ \{}
+\DoxyCodeLine{03956\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ gather\_Given\_Node\_uint\ |"{}};}
+\DoxyCodeLine{03957\ }
+\DoxyCodeLine{03958\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{03959\ }
+\DoxyCodeLine{03960\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{03961\ }
+\DoxyCodeLine{03962\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_NID\ =\ 0;}
+\DoxyCodeLine{03963\ }
+\DoxyCodeLine{03964\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_NID;}
+\DoxyCodeLine{03965\ }
+\DoxyCodeLine{03966\ \ \ \ \ \ \ \ \ API.gather\_Given\_Node\_uint(tmp\_Construct,\ tmp\_NID);}
+\DoxyCodeLine{03967\ }
+\DoxyCodeLine{03968\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{03969\ \ \ \ \ \}}
+\DoxyCodeLine{03970\ }
+\DoxyCodeLine{04014\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_ace28357789021a38f7a2eda4b5cfc569}{gather\_All\_Nodes}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04015\ \ \ \ \ \{}
+\DoxyCodeLine{04016\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ gather\_all\_nodes\ |"{}};}
+\DoxyCodeLine{04017\ }
+\DoxyCodeLine{04018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{04019\ }
+\DoxyCodeLine{04020\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{04021\ }
+\DoxyCodeLine{04022\ \ \ \ \ \ \ \ \ API.gather\_All\_Nodes(tmp\_Construct);}
+\DoxyCodeLine{04023\ }
+\DoxyCodeLine{04024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04025\ \ \ \ \ \}}
+\DoxyCodeLine{04026\ }
+\DoxyCodeLine{04027\ }
+\DoxyCodeLine{04068\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_ade341194e7e36688780577a8394029df}{gather\_All\_Nodes\_uint}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04069\ \ \ \ \ \{}
+\DoxyCodeLine{04070\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ gather\_all\_nodes\_uint\ |"{}};}
+\DoxyCodeLine{04071\ }
+\DoxyCodeLine{04072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{04073\ }
+\DoxyCodeLine{04074\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{04075\ }
+\DoxyCodeLine{04076\ \ \ \ \ \ \ \ \ API.gather\_All\_Nodes\_uint(tmp\_Construct);}
+\DoxyCodeLine{04077\ }
+\DoxyCodeLine{04078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04079\ \ \ \ \ \}}
+\DoxyCodeLine{04080\ }
+\DoxyCodeLine{04081\ }
+\DoxyCodeLine{04082\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==================================================================-\/-\/-\/}}
+\DoxyCodeLine{04083\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/====================================================================-\/-\/-\/}}
+\DoxyCodeLine{04084\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ The\ output\ of\ a\ given\ assembly\ is\ read\ into\ the\ output\ file.\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{04085\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/====================================================================-\/-\/-\/}}
+\DoxyCodeLine{04086\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==================================================================-\/-\/-\/}}
+\DoxyCodeLine{04087\ }
+\DoxyCodeLine{04088\ \ \ \ \ }
+\DoxyCodeLine{04139\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a7e0aa5a19bde777d70075936f32e8574}{gather\_Output}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04140\ \ \ \ \ \{}
+\DoxyCodeLine{04141\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n|\ gather\_Output\ |"{}};}
+\DoxyCodeLine{04142\ }
+\DoxyCodeLine{04143\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{04144\ }
+\DoxyCodeLine{04145\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{04146\ }
+\DoxyCodeLine{04147\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ tmp\_Construct\ <<\ \textcolor{stringliteral}{"{}\ |"{}};}
+\DoxyCodeLine{04148\ }
+\DoxyCodeLine{04149\ \ \ \ \ \ \ \ \ API.gather\_Output(tmp\_Construct);}
+\DoxyCodeLine{04150\ }
+\DoxyCodeLine{04151\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Neuralman.set\_Input\_1D\_string(tmp\_Construct,\ tmp\_In\_Full);}}
+\DoxyCodeLine{04152\ }
+\DoxyCodeLine{04153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04154\ \ \ \ \ \}}
+\DoxyCodeLine{04155\ }
+\DoxyCodeLine{04206\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a22244e0f8ca7d9dd0a2d024878196e48}{gather\_Output\_uint}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04207\ \ \ \ \ \{}
+\DoxyCodeLine{04208\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n|\ gather\_Output\_uint\ |"{}};}
+\DoxyCodeLine{04209\ }
+\DoxyCodeLine{04210\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{04211\ }
+\DoxyCodeLine{04212\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{04213\ }
+\DoxyCodeLine{04214\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ tmp\_Construct\ <<\ \textcolor{stringliteral}{"{}\ |"{}};}
+\DoxyCodeLine{04215\ }
+\DoxyCodeLine{04216\ \ \ \ \ \ \ \ \ API.gather\_Output\_uint(tmp\_Construct);}
+\DoxyCodeLine{04217\ }
+\DoxyCodeLine{04218\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Neuralman.set\_Input\_1D\_string(tmp\_Construct,\ tmp\_In\_Full);}}
+\DoxyCodeLine{04219\ }
+\DoxyCodeLine{04220\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04221\ \ \ \ \ \}}
+\DoxyCodeLine{04222\ }
+\DoxyCodeLine{04223\ }
+\DoxyCodeLine{04224\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/=============================-\/-\/-\/}}
+\DoxyCodeLine{04225\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/===============================-\/-\/-\/}}
+\DoxyCodeLine{04226\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ Treetop\ node\ gathering.\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{04227\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/===============================-\/-\/-\/}}
+\DoxyCodeLine{04228\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/=============================-\/-\/-\/}}
+\DoxyCodeLine{04229\ }
+\DoxyCodeLine{04267\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_ad7f78ebe85659943e8acbcddf9241b29}{gather\_Treetop\_Node}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04268\ \ \ \ \ \{}
+\DoxyCodeLine{04269\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ gather\_treetop\_node\ |"{}};}
+\DoxyCodeLine{04270\ }
+\DoxyCodeLine{04271\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{04272\ }
+\DoxyCodeLine{04273\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{04274\ }
+\DoxyCodeLine{04275\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Gathers\ the\ treetop\ node.}}
+\DoxyCodeLine{04276\ \ \ \ \ \ \ \ \ API.gather\_Treetop\_Node(tmp\_Construct);}
+\DoxyCodeLine{04277\ }
+\DoxyCodeLine{04278\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04279\ \ \ \ \ \}}
+\DoxyCodeLine{04280\ }
+\DoxyCodeLine{04318\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a01af422b47451f4761ea60e74b59eb16}{gather\_Treetop\_Node\_uint}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04319\ \ \ \ \ \{}
+\DoxyCodeLine{04320\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ gather\_treetop\_node\_uint\ |"{}};}
+\DoxyCodeLine{04321\ }
+\DoxyCodeLine{04322\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{04323\ }
+\DoxyCodeLine{04324\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{04325\ }
+\DoxyCodeLine{04326\ \ \ \ \ \ \ \ \ API.gather\_Treetop\_Node\_uint(tmp\_Construct);}
+\DoxyCodeLine{04327\ }
+\DoxyCodeLine{04328\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04329\ \ \ \ \ \}}
+\DoxyCodeLine{04330\ }
+\DoxyCodeLine{04446\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a7dd787a6e3a33287c796d314f26795a3}{gather\_Treetop\_NID}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04447\ \ \ \ \ \{}
+\DoxyCodeLine{04448\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \_\_COMMAND\_\_|\ gather\_Treetop\_NID\ |"{}};}
+\DoxyCodeLine{04449\ }
+\DoxyCodeLine{04450\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{04451\ }
+\DoxyCodeLine{04452\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{04453\ }
+\DoxyCodeLine{04454\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Passes\ the\ values\ to\ an\ assembly\ to\ encode.}}
+\DoxyCodeLine{04455\ \ \ \ \ \ \ \ \ API.gather\_Treetop\_NID(tmp\_Construct);}
+\DoxyCodeLine{04456\ }
+\DoxyCodeLine{04457\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04458\ \ \ \ \ \}}
+\DoxyCodeLine{04459\ }
+\DoxyCodeLine{04460\ }
+\DoxyCodeLine{04461\ }
+\DoxyCodeLine{04462\ }
+\DoxyCodeLine{04463\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/======================================================================-\/-\/-\/}}
+\DoxyCodeLine{04464\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/========================================================================-\/-\/-\/}}
+\DoxyCodeLine{04465\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ Output\ the\ assembly\ input,\ output,\ scaffolds,\ node\ network,\ etc.\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{04466\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/========================================================================-\/-\/-\/}}
+\DoxyCodeLine{04467\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/======================================================================-\/-\/-\/}}
+\DoxyCodeLine{04468\ }
+\DoxyCodeLine{04518\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_ad011c9a43a83319a0041c71e9ed00502}{output\_Node\_Network}}()}
+\DoxyCodeLine{04519\ \ \ \ \ \{}
+\DoxyCodeLine{04520\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n|\ output\_Node\_Network\ |"{}};}
+\DoxyCodeLine{04521\ }
+\DoxyCodeLine{04522\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Passes\ the\ values\ to\ an\ assembly\ to\ encode.}}
+\DoxyCodeLine{04523\ \ \ \ \ \ \ \ \ API.output\_Node\_Network();}
+\DoxyCodeLine{04524\ }
+\DoxyCodeLine{04525\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04526\ \ \ \ \ \}}
+\DoxyCodeLine{04527\ }
+\DoxyCodeLine{04528\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==\ \ output\_node\ \ ==-\/-\/-\/}}
+\DoxyCodeLine{04575\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a659a1d8e9f942ea65a0e675000759478}{output\_Node}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04576\ \ \ \ \ \{}
+\DoxyCodeLine{04577\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n|\ output\_Node\ |"{}};}
+\DoxyCodeLine{04578\ }
+\DoxyCodeLine{04579\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Node\ =\ 0;}
+\DoxyCodeLine{04580\ }
+\DoxyCodeLine{04581\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Node;}
+\DoxyCodeLine{04582\ }
+\DoxyCodeLine{04583\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ tmp\_Node\ <<\ \textcolor{stringliteral}{"{}\ |"{}};}
+\DoxyCodeLine{04584\ }
+\DoxyCodeLine{04585\ \ \ \ \ \ \ \ \ API.output\_BP\_NID(tmp\_Node);}
+\DoxyCodeLine{04586\ }
+\DoxyCodeLine{04587\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04588\ \ \ \ \ \}}
+\DoxyCodeLine{04589\ }
+\DoxyCodeLine{04621\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_ae4a689488b78d6000e0591bb50589e98}{output\_Assemblies}}()}
+\DoxyCodeLine{04622\ \ \ \ \ \{}
+\DoxyCodeLine{04623\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n|\ output\_Assemblies\ |"{}};}
+\DoxyCodeLine{04624\ }
+\DoxyCodeLine{04625\ \ \ \ \ \ \ \ \ API.output\_Assemblies();}
+\DoxyCodeLine{04626\ }
+\DoxyCodeLine{04627\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04628\ \ \ \ \ \}}
+\DoxyCodeLine{04629\ }
+\DoxyCodeLine{04630\ }
+\DoxyCodeLine{04631\ }
+\DoxyCodeLine{04632\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ -\/-\/-\/==================================-\/-\/-\/}}
+\DoxyCodeLine{04633\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ -\/-\/-\/====================================-\/-\/-\/}}
+\DoxyCodeLine{04634\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/======================================-\/-\/-\/}}
+\DoxyCodeLine{04635\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/========================================-\/-\/-\/}}
+\DoxyCodeLine{04636\ \ \ \ \ \textcolor{comment}{//\ \ -\/-\/-\/==\ \ \ Generic\ commands\ for\ the\ engine.\ \ \ ==-\/-\/-\/}}
+\DoxyCodeLine{04637\ \ \ \ \ \textcolor{comment}{//\ \ \ -\/-\/-\/========================================-\/-\/-\/}}
+\DoxyCodeLine{04638\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/======================================-\/-\/-\/}}
+\DoxyCodeLine{04639\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ -\/-\/-\/====================================-\/-\/-\/}}
+\DoxyCodeLine{04640\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ -\/-\/-\/==================================-\/-\/-\/}}
+\DoxyCodeLine{04641\ }
+\DoxyCodeLine{04642\ \ \ \ \ \textcolor{comment}{//\ \ \ \ -\/-\/-\/==\ \ clear\_output\ \ ==-\/-\/-\/}}
+\DoxyCodeLine{04685\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a07c25f72831938747ca959cc423e2985}{clear\_Output}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04686\ \ \ \ \ \{}
+\DoxyCodeLine{04687\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{04688\ }
+\DoxyCodeLine{04689\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{04690\ }
+\DoxyCodeLine{04691\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Gathers\ the\ treetop\ node.}}
+\DoxyCodeLine{04692\ \ \ \ \ \ \ \ \ API.clear\_Output(tmp\_Construct);}
+\DoxyCodeLine{04693\ }
+\DoxyCodeLine{04694\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04695\ \ \ \ \ \}}
+\DoxyCodeLine{04696\ }
+\DoxyCodeLine{04741\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a67d6675fb0650c609d6f89940bd1c487}{output\_Newline}}(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04742\ \ \ \ \ \{}
+\DoxyCodeLine{04743\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Construct\ =\ 0;}
+\DoxyCodeLine{04744\ }
+\DoxyCodeLine{04745\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_Construct;}
+\DoxyCodeLine{04746\ }
+\DoxyCodeLine{04747\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Gathers\ the\ treetop\ node.}}
+\DoxyCodeLine{04748\ \ \ \ \ \ \ \ \ API.output\_Newline(tmp\_Construct);}
+\DoxyCodeLine{04749\ }
+\DoxyCodeLine{04750\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04751\ \ \ \ \ \}}
+\DoxyCodeLine{04752\ }
+\DoxyCodeLine{04753\ }
+\DoxyCodeLine{04754\ \ \ \ \ \textcolor{keywordtype}{void}\ save(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04755\ \ \ \ \ \{}
+\DoxyCodeLine{04756\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n|\ save\ |"{}};}
+\DoxyCodeLine{04757\ }
+\DoxyCodeLine{04758\ \ \ \ \ \ \ \ \ std::string\ tmp\_FName;}
+\DoxyCodeLine{04759\ }
+\DoxyCodeLine{04760\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_FName;}
+\DoxyCodeLine{04761\ }
+\DoxyCodeLine{04762\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ tmp\_FName\ <<\ \textcolor{stringliteral}{"{}\ |"{}};}
+\DoxyCodeLine{04763\ }
+\DoxyCodeLine{04764\ \ \ \ \ \ \ \ \ API.save(tmp\_FName);}
+\DoxyCodeLine{04765\ \ \ \ \ \}}
+\DoxyCodeLine{04766\ }
+\DoxyCodeLine{04767\ }
+\DoxyCodeLine{04768\ \ \ \ \ \textcolor{keywordtype}{void}\ load(std::ifstream*\ p\_File)}
+\DoxyCodeLine{04769\ \ \ \ \ \{}
+\DoxyCodeLine{04770\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n|\ load\ |"{}};}
+\DoxyCodeLine{04771\ }
+\DoxyCodeLine{04772\ \ \ \ \ \ \ \ \ std::string\ tmp\_FName;}
+\DoxyCodeLine{04773\ }
+\DoxyCodeLine{04774\ \ \ \ \ \ \ \ \ *p\_File\ >>\ tmp\_FName;}
+\DoxyCodeLine{04775\ }
+\DoxyCodeLine{04776\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ tmp\_FName\ <<\ \textcolor{stringliteral}{"{}\ |"{}};}
+\DoxyCodeLine{04777\ }
+\DoxyCodeLine{04778\ \ \ \ \ \ \ \ \ API.load(tmp\_FName);}
+\DoxyCodeLine{04779\ \ \ \ \ \}}
+\DoxyCodeLine{04780\ }
+\DoxyCodeLine{04781\ }
+\DoxyCodeLine{04800\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classc___construct___text___server_a88e7529b9409186f7c4daff83c0b238e}{run}}()}
+\DoxyCodeLine{04801\ \ \ \ \ \{}
+\DoxyCodeLine{04802\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ flg\_Direction\ =\ 1;}
+\DoxyCodeLine{04803\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Distance\ =\ -\/250;}
+\DoxyCodeLine{04804\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_MAX\ =\ 250;}
+\DoxyCodeLine{04805\ }
+\DoxyCodeLine{04806\ \ \ \ \ \ \ \ \ std::string\ tmp\_Message\ =\ \textcolor{stringliteral}{"{}\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_IDLING\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_"{}};}
+\DoxyCodeLine{04807\ \ \ \ \ \ \ \ \ std::string\ tmp\_Corrupt\_Message\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{04808\ }
+\DoxyCodeLine{04809\ \ \ \ \ \ \ \ \ flg\_Direction\ =\ 1;}
+\DoxyCodeLine{04810\ \ \ \ \ \ \ \ \ tmp\_Distance\ =\ 0;}
+\DoxyCodeLine{04811\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (1)}
+\DoxyCodeLine{04812\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{04813\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Time\ =\ 0;\ cou\_Time\ <\ 250;\ cou\_Time++)}
+\DoxyCodeLine{04814\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{04815\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Distance\ +=\ flg\_Direction;}
+\DoxyCodeLine{04816\ }
+\DoxyCodeLine{04817\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Distance\ >=\ tmp\_MAX)\ \{\ flg\_Direction\ =\ -\/1;\ \}}
+\DoxyCodeLine{04818\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Distance\ <=\ (tmp\_MAX\ *\ -\/1))\ \{\ flg\_Direction\ =\ 1;\ \}}
+\DoxyCodeLine{04819\ }
+\DoxyCodeLine{04820\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ (tmp\_Message.length()\ +\ 9);\ cou\_Index++)}
+\DoxyCodeLine{04821\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{04822\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ char(8);}
+\DoxyCodeLine{04823\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{04824\ }
+\DoxyCodeLine{04825\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Corrupt\_Message\ =\ tmp\_Message;}
+\DoxyCodeLine{04826\ }
+\DoxyCodeLine{04827\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Distance;\ cou\_Index++)}
+\DoxyCodeLine{04828\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{04829\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Corrupt\_Message[rand()\ \%\ tmp\_Message.length()]\ =\ char((std::rand()\ \%\ 32)\ +\ 32);}
+\DoxyCodeLine{04830\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{04831\ }
+\DoxyCodeLine{04832\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}STANDBY["{}}\ <<\ tmp\_Corrupt\_Message\ <<\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{04833\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{04834\ }
+\DoxyCodeLine{04835\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Result\ =\ check\_Control\_Panel\_Flag();}
+\DoxyCodeLine{04836\ }
+\DoxyCodeLine{04837\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Check\ the\ control\ panel\ for\ an\ update}}
+\DoxyCodeLine{04838\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Result)}
+\DoxyCodeLine{04839\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{04840\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\ \string~\string~\string~Calling\ control\ interpreter:"{};}}
+\DoxyCodeLine{04841\ }
+\DoxyCodeLine{04842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (execute\_Control\_Panel\_Buffer()\ ==\ -\/1)}
+\DoxyCodeLine{04843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{04844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{04845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{04846\ }
+\DoxyCodeLine{04847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ \ \ \ (o.O)"{}};}
+\DoxyCodeLine{04848\ }
+\DoxyCodeLine{04849\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ tmp\_Message;}
+\DoxyCodeLine{04850\ }
+\DoxyCodeLine{04851\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{04852\ }
+\DoxyCodeLine{04853\ \ \ \ \ \ \ \ \ \ \ \ \ Tick++;}
+\DoxyCodeLine{04854\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{04855\ \ \ \ \ \}}
+\DoxyCodeLine{04856\ \};}
+\DoxyCodeLine{04857\ }
+\DoxyCodeLine{04858\ }
+
+\end{DoxyCode}

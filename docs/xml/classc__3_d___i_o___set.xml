@@ -1,0 +1,238 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="classc__3_d___i_o___set" kind="class" language="C++" prot="public">
+    <compoundname>c_3D_IO_Set</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classc__3_d___i_o___set_1a8b82f55c2b04cb5231a5eb90f0ccf0ad" prot="public" static="no" mutable="no">
+        <type>uint64_t ***</type>
+        <definition>uint64_t*** c_3D_IO_Set::Data</definition>
+        <argsstring></argsstring>
+        <name>Data</name>
+        <qualifiedname>c_3D_IO_Set::Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="279" column="14" bodyfile="include/NT4/c_IO.h" bodystart="279" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc__3_d___i_o___set_1a59609e1a4542c4f084c8731d093d087b" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int c_3D_IO_Set::Depth[3]</definition>
+        <argsstring>[3]</argsstring>
+        <name>Depth</name>
+        <qualifiedname>c_3D_IO_Set::Depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="286" column="9" bodyfile="include/NT4/c_IO.h" bodystart="286" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classc__3_d___i_o___set_1ae3d19c3e902a50a958cd91a57af81a62" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_3D_IO_Set::c_3D_IO_Set</definition>
+        <argsstring>()</argsstring>
+        <name>c_3D_IO_Set</name>
+        <qualifiedname>c_3D_IO_Set::c_3D_IO_Set</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="288" column="5" bodyfile="include/NT4/c_IO.h" bodystart="288" bodyend="295"/>
+      </memberdef>
+      <memberdef kind="function" id="classc__3_d___i_o___set_1a2efb9212ca24d3ea3226a66aa19d1292" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_3D_IO_Set::set_Depth</definition>
+        <argsstring>(int p_X_Depth, int p_Y_Depth, int p_Z_Depth)</argsstring>
+        <name>set_Depth</name>
+        <qualifiedname>c_3D_IO_Set::set_Depth</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>p_X_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Y_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Z_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="297" column="10" bodyfile="include/NT4/c_IO.h" bodystart="297" bodyend="321"/>
+      </memberdef>
+      <memberdef kind="function" id="classc__3_d___i_o___set_1aa86ca542292f116549b44fce7cdb30c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_3D_IO_Set::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <qualifiedname>c_3D_IO_Set::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="325" column="10" bodyfile="include/NT4/c_IO.h" bodystart="325" bodyend="354"/>
+      </memberdef>
+      <memberdef kind="function" id="classc__3_d___i_o___set_1a6e2925e44d70c64e1b725a666ca7d0f3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_3D_IO_Set::wipe_Data</definition>
+        <argsstring>()</argsstring>
+        <name>wipe_Data</name>
+        <qualifiedname>c_3D_IO_Set::wipe_Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="357" column="10" bodyfile="include/NT4/c_IO.h" bodystart="357" bodyend="370"/>
+      </memberdef>
+      <memberdef kind="function" id="classc__3_d___i_o___set_1a70177de910e4457165d6dc7ac058109f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_3D_IO_Set::set_Value</definition>
+        <argsstring>(uint64_t p_Value, int p_X, int p_Y, int p_Z)</argsstring>
+        <name>set_Value</name>
+        <qualifiedname>c_3D_IO_Set::set_Value</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>p_Value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_X</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="373" column="10" bodyfile="include/NT4/c_IO.h" bodystart="373" bodyend="377"/>
+      </memberdef>
+      <memberdef kind="function" id="classc__3_d___i_o___set_1a44d3fd88e32642f00f8946547bbbd9f5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_3D_IO_Set::set_Array_Value</definition>
+        <argsstring>(uint64_t ***p_Data_Array, int p_X_Depth, int p_Y_Depth, int p_Z_Depth)</argsstring>
+        <name>set_Array_Value</name>
+        <qualifiedname>c_3D_IO_Set::set_Array_Value</qualifiedname>
+        <param>
+          <type>uint64_t ***</type>
+          <declname>p_Data_Array</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_X_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Y_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Z_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="380" column="10" bodyfile="include/NT4/c_IO.h" bodystart="380" bodyend="397"/>
+      </memberdef>
+      <memberdef kind="function" id="classc__3_d___i_o___set_1a50fb48ef41f9ccb53236cf77ffa7bfea" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t c_3D_IO_Set::get_Value</definition>
+        <argsstring>(int p_X, int p_Y, int p_Z)</argsstring>
+        <name>get_Value</name>
+        <qualifiedname>c_3D_IO_Set::get_Value</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>p_X</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Y</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Z</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="400" column="14" bodyfile="include/NT4/c_IO.h" bodystart="400" bodyend="403"/>
+      </memberdef>
+      <memberdef kind="function" id="classc__3_d___i_o___set_1a620cddfdcbb1d7719f5fbf371a15c6b2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_3D_IO_Set::shift_Data</definition>
+        <argsstring>()</argsstring>
+        <name>shift_Data</name>
+        <qualifiedname>c_3D_IO_Set::shift_Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="407" column="10" bodyfile="include/NT4/c_IO.h" bodystart="407" bodyend="427"/>
+      </memberdef>
+      <memberdef kind="function" id="classc__3_d___i_o___set_1a9cb8b545201e1c300af7d6d4ebff3e0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_3D_IO_Set::output</definition>
+        <argsstring>()</argsstring>
+        <name>output</name>
+        <qualifiedname>c_3D_IO_Set::output</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_IO.h" line="430" column="10" bodyfile="include/NT4/c_IO.h" bodystart="430" bodyend="444"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/NT4/c_IO.h" line="274" column="1" bodyfile="include/NT4/c_IO.h" bodystart="275" bodyend="445"/>
+    <listofallmembers>
+      <member refid="classc__3_d___i_o___set_1ae3d19c3e902a50a958cd91a57af81a62" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>c_3D_IO_Set</name></member>
+      <member refid="classc__3_d___i_o___set_1a8b82f55c2b04cb5231a5eb90f0ccf0ad" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>Data</name></member>
+      <member refid="classc__3_d___i_o___set_1a59609e1a4542c4f084c8731d093d087b" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>Depth</name></member>
+      <member refid="classc__3_d___i_o___set_1a50fb48ef41f9ccb53236cf77ffa7bfea" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>get_Value</name></member>
+      <member refid="classc__3_d___i_o___set_1a9cb8b545201e1c300af7d6d4ebff3e0b" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>output</name></member>
+      <member refid="classc__3_d___i_o___set_1aa86ca542292f116549b44fce7cdb30c1" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>reset</name></member>
+      <member refid="classc__3_d___i_o___set_1a44d3fd88e32642f00f8946547bbbd9f5" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>set_Array_Value</name></member>
+      <member refid="classc__3_d___i_o___set_1a2efb9212ca24d3ea3226a66aa19d1292" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>set_Depth</name></member>
+      <member refid="classc__3_d___i_o___set_1a70177de910e4457165d6dc7ac058109f" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>set_Value</name></member>
+      <member refid="classc__3_d___i_o___set_1a620cddfdcbb1d7719f5fbf371a15c6b2" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>shift_Data</name></member>
+      <member refid="classc__3_d___i_o___set_1a6e2925e44d70c64e1b725a666ca7d0f3" prot="public" virt="non-virtual"><scope>c_3D_IO_Set</scope><name>wipe_Data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

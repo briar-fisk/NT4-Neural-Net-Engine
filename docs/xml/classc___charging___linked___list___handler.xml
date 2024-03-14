@@ -1,0 +1,190 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="classc___charging___linked___list___handler" kind="class" language="C++" prot="public">
+    <compoundname>c_Charging_Linked_List_Handler</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classc___charging___linked___list___handler_1aa82256ea43a5223252573de74442aede" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___charging___linked___list" kindref="compound">c_Charging_Linked_List</ref> *</type>
+        <definition>c_Charging_Linked_List* c_Charging_Linked_List_Handler::Root</definition>
+        <argsstring></argsstring>
+        <name>Root</name>
+        <qualifiedname>c_Charging_Linked_List_Handler::Root</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="48" column="28" bodyfile="include/NT4/c_Charging_Array.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___linked___list___handler_1a629102652e3659b7e39c6b853add8359" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___charging___linked___list" kindref="compound">c_Charging_Linked_List</ref> **</type>
+        <definition>c_Charging_Linked_List** c_Charging_Linked_List_Handler::Current_LL</definition>
+        <argsstring></argsstring>
+        <name>Current_LL</name>
+        <qualifiedname>c_Charging_Linked_List_Handler::Current_LL</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="49" column="28" bodyfile="include/NT4/c_Charging_Array.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___linked___list___handler_1a036ca5999cbe92960c64d4ff69d98f6a" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int c_Charging_Linked_List_Handler::Depth</definition>
+        <argsstring></argsstring>
+        <name>Depth</name>
+        <qualifiedname>c_Charging_Linked_List_Handler::Depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="50" column="9" bodyfile="include/NT4/c_Charging_Array.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classc___charging___linked___list___handler_1a1cf7e9ffb7906677067089652b110285" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_Charging_Linked_List_Handler::c_Charging_Linked_List_Handler</definition>
+        <argsstring>()</argsstring>
+        <name>c_Charging_Linked_List_Handler</name>
+        <qualifiedname>c_Charging_Linked_List_Handler::c_Charging_Linked_List_Handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="52" column="5" bodyfile="include/NT4/c_Charging_Array.h" bodystart="52" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___linked___list___handler_1adf60105e341741027e12b84801cf9d1c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_Charging_Linked_List_Handler::~c_Charging_Linked_List_Handler</definition>
+        <argsstring>()</argsstring>
+        <name>~c_Charging_Linked_List_Handler</name>
+        <qualifiedname>c_Charging_Linked_List_Handler::~c_Charging_Linked_List_Handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="59" column="5" bodyfile="include/NT4/c_Charging_Array.h" bodystart="59" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___linked___list___handler_1a7bb44115c4515dfda501d23f6c9095b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Linked_List_Handler::init</definition>
+        <argsstring>()</argsstring>
+        <name>init</name>
+        <qualifiedname>c_Charging_Linked_List_Handler::init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="65" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="65" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___linked___list___handler_1a145c21dea7dc0936f76ce1d4e100d5a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classc___charging___linked___list" kindref="compound">c_Charging_Linked_List</ref> *</type>
+        <definition>c_Charging_Linked_List * c_Charging_Linked_List_Handler::new_LL</definition>
+        <argsstring>(c_Node *p_NID, double p_Charge)</argsstring>
+        <name>new_LL</name>
+        <qualifiedname>c_Charging_Linked_List_Handler::new_LL</qualifiedname>
+        <param>
+          <type><ref refid="classc___node" kindref="compound">c_Node</ref> *</type>
+          <declname>p_NID</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>p_Charge</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="73" column="28" bodyfile="include/NT4/c_Charging_Array.h" bodystart="73" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___linked___list___handler_1a6f1c37c0ca88bd32c56722293302a929" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Linked_List_Handler::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <qualifiedname>c_Charging_Linked_List_Handler::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="94" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="94" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___linked___list___handler_1abf10336cf06b3a3a5923cefbface516b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Linked_List_Handler::output</definition>
+        <argsstring>()</argsstring>
+        <name>output</name>
+        <qualifiedname>c_Charging_Linked_List_Handler::output</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="118" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="118" bodyend="140"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>c_Charging_Linked_List</label>
+        <link refid="classc___charging___linked___list"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Next</edgelabel>
+          <edgelabel>Previous</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>NID</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>c_Charging_Linked_List_Handler</label>
+        <link refid="classc___charging___linked___list___handler"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Current_LL</edgelabel>
+          <edgelabel>Root</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>c_Node</label>
+        <link refid="classc___node"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>Axons</edgelabel>
+          <edgelabel>Dendrites</edgelabel>
+          <edgelabel>Next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/NT4/c_Charging_Array.h" line="43" column="1" bodyfile="include/NT4/c_Charging_Array.h" bodystart="44" bodyend="141"/>
+    <listofallmembers>
+      <member refid="classc___charging___linked___list___handler_1a1cf7e9ffb7906677067089652b110285" prot="public" virt="non-virtual"><scope>c_Charging_Linked_List_Handler</scope><name>c_Charging_Linked_List_Handler</name></member>
+      <member refid="classc___charging___linked___list___handler_1a629102652e3659b7e39c6b853add8359" prot="public" virt="non-virtual"><scope>c_Charging_Linked_List_Handler</scope><name>Current_LL</name></member>
+      <member refid="classc___charging___linked___list___handler_1a036ca5999cbe92960c64d4ff69d98f6a" prot="public" virt="non-virtual"><scope>c_Charging_Linked_List_Handler</scope><name>Depth</name></member>
+      <member refid="classc___charging___linked___list___handler_1a7bb44115c4515dfda501d23f6c9095b3" prot="public" virt="non-virtual"><scope>c_Charging_Linked_List_Handler</scope><name>init</name></member>
+      <member refid="classc___charging___linked___list___handler_1a145c21dea7dc0936f76ce1d4e100d5a8" prot="public" virt="non-virtual"><scope>c_Charging_Linked_List_Handler</scope><name>new_LL</name></member>
+      <member refid="classc___charging___linked___list___handler_1abf10336cf06b3a3a5923cefbface516b" prot="public" virt="non-virtual"><scope>c_Charging_Linked_List_Handler</scope><name>output</name></member>
+      <member refid="classc___charging___linked___list___handler_1a6f1c37c0ca88bd32c56722293302a929" prot="public" virt="non-virtual"><scope>c_Charging_Linked_List_Handler</scope><name>reset</name></member>
+      <member refid="classc___charging___linked___list___handler_1aa82256ea43a5223252573de74442aede" prot="public" virt="non-virtual"><scope>c_Charging_Linked_List_Handler</scope><name>Root</name></member>
+      <member refid="classc___charging___linked___list___handler_1adf60105e341741027e12b84801cf9d1c" prot="public" virt="non-virtual"><scope>c_Charging_Linked_List_Handler</scope><name>~c_Charging_Linked_List_Handler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

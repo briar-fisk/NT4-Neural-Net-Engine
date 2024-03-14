@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="dir_9a24b23fd88bd85ab05010ae8548cd82" kind="dir">
+    <compoundname>include/NT4</compoundname>
+    <innerfile refid="c___c_a_n_8h">c_CAN.h</innerfile>
+    <innerfile refid="c___c_a_n__1_d___pyramid_8h">c_CAN_1D_Pyramid.h</innerfile>
+    <innerfile refid="c___c_a_n__2_d___pyramid_8h">c_CAN_2D_Pyramid.h</innerfile>
+    <innerfile refid="c___c_a_n__3_d___pyramid_8h">c_CAN_3D_Pyramid.h</innerfile>
+    <innerfile refid="c___c_a_n__7_d___pyramid_8h">c_CAN_7D_Pyramid.h</innerfile>
+    <innerfile refid="c___c_a_n___many___to___one_8h">c_CAN_Many_To_One.h</innerfile>
+    <innerfile refid="c___c_a_n___multi___sensory___construct_8h">c_CAN_Multi_Sensory_Construct.h</innerfile>
+    <innerfile refid="c___charging___array_8h">c_Charging_Array.h</innerfile>
+    <innerfile refid="c___construct_8h">c_Construct.h</innerfile>
+    <innerfile refid="c___construct___a_p_i_8h">c_Construct_API.h</innerfile>
+    <innerfile refid="c___construct___text___server_8h">c_Construct_Text_Server.h</innerfile>
+    <innerfile refid="c___fractal___tree_8h">c_Fractal_Tree.h</innerfile>
+    <innerfile refid="c___i_o_8h">c_IO.h</innerfile>
+    <innerfile refid="c___linked___list___handler_8h">c_Linked_List_Handler.h</innerfile>
+    <innerfile refid="c___node_8h">c_Node.h</innerfile>
+    <innerfile refid="c___node___network_8h">c_Node_Network.h</innerfile>
+    <innerfile refid="c___trace_8h">c_Trace.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/NT4/"/>
+  </compounddef>
+</doxygen>

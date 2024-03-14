@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="classc___linked___list___handler" kind="class" language="C++" prot="public">
+    <compoundname>c_Linked_List_Handler</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classc___linked___list___handler_1ae5364d2a3f9f6248ca88373f4a716c8c" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___linked___list" kindref="compound">c_Linked_List</ref> *</type>
+        <definition>c_Linked_List* c_Linked_List_Handler::Root</definition>
+        <argsstring></argsstring>
+        <name>Root</name>
+        <qualifiedname>c_Linked_List_Handler::Root</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Linked_List_Handler.h" line="41" column="19" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___linked___list___handler_1a04af10617585c1e389ba74ce61a93a32" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___linked___list" kindref="compound">c_Linked_List</ref> **</type>
+        <definition>c_Linked_List** c_Linked_List_Handler::Current_LL</definition>
+        <argsstring></argsstring>
+        <name>Current_LL</name>
+        <qualifiedname>c_Linked_List_Handler::Current_LL</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Linked_List_Handler.h" line="42" column="19" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___linked___list___handler_1a3d2c300dbcf3d8dc233d29ea64237a61" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int c_Linked_List_Handler::Depth</definition>
+        <argsstring></argsstring>
+        <name>Depth</name>
+        <qualifiedname>c_Linked_List_Handler::Depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Linked_List_Handler.h" line="43" column="9" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classc___linked___list___handler_1a7465c16221ff58617e21cf4efbc82e2f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_Linked_List_Handler::c_Linked_List_Handler</definition>
+        <argsstring>()</argsstring>
+        <name>c_Linked_List_Handler</name>
+        <qualifiedname>c_Linked_List_Handler::c_Linked_List_Handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Linked_List_Handler.h" line="45" column="5" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="45" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___linked___list___handler_1a83ebb2dc24bc50514bc55ea83315d7c1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_Linked_List_Handler::~c_Linked_List_Handler</definition>
+        <argsstring>()</argsstring>
+        <name>~c_Linked_List_Handler</name>
+        <qualifiedname>c_Linked_List_Handler::~c_Linked_List_Handler</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Linked_List_Handler.h" line="52" column="5" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="52" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___linked___list___handler_1ae8847ff1a8f408af2eeed81c82defcd5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Linked_List_Handler::init</definition>
+        <argsstring>()</argsstring>
+        <name>init</name>
+        <qualifiedname>c_Linked_List_Handler::init</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Linked_List_Handler.h" line="58" column="10" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="58" bodyend="63"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___linked___list___handler_1a39b5afd288826c1cbe51a052f320b27d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classc___linked___list" kindref="compound">c_Linked_List</ref> *</type>
+        <definition>c_Linked_List * c_Linked_List_Handler::new_LL</definition>
+        <argsstring>(uint64_t p_Quanta)</argsstring>
+        <name>new_LL</name>
+        <qualifiedname>c_Linked_List_Handler::new_LL</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>p_Quanta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Linked_List_Handler.h" line="66" column="19" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="66" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___linked___list___handler_1a260275d1cb30bf69435e9e6b92aaa3ed" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Linked_List_Handler::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <qualifiedname>c_Linked_List_Handler::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Linked_List_Handler.h" line="86" column="10" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="86" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___linked___list___handler_1af7bc7e9cc00412883b97625502a4f342" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Linked_List_Handler::output</definition>
+        <argsstring>()</argsstring>
+        <name>output</name>
+        <qualifiedname>c_Linked_List_Handler::output</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Linked_List_Handler.h" line="110" column="10" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="110" bodyend="133"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>c_Linked_List</label>
+        <link refid="classc___linked___list"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Next</edgelabel>
+          <edgelabel>Previous</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>c_Linked_List_Handler</label>
+        <link refid="classc___linked___list___handler"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Current_LL</edgelabel>
+          <edgelabel>Root</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/NT4/c_Linked_List_Handler.h" line="36" column="1" bodyfile="include/NT4/c_Linked_List_Handler.h" bodystart="37" bodyend="134"/>
+    <listofallmembers>
+      <member refid="classc___linked___list___handler_1a7465c16221ff58617e21cf4efbc82e2f" prot="public" virt="non-virtual"><scope>c_Linked_List_Handler</scope><name>c_Linked_List_Handler</name></member>
+      <member refid="classc___linked___list___handler_1a04af10617585c1e389ba74ce61a93a32" prot="public" virt="non-virtual"><scope>c_Linked_List_Handler</scope><name>Current_LL</name></member>
+      <member refid="classc___linked___list___handler_1a3d2c300dbcf3d8dc233d29ea64237a61" prot="public" virt="non-virtual"><scope>c_Linked_List_Handler</scope><name>Depth</name></member>
+      <member refid="classc___linked___list___handler_1ae8847ff1a8f408af2eeed81c82defcd5" prot="public" virt="non-virtual"><scope>c_Linked_List_Handler</scope><name>init</name></member>
+      <member refid="classc___linked___list___handler_1a39b5afd288826c1cbe51a052f320b27d" prot="public" virt="non-virtual"><scope>c_Linked_List_Handler</scope><name>new_LL</name></member>
+      <member refid="classc___linked___list___handler_1af7bc7e9cc00412883b97625502a4f342" prot="public" virt="non-virtual"><scope>c_Linked_List_Handler</scope><name>output</name></member>
+      <member refid="classc___linked___list___handler_1a260275d1cb30bf69435e9e6b92aaa3ed" prot="public" virt="non-virtual"><scope>c_Linked_List_Handler</scope><name>reset</name></member>
+      <member refid="classc___linked___list___handler_1ae5364d2a3f9f6248ca88373f4a716c8c" prot="public" virt="non-virtual"><scope>c_Linked_List_Handler</scope><name>Root</name></member>
+      <member refid="classc___linked___list___handler_1a83ebb2dc24bc50514bc55ea83315d7c1" prot="public" virt="non-virtual"><scope>c_Linked_List_Handler</scope><name>~c_Linked_List_Handler</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

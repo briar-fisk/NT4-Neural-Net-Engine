@@ -1,0 +1,377 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="classc___trace" kind="class" language="C++" prot="public">
+    <compoundname>c_Trace</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classc___trace_1a98a7286f5e6d43415a2eec1546f3e946" prot="public" static="no" mutable="no">
+        <type>uint64_t *</type>
+        <definition>uint64_t* c_Trace::Pattern</definition>
+        <argsstring></argsstring>
+        <name>Pattern</name>
+        <qualifiedname>c_Trace::Pattern</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="10" column="14" bodyfile="include/NT4/c_Trace.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___trace_1a2602593a48c4085cd1dcb9b4ca53db9c" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double c_Trace::Charge</definition>
+        <argsstring></argsstring>
+        <name>Charge</name>
+        <qualifiedname>c_Trace::Charge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="11" column="12" bodyfile="include/NT4/c_Trace.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___trace_1a1879a1b8b07696dfa624d93a18c6c229" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double c_Trace::RC</definition>
+        <argsstring></argsstring>
+        <name>RC</name>
+        <qualifiedname>c_Trace::RC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="12" column="12" bodyfile="include/NT4/c_Trace.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___trace_1a4a78d4835f0b43bf860b74bc1c88aeeb" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___node" kindref="compound">c_Node</ref> *</type>
+        <definition>c_Node* c_Trace::Treetop</definition>
+        <argsstring></argsstring>
+        <name>Treetop</name>
+        <qualifiedname>c_Trace::Treetop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="13" column="12" bodyfile="include/NT4/c_Trace.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___trace_1aee89909b831c3a3eb0f65294e247bb81" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int c_Trace::Depth</definition>
+        <argsstring></argsstring>
+        <name>Depth</name>
+        <qualifiedname>c_Trace::Depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="16" column="9" bodyfile="include/NT4/c_Trace.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classc___trace_1ac23f623ecff4a8a659bd115b9e14f11d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_Trace::c_Trace</definition>
+        <argsstring>()</argsstring>
+        <name>c_Trace</name>
+        <qualifiedname>c_Trace::c_Trace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="18" column="5" bodyfile="include/NT4/c_Trace.h" bodystart="18" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a3606bf572f0a0ba67468bb317e5bff22" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::set_Depth</definition>
+        <argsstring>(int p_Depth)</argsstring>
+        <name>set_Depth</name>
+        <qualifiedname>c_Trace::set_Depth</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>p_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="24" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="24" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a099b292f79cd9e798249d9531d763c2b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::wipe_Data</definition>
+        <argsstring>()</argsstring>
+        <name>wipe_Data</name>
+        <qualifiedname>c_Trace::wipe_Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="43" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="43" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a220f1d3743851d74ec6c40bdb4976385" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <qualifiedname>c_Trace::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="57" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="57" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1ab809d62d7bdef49d0f1fbc7eb1d8e618" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::set_Pattern_Index</definition>
+        <argsstring>(uint64_t p_Value, int p_Index=-1)</argsstring>
+        <name>set_Pattern_Index</name>
+        <qualifiedname>c_Trace::set_Pattern_Index</qualifiedname>
+        <param>
+          <type>uint64_t</type>
+          <declname>p_Value</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Index</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="77" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="77" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a969cc0f9e907c667a257666eec5d9923" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::set_Charge</definition>
+        <argsstring>(double p_Charge)</argsstring>
+        <name>set_Charge</name>
+        <qualifiedname>c_Trace::set_Charge</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>p_Charge</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="89" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="89" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1aa0070f3cfe89f7a5d664ab9becad3cbd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::set_RC</definition>
+        <argsstring>(double p_RC)</argsstring>
+        <name>set_RC</name>
+        <qualifiedname>c_Trace::set_RC</qualifiedname>
+        <param>
+          <type>double</type>
+          <declname>p_RC</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="95" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="95" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a5c08fe90f1a851d927740994a4a646cf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::set_Treetop</definition>
+        <argsstring>(c_Node *p_Treetop)</argsstring>
+        <name>set_Treetop</name>
+        <qualifiedname>c_Trace::set_Treetop</qualifiedname>
+        <param>
+          <type><ref refid="classc___node" kindref="compound">c_Node</ref> *</type>
+          <declname>p_Treetop</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="101" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="101" bodyend="104"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a7e2c6e0a7f97e4a0fd3bbf39d3cdf0b6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::set_Pattern_Array</definition>
+        <argsstring>(uint64_t *p_Pattern_Array, int p_Depth)</argsstring>
+        <name>set_Pattern_Array</name>
+        <qualifiedname>c_Trace::set_Pattern_Array</qualifiedname>
+        <param>
+          <type>uint64_t *</type>
+          <declname>p_Pattern_Array</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="107" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="107" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1ac68c5966deea5b9d9b163cecbc65279a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>uint64_t</type>
+        <definition>uint64_t c_Trace::get_Pattern_Index</definition>
+        <argsstring>(int p_Index=-1)</argsstring>
+        <name>get_Pattern_Index</name>
+        <qualifiedname>c_Trace::get_Pattern_Index</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>p_Index</declname>
+          <defval>-1</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="121" column="14" bodyfile="include/NT4/c_Trace.h" bodystart="121" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a0c95c80a77464a86311c4c69fc2b1b57" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double c_Trace::get_Charge</definition>
+        <argsstring>()</argsstring>
+        <name>get_Charge</name>
+        <qualifiedname>c_Trace::get_Charge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="131" column="12" bodyfile="include/NT4/c_Trace.h" bodystart="131" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a90dee35fcabbbec7a86196798673b7d8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double c_Trace::get_RC</definition>
+        <argsstring>()</argsstring>
+        <name>get_RC</name>
+        <qualifiedname>c_Trace::get_RC</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="136" column="12" bodyfile="include/NT4/c_Trace.h" bodystart="136" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1ac1d4ad0629305b5fc47b294857910f82" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classc___node" kindref="compound">c_Node</ref> *</type>
+        <definition>c_Node * c_Trace::get_Treetop</definition>
+        <argsstring>()</argsstring>
+        <name>get_Treetop</name>
+        <qualifiedname>c_Trace::get_Treetop</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="141" column="13" bodyfile="include/NT4/c_Trace.h" bodystart="141" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a58204c304fa3ee3b64c345d14c7acb8c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::shift_Data</definition>
+        <argsstring>()</argsstring>
+        <name>shift_Data</name>
+        <qualifiedname>c_Trace::shift_Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="147" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="147" bodyend="157"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___trace_1a2dcd7a73f260179aaa2e7099bbb84702" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Trace::output</definition>
+        <argsstring>(int p_Type)</argsstring>
+        <name>output</name>
+        <qualifiedname>c_Trace::output</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>p_Type</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Trace.h" line="160" column="10" bodyfile="include/NT4/c_Trace.h" bodystart="160" bodyend="171"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>c_Node</label>
+        <link refid="classc___node"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Axons</edgelabel>
+          <edgelabel>Dendrites</edgelabel>
+          <edgelabel>Next</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>c_Trace</label>
+        <link refid="classc___trace"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Treetop</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/NT4/c_Trace.h" line="5" column="1" bodyfile="include/NT4/c_Trace.h" bodystart="6" bodyend="172"/>
+    <listofallmembers>
+      <member refid="classc___trace_1ac23f623ecff4a8a659bd115b9e14f11d" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>c_Trace</name></member>
+      <member refid="classc___trace_1a2602593a48c4085cd1dcb9b4ca53db9c" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>Charge</name></member>
+      <member refid="classc___trace_1aee89909b831c3a3eb0f65294e247bb81" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>Depth</name></member>
+      <member refid="classc___trace_1a0c95c80a77464a86311c4c69fc2b1b57" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>get_Charge</name></member>
+      <member refid="classc___trace_1ac68c5966deea5b9d9b163cecbc65279a" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>get_Pattern_Index</name></member>
+      <member refid="classc___trace_1a90dee35fcabbbec7a86196798673b7d8" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>get_RC</name></member>
+      <member refid="classc___trace_1ac1d4ad0629305b5fc47b294857910f82" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>get_Treetop</name></member>
+      <member refid="classc___trace_1a2dcd7a73f260179aaa2e7099bbb84702" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>output</name></member>
+      <member refid="classc___trace_1a98a7286f5e6d43415a2eec1546f3e946" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>Pattern</name></member>
+      <member refid="classc___trace_1a1879a1b8b07696dfa624d93a18c6c229" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>RC</name></member>
+      <member refid="classc___trace_1a220f1d3743851d74ec6c40bdb4976385" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>reset</name></member>
+      <member refid="classc___trace_1a969cc0f9e907c667a257666eec5d9923" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>set_Charge</name></member>
+      <member refid="classc___trace_1a3606bf572f0a0ba67468bb317e5bff22" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>set_Depth</name></member>
+      <member refid="classc___trace_1a7e2c6e0a7f97e4a0fd3bbf39d3cdf0b6" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>set_Pattern_Array</name></member>
+      <member refid="classc___trace_1ab809d62d7bdef49d0f1fbc7eb1d8e618" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>set_Pattern_Index</name></member>
+      <member refid="classc___trace_1aa0070f3cfe89f7a5d664ab9becad3cbd" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>set_RC</name></member>
+      <member refid="classc___trace_1a5c08fe90f1a851d927740994a4a646cf" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>set_Treetop</name></member>
+      <member refid="classc___trace_1a58204c304fa3ee3b64c345d14c7acb8c" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>shift_Data</name></member>
+      <member refid="classc___trace_1a4a78d4835f0b43bf860b74bc1c88aeeb" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>Treetop</name></member>
+      <member refid="classc___trace_1a099b292f79cd9e798249d9531d763c2b" prot="public" virt="non-virtual"><scope>c_Trace</scope><name>wipe_Data</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

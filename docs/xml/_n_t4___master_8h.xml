@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="_n_t4___master_8h" kind="file" language="C++">
+    <compoundname>NT4_Master.h</compoundname>
+    <includes refid="c___i_o_8h" local="yes">NT4/c_IO.h</includes>
+    <includes refid="c___linked___list___handler_8h" local="yes">NT4/c_Linked_List_Handler.h</includes>
+    <includes refid="c___node_8h" local="yes">NT4/c_Node.h</includes>
+    <includes refid="c___trace_8h" local="yes">NT4/c_Trace.h</includes>
+    <includes refid="c___fractal___tree_8h" local="yes">NT4/c_Fractal_Tree.h</includes>
+    <includes refid="c___node___network_8h" local="yes">NT4/c_Node_Network.h</includes>
+    <includes refid="c___charging___array_8h" local="yes">NT4/c_Charging_Array.h</includes>
+    <includes refid="c___c_a_n_8h" local="yes">NT4/c_CAN.h</includes>
+    <includes refid="c___c_a_n___many___to___one_8h" local="yes">NT4/c_CAN_Many_To_One.h</includes>
+    <includes refid="c___c_a_n__1_d___pyramid_8h" local="yes">NT4/c_CAN_1D_Pyramid.h</includes>
+    <includes refid="c___c_a_n__2_d___pyramid_8h" local="yes">NT4/c_CAN_2D_Pyramid.h</includes>
+    <includes refid="c___c_a_n__3_d___pyramid_8h" local="yes">NT4/c_CAN_3D_Pyramid.h</includes>
+    <includes refid="c___construct_8h" local="yes">NT4/c_Construct.h</includes>
+    <includes refid="c___construct___a_p_i_8h" local="yes">NT4/c_Construct_API.h</includes>
+    <includes refid="c___construct___text___server_8h" local="yes">NT4/c_Construct_Text_Server.h</includes>
+    <includedby refid="_n_t4_8h" local="yes">NT4.h</includedby>
+    <incdepgraph>
+      <node id="9">
+        <label>NT4/c_CAN.h</label>
+        <link refid="c___c_a_n_8h_source"/>
+      </node>
+      <node id="11">
+        <label>NT4/c_CAN_1D_Pyramid.h</label>
+        <link refid="c___c_a_n__1_d___pyramid_8h_source"/>
+      </node>
+      <node id="12">
+        <label>NT4/c_CAN_2D_Pyramid.h</label>
+        <link refid="c___c_a_n__2_d___pyramid_8h_source"/>
+      </node>
+      <node id="13">
+        <label>NT4/c_CAN_3D_Pyramid.h</label>
+        <link refid="c___c_a_n__3_d___pyramid_8h_source"/>
+      </node>
+      <node id="10">
+        <label>NT4/c_CAN_Many_To_One.h</label>
+        <link refid="c___c_a_n___many___to___one_8h_source"/>
+      </node>
+      <node id="8">
+        <label>NT4/c_Charging_Array.h</label>
+        <link refid="c___charging___array_8h_source"/>
+      </node>
+      <node id="14">
+        <label>NT4/c_Construct.h</label>
+        <link refid="c___construct_8h_source"/>
+      </node>
+      <node id="15">
+        <label>NT4/c_Construct_API.h</label>
+        <link refid="c___construct___a_p_i_8h_source"/>
+      </node>
+      <node id="16">
+        <label>NT4/c_Construct_Text_Server.h</label>
+        <link refid="c___construct___text___server_8h_source"/>
+      </node>
+      <node id="6">
+        <label>NT4/c_Fractal_Tree.h</label>
+        <link refid="c___fractal___tree_8h_source"/>
+      </node>
+      <node id="2">
+        <label>NT4/c_IO.h</label>
+        <link refid="c___i_o_8h_source"/>
+      </node>
+      <node id="3">
+        <label>NT4/c_Linked_List_Handler.h</label>
+        <link refid="c___linked___list___handler_8h_source"/>
+      </node>
+      <node id="4">
+        <label>NT4/c_Node.h</label>
+        <link refid="c___node_8h_source"/>
+      </node>
+      <node id="7">
+        <label>NT4/c_Node_Network.h</label>
+        <link refid="c___node___network_8h_source"/>
+      </node>
+      <node id="5">
+        <label>NT4/c_Trace.h</label>
+        <link refid="c___trace_8h_source"/>
+      </node>
+      <node id="1">
+        <label>include/NT4_Master.h</label>
+        <link refid="_n_t4___master_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2">
+        <label>NT4.h</label>
+        <link refid="_n_t4_8h_source"/>
+      </node>
+      <node id="1">
+        <label>include/NT4_Master.h</label>
+        <link refid="_n_t4___master_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innernamespace refid="namespace_n_t4">NT4</innernamespace>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//The<sp/>NeuroTox<sp/>4<sp/>library.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal"><ref refid="namespace_n_t4" kindref="compound">NT4</ref></highlight></codeline>
+<codeline lineno="27"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Used<sp/>in<sp/>the<sp/>CAN<sp/>&amp;<sp/>the<sp/>Node<sp/>Network<sp/>for<sp/>backprop.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_IO.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_Linked_List_Handler.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_Node.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_Trace.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_Fractal_Tree.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_Node_Network.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_Charging_Array.h&quot;</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//#include<sp/>&quot;NT4/c_Backpropagation_Station</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Both<sp/>the<sp/>Charging_Array<sp/>&amp;<sp/>Backpropagation_Station<sp/>have<sp/>to<sp/>have<sp/>members<sp/>to<sp/>handle<sp/>each<sp/>type<sp/>of<sp/>CAN<sp/>structure.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_CAN.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_CAN_Many_To_One.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_CAN_1D_Pyramid.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_CAN_2D_Pyramid.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_CAN_3D_Pyramid.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_Construct.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_Construct_API.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="preprocessor"><sp/><sp/><sp/><sp/>#include<sp/>&quot;NT4/c_Construct_Text_Server.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="56"></codeline>
+    </programlisting>
+    <location file="include/NT4_Master.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="classc___fractal___node" kind="class" language="C++" prot="public">
+    <compoundname>c_Fractal_Node</compoundname>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classc___fractal___node_1a3670a4d5bd42ace45e813d892f23c32b" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class c_Fractal_Tree</definition>
+        <argsstring></argsstring>
+        <name>c_Fractal_Tree</name>
+        <qualifiedname>c_Fractal_Node::c_Fractal_Tree</qualifiedname>
+        <param>
+          <type><ref refid="classc___fractal___tree" kindref="compound">c_Fractal_Tree</ref></type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Fractal_Tree.h" line="27" column="14" bodyfile="include/NT4/c_Fractal_Tree.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classc___fractal___node_1a5389ea1d4d569f024c49606ffd82c210" prot="private" static="no" mutable="no">
+        <type><ref refid="classc___fractal___node" kindref="compound">c_Fractal_Node</ref> *</type>
+        <definition>c_Fractal_Node* c_Fractal_Node::Right</definition>
+        <argsstring></argsstring>
+        <name>Right</name>
+        <qualifiedname>c_Fractal_Node::Right</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Fractal_Tree.h" line="31" column="16" bodyfile="include/NT4/c_Fractal_Tree.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___fractal___node_1af22ef1ed2f71949cdf06f4c14462ea26" prot="private" static="no" mutable="no">
+        <type><ref refid="classc___fractal___node" kindref="compound">c_Fractal_Node</ref> *</type>
+        <definition>c_Fractal_Node* c_Fractal_Node::Center</definition>
+        <argsstring></argsstring>
+        <name>Center</name>
+        <qualifiedname>c_Fractal_Node::Center</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Fractal_Tree.h" line="32" column="16" bodyfile="include/NT4/c_Fractal_Tree.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___fractal___node_1a8dac8845b1cda3167d88bc70637152ea" prot="private" static="no" mutable="no">
+        <type><ref refid="classc___fractal___node" kindref="compound">c_Fractal_Node</ref> *</type>
+        <definition>c_Fractal_Node* c_Fractal_Node::Left</definition>
+        <argsstring></argsstring>
+        <name>Left</name>
+        <qualifiedname>c_Fractal_Node::Left</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Fractal_Tree.h" line="33" column="16" bodyfile="include/NT4/c_Fractal_Tree.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classc___fractal___node_1a906521ac89a0b8cda08ae2ebcc864fd6" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t c_Fractal_Node::Data</definition>
+        <argsstring></argsstring>
+        <name>Data</name>
+        <qualifiedname>c_Fractal_Node::Data</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Fractal_Tree.h" line="38" column="10" bodyfile="include/NT4/c_Fractal_Tree.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___fractal___node_1a310d3b815d4d3dd8ccef1178d653a273" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___node" kindref="compound">c_Node</ref> *</type>
+        <definition>c_Node* c_Fractal_Node::NAdd</definition>
+        <argsstring></argsstring>
+        <name>NAdd</name>
+        <qualifiedname>c_Fractal_Node::NAdd</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Fractal_Tree.h" line="41" column="8" bodyfile="include/NT4/c_Fractal_Tree.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classc___fractal___node_1ac1415297e0e16e5ac0c066e02e7b1db2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_Fractal_Node::c_Fractal_Node</definition>
+        <argsstring>()</argsstring>
+        <name>c_Fractal_Node</name>
+        <qualifiedname>c_Fractal_Node::c_Fractal_Node</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Fractal_Tree.h" line="43" column="1" bodyfile="include/NT4/c_Fractal_Tree.h" bodystart="43" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___fractal___node_1a843dcd3e93b8cdcf6cf2e24b3cdedd49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_Fractal_Node::~c_Fractal_Node</definition>
+        <argsstring>()</argsstring>
+        <name>~c_Fractal_Node</name>
+        <qualifiedname>c_Fractal_Node::~c_Fractal_Node</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Fractal_Tree.h" line="52" column="1" bodyfile="include/NT4/c_Fractal_Tree.h" bodystart="52" bodyend="58"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>c_Fractal_Node</label>
+        <link refid="classc___fractal___node"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>NAdd</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>c_Node</label>
+        <link refid="classc___node"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Axons</edgelabel>
+          <edgelabel>Dendrites</edgelabel>
+          <edgelabel>Next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/NT4/c_Fractal_Tree.h" line="25" column="1" bodyfile="include/NT4/c_Fractal_Tree.h" bodystart="26" bodyend="60"/>
+    <listofallmembers>
+      <member refid="classc___fractal___node_1ac1415297e0e16e5ac0c066e02e7b1db2" prot="public" virt="non-virtual"><scope>c_Fractal_Node</scope><name>c_Fractal_Node</name></member>
+      <member refid="classc___fractal___node_1a3670a4d5bd42ace45e813d892f23c32b" prot="private" virt="non-virtual"><scope>c_Fractal_Node</scope><name>c_Fractal_Tree</name></member>
+      <member refid="classc___fractal___node_1af22ef1ed2f71949cdf06f4c14462ea26" prot="private" virt="non-virtual"><scope>c_Fractal_Node</scope><name>Center</name></member>
+      <member refid="classc___fractal___node_1a906521ac89a0b8cda08ae2ebcc864fd6" prot="public" virt="non-virtual"><scope>c_Fractal_Node</scope><name>Data</name></member>
+      <member refid="classc___fractal___node_1a8dac8845b1cda3167d88bc70637152ea" prot="private" virt="non-virtual"><scope>c_Fractal_Node</scope><name>Left</name></member>
+      <member refid="classc___fractal___node_1a310d3b815d4d3dd8ccef1178d653a273" prot="public" virt="non-virtual"><scope>c_Fractal_Node</scope><name>NAdd</name></member>
+      <member refid="classc___fractal___node_1a5389ea1d4d569f024c49606ffd82c210" prot="private" virt="non-virtual"><scope>c_Fractal_Node</scope><name>Right</name></member>
+      <member refid="classc___fractal___node_1a843dcd3e93b8cdcf6cf2e24b3cdedd49" prot="public" virt="non-virtual"><scope>c_Fractal_Node</scope><name>~c_Fractal_Node</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

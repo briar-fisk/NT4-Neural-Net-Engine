@@ -1,0 +1,504 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="classc___charging___buffer" kind="class" language="C++" prot="public">
+    <compoundname>c_Charging_Buffer</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classc___charging___buffer_1a886b04556353bf22f1f8999fa33576e6" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___charging___buffer___tree" kindref="compound">c_Charging_Buffer_Tree</ref></type>
+        <definition>c_Charging_Buffer_Tree c_Charging_Buffer::Tree</definition>
+        <argsstring></argsstring>
+        <name>Tree</name>
+        <qualifiedname>c_Charging_Buffer::Tree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="382" column="28" bodyfile="include/NT4/c_Charging_Array.h" bodystart="382" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1a264bdc7325e966a54b2adf432d858963" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___charging___linked___list___handler" kindref="compound">c_Charging_Linked_List_Handler</ref></type>
+        <definition>c_Charging_Linked_List_Handler c_Charging_Buffer::Current_Charge</definition>
+        <argsstring></argsstring>
+        <name>Current_Charge</name>
+        <qualifiedname>c_Charging_Buffer::Current_Charge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="385" column="36" bodyfile="include/NT4/c_Charging_Array.h" bodystart="385" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1a8925d9195ecb0dbc5308f6fd39285373" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___charging___linked___list___handler" kindref="compound">c_Charging_Linked_List_Handler</ref></type>
+        <definition>c_Charging_Linked_List_Handler c_Charging_Buffer::Output</definition>
+        <argsstring></argsstring>
+        <name>Output</name>
+        <qualifiedname>c_Charging_Buffer::Output</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="387" column="36" bodyfile="include/NT4/c_Charging_Array.h" bodystart="387" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1ad05e6260126e24d8ad94b6e65dd8604f" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___charging___linked___list___handler" kindref="compound">c_Charging_Linked_List_Handler</ref></type>
+        <definition>c_Charging_Linked_List_Handler c_Charging_Buffer::Treetops</definition>
+        <argsstring></argsstring>
+        <name>Treetops</name>
+        <qualifiedname>c_Charging_Buffer::Treetops</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="389" column="36" bodyfile="include/NT4/c_Charging_Array.h" bodystart="389" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1ae1ad2133334729f4cc50bff6533300ba" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool c_Charging_Buffer::flg_Not_Done</definition>
+        <argsstring></argsstring>
+        <name>flg_Not_Done</name>
+        <qualifiedname>c_Charging_Buffer::flg_Not_Done</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="392" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="392" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1aace4aebf85dd47c9a0dcd806d6b2cc0c" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int c_Charging_Buffer::Input_Position</definition>
+        <argsstring></argsstring>
+        <name>Input_Position</name>
+        <qualifiedname>c_Charging_Buffer::Input_Position</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="394" column="9" bodyfile="include/NT4/c_Charging_Array.h" bodystart="394" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1aeb9c0fb1b1db3165946462f2c4bd2e65" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double c_Charging_Buffer::Base_Charge</definition>
+        <argsstring></argsstring>
+        <name>Base_Charge</name>
+        <qualifiedname>c_Charging_Buffer::Base_Charge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="397" column="12" bodyfile="include/NT4/c_Charging_Array.h" bodystart="397" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1ae99140147229e5e09cc97ed9c2eff6b4" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double c_Charging_Buffer::Current_Highest_Charge</definition>
+        <argsstring></argsstring>
+        <name>Current_Highest_Charge</name>
+        <qualifiedname>c_Charging_Buffer::Current_Highest_Charge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="398" column="12" bodyfile="include/NT4/c_Charging_Array.h" bodystart="398" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1a95af1bf5504a488942ff751d61ac44cf" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double c_Charging_Buffer::Previous_Highest_Charge</definition>
+        <argsstring></argsstring>
+        <name>Previous_Highest_Charge</name>
+        <qualifiedname>c_Charging_Buffer::Previous_Highest_Charge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="399" column="12" bodyfile="include/NT4/c_Charging_Array.h" bodystart="399" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1a87790fda7ce0ece58e08658b70312e15" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double c_Charging_Buffer::Modifier_Charge</definition>
+        <argsstring></argsstring>
+        <name>Modifier_Charge</name>
+        <qualifiedname>c_Charging_Buffer::Modifier_Charge</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="401" column="12" bodyfile="include/NT4/c_Charging_Array.h" bodystart="401" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___charging___buffer_1a3d52178ef083b91215e28d627bd316e8" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double c_Charging_Buffer::Action_Potential_Threshold</definition>
+        <argsstring></argsstring>
+        <name>Action_Potential_Threshold</name>
+        <qualifiedname>c_Charging_Buffer::Action_Potential_Threshold</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="402" column="12" bodyfile="include/NT4/c_Charging_Array.h" bodystart="402" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classc___charging___buffer_1a5a292f24f59920f0bb1032c463de44c4" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_Charging_Buffer::c_Charging_Buffer</definition>
+        <argsstring>()</argsstring>
+        <name>c_Charging_Buffer</name>
+        <qualifiedname>c_Charging_Buffer::c_Charging_Buffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="404" column="5" bodyfile="include/NT4/c_Charging_Array.h" bodystart="404" bodyend="414"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1a0fac6561a16426f1db79e8675980cadf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>c_Charging_Buffer::~c_Charging_Buffer</definition>
+        <argsstring>()</argsstring>
+        <name>~c_Charging_Buffer</name>
+        <qualifiedname>c_Charging_Buffer::~c_Charging_Buffer</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="416" column="5" bodyfile="include/NT4/c_Charging_Array.h" bodystart="416" bodyend="421"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1aa3fb0f5f29d1964d3cc0a7b5396210e0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::reset</definition>
+        <argsstring>()</argsstring>
+        <name>reset</name>
+        <qualifiedname>c_Charging_Buffer::reset</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="423" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="423" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1af35f2a73f342d0db2f9e88a96c20488d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::charge_Outputs</definition>
+        <argsstring>()</argsstring>
+        <name>charge_Outputs</name>
+        <qualifiedname>c_Charging_Buffer::charge_Outputs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="447" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="447" bodyend="493"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1ac5eb5bd11b5e99dcd30851d9d695e7b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::charge_Given_Leg</definition>
+        <argsstring>(c_Node *p_Node, double p_Charge=10.00, int p_Leg=0)</argsstring>
+        <name>charge_Given_Leg</name>
+        <qualifiedname>c_Charging_Buffer::charge_Given_Leg</qualifiedname>
+        <param>
+          <type><ref refid="classc___node" kindref="compound">c_Node</ref> *</type>
+          <declname>p_Node</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>p_Charge</declname>
+          <defval>10.00</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Leg</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="501" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="501" bodyend="518"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1a370b0fbff808b656cf766ae4a8e433fa" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::charge_Given_Legs</definition>
+        <argsstring>(c_Node *p_Node, int p_Leg_Count, int *p_Leg, double p_Charge=10.00)</argsstring>
+        <name>charge_Given_Legs</name>
+        <qualifiedname>c_Charging_Buffer::charge_Given_Legs</qualifiedname>
+        <param>
+          <type><ref refid="classc___node" kindref="compound">c_Node</ref> *</type>
+          <declname>p_Node</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Leg_Count</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>p_Leg</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>p_Charge</declname>
+          <defval>10.00</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="523" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="523" bodyend="544"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1a2a4adb08bd4a2ed2ccc2ecb8bfdd918d" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::submit</definition>
+        <argsstring>(c_Node *p_Node, double p_Charge=10.00)</argsstring>
+        <name>submit</name>
+        <qualifiedname>c_Charging_Buffer::submit</qualifiedname>
+        <param>
+          <type><ref refid="classc___node" kindref="compound">c_Node</ref> *</type>
+          <declname>p_Node</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>p_Charge</declname>
+          <defval>10.00</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="551" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="551" bodyend="568"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1ae222a384401b5758fb404d8fcf83fb17" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::gather</definition>
+        <argsstring>()</argsstring>
+        <name>gather</name>
+        <qualifiedname>c_Charging_Buffer::gather</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="581" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="581" bodyend="599"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1a5a941c17ca3da8714f688799cc3ea278" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double c_Charging_Buffer::gather_Treetops</definition>
+        <argsstring>()</argsstring>
+        <name>gather_Treetops</name>
+        <qualifiedname>c_Charging_Buffer::gather_Treetops</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="602" column="12" bodyfile="include/NT4/c_Charging_Array.h" bodystart="602" bodyend="642"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1aeb34d303b3b3113969b1174a7b6efd33" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::destroy_Output_Buffers</definition>
+        <argsstring>()</argsstring>
+        <name>destroy_Output_Buffers</name>
+        <qualifiedname>c_Charging_Buffer::destroy_Output_Buffers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="650" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="650" bodyend="654"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1ac01b2b2f205926c6de2abe8cd217f723" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::output_All_Buffers</definition>
+        <argsstring>()</argsstring>
+        <name>output_All_Buffers</name>
+        <qualifiedname>c_Charging_Buffer::output_All_Buffers</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="661" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="661" bodyend="670"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1aca17945900ffc7045a1e1ccb4976ea07" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::output_Tree</definition>
+        <argsstring>()</argsstring>
+        <name>output_Tree</name>
+        <qualifiedname>c_Charging_Buffer::output_Tree</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="673" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="673" bodyend="676"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1adb8ac185524e23943b3012e5a755f2ad" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::output_Charge_LL</definition>
+        <argsstring>()</argsstring>
+        <name>output_Charge_LL</name>
+        <qualifiedname>c_Charging_Buffer::output_Charge_LL</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="679" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="679" bodyend="685"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1a49fdb0b04b96c2e3b93608264207c48b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::output_Output_LL</definition>
+        <argsstring>()</argsstring>
+        <name>output_Output_LL</name>
+        <qualifiedname>c_Charging_Buffer::output_Output_LL</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="688" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="688" bodyend="694"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___charging___buffer_1a45f58cc5d104b21c9fb52765521e2efc" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Charging_Buffer::output_Treetops</definition>
+        <argsstring>()</argsstring>
+        <name>output_Treetops</name>
+        <qualifiedname>c_Charging_Buffer::output_Treetops</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Charging_Array.h" line="697" column="10" bodyfile="include/NT4/c_Charging_Array.h" bodystart="697" bodyend="704"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>c_Charging_Buffer</label>
+        <link refid="classc___charging___buffer"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>Tree</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>Current_Charge</edgelabel>
+          <edgelabel>Output</edgelabel>
+          <edgelabel>Treetops</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>c_Charging_Buffer_Node</label>
+        <link refid="classc___charging___buffer___node"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>LL</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>c_Charging_Buffer_Tree</label>
+        <link refid="classc___charging___buffer___tree"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>Current</edgelabel>
+          <edgelabel>Root</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>c_Charging_Linked_List</label>
+        <link refid="classc___charging___linked___list"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>Next</edgelabel>
+          <edgelabel>Previous</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>NID</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>c_Charging_Linked_List_Handler</label>
+        <link refid="classc___charging___linked___list___handler"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>Current_LL</edgelabel>
+          <edgelabel>Root</edgelabel>
+        </childnode>
+      </node>
+      <node id="5">
+        <label>c_Node</label>
+        <link refid="classc___node"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>Axons</edgelabel>
+          <edgelabel>Dendrites</edgelabel>
+          <edgelabel>Next</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/NT4/c_Charging_Array.h" line="375" column="1" bodyfile="include/NT4/c_Charging_Array.h" bodystart="376" bodyend="705"/>
+    <listofallmembers>
+      <member refid="classc___charging___buffer_1a3d52178ef083b91215e28d627bd316e8" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Action_Potential_Threshold</name></member>
+      <member refid="classc___charging___buffer_1aeb9c0fb1b1db3165946462f2c4bd2e65" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Base_Charge</name></member>
+      <member refid="classc___charging___buffer_1a5a292f24f59920f0bb1032c463de44c4" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>c_Charging_Buffer</name></member>
+      <member refid="classc___charging___buffer_1ac5eb5bd11b5e99dcd30851d9d695e7b3" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>charge_Given_Leg</name></member>
+      <member refid="classc___charging___buffer_1a370b0fbff808b656cf766ae4a8e433fa" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>charge_Given_Legs</name></member>
+      <member refid="classc___charging___buffer_1af35f2a73f342d0db2f9e88a96c20488d" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>charge_Outputs</name></member>
+      <member refid="classc___charging___buffer_1a264bdc7325e966a54b2adf432d858963" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Current_Charge</name></member>
+      <member refid="classc___charging___buffer_1ae99140147229e5e09cc97ed9c2eff6b4" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Current_Highest_Charge</name></member>
+      <member refid="classc___charging___buffer_1aeb34d303b3b3113969b1174a7b6efd33" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>destroy_Output_Buffers</name></member>
+      <member refid="classc___charging___buffer_1ae1ad2133334729f4cc50bff6533300ba" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>flg_Not_Done</name></member>
+      <member refid="classc___charging___buffer_1ae222a384401b5758fb404d8fcf83fb17" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>gather</name></member>
+      <member refid="classc___charging___buffer_1a5a941c17ca3da8714f688799cc3ea278" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>gather_Treetops</name></member>
+      <member refid="classc___charging___buffer_1aace4aebf85dd47c9a0dcd806d6b2cc0c" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Input_Position</name></member>
+      <member refid="classc___charging___buffer_1a87790fda7ce0ece58e08658b70312e15" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Modifier_Charge</name></member>
+      <member refid="classc___charging___buffer_1a8925d9195ecb0dbc5308f6fd39285373" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Output</name></member>
+      <member refid="classc___charging___buffer_1ac01b2b2f205926c6de2abe8cd217f723" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>output_All_Buffers</name></member>
+      <member refid="classc___charging___buffer_1adb8ac185524e23943b3012e5a755f2ad" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>output_Charge_LL</name></member>
+      <member refid="classc___charging___buffer_1a49fdb0b04b96c2e3b93608264207c48b" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>output_Output_LL</name></member>
+      <member refid="classc___charging___buffer_1aca17945900ffc7045a1e1ccb4976ea07" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>output_Tree</name></member>
+      <member refid="classc___charging___buffer_1a45f58cc5d104b21c9fb52765521e2efc" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>output_Treetops</name></member>
+      <member refid="classc___charging___buffer_1a95af1bf5504a488942ff751d61ac44cf" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Previous_Highest_Charge</name></member>
+      <member refid="classc___charging___buffer_1aa3fb0f5f29d1964d3cc0a7b5396210e0" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>reset</name></member>
+      <member refid="classc___charging___buffer_1a2a4adb08bd4a2ed2ccc2ecb8bfdd918d" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>submit</name></member>
+      <member refid="classc___charging___buffer_1a886b04556353bf22f1f8999fa33576e6" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Tree</name></member>
+      <member refid="classc___charging___buffer_1ad05e6260126e24d8ad94b6e65dd8604f" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>Treetops</name></member>
+      <member refid="classc___charging___buffer_1a0fac6561a16426f1db79e8675980cadf" prot="public" virt="non-virtual"><scope>c_Charging_Buffer</scope><name>~c_Charging_Buffer</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

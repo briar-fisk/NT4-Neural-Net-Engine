@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="group___construct___text___server" kind="group">
+    <compoundname>Construct_Text_Server</compoundname>
+    <title>Construct_Text_Server</title>
+    <innerclass refid="classc___construct___text___server" prot="public">c_Construct_Text_Server</innerclass>
+    <sectiondef kind="var">
+      <memberdef kind="variable" id="group___construct___text___server_1gab62d19149ac3f614c33e6db6320e7bd4" prot="public" static="no" mutable="no">
+        <type>const std::string</type>
+        <definition>const std::string RETURN_FILE</definition>
+        <argsstring></argsstring>
+        <name>RETURN_FILE</name>
+        <initializer>= &quot;./Output/returned.ssv&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_Construct_Text_Server.h" line="51" column="19" bodyfile="include/NT4/c_Construct_Text_Server.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+  </compounddef>
+</doxygen>

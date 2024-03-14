@@ -1,0 +1,196 @@
+\doxysection{c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid Class Reference}
+\hypertarget{classc___c_a_n__3_d___pyramid}{}\label{classc___c_a_n__3_d___pyramid}\index{c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}}
+Inheritance diagram for c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classc___c_a_n__3_d___pyramid}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_a0936e0f7fc66874c3ce4bb6e022775f7}\label{classc___c_a_n__3_d___pyramid_a0936e0f7fc66874c3ce4bb6e022775f7} 
+void {\bfseries reset\+\_\+\+Scaffold} ()
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_a61c870d4af6d247bca391933075f2d8b}\label{classc___c_a_n__3_d___pyramid_a61c870d4af6d247bca391933075f2d8b} 
+void {\bfseries setup\+\_\+\+CAN\+\_\+\+Scaffold} ()
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_a904e4f023a1b9ac1a66d0d8c27316d70}\label{classc___c_a_n__3_d___pyramid_a904e4f023a1b9ac1a66d0d8c27316d70} 
+void {\bfseries fill\+\_\+\+State} (std\+::string p\+\_\+\+How="{}Encode"{})
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_a4a4852e940377ac58019cc829ebb128f}\label{classc___c_a_n__3_d___pyramid_a4a4852e940377ac58019cc829ebb128f} 
+void {\bfseries fill\+\_\+\+Scaffold} (std\+::string p\+\_\+\+How="{}Encode"{})
+\item 
+void \mbox{\hyperlink{classc___c_a_n__3_d___pyramid_a85a15ff4d440c2e21d7457b306b6bafe}{encode}} (uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Input=NULL, int p\+\_\+\+Depth=0)
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_a7d46ac643db07de3a488d31a4f572a8d}\label{classc___c_a_n__3_d___pyramid_a7d46ac643db07de3a488d31a4f572a8d} 
+void {\bfseries charge\+\_\+\+Buffers} (int p\+\_\+\+Style=-\/1, int p\+\_\+\+Leg=0, int \texorpdfstring{$\ast$}{*}p\+\_\+\+Legs=NULL)
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_aca9af89bb4daaac372733de2a4f16403}\label{classc___c_a_n__3_d___pyramid_aca9af89bb4daaac372733de2a4f16403} 
+void {\bfseries gather\+\_\+\+Treetops} ()
+\item 
+void \mbox{\hyperlink{classc___c_a_n__3_d___pyramid_a82c3cb98f49b9805fddaa4bf51bc8e9b}{gather\+\_\+\+All\+\_\+\+Traces}} ()
+\item 
+void \mbox{\hyperlink{classc___c_a_n__3_d___pyramid_abc46655a497268c7241ea6b37ebceed7}{gather\+\_\+\+Given\+\_\+\+Trace}} (uint64\+\_\+t p\+\_\+\+NID)
+\item 
+void \mbox{\hyperlink{classc___c_a_n__3_d___pyramid_ae3e3695f582463d5d4c6babed5113363}{query}} (uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Input=NULL, int p\+\_\+\+Depth=0, int p\+\_\+\+Charging\+\_\+\+Style=-\/1, int p\+\_\+\+Leg=0, int \texorpdfstring{$\ast$}{*}p\+\_\+\+Legs=NULL)
+\item 
+void \mbox{\hyperlink{classc___c_a_n__3_d___pyramid_ab07e860373c2b57d518016f3398cd388}{submit\+\_\+\+Set}} (uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Input, int p\+\_\+\+Depth)
+\item 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classc___c_a_n__3_d___pyramid_a77bf2f8ab77a805e3ca2699b4ce3f6b2}{get\+\_\+\+Treetop}} (int p\+\_\+\+Index=-\/1)
+\item 
+void \mbox{\hyperlink{classc___c_a_n__3_d___pyramid_af912b9056781ec3eb342e08058168932}{output\+\_\+\+Scaffold}} ()
+\item 
+void \mbox{\hyperlink{classc___c_a_n__3_d___pyramid_ab161a83bec98bdebbc82371e894d0d1d}{output\+\_\+\+Scaffold\+\_\+\+Char}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries reset\+\_\+\+Input} ()
+\item 
+void {\bfseries set\+\_\+\+NNet} (\mbox{\hyperlink{classc___node___network}{c\+\_\+\+Node\+\_\+\+Network}} \texorpdfstring{$\ast$}{*}p\+\_\+\+NNet)
+\item 
+void {\bfseries set\+\_\+\+State\+\_\+\+Nodes\+\_\+\+Index} (int p\+\_\+\+Index)
+\item 
+void {\bfseries set\+\_\+\+Input} (uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Input, int p\+\_\+\+Input\+\_\+\+Depth)
+\item 
+void {\bfseries set\+\_\+\+Input\+\_\+\+String} (std\+::string p\+\_\+\+Input)
+\item 
+void {\bfseries set\+\_\+2\+D\+\_\+\+Input} (uint64\+\_\+t \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}p\+\_\+\+Input, int p\+\_\+\+X\+\_\+\+Depth, int p\+\_\+\+Y\+\_\+\+Depth)
+\item 
+void {\bfseries set\+\_\+2\+D\+\_\+\+Input\+\_\+\+String} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}p\+\_\+\+Input, int p\+\_\+\+X\+\_\+\+Depth, int p\+\_\+\+Y\+\_\+\+Depth)
+\item 
+void {\bfseries set\+\_\+3\+D\+\_\+\+Input} (uint64\+\_\+t \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}p\+\_\+\+Input, int p\+\_\+\+X\+\_\+\+Depth, int p\+\_\+\+Y\+\_\+\+Depth, int p\+\_\+\+Z\+\_\+\+Depth)
+\item 
+void {\bfseries set\+\_\+3\+D\+\_\+\+Input\+\_\+\+String} (char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}p\+\_\+\+Input, int p\+\_\+\+X\+\_\+\+Depth, int p\+\_\+\+Y\+\_\+\+Depth, int p\+\_\+\+Z\+\_\+\+Depth)
+\item 
+void {\bfseries output\+\_\+\+Input} (int p\+\_\+\+Type=0)
+\item 
+void {\bfseries output\+\_\+\+Output} (int p\+\_\+\+Type=0)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_aaa526805efbf95c6f44262eff123351a}\label{classc___c_a_n__3_d___pyramid_aaa526805efbf95c6f44262eff123351a} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries Scaffold}
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_a5d614c400ae1c5c9084c513ddd3299a0}\label{classc___c_a_n__3_d___pyramid_a5d614c400ae1c5c9084c513ddd3299a0} 
+int {\bfseries State\+\_\+\+Depth\+\_\+X}
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_a3f1e4dc78cf6dbc6659c3fb49cd05ac3}\label{classc___c_a_n__3_d___pyramid_a3f1e4dc78cf6dbc6659c3fb49cd05ac3} 
+int {\bfseries State\+\_\+\+Depth\+\_\+Y}
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_a293e142533d6c8d644ac42180b07a0bb}\label{classc___c_a_n__3_d___pyramid_a293e142533d6c8d644ac42180b07a0bb} 
+int {\bfseries State\+\_\+\+Depth\+\_\+Z}
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_ad716684e13858f763312e482c4119482}\label{classc___c_a_n__3_d___pyramid_ad716684e13858f763312e482c4119482} 
+int {\bfseries Top\+\_\+\+Tier}
+\item 
+\Hypertarget{classc___c_a_n__3_d___pyramid_a6de33a64d6064269ce990d774b61dde8}\label{classc___c_a_n__3_d___pyramid_a6de33a64d6064269ce990d774b61dde8} 
+\mbox{\hyperlink{classc___charging___buffer}{c\+\_\+\+Charging\+\_\+\+Buffer}} {\bfseries tmp\+\_\+\+Buffman}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc___node___network}{c\+\_\+\+Node\+\_\+\+Network}} \texorpdfstring{$\ast$}{*} {\bfseries NNet}
+\item 
+int {\bfseries State\+\_\+\+Nodes\+\_\+\+Index}
+\item 
+\mbox{\hyperlink{classc___i_o___set}{c\+\_\+\+IO\+\_\+\+Set}} {\bfseries Input}
+\item 
+\mbox{\hyperlink{classc__2_d___i_o___set}{c\+\_\+2\+D\+\_\+\+IO\+\_\+\+Set}} {\bfseries Input\+\_\+2D}
+\item 
+\mbox{\hyperlink{classc__3_d___i_o___set}{c\+\_\+3\+D\+\_\+\+IO\+\_\+\+Set}} {\bfseries Input\+\_\+3D}
+\item 
+\mbox{\hyperlink{classc___trace}{c\+\_\+\+Trace}} \texorpdfstring{$\ast$}{*} {\bfseries Output}
+\item 
+int {\bfseries Output\+\_\+\+Depth}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classc___c_a_n__3_d___pyramid_a85a15ff4d440c2e21d7457b306b6bafe}\label{classc___c_a_n__3_d___pyramid_a85a15ff4d440c2e21d7457b306b6bafe} 
+\index{c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}!encode@{encode}}
+\index{encode@{encode}!c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}}
+\doxysubsubsection{\texorpdfstring{encode()}{encode()}}
+{\footnotesize\ttfamily void c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid\+::encode (\begin{DoxyParamCaption}\item[{uint64\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+\_\+\+Input = {\ttfamily NULL},  }\item[{int}]{p\+\_\+\+Depth = {\ttfamily 0} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}.
+
+\Hypertarget{classc___c_a_n__3_d___pyramid_a82c3cb98f49b9805fddaa4bf51bc8e9b}\label{classc___c_a_n__3_d___pyramid_a82c3cb98f49b9805fddaa4bf51bc8e9b} 
+\index{c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}!gather\_All\_Traces@{gather\_All\_Traces}}
+\index{gather\_All\_Traces@{gather\_All\_Traces}!c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}}
+\doxysubsubsection{\texorpdfstring{gather\_All\_Traces()}{gather\_All\_Traces()}}
+{\footnotesize\ttfamily void c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid\+::gather\+\_\+\+All\+\_\+\+Traces (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}.
+
+\Hypertarget{classc___c_a_n__3_d___pyramid_abc46655a497268c7241ea6b37ebceed7}\label{classc___c_a_n__3_d___pyramid_abc46655a497268c7241ea6b37ebceed7} 
+\index{c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}!gather\_Given\_Trace@{gather\_Given\_Trace}}
+\index{gather\_Given\_Trace@{gather\_Given\_Trace}!c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}}
+\doxysubsubsection{\texorpdfstring{gather\_Given\_Trace()}{gather\_Given\_Trace()}}
+{\footnotesize\ttfamily void c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid\+::gather\+\_\+\+Given\+\_\+\+Trace (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{p\+\_\+\+NID }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}.
+
+\Hypertarget{classc___c_a_n__3_d___pyramid_a77bf2f8ab77a805e3ca2699b4ce3f6b2}\label{classc___c_a_n__3_d___pyramid_a77bf2f8ab77a805e3ca2699b4ce3f6b2} 
+\index{c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}!get\_Treetop@{get\_Treetop}}
+\index{get\_Treetop@{get\_Treetop}!c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}}
+\doxysubsubsection{\texorpdfstring{get\_Treetop()}{get\_Treetop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid\+::get\+\_\+\+Treetop (\begin{DoxyParamCaption}\item[{int}]{p\+\_\+\+Index = {\ttfamily -\/1} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}.
+
+\Hypertarget{classc___c_a_n__3_d___pyramid_af912b9056781ec3eb342e08058168932}\label{classc___c_a_n__3_d___pyramid_af912b9056781ec3eb342e08058168932} 
+\index{c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}!output\_Scaffold@{output\_Scaffold}}
+\index{output\_Scaffold@{output\_Scaffold}!c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}}
+\doxysubsubsection{\texorpdfstring{output\_Scaffold()}{output\_Scaffold()}}
+{\footnotesize\ttfamily void c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid\+::output\+\_\+\+Scaffold (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}.
+
+\Hypertarget{classc___c_a_n__3_d___pyramid_ab161a83bec98bdebbc82371e894d0d1d}\label{classc___c_a_n__3_d___pyramid_ab161a83bec98bdebbc82371e894d0d1d} 
+\index{c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}!output\_Scaffold\_Char@{output\_Scaffold\_Char}}
+\index{output\_Scaffold\_Char@{output\_Scaffold\_Char}!c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}}
+\doxysubsubsection{\texorpdfstring{output\_Scaffold\_Char()}{output\_Scaffold\_Char()}}
+{\footnotesize\ttfamily void c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid\+::output\+\_\+\+Scaffold\+\_\+\+Char (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}.
+
+\Hypertarget{classc___c_a_n__3_d___pyramid_ae3e3695f582463d5d4c6babed5113363}\label{classc___c_a_n__3_d___pyramid_ae3e3695f582463d5d4c6babed5113363} 
+\index{c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}!query@{query}}
+\index{query@{query}!c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}}
+\doxysubsubsection{\texorpdfstring{query()}{query()}}
+{\footnotesize\ttfamily void c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid\+::query (\begin{DoxyParamCaption}\item[{uint64\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+\_\+\+Input = {\ttfamily NULL},  }\item[{int}]{p\+\_\+\+Depth = {\ttfamily 0},  }\item[{int}]{p\+\_\+\+Charging\+\_\+\+Style = {\ttfamily -\/1},  }\item[{int}]{p\+\_\+\+Leg = {\ttfamily 0},  }\item[{int \texorpdfstring{$\ast$}{*}}]{p\+\_\+\+Legs = {\ttfamily NULL} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}.
+
+\Hypertarget{classc___c_a_n__3_d___pyramid_ab07e860373c2b57d518016f3398cd388}\label{classc___c_a_n__3_d___pyramid_ab07e860373c2b57d518016f3398cd388} 
+\index{c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}!submit\_Set@{submit\_Set}}
+\index{submit\_Set@{submit\_Set}!c\_CAN\_3D\_Pyramid@{c\_CAN\_3D\_Pyramid}}
+\doxysubsubsection{\texorpdfstring{submit\_Set()}{submit\_Set()}}
+{\footnotesize\ttfamily void c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid\+::submit\+\_\+\+Set (\begin{DoxyParamCaption}\item[{uint64\+\_\+t \texorpdfstring{$\ast$}{*}}]{p\+\_\+\+Input,  }\item[{int}]{p\+\_\+\+Depth }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classc___base___c_a_n}{c\+\_\+\+Base\+\_\+\+CAN}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+NT4/c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid.\+h\end{DoxyCompactItemize}

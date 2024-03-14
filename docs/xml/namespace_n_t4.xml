@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="namespace_n_t4" kind="namespace" language="C++">
+    <compoundname>NT4</compoundname>
+    <briefdescription>
+<para>This is the namespace which encapsulates the <ref refid="namespace_n_t4" kindref="compound">NT4</ref> Neural-Net Engine and the interfaces. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/NT4_Master.h" line="21" column="1"/>
+  </compounddef>
+</doxygen>

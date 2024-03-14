@@ -1,0 +1,688 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="classc___base___c_a_n" kind="class" language="C++" prot="public" abstract="yes">
+    <compoundname>c_Base_CAN</compoundname>
+    <derivedcompoundref refid="classc___c_a_n__1_d___pyramid" prot="public" virt="non-virtual">c_CAN_1D_Pyramid</derivedcompoundref>
+    <derivedcompoundref refid="classc___c_a_n__2_d___pyramid" prot="public" virt="non-virtual">c_CAN_2D_Pyramid</derivedcompoundref>
+    <derivedcompoundref refid="classc___c_a_n__3_d___pyramid" prot="public" virt="non-virtual">c_CAN_3D_Pyramid</derivedcompoundref>
+    <derivedcompoundref refid="classc___c_a_n___many___to___one" prot="public" virt="non-virtual">c_CAN_Many_To_One</derivedcompoundref>
+    <innerclass refid="unionc___base___c_a_n_1_1tmp___union" prot="public">c_Base_CAN::tmp_Union</innerclass>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classc___base___c_a_n_1a5d06e375119ad1e2936ed39a0b2a5aa2" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___node___network" kindref="compound">c_Node_Network</ref> *</type>
+        <definition>c_Node_Network* c_Base_CAN::NNet</definition>
+        <argsstring></argsstring>
+        <name>NNet</name>
+        <qualifiedname>c_Base_CAN::NNet</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="19" column="16" bodyfile="include/NT4/c_CAN.h" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___base___c_a_n_1a6c0a734b3b5f655d00192031c2011ced" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int c_Base_CAN::State_Nodes_Index</definition>
+        <argsstring></argsstring>
+        <name>State_Nodes_Index</name>
+        <qualifiedname>c_Base_CAN::State_Nodes_Index</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="22" column="5" bodyfile="include/NT4/c_CAN.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___base___c_a_n_1a8efb0e1a87b959802f84f89df14066d2" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___i_o___set" kindref="compound">c_IO_Set</ref></type>
+        <definition>c_IO_Set c_Base_CAN::Input</definition>
+        <argsstring></argsstring>
+        <name>Input</name>
+        <qualifiedname>c_Base_CAN::Input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="27" column="10" bodyfile="include/NT4/c_CAN.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___base___c_a_n_1abf6c9a6f49295899df8aa25dad0d3de9" prot="public" static="no" mutable="no">
+        <type><ref refid="classc__2_d___i_o___set" kindref="compound">c_2D_IO_Set</ref></type>
+        <definition>c_2D_IO_Set c_Base_CAN::Input_2D</definition>
+        <argsstring></argsstring>
+        <name>Input_2D</name>
+        <qualifiedname>c_Base_CAN::Input_2D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="28" column="13" bodyfile="include/NT4/c_CAN.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___base___c_a_n_1aeecc35ba62a57d6497ea6db97337322d" prot="public" static="no" mutable="no">
+        <type><ref refid="classc__3_d___i_o___set" kindref="compound">c_3D_IO_Set</ref></type>
+        <definition>c_3D_IO_Set c_Base_CAN::Input_3D</definition>
+        <argsstring></argsstring>
+        <name>Input_3D</name>
+        <qualifiedname>c_Base_CAN::Input_3D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="29" column="13" bodyfile="include/NT4/c_CAN.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___base___c_a_n_1a9c158a4fa1d4eac7e33553469561d30e" prot="public" static="no" mutable="no">
+        <type><ref refid="classc___trace" kindref="compound">c_Trace</ref> *</type>
+        <definition>c_Trace* c_Base_CAN::Output</definition>
+        <argsstring></argsstring>
+        <name>Output</name>
+        <qualifiedname>c_Base_CAN::Output</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="32" column="9" bodyfile="include/NT4/c_CAN.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classc___base___c_a_n_1a61b6accf7c449d007c7aa083eba73a30" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int c_Base_CAN::Output_Depth</definition>
+        <argsstring></argsstring>
+        <name>Output_Depth</name>
+        <qualifiedname>c_Base_CAN::Output_Depth</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="33" column="5" bodyfile="include/NT4/c_CAN.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classc___base___c_a_n_1a3669034fbec3a3a6137147566bb99331" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void c_Base_CAN::encode</definition>
+        <argsstring>(uint64_t *p_Input=NULL, int p_Depth=0)=0</argsstring>
+        <name>encode</name>
+        <qualifiedname>c_Base_CAN::encode</qualifiedname>
+        <reimplementedby refid="classc___c_a_n__1_d___pyramid_1a965f89ddcbb0e0414e0d6935fd101256">encode</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__2_d___pyramid_1a24b5813f90cadf1530b3d325a6fe234e">encode</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__3_d___pyramid_1a85a15ff4d440c2e21d7457b306b6bafe">encode</reimplementedby>
+        <reimplementedby refid="classc___c_a_n___many___to___one_1a016c2acda98b10ac073c5f7045e56fec">encode</reimplementedby>
+        <param>
+          <type>uint64_t *</type>
+          <declname>p_Input</declname>
+          <defval>NULL</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Depth</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="43" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a6b9e343f114dcccadd8bd36ede4b8f3e" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void c_Base_CAN::query</definition>
+        <argsstring>(uint64_t *p_Input=NULL, int p_Depth=0, int p_Charging_Style=-1, int p_Leg=0, int *p_Legs=NULL)=0</argsstring>
+        <name>query</name>
+        <qualifiedname>c_Base_CAN::query</qualifiedname>
+        <reimplementedby refid="classc___c_a_n__1_d___pyramid_1a6aa394240f6248f601d176c3cb614826">query</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__2_d___pyramid_1a4793f54a70428ed7568ad1330658afb1">query</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__3_d___pyramid_1ae3e3695f582463d5d4c6babed5113363">query</reimplementedby>
+        <reimplementedby refid="classc___c_a_n___many___to___one_1ac1d1354a4fd505189a428ffdcd1e8d5c">query</reimplementedby>
+        <param>
+          <type>uint64_t *</type>
+          <declname>p_Input</declname>
+          <defval>NULL</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Depth</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Charging_Style</declname>
+          <defval>-1</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Leg</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>p_Legs</declname>
+          <defval>NULL</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="48" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1ad30f3862e0cd453c1f1220a258c528fd" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void c_Base_CAN::submit_Set</definition>
+        <argsstring>(uint64_t *p_Input, int p_Depth)=0</argsstring>
+        <name>submit_Set</name>
+        <qualifiedname>c_Base_CAN::submit_Set</qualifiedname>
+        <reimplementedby refid="classc___c_a_n__1_d___pyramid_1aeae333c198b475cd90a98e7c9a028d3d">submit_Set</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__2_d___pyramid_1ac408b661d766b5f6ad66dc5f0119ec62">submit_Set</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__3_d___pyramid_1ab07e860373c2b57d518016f3398cd388">submit_Set</reimplementedby>
+        <reimplementedby refid="classc___c_a_n___many___to___one_1a049fc194e49aa940e53a4d62a8bbdea4">submit_Set</reimplementedby>
+        <param>
+          <type>uint64_t *</type>
+          <declname>p_Input</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="51" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1abc1b4fb748b7e5dbfc4e9c4c3fdb3740" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type><ref refid="classc___node" kindref="compound">c_Node</ref> *</type>
+        <definition>virtual c_Node * c_Base_CAN::get_Treetop</definition>
+        <argsstring>(int p_Index=0)=0</argsstring>
+        <name>get_Treetop</name>
+        <qualifiedname>c_Base_CAN::get_Treetop</qualifiedname>
+        <reimplementedby refid="classc___c_a_n__1_d___pyramid_1a328801ce712d3d5105aa1c4291e8bcff">get_Treetop</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__2_d___pyramid_1ab7ab1a00bea9acf8110dc23faf4b4bd6">get_Treetop</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__3_d___pyramid_1a77bf2f8ab77a805e3ca2699b4ce3f6b2">get_Treetop</reimplementedby>
+        <reimplementedby refid="classc___c_a_n___many___to___one_1a5e1647eec98acdcd83738568d89e1c59">get_Treetop</reimplementedby>
+        <param>
+          <type>int</type>
+          <declname>p_Index</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="54" column="16"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a774bda5366a4ac729d5dbd524d07bd47" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void c_Base_CAN::gather_Given_Trace</definition>
+        <argsstring>(uint64_t p_NID)=0</argsstring>
+        <name>gather_Given_Trace</name>
+        <qualifiedname>c_Base_CAN::gather_Given_Trace</qualifiedname>
+        <reimplementedby refid="classc___c_a_n__1_d___pyramid_1aeefeeb4636b0fc213a1132e787742a4a">gather_Given_Trace</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__2_d___pyramid_1a4a9b9565bd4a074922a6e3620d2e5351">gather_Given_Trace</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__3_d___pyramid_1abc46655a497268c7241ea6b37ebceed7">gather_Given_Trace</reimplementedby>
+        <reimplementedby refid="classc___c_a_n___many___to___one_1a837579dee50f2a1d0a0c117e18f1fc7f">gather_Given_Trace</reimplementedby>
+        <param>
+          <type>uint64_t</type>
+          <declname>p_NID</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="57" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a99336f307406e1c0bfbdbdb547e5a291" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void c_Base_CAN::gather_All_Traces</definition>
+        <argsstring>()=0</argsstring>
+        <name>gather_All_Traces</name>
+        <qualifiedname>c_Base_CAN::gather_All_Traces</qualifiedname>
+        <reimplementedby refid="classc___c_a_n__1_d___pyramid_1a7638be63eda1213b20546520a99a913d">gather_All_Traces</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__2_d___pyramid_1a3dcf2ed49c7a3342d95067982f0fad65">gather_All_Traces</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__3_d___pyramid_1a82c3cb98f49b9805fddaa4bf51bc8e9b">gather_All_Traces</reimplementedby>
+        <reimplementedby refid="classc___c_a_n___many___to___one_1a455278df4a45471ecb0fe211b02dc645">gather_All_Traces</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="59" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a046e77f818dc8b86ec06299f3f813ef3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::reset_Input</definition>
+        <argsstring>()</argsstring>
+        <name>reset_Input</name>
+        <qualifiedname>c_Base_CAN::reset_Input</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="62" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="62" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a4560546556b3403e7adffa44ea8338cb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::set_NNet</definition>
+        <argsstring>(c_Node_Network *p_NNet)</argsstring>
+        <name>set_NNet</name>
+        <qualifiedname>c_Base_CAN::set_NNet</qualifiedname>
+        <param>
+          <type><ref refid="classc___node___network" kindref="compound">c_Node_Network</ref> *</type>
+          <declname>p_NNet</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="70" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="70" bodyend="73"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a5573588263339657bf72b6ac619c6e70" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::set_State_Nodes_Index</definition>
+        <argsstring>(int p_Index)</argsstring>
+        <name>set_State_Nodes_Index</name>
+        <qualifiedname>c_Base_CAN::set_State_Nodes_Index</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>p_Index</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="76" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="76" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a968ec4f1e5eb1b5c4a83e6f4a322899a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::set_Input</definition>
+        <argsstring>(uint64_t *p_Input, int p_Input_Depth)</argsstring>
+        <name>set_Input</name>
+        <qualifiedname>c_Base_CAN::set_Input</qualifiedname>
+        <param>
+          <type>uint64_t *</type>
+          <declname>p_Input</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Input_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="91" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="91" bodyend="94"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1ac4cc2d6a8f727d523929fb75aefe26a8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::set_Input_String</definition>
+        <argsstring>(std::string p_Input)</argsstring>
+        <name>set_Input_String</name>
+        <qualifiedname>c_Base_CAN::set_Input_String</qualifiedname>
+        <param>
+          <type>std::string</type>
+          <declname>p_Input</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="97" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="97" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1ac66268470764ac57198f9c7c11d4a3a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::set_2D_Input</definition>
+        <argsstring>(uint64_t **p_Input, int p_X_Depth, int p_Y_Depth)</argsstring>
+        <name>set_2D_Input</name>
+        <qualifiedname>c_Base_CAN::set_2D_Input</qualifiedname>
+        <param>
+          <type>uint64_t **</type>
+          <declname>p_Input</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_X_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Y_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="123" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="123" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a27a7893fc24d77a8f0fcb22643457fca" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::set_2D_Input_String</definition>
+        <argsstring>(char **p_Input, int p_X_Depth, int p_Y_Depth)</argsstring>
+        <name>set_2D_Input_String</name>
+        <qualifiedname>c_Base_CAN::set_2D_Input_String</qualifiedname>
+        <param>
+          <type>char **</type>
+          <declname>p_Input</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_X_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Y_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="129" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="129" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a98151f61b01bce273475fe34ae8c7935" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::set_3D_Input</definition>
+        <argsstring>(uint64_t ***p_Input, int p_X_Depth, int p_Y_Depth, int p_Z_Depth)</argsstring>
+        <name>set_3D_Input</name>
+        <qualifiedname>c_Base_CAN::set_3D_Input</qualifiedname>
+        <param>
+          <type>uint64_t ***</type>
+          <declname>p_Input</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_X_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Y_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Z_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="169" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="169" bodyend="172"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1aa132ba51c880aef927bee8e1bdc3b7bf" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::set_3D_Input_String</definition>
+        <argsstring>(char ***p_Input, int p_X_Depth, int p_Y_Depth, int p_Z_Depth)</argsstring>
+        <name>set_3D_Input_String</name>
+        <qualifiedname>c_Base_CAN::set_3D_Input_String</qualifiedname>
+        <param>
+          <type>char ***</type>
+          <declname>p_Input</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_X_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Y_Depth</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>p_Z_Depth</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="175" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="175" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a48f4d3572adb046bc6bf08afaba3e50a" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void c_Base_CAN::output_Scaffold</definition>
+        <argsstring>()=0</argsstring>
+        <name>output_Scaffold</name>
+        <qualifiedname>c_Base_CAN::output_Scaffold</qualifiedname>
+        <reimplementedby refid="classc___c_a_n__1_d___pyramid_1a58290464b47ee6d22f29617752ac5d9b">output_Scaffold</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__2_d___pyramid_1a2325d5c223c6decd9472ac8a84fe9eba">output_Scaffold</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__3_d___pyramid_1af912b9056781ec3eb342e08058168932">output_Scaffold</reimplementedby>
+        <reimplementedby refid="classc___c_a_n___many___to___one_1af1ca0422aa74017ba40eee3781b0d437">output_Scaffold</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="228" column="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1ad1a136fab70398b3d0a1dfd54d60f548" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::output_Input</definition>
+        <argsstring>(int p_Type=0)</argsstring>
+        <name>output_Input</name>
+        <qualifiedname>c_Base_CAN::output_Input</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>p_Type</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="231" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="231" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1a750b2dd0e37504008ac5697f40f72194" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void c_Base_CAN::output_Output</definition>
+        <argsstring>(int p_Type=0)</argsstring>
+        <name>output_Output</name>
+        <qualifiedname>c_Base_CAN::output_Output</qualifiedname>
+        <param>
+          <type>int</type>
+          <declname>p_Type</declname>
+          <defval>0</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="247" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="247" bodyend="265"/>
+      </memberdef>
+      <memberdef kind="function" id="classc___base___c_a_n_1ad79ea8dcb1365a92720b0a1deda5d41c" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void c_Base_CAN::output_Scaffold_Char</definition>
+        <argsstring>()=0</argsstring>
+        <name>output_Scaffold_Char</name>
+        <qualifiedname>c_Base_CAN::output_Scaffold_Char</qualifiedname>
+        <reimplementedby refid="classc___c_a_n__1_d___pyramid_1a482f86dd037ba46524b1852819bd1f55">output_Scaffold_Char</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__2_d___pyramid_1aba3166a47dab382ff5f4b945725f3787">output_Scaffold_Char</reimplementedby>
+        <reimplementedby refid="classc___c_a_n__3_d___pyramid_1ab161a83bec98bdebbc82371e894d0d1d">output_Scaffold_Char</reimplementedby>
+        <reimplementedby refid="classc___c_a_n___many___to___one_1a55011fb939db43ea4f96e744b0fbeb6e">output_Scaffold_Char</reimplementedby>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="269" column="14"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>c_Base_CAN</label>
+        <link refid="classc___base___c_a_n"/>
+      </node>
+      <node id="2">
+        <label>c_CAN_1D_Pyramid</label>
+        <link refid="classc___c_a_n__1_d___pyramid"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>c_CAN_2D_Pyramid</label>
+        <link refid="classc___c_a_n__2_d___pyramid"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>c_CAN_3D_Pyramid</label>
+        <link refid="classc___c_a_n__3_d___pyramid"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>c_CAN_Many_To_One</label>
+        <link refid="classc___c_a_n___many___to___one"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="7">
+        <label>c_2D_IO_Set</label>
+        <link refid="classc__2_d___i_o___set"/>
+      </node>
+      <node id="8">
+        <label>c_3D_IO_Set</label>
+        <link refid="classc__3_d___i_o___set"/>
+      </node>
+      <node id="1">
+        <label>c_Base_CAN</label>
+        <link refid="classc___base___c_a_n"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>NNet</edgelabel>
+        </childnode>
+        <childnode refid="6" relation="usage">
+          <edgelabel>Input</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>Input_2D</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>Input_3D</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>Output</edgelabel>
+        </childnode>
+      </node>
+      <node id="4">
+        <label>c_Fractal_Node</label>
+        <link refid="classc___fractal___node"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>NAdd</edgelabel>
+        </childnode>
+      </node>
+      <node id="3">
+        <label>c_Fractal_Tree</label>
+        <link refid="classc___fractal___tree"/>
+        <childnode refid="4" relation="usage">
+          <edgelabel>Current</edgelabel>
+          <edgelabel>Root</edgelabel>
+        </childnode>
+      </node>
+      <node id="6">
+        <label>c_IO_Set</label>
+        <link refid="classc___i_o___set"/>
+      </node>
+      <node id="5">
+        <label>c_Node</label>
+        <link refid="classc___node"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>Axons</edgelabel>
+          <edgelabel>Dendrites</edgelabel>
+          <edgelabel>Next</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>c_Node_Network</label>
+        <link refid="classc___node___network"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>Nodes</edgelabel>
+          <edgelabel>State_Nodes</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>Current_Node</edgelabel>
+          <edgelabel>Root</edgelabel>
+        </childnode>
+      </node>
+      <node id="9">
+        <label>c_Trace</label>
+        <link refid="classc___trace"/>
+        <childnode refid="5" relation="usage">
+          <edgelabel>Treetop</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="include/NT4/c_CAN.h" line="14" column="1" bodyfile="include/NT4/c_CAN.h" bodystart="15" bodyend="270"/>
+    <listofallmembers>
+      <member refid="classc___base___c_a_n_1a3669034fbec3a3a6137147566bb99331" prot="public" virt="pure-virtual"><scope>c_Base_CAN</scope><name>encode</name></member>
+      <member refid="classc___base___c_a_n_1a99336f307406e1c0bfbdbdb547e5a291" prot="public" virt="pure-virtual"><scope>c_Base_CAN</scope><name>gather_All_Traces</name></member>
+      <member refid="classc___base___c_a_n_1a774bda5366a4ac729d5dbd524d07bd47" prot="public" virt="pure-virtual"><scope>c_Base_CAN</scope><name>gather_Given_Trace</name></member>
+      <member refid="classc___base___c_a_n_1abc1b4fb748b7e5dbfc4e9c4c3fdb3740" prot="public" virt="pure-virtual"><scope>c_Base_CAN</scope><name>get_Treetop</name></member>
+      <member refid="classc___base___c_a_n_1a8efb0e1a87b959802f84f89df14066d2" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>Input</name></member>
+      <member refid="classc___base___c_a_n_1abf6c9a6f49295899df8aa25dad0d3de9" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>Input_2D</name></member>
+      <member refid="classc___base___c_a_n_1aeecc35ba62a57d6497ea6db97337322d" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>Input_3D</name></member>
+      <member refid="classc___base___c_a_n_1a5d06e375119ad1e2936ed39a0b2a5aa2" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>NNet</name></member>
+      <member refid="classc___base___c_a_n_1a9c158a4fa1d4eac7e33553469561d30e" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>Output</name></member>
+      <member refid="classc___base___c_a_n_1a61b6accf7c449d007c7aa083eba73a30" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>Output_Depth</name></member>
+      <member refid="classc___base___c_a_n_1ad1a136fab70398b3d0a1dfd54d60f548" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>output_Input</name></member>
+      <member refid="classc___base___c_a_n_1a750b2dd0e37504008ac5697f40f72194" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>output_Output</name></member>
+      <member refid="classc___base___c_a_n_1a48f4d3572adb046bc6bf08afaba3e50a" prot="public" virt="pure-virtual"><scope>c_Base_CAN</scope><name>output_Scaffold</name></member>
+      <member refid="classc___base___c_a_n_1ad79ea8dcb1365a92720b0a1deda5d41c" prot="public" virt="pure-virtual"><scope>c_Base_CAN</scope><name>output_Scaffold_Char</name></member>
+      <member refid="classc___base___c_a_n_1a6b9e343f114dcccadd8bd36ede4b8f3e" prot="public" virt="pure-virtual"><scope>c_Base_CAN</scope><name>query</name></member>
+      <member refid="classc___base___c_a_n_1a046e77f818dc8b86ec06299f3f813ef3" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>reset_Input</name></member>
+      <member refid="classc___base___c_a_n_1ac66268470764ac57198f9c7c11d4a3a6" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>set_2D_Input</name></member>
+      <member refid="classc___base___c_a_n_1a27a7893fc24d77a8f0fcb22643457fca" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>set_2D_Input_String</name></member>
+      <member refid="classc___base___c_a_n_1a98151f61b01bce273475fe34ae8c7935" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>set_3D_Input</name></member>
+      <member refid="classc___base___c_a_n_1aa132ba51c880aef927bee8e1bdc3b7bf" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>set_3D_Input_String</name></member>
+      <member refid="classc___base___c_a_n_1a968ec4f1e5eb1b5c4a83e6f4a322899a" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>set_Input</name></member>
+      <member refid="classc___base___c_a_n_1ac4cc2d6a8f727d523929fb75aefe26a8" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>set_Input_String</name></member>
+      <member refid="classc___base___c_a_n_1a4560546556b3403e7adffa44ea8338cb" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>set_NNet</name></member>
+      <member refid="classc___base___c_a_n_1a5573588263339657bf72b6ac619c6e70" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>set_State_Nodes_Index</name></member>
+      <member refid="classc___base___c_a_n_1a6c0a734b3b5f655d00192031c2011ced" prot="public" virt="non-virtual"><scope>c_Base_CAN</scope><name>State_Nodes_Index</name></member>
+      <member refid="classc___base___c_a_n_1ad30f3862e0cd453c1f1220a258c528fd" prot="public" virt="pure-virtual"><scope>c_Base_CAN</scope><name>submit_Set</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

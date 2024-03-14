@@ -1,0 +1,85 @@
+\doxysection{c\+\_\+\+Charging\+\_\+\+Buffer Class Reference}
+\hypertarget{classc___charging___buffer}{}\label{classc___charging___buffer}\index{c\_Charging\_Buffer@{c\_Charging\_Buffer}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classc___charging___buffer_aa3fb0f5f29d1964d3cc0a7b5396210e0}\label{classc___charging___buffer_aa3fb0f5f29d1964d3cc0a7b5396210e0} 
+void {\bfseries reset} ()
+\item 
+\Hypertarget{classc___charging___buffer_af35f2a73f342d0db2f9e88a96c20488d}\label{classc___charging___buffer_af35f2a73f342d0db2f9e88a96c20488d} 
+void {\bfseries charge\+\_\+\+Outputs} ()
+\item 
+\Hypertarget{classc___charging___buffer_ac5eb5bd11b5e99dcd30851d9d695e7b3}\label{classc___charging___buffer_ac5eb5bd11b5e99dcd30851d9d695e7b3} 
+void {\bfseries charge\+\_\+\+Given\+\_\+\+Leg} (\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}p\+\_\+\+Node, double p\+\_\+\+Charge=10.\+00, int p\+\_\+\+Leg=0)
+\item 
+\Hypertarget{classc___charging___buffer_a370b0fbff808b656cf766ae4a8e433fa}\label{classc___charging___buffer_a370b0fbff808b656cf766ae4a8e433fa} 
+void {\bfseries charge\+\_\+\+Given\+\_\+\+Legs} (\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}p\+\_\+\+Node, int p\+\_\+\+Leg\+\_\+\+Count, int \texorpdfstring{$\ast$}{*}p\+\_\+\+Leg, double p\+\_\+\+Charge=10.\+00)
+\item 
+\Hypertarget{classc___charging___buffer_a2a4adb08bd4a2ed2ccc2ecb8bfdd918d}\label{classc___charging___buffer_a2a4adb08bd4a2ed2ccc2ecb8bfdd918d} 
+void {\bfseries submit} (\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}p\+\_\+\+Node, double p\+\_\+\+Charge=10.\+00)
+\item 
+\Hypertarget{classc___charging___buffer_ae222a384401b5758fb404d8fcf83fb17}\label{classc___charging___buffer_ae222a384401b5758fb404d8fcf83fb17} 
+void {\bfseries gather} ()
+\item 
+\Hypertarget{classc___charging___buffer_a5a941c17ca3da8714f688799cc3ea278}\label{classc___charging___buffer_a5a941c17ca3da8714f688799cc3ea278} 
+double {\bfseries gather\+\_\+\+Treetops} ()
+\item 
+\Hypertarget{classc___charging___buffer_aeb34d303b3b3113969b1174a7b6efd33}\label{classc___charging___buffer_aeb34d303b3b3113969b1174a7b6efd33} 
+void {\bfseries destroy\+\_\+\+Output\+\_\+\+Buffers} ()
+\item 
+\Hypertarget{classc___charging___buffer_ac01b2b2f205926c6de2abe8cd217f723}\label{classc___charging___buffer_ac01b2b2f205926c6de2abe8cd217f723} 
+void {\bfseries output\+\_\+\+All\+\_\+\+Buffers} ()
+\item 
+\Hypertarget{classc___charging___buffer_aca17945900ffc7045a1e1ccb4976ea07}\label{classc___charging___buffer_aca17945900ffc7045a1e1ccb4976ea07} 
+void {\bfseries output\+\_\+\+Tree} ()
+\item 
+\Hypertarget{classc___charging___buffer_adb8ac185524e23943b3012e5a755f2ad}\label{classc___charging___buffer_adb8ac185524e23943b3012e5a755f2ad} 
+void {\bfseries output\+\_\+\+Charge\+\_\+\+LL} ()
+\item 
+\Hypertarget{classc___charging___buffer_a49fdb0b04b96c2e3b93608264207c48b}\label{classc___charging___buffer_a49fdb0b04b96c2e3b93608264207c48b} 
+void {\bfseries output\+\_\+\+Output\+\_\+\+LL} ()
+\item 
+\Hypertarget{classc___charging___buffer_a45f58cc5d104b21c9fb52765521e2efc}\label{classc___charging___buffer_a45f58cc5d104b21c9fb52765521e2efc} 
+void {\bfseries output\+\_\+\+Treetops} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classc___charging___buffer_a886b04556353bf22f1f8999fa33576e6}\label{classc___charging___buffer_a886b04556353bf22f1f8999fa33576e6} 
+\mbox{\hyperlink{classc___charging___buffer___tree}{c\+\_\+\+Charging\+\_\+\+Buffer\+\_\+\+Tree}} {\bfseries Tree}
+\item 
+\Hypertarget{classc___charging___buffer_a264bdc7325e966a54b2adf432d858963}\label{classc___charging___buffer_a264bdc7325e966a54b2adf432d858963} 
+\mbox{\hyperlink{classc___charging___linked___list___handler}{c\+\_\+\+Charging\+\_\+\+Linked\+\_\+\+List\+\_\+\+Handler}} {\bfseries Current\+\_\+\+Charge}
+\item 
+\Hypertarget{classc___charging___buffer_a8925d9195ecb0dbc5308f6fd39285373}\label{classc___charging___buffer_a8925d9195ecb0dbc5308f6fd39285373} 
+\mbox{\hyperlink{classc___charging___linked___list___handler}{c\+\_\+\+Charging\+\_\+\+Linked\+\_\+\+List\+\_\+\+Handler}} {\bfseries Output}
+\item 
+\Hypertarget{classc___charging___buffer_ad05e6260126e24d8ad94b6e65dd8604f}\label{classc___charging___buffer_ad05e6260126e24d8ad94b6e65dd8604f} 
+\mbox{\hyperlink{classc___charging___linked___list___handler}{c\+\_\+\+Charging\+\_\+\+Linked\+\_\+\+List\+\_\+\+Handler}} {\bfseries Treetops}
+\item 
+\Hypertarget{classc___charging___buffer_ae1ad2133334729f4cc50bff6533300ba}\label{classc___charging___buffer_ae1ad2133334729f4cc50bff6533300ba} 
+bool {\bfseries flg\+\_\+\+Not\+\_\+\+Done}
+\item 
+\Hypertarget{classc___charging___buffer_aace4aebf85dd47c9a0dcd806d6b2cc0c}\label{classc___charging___buffer_aace4aebf85dd47c9a0dcd806d6b2cc0c} 
+int {\bfseries Input\+\_\+\+Position}
+\item 
+\Hypertarget{classc___charging___buffer_aeb9c0fb1b1db3165946462f2c4bd2e65}\label{classc___charging___buffer_aeb9c0fb1b1db3165946462f2c4bd2e65} 
+double {\bfseries Base\+\_\+\+Charge}
+\item 
+\Hypertarget{classc___charging___buffer_ae99140147229e5e09cc97ed9c2eff6b4}\label{classc___charging___buffer_ae99140147229e5e09cc97ed9c2eff6b4} 
+double {\bfseries Current\+\_\+\+Highest\+\_\+\+Charge}
+\item 
+\Hypertarget{classc___charging___buffer_a95af1bf5504a488942ff751d61ac44cf}\label{classc___charging___buffer_a95af1bf5504a488942ff751d61ac44cf} 
+double {\bfseries Previous\+\_\+\+Highest\+\_\+\+Charge}
+\item 
+\Hypertarget{classc___charging___buffer_a87790fda7ce0ece58e08658b70312e15}\label{classc___charging___buffer_a87790fda7ce0ece58e08658b70312e15} 
+double {\bfseries Modifier\+\_\+\+Charge}
+\item 
+\Hypertarget{classc___charging___buffer_a3d52178ef083b91215e28d627bd316e8}\label{classc___charging___buffer_a3d52178ef083b91215e28d627bd316e8} 
+double {\bfseries Action\+\_\+\+Potential\+\_\+\+Threshold}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+NT4/c\+\_\+\+Charging\+\_\+\+Array.\+h\end{DoxyCompactItemize}

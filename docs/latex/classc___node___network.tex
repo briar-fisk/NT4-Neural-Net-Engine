@@ -1,0 +1,70 @@
+\doxysection{c\+\_\+\+Node\+\_\+\+Network Class Reference}
+\hypertarget{classc___node___network}{}\label{classc___node___network}\index{c\_Node\_Network@{c\_Node\_Network}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classc___node___network_a1d996398cc927a44ba7a9200fb966a14}\label{classc___node___network_a1d996398cc927a44ba7a9200fb966a14} 
+int {\bfseries register\+\_\+\+New\+\_\+\+Construct} ()
+\item 
+\Hypertarget{classc___node___network_aceaa67302ce4d7fb686040b3d71ea640}\label{classc___node___network_aceaa67302ce4d7fb686040b3d71ea640} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} {\bfseries new\+\_\+\+Node} ()
+\item 
+\Hypertarget{classc___node___network_adc565abd674de560cf9c1e0f6493c072}\label{classc___node___network_adc565abd674de560cf9c1e0f6493c072} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} {\bfseries new\+\_\+\+State\+\_\+\+Node} (int p\+\_\+\+Construct, double p\+\_\+\+State)
+\item 
+\Hypertarget{classc___node___network_a867c32ef68f61a90d47c64aea5417bfe}\label{classc___node___network_a867c32ef68f61a90d47c64aea5417bfe} 
+void {\bfseries assign\+\_\+\+State\+\_\+\+Node} (int p\+\_\+\+State\+\_\+\+Tree, \mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}p\+\_\+\+Node, double p\+\_\+\+State)
+\item 
+\Hypertarget{classc___node___network_aa7a5c687cdae99e9f24ab5a2e6c0aa17}\label{classc___node___network_aa7a5c687cdae99e9f24ab5a2e6c0aa17} 
+void {\bfseries create\+\_\+\+Connections} (\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}p\+\_\+\+To, \mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}p\+\_\+\+From, int p\+\_\+\+Count)
+\item 
+\Hypertarget{classc___node___network_a099d1a1e90690c62aed769ade7ed0ee3}\label{classc___node___network_a099d1a1e90690c62aed769ade7ed0ee3} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} {\bfseries does\+\_\+\+Upper\+\_\+\+Tier\+\_\+\+Connection\+\_\+\+Exist} (\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}p\+\_\+\+Legs, int p\+\_\+\+Count)
+\item 
+\Hypertarget{classc___node___network_a3f8f1876326cf10fb2239d630b88a0a9}\label{classc___node___network_a3f8f1876326cf10fb2239d630b88a0a9} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+\+Upper\+\_\+\+Tier\+\_\+\+Node} (\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}p\+\_\+\+Legs, int p\+\_\+\+Count, int p\+\_\+\+Type)
+\item 
+\Hypertarget{classc___node___network_a680f15be6f02774d19c35b4bb72aafa5}\label{classc___node___network_a680f15be6f02774d19c35b4bb72aafa5} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} {\bfseries does\+\_\+\+State\+\_\+\+Node\+\_\+\+Exist} (int p\+\_\+\+Index, uint64\+\_\+t p\+\_\+\+Data)
+\item 
+\Hypertarget{classc___node___network_a06fe978620de4ac36ef7ac83e8e37e66}\label{classc___node___network_a06fe978620de4ac36ef7ac83e8e37e66} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+\+State\+\_\+\+Node} (int p\+\_\+\+Index, uint64\+\_\+t p\+\_\+\+Data)
+\item 
+\Hypertarget{classc___node___network_a9f87c489f9bd1f36c345e35ebd69357b}\label{classc___node___network_a9f87c489f9bd1f36c345e35ebd69357b} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} {\bfseries get\+\_\+\+Node\+\_\+\+Ref\+\_\+\+By\+\_\+\+NID} (uint64\+\_\+t p\+\_\+\+NID)
+\item 
+\Hypertarget{classc___node___network_a60b464c790ee06b3be8a714de0cc619c}\label{classc___node___network_a60b464c790ee06b3be8a714de0cc619c} 
+void {\bfseries output\+\_\+\+BP} ()
+\item 
+\Hypertarget{classc___node___network_ab208b050b5f682c061c374ec842b018f}\label{classc___node___network_ab208b050b5f682c061c374ec842b018f} 
+void {\bfseries output\+\_\+\+Raw} ()
+\item 
+\Hypertarget{classc___node___network_aa39b84afb0daa8a0be51a611c4c7e44d}\label{classc___node___network_aa39b84afb0daa8a0be51a611c4c7e44d} 
+void {\bfseries output\+\_\+\+BP\+\_\+\+NID} (uint64\+\_\+t p\+\_\+\+NID)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classc___node___network_ae75bfe4e3c1092fdcbe4bbe5a9f87d54}\label{classc___node___network_ae75bfe4e3c1092fdcbe4bbe5a9f87d54} 
+\mbox{\hyperlink{classc___fractal___tree}{c\+\_\+\+Fractal\+\_\+\+Tree}} {\bfseries Nodes}
+\item 
+\Hypertarget{classc___node___network_ad0a6431ac74b58ab8cf20fe079c57b3a}\label{classc___node___network_ad0a6431ac74b58ab8cf20fe079c57b3a} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*} {\bfseries Root}
+\item 
+\Hypertarget{classc___node___network_accca531caaf962ade3d15d533b911249}\label{classc___node___network_accca531caaf962ade3d15d533b911249} 
+\mbox{\hyperlink{classc___node}{c\+\_\+\+Node}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries Current\+\_\+\+Node}
+\item 
+\Hypertarget{classc___node___network_a625b54b6b47b54c6eed52031fc8af207}\label{classc___node___network_a625b54b6b47b54c6eed52031fc8af207} 
+uint64\+\_\+t {\bfseries Node\+\_\+\+Count}
+\item 
+\Hypertarget{classc___node___network_a1b11fd3159f04a8a0646d1681a552e7d}\label{classc___node___network_a1b11fd3159f04a8a0646d1681a552e7d} 
+\mbox{\hyperlink{classc___fractal___tree}{c\+\_\+\+Fractal\+\_\+\+Tree}} \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} {\bfseries State\+\_\+\+Nodes}
+\item 
+\Hypertarget{classc___node___network_a84f02216b76c6dcfe724bc0b6d6f54d7}\label{classc___node___network_a84f02216b76c6dcfe724bc0b6d6f54d7} 
+int {\bfseries State\+\_\+\+Node\+\_\+\+Tree\+\_\+\+Count}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+NT4/c\+\_\+\+Node\+\_\+\+Network.\+h\end{DoxyCompactItemize}

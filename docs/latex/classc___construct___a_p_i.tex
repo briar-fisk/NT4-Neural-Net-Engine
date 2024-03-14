@@ -1,0 +1,196 @@
+\doxysection{c\+\_\+\+Construct\+\_\+\+API Class Reference}
+\hypertarget{classc___construct___a_p_i}{}\label{classc___construct___a_p_i}\index{c\_Construct\_API@{c\_Construct\_API}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classc___construct___a_p_i_a1b6a610fa5ea994b86716393d5582e69}\label{classc___construct___a_p_i_a1b6a610fa5ea994b86716393d5582e69} 
+void {\bfseries set\+\_\+\+Type} (uint64\+\_\+t p\+\_\+\+NID, uint8\+\_\+t p\+\_\+\+Type)
+\item 
+\Hypertarget{classc___construct___a_p_i_a72f7a34dd367ebc2f23ba77b86c9c90c}\label{classc___construct___a_p_i_a72f7a34dd367ebc2f23ba77b86c9c90c} 
+void {\bfseries add\+\_\+\+Axon\+\_\+\+Index} (uint64\+\_\+t p\+\_\+\+NID, uint64\+\_\+t p\+\_\+\+Axon\+\_\+\+NID, int p\+\_\+\+Index)
+\item 
+\Hypertarget{classc___construct___a_p_i_a1f96deb7c9be8cdc55da3ec1bbb1f638}\label{classc___construct___a_p_i_a1f96deb7c9be8cdc55da3ec1bbb1f638} 
+void {\bfseries set\+\_\+\+Dendrites} (uint64\+\_\+t p\+\_\+\+NID, int p\+\_\+\+Count, uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Dendrite\+\_\+\+NIDs)
+\item 
+\Hypertarget{classc___construct___a_p_i_a3345f82359550ead020fcab53d99a81f}\label{classc___construct___a_p_i_a3345f82359550ead020fcab53d99a81f} 
+uint64\+\_\+t {\bfseries does\+\_\+\+Upper\+\_\+\+Tier\+\_\+\+Connection\+\_\+\+Exist} (int p\+\_\+\+Count, uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Nodes)
+\item 
+\Hypertarget{classc___construct___a_p_i_a3909af1fdc534f43f0ea120f12249444}\label{classc___construct___a_p_i_a3909af1fdc534f43f0ea120f12249444} 
+bool {\bfseries does\+\_\+\+Lower\+\_\+\+Connection\+\_\+\+Exist} (uint64\+\_\+t p\+\_\+\+NID, int p\+\_\+\+Count, uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Nodes)
+\item 
+\Hypertarget{classc___construct___a_p_i_a3630922e97475081afbb4071f723fa26}\label{classc___construct___a_p_i_a3630922e97475081afbb4071f723fa26} 
+void {\bfseries bind\+\_\+\+State} (uint64\+\_\+t p\+\_\+\+NID, uint64\+\_\+t p\+\_\+\+State)
+\item 
+\Hypertarget{classc___construct___a_p_i_a338c1b73189a42c2d25d0de6d5f8e123}\label{classc___construct___a_p_i_a338c1b73189a42c2d25d0de6d5f8e123} 
+void {\bfseries bp\+\_\+O} (uint64\+\_\+t p\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_a4f1ae69c279682dcc5f2a5d7d38c2be1}\label{classc___construct___a_p_i_a4f1ae69c279682dcc5f2a5d7d38c2be1} 
+void {\bfseries output\+\_\+\+Node\+\_\+\+Raw} (uint64\+\_\+t p\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_a60a865722e2e9ba5cb90234adc71e7ee}\label{classc___construct___a_p_i_a60a865722e2e9ba5cb90234adc71e7ee} 
+void {\bfseries output\+\_\+\+Node\+\_\+\+Char} (uint64\+\_\+t p\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_a040e677e7a159ad714a11a823311d357}\label{classc___construct___a_p_i_a040e677e7a159ad714a11a823311d357} 
+int {\bfseries register\+\_\+\+New\+\_\+\+Construct} ()
+\item 
+\Hypertarget{classc___construct___a_p_i_a78379d62e8da7937dd259b84a43e2100}\label{classc___construct___a_p_i_a78379d62e8da7937dd259b84a43e2100} 
+uint64\+\_\+t {\bfseries new\+\_\+\+Node} ()
+\item 
+\Hypertarget{classc___construct___a_p_i_a9ab29758eb45af878b787d30b171687e}\label{classc___construct___a_p_i_a9ab29758eb45af878b787d30b171687e} 
+uint64\+\_\+t {\bfseries new\+\_\+\+State\+\_\+\+Node} (int p\+\_\+\+Assembly, double p\+\_\+\+State)
+\item 
+\Hypertarget{classc___construct___a_p_i_a5dfedb33665d3b44259f1daf7d963cc6}\label{classc___construct___a_p_i_a5dfedb33665d3b44259f1daf7d963cc6} 
+void {\bfseries create\+\_\+\+Connections} (uint64\+\_\+t p\+\_\+\+To\+\_\+\+NID, int p\+\_\+\+Count, uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+From\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_a55854e06a93e8a1a28b93ce700dbd3b5}\label{classc___construct___a_p_i_a55854e06a93e8a1a28b93ce700dbd3b5} 
+uint64\+\_\+t {\bfseries does\+\_\+\+Upper\+\_\+\+Tier\+\_\+\+Connection\+\_\+\+Exist\+\_\+\+Network} (int p\+\_\+\+Count, uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Legs\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_acfa949db906693635246e04d3ab5af5f}\label{classc___construct___a_p_i_acfa949db906693635246e04d3ab5af5f} 
+uint64\+\_\+t {\bfseries get\+\_\+\+Upper\+\_\+\+Tier\+\_\+\+Node} (int p\+\_\+\+Count, uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Legs\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_ae0dcda8522044ed61fd207541a45750a}\label{classc___construct___a_p_i_ae0dcda8522044ed61fd207541a45750a} 
+uint64\+\_\+t {\bfseries does\+\_\+\+State\+\_\+\+Node\+\_\+\+Exist} (int p\+\_\+\+Assembly, uint64\+\_\+t p\+\_\+\+State)
+\item 
+\Hypertarget{classc___construct___a_p_i_a0e85e24d4daca7b7f0aaf9b5cc2db5f3}\label{classc___construct___a_p_i_a0e85e24d4daca7b7f0aaf9b5cc2db5f3} 
+uint64\+\_\+t {\bfseries get\+\_\+\+State\+\_\+\+Node} (int p\+\_\+\+Assembly, uint64\+\_\+t p\+\_\+\+State)
+\item 
+\Hypertarget{classc___construct___a_p_i_aca7caed2f866cf6611e04fd84f03ccba}\label{classc___construct___a_p_i_aca7caed2f866cf6611e04fd84f03ccba} 
+void {\bfseries output\+\_\+\+BP} ()
+\item 
+\Hypertarget{classc___construct___a_p_i_acaaeeb33ceda6e6b7ad1403a683f0bb2}\label{classc___construct___a_p_i_acaaeeb33ceda6e6b7ad1403a683f0bb2} 
+void {\bfseries output\+\_\+\+BP\+\_\+\+NID} (int p\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_a52f927ff5f34dbba9ca8b3493037e6a0}\label{classc___construct___a_p_i_a52f927ff5f34dbba9ca8b3493037e6a0} 
+void {\bfseries output\+\_\+\+Node\+\_\+\+Network} ()
+\item 
+\Hypertarget{classc___construct___a_p_i_aeafadda8cce1f30c2f5010632d20a13f}\label{classc___construct___a_p_i_aeafadda8cce1f30c2f5010632d20a13f} 
+void {\bfseries encode} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_aa4cfa0407e4f5add49659cbfdadacffb}\label{classc___construct___a_p_i_aa4cfa0407e4f5add49659cbfdadacffb} 
+void {\bfseries query} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a446765a1249235687772071422ec2bfc}\label{classc___construct___a_p_i_a446765a1249235687772071422ec2bfc} 
+void {\bfseries query\+\_\+\+Spacial} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_aa20a31f0df44a368d27eda0ac67ba121}\label{classc___construct___a_p_i_aa20a31f0df44a368d27eda0ac67ba121} 
+void {\bfseries query\+\_\+\+Given\+\_\+\+Index} (int p\+\_\+\+Assembly, int p\+\_\+\+Index)
+\item 
+\Hypertarget{classc___construct___a_p_i_a2ad3b17e44b49876e04320681cbcc945}\label{classc___construct___a_p_i_a2ad3b17e44b49876e04320681cbcc945} 
+void {\bfseries query\+\_\+\+Given\+\_\+\+Legs} (int p\+\_\+\+Assembly, int p\+\_\+\+Leg\+\_\+\+Count, int \texorpdfstring{$\ast$}{*}p\+\_\+\+Legs)
+\item 
+\Hypertarget{classc___construct___a_p_i_ae427e553549b283b083c599ae28a103f}\label{classc___construct___a_p_i_ae427e553549b283b083c599ae28a103f} 
+void {\bfseries submit\+\_\+\+Set} (int p\+\_\+\+Assembly, int p\+\_\+\+Depth, uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Input)
+\item 
+\Hypertarget{classc___construct___a_p_i_af846e7af637e796b29eb57e1121189b2}\label{classc___construct___a_p_i_af846e7af637e796b29eb57e1121189b2} 
+uint64\+\_\+t {\bfseries get\+\_\+\+Treetop\+\_\+\+NID} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_abe8c2ae07eb09de43f4a695a8e4b32ff}\label{classc___construct___a_p_i_abe8c2ae07eb09de43f4a695a8e4b32ff} 
+void {\bfseries gather\+\_\+\+Given\+\_\+\+Trace} (int p\+\_\+\+Assembly, uint64\+\_\+t p\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_ac314c71399c183660f2eeb2b12de852c}\label{classc___construct___a_p_i_ac314c71399c183660f2eeb2b12de852c} 
+void {\bfseries gather\+\_\+\+All\+\_\+\+Traces} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_acaffc2e5e69fba039857de6306fd138e}\label{classc___construct___a_p_i_acaffc2e5e69fba039857de6306fd138e} 
+void {\bfseries reset\+\_\+\+Input} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a96403a430ee222ff9a83ad313a0556b6}\label{classc___construct___a_p_i_a96403a430ee222ff9a83ad313a0556b6} 
+void {\bfseries set\+\_\+\+State\+\_\+\+Nodes\+\_\+\+Index} (int p\+\_\+\+Assembly, int p\+\_\+\+Index)
+\item 
+\Hypertarget{classc___construct___a_p_i_a20dfd111e3895b753b895cb0b1630a2e}\label{classc___construct___a_p_i_a20dfd111e3895b753b895cb0b1630a2e} 
+void {\bfseries output\+\_\+\+Scaffold} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a86c5472ca408af6ed54586fcda8f47cc}\label{classc___construct___a_p_i_a86c5472ca408af6ed54586fcda8f47cc} 
+void {\bfseries output\+\_\+\+Input} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_aa692fe65d4d2f1f5d04da487d3fbffc8}\label{classc___construct___a_p_i_aa692fe65d4d2f1f5d04da487d3fbffc8} 
+void {\bfseries output\+\_\+\+Input\+\_\+uint} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a1f050be759fa59854d84b5d0a8b82c9d}\label{classc___construct___a_p_i_a1f050be759fa59854d84b5d0a8b82c9d} 
+void {\bfseries output\+\_\+\+Output} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a5405c2d6203a11280e2784c31b2c1589}\label{classc___construct___a_p_i_a5405c2d6203a11280e2784c31b2c1589} 
+void {\bfseries output\+\_\+\+Output\+\_\+uint} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_adaf9c0a2861ec8d2c31e4dd10692d219}\label{classc___construct___a_p_i_adaf9c0a2861ec8d2c31e4dd10692d219} 
+void {\bfseries output\+\_\+\+Scaffold\+\_\+\+Char} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a650261dedafd51cfcd47de8aec69e9f2}\label{classc___construct___a_p_i_a650261dedafd51cfcd47de8aec69e9f2} 
+int {\bfseries register\+\_\+\+Assembly} (std\+::string p\+\_\+\+Type, std\+::string p\+\_\+\+Assembly\+\_\+\+Name)
+\item 
+\Hypertarget{classc___construct___a_p_i_ab9372ef0f2d0caf083a1a1b7662244fa}\label{classc___construct___a_p_i_ab9372ef0f2d0caf083a1a1b7662244fa} 
+int {\bfseries load\+\_\+\+Input} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_aa2fbedcd7603a52bcc90730c55c17363}\label{classc___construct___a_p_i_aa2fbedcd7603a52bcc90730c55c17363} 
+int {\bfseries load\+\_\+\+Input\+\_\+uint} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a6c5bc5efe730f14ca5300fd2e29e2adb}\label{classc___construct___a_p_i_a6c5bc5efe730f14ca5300fd2e29e2adb} 
+void {\bfseries set\+\_\+\+Input} (int p\+\_\+\+Assembly, std\+::string p\+\_\+\+Input)
+\item 
+\Hypertarget{classc___construct___a_p_i_aa960218d5f90fc7123dd8c0d8b52e1d7}\label{classc___construct___a_p_i_aa960218d5f90fc7123dd8c0d8b52e1d7} 
+void {\bfseries set\+\_\+\+Input\+\_\+uint} (int p\+\_\+\+Assembly, int p\+\_\+\+Depth, uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Input)
+\item 
+\Hypertarget{classc___construct___a_p_i_af1f3f51abf39946e652d6780b8211329}\label{classc___construct___a_p_i_af1f3f51abf39946e652d6780b8211329} 
+void {\bfseries set\+\_\+\+Input} (int p\+\_\+\+Assembly, int p\+\_\+\+Input\+\_\+\+Depth, uint64\+\_\+t \texorpdfstring{$\ast$}{*}p\+\_\+\+Input)
+\item 
+\Hypertarget{classc___construct___a_p_i_a525ec6ea5fa42f4148149e252b0acf96}\label{classc___construct___a_p_i_a525ec6ea5fa42f4148149e252b0acf96} 
+void {\bfseries set\+\_\+2\+D\+\_\+\+Input\+\_\+uint} (int p\+\_\+\+Assembly, int p\+\_\+\+X\+\_\+\+Depth, int p\+\_\+\+Y\+\_\+\+Depth, uint64\+\_\+t \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}p\+\_\+\+Input)
+\item 
+\Hypertarget{classc___construct___a_p_i_a0bd229abbe336e30d70cb879794169a0}\label{classc___construct___a_p_i_a0bd229abbe336e30d70cb879794169a0} 
+void {\bfseries set\+\_\+3\+D\+\_\+\+Input\+\_\+uint} (int p\+\_\+\+Assembly, int p\+\_\+\+X\+\_\+\+Depth, int p\+\_\+\+Y\+\_\+\+Depth, int p\+\_\+\+Z\+\_\+\+Depth, uint64\+\_\+t \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}p\+\_\+\+Input)
+\item 
+\Hypertarget{classc___construct___a_p_i_a636791be9cf8ed283e1e648479c15edf}\label{classc___construct___a_p_i_a636791be9cf8ed283e1e648479c15edf} 
+void {\bfseries set\+\_\+\+Input\+\_\+\+String} (int p\+\_\+\+Assembly, std\+::string p\+\_\+\+Input)
+\item 
+\Hypertarget{classc___construct___a_p_i_a18c5a5d8e4ed23a8dec910e70a9af8fc}\label{classc___construct___a_p_i_a18c5a5d8e4ed23a8dec910e70a9af8fc} 
+void {\bfseries gather\+\_\+\+Given\+\_\+\+Node} (int p\+\_\+\+Assembly, uint64\+\_\+t p\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_a91d4c998f82d1b326ec7604126e75ce3}\label{classc___construct___a_p_i_a91d4c998f82d1b326ec7604126e75ce3} 
+void {\bfseries gather\+\_\+\+Given\+\_\+\+Node\+\_\+uint} (int p\+\_\+\+Assembly, uint64\+\_\+t p\+\_\+\+NID)
+\item 
+\Hypertarget{classc___construct___a_p_i_aba0a42e2345d2e75e1f090d7e487e9a2}\label{classc___construct___a_p_i_aba0a42e2345d2e75e1f090d7e487e9a2} 
+void {\bfseries gather\+\_\+\+All\+\_\+\+Nodes} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a34247d7a9646545dd7c95203050d0ee9}\label{classc___construct___a_p_i_a34247d7a9646545dd7c95203050d0ee9} 
+void {\bfseries gather\+\_\+\+All\+\_\+\+Nodes\+\_\+uint} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a2b75364ebc838f5b19e6050e05548ab7}\label{classc___construct___a_p_i_a2b75364ebc838f5b19e6050e05548ab7} 
+void {\bfseries gather\+\_\+\+Output} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a432a7d86eb44d7600054c05244fc01c7}\label{classc___construct___a_p_i_a432a7d86eb44d7600054c05244fc01c7} 
+void {\bfseries gather\+\_\+\+Output\+\_\+uint} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a14c4779893543384cd7d6857563df572}\label{classc___construct___a_p_i_a14c4779893543384cd7d6857563df572} 
+void {\bfseries gather\+\_\+\+Treetop\+\_\+\+Node} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_af3cfbb9f44460be138829ff4137c3283}\label{classc___construct___a_p_i_af3cfbb9f44460be138829ff4137c3283} 
+void {\bfseries gather\+\_\+\+Treetop\+\_\+\+Node\+\_\+uint} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_abeab9346d961c7519043e3e351a4e3b5}\label{classc___construct___a_p_i_abeab9346d961c7519043e3e351a4e3b5} 
+void {\bfseries gather\+\_\+\+Treetop\+\_\+\+NID} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_a799d72345fb1dc299825896bd2174061}\label{classc___construct___a_p_i_a799d72345fb1dc299825896bd2174061} 
+void {\bfseries output\+\_\+\+Assemblies} ()
+\item 
+\Hypertarget{classc___construct___a_p_i_a9a97003cbc4925819e4fb721b628c1ac}\label{classc___construct___a_p_i_a9a97003cbc4925819e4fb721b628c1ac} 
+int {\bfseries clear\+\_\+\+Output} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_affa5fe0f7199a742073a615cfb4fa6b9}\label{classc___construct___a_p_i_affa5fe0f7199a742073a615cfb4fa6b9} 
+int {\bfseries output\+\_\+\+Newline} (int p\+\_\+\+Assembly)
+\item 
+\Hypertarget{classc___construct___a_p_i_ace0f352c1b68555e0decebc2810c6721}\label{classc___construct___a_p_i_ace0f352c1b68555e0decebc2810c6721} 
+void {\bfseries save} (std\+::string p\+\_\+\+FName)
+\item 
+\Hypertarget{classc___construct___a_p_i_ad10c777419ccc9a6b2c29504688f95fe}\label{classc___construct___a_p_i_ad10c777419ccc9a6b2c29504688f95fe} 
+void {\bfseries load} (std\+::string p\+\_\+\+FName)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{classc___construct___a_p_i_a766db3088cc6f0316646df6c54ee0813}\label{classc___construct___a_p_i_a766db3088cc6f0316646df6c54ee0813} 
+\mbox{\hyperlink{classc___construct}{c\+\_\+\+Construct}} {\bfseries Base}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/\+NT4/c\+\_\+\+Construct\+\_\+\+API.\+h\end{DoxyCompactItemize}

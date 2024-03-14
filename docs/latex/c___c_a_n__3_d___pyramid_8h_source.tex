@@ -1,0 +1,681 @@
+\doxysection{c\+\_\+\+CAN\+\_\+3\+D\+\_\+\+Pyramid.\+h}
+\hypertarget{c___c_a_n__3_d___pyramid_8h_source}{}\label{c___c_a_n__3_d___pyramid_8h_source}\index{include/NT4/c\_CAN\_3D\_Pyramid.h@{include/NT4/c\_CAN\_3D\_Pyramid.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ \textcolor{comment}{//This\ functions\ to\ create\ a\ trace\ where\ all\ legs\ are\ connected\ to\ one\ node.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//Load\ up\ the\ input,\ hit\ encode(),\ boom\ you\ single\ permutation\ of\ all\ legs\ bound\ to\ that\ node.}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//Most\ useful\ when\ each\ index\ in\ the\ input\ is\ a\ separate\ state\ space\ from\ the\ other\ indexes,\ sensors\ ==\ good,\ language\ ==\ shared\ states\ across\ words\ !good}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classc___c_a_n__3_d___pyramid}{c\_CAN\_3D\_Pyramid}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classc___base___c_a_n}{c\_Base\_CAN}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{comment}{//Each\ CAN\ node\ is\ just\ a\ pointer\ to\ a\ node\ in\ the\ network.}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{comment}{//Scaffold[Tier][X][Y]}}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{comment}{//Tier\_Depth\ ==\ where\ T\ =\ current\ tier:\ (Input\_Depth\ -\/\ T)}}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{classc___node}{c\_Node}}*****\ Scaffold;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ State\_Depth\_X;\ \textcolor{comment}{//We\ track\ this\ so\ that\ if\ the\ input\ is\ changed\ we\ can\ still\ properly\ delete\ the\ scaffold.}}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{int}\ State\_Depth\_Y;\ \textcolor{comment}{//We\ track\ this\ so\ that\ if\ the\ input\ is\ changed\ we\ can\ still\ properly\ delete\ the\ scaffold.}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{int}\ State\_Depth\_Z;\ \textcolor{comment}{//We\ track\ this\ so\ that\ if\ the\ input\ is\ changed\ we\ can\ still\ properly\ delete\ the\ scaffold.}}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{int}\ Top\_Tier;\ \textcolor{comment}{//Whichever\ dimension\ is\ lowest\ is\ the\ limiting\ factor\ on\ the\ height\ for\ nodes\ with\ the\ same\ leg\ count.\ For\ every\ dimsension\ that\ 'closes'\ you\ want\ to\ drop\ a\ lower\ dimensional\ construct\ on\ top.}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//The\ temporary\ buffer\ used\ during\ charging.}}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classc___charging___buffer}{c\_Charging\_Buffer}}\ tmp\_Buffman;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classc___c_a_n__3_d___pyramid}{c\_CAN\_3D\_Pyramid}}()}
+\DoxyCodeLine{00022\ \ \ \ \ \{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ NNet\ =\ NULL;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ Input.reset();}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ Output\ =\ NULL;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ Output\_Depth\ =\ 0;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ Scaffold\ =\ NULL;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ State\_Depth\_X\ =\ 0;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ State\_Depth\_Y\ =\ 0;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ State\_Depth\_Z\ =\ 0;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ State\_Nodes\_Index\ =\ 0;}
+\DoxyCodeLine{00035\ \ \ \ \ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classc___c_a_n__3_d___pyramid}{\string~c\_CAN\_3D\_Pyramid}}()}
+\DoxyCodeLine{00038\ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ NNet\ =\ NULL;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ reset\_Scaffold();}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ reset\_Input();}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//Resets\ the\ CAN\ to\ NULL,\ and\ deletes\ the\ state\ tier\ +\ treetop.}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ reset\_Scaffold()}
+\DoxyCodeLine{00046\ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Scaffold\ !=\ NULL)}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//For\ every\ tier}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_T\ =\ 0;\ cou\_T\ <\ Top\_Tier;\ cou\_T++)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Scaffold[cou\_T]\ !=\ NULL)}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ (State\_Depth\_X\ -\/\ cou\_T);\ cou\_X++)}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ (State\_Depth\_Y\ -\/\ cou\_T);\ cou\_Y++)}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ (State\_Depth\_Z\ -\/\ cou\_T);\ cou\_Z++)}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Make\ sure\ to\ NULL\ the\ scaffold\ first.}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//DO\ NOT\ DELETE\ THEM,\ the\ addresses\ are\ for\ the\ node\ network,\ deleting\ them\ here\ will\ cause\ null\ pointer\ deletion\ in\ Node\_Network.}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z]\ =\ NULL;}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ Scaffold[cou\_T][cou\_X][cou\_Y];}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T][cou\_X][cou\_Y]\ =\ NULL;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ Scaffold[cou\_T][cou\_X];}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T][cou\_X]\ =\ NULL;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ Scaffold[cou\_T];}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T]\ =\ NULL;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}[]\ Scaffold;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold\ =\ NULL;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00077\ \ \ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//This\ sets\ up\ the\ actual\ CAN\ scaffold\ to\ use.}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//It\ assumes\ the\ input\ array\ is\ filled\ out,\ the\ size\ is\ based\ upon\ that\ array.}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ setup\_CAN\_Scaffold()}
+\DoxyCodeLine{00082\ \ \ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Take\ it\ out\ back\ and\ put\ it\ down.}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ reset\_Scaffold();}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Sizing\ her\ up!}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ State\_Depth\_X\ =\ Input\_3D.Depth[0];}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ State\_Depth\_Y\ =\ Input\_3D.Depth[1];}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ State\_Depth\_Z\ =\ Input\_3D.Depth[2];}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ State\_Depth\_X:\ "{}}\ <<\ State\_Depth\_X;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ State\_Depth\_Y:\ "{}}\ <<\ State\_Depth\_Y;}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ State\_Depth\_Z:\ "{}}\ <<\ State\_Depth\_Y;}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Find\ the\ shortest\ side\ to\ set\ the\ top\ tier\ to\ as\ that\ is\ when\ the\ symbol\ will\ reduce\ in\ dimension.}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ Top\_Tier\ =\ State\_Depth\_X;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (State\_Depth\_Y\ <\ Top\_Tier)\ \{\ Top\_Tier\ =\ State\_Depth\_Y;\ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (State\_Depth\_Z\ <\ Top\_Tier)\ \{\ Top\_Tier\ =\ State\_Depth\_Z;\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Define\ the\ tiers,\ the\ number\ of\ tiers\ to\ hold\ a\ pyramid\ is\ equal\ to\ the\ depth\ of\ the\ pattern\ it\ represents.}}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ Scaffold\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classc___node}{c\_Node}}\ ****\ [Top\_Tier];}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Through\ the\ tiers\ we\ brings\ beers.}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_T\ =\ 0;\ cou\_T\ <\ Top\_Tier;\ cou\_T++)}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Through\ the\ steps\ Randolph\ Carter\ crept.}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T]\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classc___node}{c\_Node}}\ ***\ [State\_Depth\_X\ -\/\ cou\_T];}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ (State\_Depth\_X\ -\/\ cou\_T);\ cou\_X++)}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T][cou\_X]\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classc___node}{c\_Node}}\ **\ [State\_Depth\_Y\ -\/\ cou\_T];}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ (State\_Depth\_Y\ -\/\ cou\_T);\ cou\_Y++)}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T][cou\_X][cou\_Y]\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classc___node}{c\_Node}}\ *[State\_Depth\_Z\ -\/\ cou\_T];}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ (State\_Depth\_Z\ -\/\ cou\_T);\ cou\_Z++)}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z]\ =\ NULL;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{comment}{//This\ fills\ the\ state\ tier\ by\ querying\ the\ node\ network.}}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{comment}{//p\_How:\ "{}Encode"{}\ ==\ Create\ the\ nodes\ if\ they\ aren't\ found,\ "{}Query"{}\ ==\ Returns\ NULL\ if\ they\ aren't\ found,\ used\ for\ checking\ if\ something\ has\ been\ encoded\ without\ modifying\ the\ network.}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ fill\_State(std::string\ p\_How\ =\ \textcolor{stringliteral}{"{}Encode"{}})}
+\DoxyCodeLine{00129\ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ Encoding\ with\ State\_Nodes\_Index:\ "{}}\ <<\ State\_Nodes\_Index;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_How\ ==\ \textcolor{stringliteral}{"{}Encode"{}})}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ State\_Depth\_X;\ cou\_X++)}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ State\_Depth\_Y;\ cou\_Y++)}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ State\_Depth\_Z;\ cou\_Z++)}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Request\ the\ state\ node\ form\ the\ node\ network\ using\ get\_State\_Node\ so\ one\ is\ created\ if\ not\ found.}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ have\ to\ make\ sure\ we\ request\ the\ correct\ state\ tree.}}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[0][cou\_X][cou\_Y][cou\_Z]\ =\ NNet-\/>get\_State\_Node(State\_Nodes\_Index,\ Input\_3D.get\_Value(cou\_X,\ cou\_Y,\ cou\_Z));}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[0][cou\_X][cou\_Y][cou\_Z]-\/>RC++;}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ node\ is\ also\ a\ treetop\ then\ set\ it\ to\ state/treetop.}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((Scaffold[0][cou\_X][cou\_Y][cou\_Z]-\/>Type\ ==\ 2))}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[0][cou\_X][cou\_Y][cou\_Z]-\/>Type\ =\ 3;}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_How\ ==\ \textcolor{stringliteral}{"{}Query"{}})}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ State\_Depth\_X;\ cou\_X++)}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ State\_Depth\_Y;\ cou\_Y++)}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ State\_Depth\_Z;\ cou\_Z++)}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Request\ the\ state\ node\ form\ the\ node\ network\ using\ get\_State\_Node\ so\ one\ is\ created\ if\ not\ found.}}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ have\ to\ make\ sure\ we\ request\ the\ correct\ state\ tree.}}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[0][cou\_X][cou\_Y][cou\_Z]\ =\ NNet-\/>does\_State\_Node\_Exist(State\_Nodes\_Index,\ Input\_3D.get\_Value(cou\_X,\ cou\_Y,\ cou\_Z));}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00168\ \ \ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{comment}{//Just\ one\ node\ at\ the\ tippy\ top.}}
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{comment}{//p\_How:\ "{}Encode"{}\ ==\ Create\ the\ nodes\ if\ they\ aren't\ found,\ "{}Query"{}\ ==\ Returns\ NULL\ if\ they\ aren't\ found,\ used\ for\ checking\ if\ something\ has\ been\ encoded\ without\ modifying\ the\ network.}}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{void}\ fill\_Scaffold(std::string\ p\_How\ =\ \textcolor{stringliteral}{"{}Encode"{}})}
+\DoxyCodeLine{00173\ \ \ \ \ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((State\_Depth\_X\ ==\ 0)\ ||\ (State\_Depth\_Y\ ==\ 0)\ ||\ (State\_Depth\_Z\ ==\ 0))}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{comment}{//These\ hold\ the\ matrix\ we\ use\ to\ get\ the\ nodes\ to\ submit\ to\ the\ get\ upper\ tier\ node.}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{comment}{//It\ takes\ 8\ points\ to\ define\ a\ cube,\ each\ point\ is\ a\ sub-\/symbol,\ so\ we\ gather\ the\ 8\ sub-\/symbols\ and\ abstract\ them.}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___node}{c\_Node}}*\ tmp\_Nodes[8];}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_T\ =\ 1;\ cou\_T\ <\ Top\_Tier;\ cou\_T++)}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ T:\ "{}}\ <<\ cou\_T;}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//The\ extra\ -\/1\ is\ so\ we\ don't\ step\ to\ the\ last\ node\ and\ reach\ into\ the\ void.}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00188\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ We\ need\ to\ take\ them\ in\ a\ 2x2x2\ block\ my\ dude\ don't\ be\ rude\ or\ crude\ unless\ you've\ got\ a\ job\ to\ Derude.}}
+\DoxyCodeLine{00189\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ }}
+\DoxyCodeLine{00190\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ 0[0,\ 0,\ 0]\ 1[1,\ 0,\ 0]}}
+\DoxyCodeLine{00191\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ 2[0,\ 1,\ 0]\ 3[1,\ 1,\ 0]}}
+\DoxyCodeLine{00192\ \textcolor{comment}{}}
+\DoxyCodeLine{00193\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ 4[0,\ 0,\ 1]\ 5[1,\ 0,\ 1]}}
+\DoxyCodeLine{00194\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ 6[0,\ 1,\ 1]\ 7[1,\ 1,\ 1]}}
+\DoxyCodeLine{00195\ \textcolor{comment}{}}
+\DoxyCodeLine{00196\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ (State\_Depth\_X\ -\/\ cou\_T);\ cou\_X++)}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ (State\_Depth\_Y\ -\/\ cou\_T);\ cou\_Y++)}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ (State\_Depth\_Z\ -\/\ cou\_T);\ cou\_Z++)}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ <<\ cou\_X\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ cou\_Y\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ cou\_Z;}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ legs\ for\ the\ node,\ the\ 2x2}}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Nodes[0]\ =\ Scaffold[cou\_T\ -\/\ 1][cou\_X][cou\_Y][cou\_Z];}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Nodes[1]\ =\ Scaffold[cou\_T\ -\/\ 1][cou\_X\ +\ 1][cou\_Y][cou\_Z];}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Nodes[2]\ =\ Scaffold[cou\_T\ -\/\ 1][cou\_X][cou\_Y\ +\ 1][cou\_Z];}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Nodes[3]\ =\ Scaffold[cou\_T\ -\/\ 1][cou\_X\ +\ 1][cou\_Y\ +\ 1][cou\_Z];}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Nodes[4]\ =\ Scaffold[cou\_T\ -\/\ 1][cou\_X][cou\_Y][cou\_Z\ +\ 1];}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Nodes[5]\ =\ Scaffold[cou\_T\ -\/\ 1][cou\_X\ +\ 1][cou\_Y][cou\_Z\ +\ 1];}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Nodes[6]\ =\ Scaffold[cou\_T\ -\/\ 1][cou\_X][cou\_Y\ +\ 1][cou\_Z\ +\ 1];}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Nodes[7]\ =\ Scaffold[cou\_T\ -\/\ 1][cou\_X\ +\ 1][cou\_Y\ +\ 1][cou\_Z\ +\ 1];}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_How\ ==\ \textcolor{stringliteral}{"{}Encode"{}})}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ request\ a\ node\ that\ links\ 4\ nodes\ together.}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z]\ =\ NNet-\/>get\_Upper\_Tier\_Node(tmp\_Nodes,\ 8,\ 1);}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z]-\/>RC++;}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_How\ ==\ \textcolor{stringliteral}{"{}Query"{}})}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ request\ a\ node\ that\ links\ the\ entire\ state\ tier\ together,\ but\ do\ not\ create\ them.}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z]\ =\ NNet-\/>does\_Upper\_Tier\_Connection\_Exist(tmp\_Nodes,\ 8);}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ (State\_Depth\_X\ -\/\ Top\_Tier\ -\/\ 1);\ cou\_X++)}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ (State\_Depth\_Y\ -\/\ Top\_Tier\ -\/\ 1);\ cou\_Y++)}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ (State\_Depth\_Z\ -\/\ Top\_Tier\ -\/\ 1);\ cou\_Z++)}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Scaffold[Top\_Tier\ -\/\ 1][cou\_X][cou\_Y][cou\_Z]-\/>Type\ =\ 2;}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00242\ \ \ \ \ \}}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{comment}{//Encodes\ a\ single\ trace,\ forcibly.}}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{comment}{//Arguments\ no\ longer\ used,\ need\ to\ remove\ during\ refactoria.}}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordtype}{void}\ encode(uint64\_t*\ p\_Input\ =\ NULL,\ \textcolor{keywordtype}{int}\ p\_Depth\ =\ 0)}
+\DoxyCodeLine{00247\ \ \ \ \ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n<<-\/-\/\ Begin\ Encoding\ 3D\ -\/-\/>>\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ up\ the\ scaffold\ for\ the\ nodes\ to\ reside\ in\ as\ we\ build\ the\ trace.}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ setup\_CAN\_Scaffold();}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ output\_Scaffold();}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Work\ across\ the\ state\ tier\ to\ fill\ it\ out\ by\ requesting\ state\ nodes\ from\ the\ NNet,\ if\ not\ found\ they\ are\ created.}}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ fill\_State(\textcolor{stringliteral}{"{}Encode"{}});}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ State\ Filled."{}};}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ output\_Scaffold();}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Fills\ the\ scaffold\ out\ by\ requesting\ nodes\ from\ the\ NNet\ and\ creating\ them\ if\ they\ aren't\ found.}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ fill\_Scaffold(\textcolor{stringliteral}{"{}Encode"{}});}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{comment}{//To\ be\ removed\ later\ after\ testing.}}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{comment}{//output\_Input();}}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ output\_Scaffold();}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ output\_Scaffold\_Char();}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n-\/-\/\ End\ Encoding\ -\/-\/\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00270\ \ \ \ \ \}}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{comment}{//Style\ determines\ whether\ it\ charges\ with\ normal\ submission\ of\ raw,\ or\ if\ it\ does\ the\ specific\ leg\ charging\ for\ Chrono.}}
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{comment}{//Assumes\ the\ CAN\ is\ setup.}}
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordtype}{void}\ charge\_Buffers(\textcolor{keywordtype}{int}\ p\_Style\ =\ -\/1,\ \textcolor{keywordtype}{int}\ p\_Leg\ =\ 0,\ \textcolor{keywordtype}{int}\ *\ p\_Legs\ =\ NULL)}
+\DoxyCodeLine{00275\ \ \ \ \ \{}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ tmp\_Buffman.reset();}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ tmp\_Buffman.Input\_Position\ =\ 0;}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ tmp\_Buffman.charge\_Outputs();}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_T\ =\ 0;\ cou\_T\ <\ Top\_Tier;\ cou\_T++)}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ (State\_Depth\_X\ -\/\ cou\_T);\ cou\_X++)}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ (State\_Depth\_Y\ -\/\ cou\_T);\ cou\_Y++)}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ (State\_Depth\_Z\ -\/\ cou\_T);\ cou\_Z++)}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z]\ !=\ NULL)}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n\ \string~\string~++==++\string~\string~\ Charging\ Node:\ CAN[cou\_T]["{}\ <<\ cou\_Input\ <<\ "{}]:\ "{}\ <<\ Scaffold[cou\_T][cou\_Input]\ <<\ "{}\ \string~\ "{}\ <<\ Scaffold[cou\_T][cou\_Input]-\/>NID;}}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//tmp\_Buffman.submit(Scaffold[0][cou\_Input],\ (1.0));}}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Style\ ==\ -\/1)}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Buffman.submit(Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z],\ (10.0));}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Style\ ==\ 1)}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ style\ not\ used\ in\ pyramidal.}}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//tmp\_Buffman.charge\_Given\_Leg(Scaffold[cou\_T][cou\_X][cou\_Y],\ (10.0),\ cou\_Input);}}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Style\ ==\ 2)}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//p\_Leg\ specifies\ which\ leg\ to\ charge\ in\ this\ function,\ p\_Legs[]\ being\ unused.}}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Buffman.charge\_Given\_Leg(Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z],\ (10.0),\ p\_Leg);}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Style\ ==\ 3)}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//p\_Leg\ is\ used\ here\ as\ the\ count\ of\ elements\ in\ p\_Legs[].}}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Buffman.charge\_Given\_Legs(Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z],\ p\_Leg,\ p\_Legs,\ (10.0));}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n++++++++++++++++++++++++++++++\ Before\ ++++++++++++++++++++++++++++++\ \(\backslash\)n\(\backslash\)n"{};}}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \textcolor{comment}{//tmp\_Buffman.output\_All\_Buffers();}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ tmp\_Buffman.gather();}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n++++++++++++++++++++++++++++++\ After\ ++++++++++++++++++++++++++++++\ \(\backslash\)n\(\backslash\)n"{};}}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \textcolor{comment}{//tmp\_Buffman.output\_All\_Buffers();}}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (tmp\_Buffman.flg\_Not\_Done)}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n\ flg\_Not\_Done\(\backslash\)n"{};}}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Buffman.charge\_Outputs();}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Buffman.gather();}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//tmp\_Buffman.output\_All\_Buffers();}}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n\ Completed:\(\backslash\)n"{};}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \textcolor{comment}{//tmp\_Buffman.output\_All\_Buffers();}}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \textcolor{comment}{//std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n\ Treetops:\(\backslash\)n"{};}}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \textcolor{comment}{//tmp\_Buffman.output\_Treetops();}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___charging___linked___list}{c\_Charging\_Linked\_List}}\ *\ tmp\_Current\_LL\ =\ NULL;}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ tmp\_Current\_LL\ =\ tmp\_Buffman.Treetops.Root;}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00353\ \textcolor{comment}{\ \ \ \ \ \ \ \ while\ (tmp\_Current\_LL\ !=\ NULL)}}
+\DoxyCodeLine{00354\ \textcolor{comment}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{00355\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ tmp\_Current\_LL-\/>NID-\/>bp\_O();}}
+\DoxyCodeLine{00356\ \textcolor{comment}{}}
+\DoxyCodeLine{00357\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ tmp\_Current\_LL\ =\ tmp\_Current\_LL-\/>Next;}}
+\DoxyCodeLine{00358\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00359\ \textcolor{comment}{\ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{00360\ \ \ \ \ \}}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordtype}{void}\ gather\_Treetops()}
+\DoxyCodeLine{00363\ \ \ \ \ \{}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n\ Gathering\ Treetops..."{};}}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___charging___linked___list}{c\_Charging\_Linked\_List}}*\ tmp\_Current\_LL\ =\ NULL;}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ tmp\_Current\_LL\ =\ tmp\_Buffman.Treetops.Root;}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Output\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ Output;\ Output\ =\ NULL;\ \}}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ Output\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classc___trace}{c\_Trace}}[tmp\_Buffman.Treetops.Depth];}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ Output\_Depth\ =\ tmp\_Buffman.Treetops.Depth;}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Current\_Index\ =\ 0;}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___linked___list___handler}{c\_Linked\_List\_Handler}}\ tmp\_Pattern;}
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___linked___list}{c\_Linked\_List}}*\ tmp\_LL\_Pat\ =\ NULL;}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (tmp\_Current\_LL\ !=\ NULL)}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Pattern.reset();}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ pattern\ into\ a\ linked\ list}}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Current\_LL-\/>NID-\/>bp\_Trace\_O(\&tmp\_Pattern);}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ NID:\ "{}}\ <<\ tmp\_Current\_LL-\/>NID-\/>NID;}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Pattern.Depth:\ "{}\ <<\ tmp\_Pattern.Depth;}}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/tmp\_Pattern.output();}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Pattern.Depth:\ "{}\ <<\ tmp\_Pattern.Depth;}}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Copy\ the\ pattern\ over}}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Depth(tmp\_Pattern.Depth);}
+\DoxyCodeLine{00394\ }
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ Output["{}\ <<\ tmp\_Current\_Index\ <<\ "{}].Depth:\ "{}\ <<\ Output[tmp\_Current\_Index].Depth;}}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Pattern.Depth:\ "{}\ <<\ tmp\_Pattern.Depth;}}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_LL\_Pat\ =\ tmp\_Pattern.Root;}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ can\ iterate\ through\ given\ we\ know\ how\ big\ the\ linked\ list\ is.}}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Pattern.Depth;\ cou\_Index++)}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Pattern\_Index(tmp\_LL\_Pat-\/>Quanta,\ cou\_Index);}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_LL\_Pat\ =\ tmp\_LL\_Pat-\/>Next;}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Current\_LL-\/>NID-\/>Current\_Charge:\ "{}\ <<\ tmp\_Current\_LL-\/>NID-\/>Current\_Charge;}}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Current\_LL-\/>Charge:\ "{}\ <<\ tmp\_Current\_LL-\/>Charge;}}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Current\_LL-\/>NID-\/>RC:\ "{}\ <<\ tmp\_Current\_LL-\/>NID-\/>RC;}}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Charge(tmp\_Current\_LL-\/>Charge);}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Output[tmp\_Current\_Index].set\_Charge(tmp\_Current\_LL-\/>NID-\/>Current\_Charge);}}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_RC(tmp\_Current\_LL-\/>NID-\/>RC);}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Treetop(tmp\_Current\_LL-\/>NID);}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Current\_LL\ =\ tmp\_Current\_LL-\/>Next;}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/Output[tmp\_Current\_Index].output(0);}}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/Output[tmp\_Current\_Index].output(1);}}
+\DoxyCodeLine{00420\ }
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Current\_Index++;}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00423\ \ \ \ \ \}}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \ \ \ \ \textcolor{comment}{//Gets\ a\ single\ trace\ from\ a\ given\ node.\ Puts\ it\ into\ the\ output.}}
+\DoxyCodeLine{00426\ \ \ \ \ \textcolor{keywordtype}{void}\ gather\_All\_Traces()}
+\DoxyCodeLine{00427\ \ \ \ \ \{}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n\ Gathering\ All\ Traces!!!"{}};}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___node}{c\_Node}}*\ tmp\_Node\ =\ NULL;}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ tmp\_Node\ =\ NNet-\/>Root;}
+\DoxyCodeLine{00434\ }
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Output\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ Output;\ Output\ =\ NULL;\ \}}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ Output\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classc___trace}{c\_Trace}}[NNet-\/>Node\_Count];}
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ Output\_Depth\ =\ NNet-\/>Node\_Count;}
+\DoxyCodeLine{00439\ }
+\DoxyCodeLine{00440\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Current\_Index\ =\ 0;}
+\DoxyCodeLine{00441\ }
+\DoxyCodeLine{00442\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___linked___list___handler}{c\_Linked\_List\_Handler}}\ tmp\_Pattern;}
+\DoxyCodeLine{00443\ }
+\DoxyCodeLine{00444\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___linked___list}{c\_Linked\_List}}*\ tmp\_LL\_Pat\ =\ NULL;}
+\DoxyCodeLine{00445\ }
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (tmp\_Node\ !=\ NULL)}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)nNode\ ("{}}\ <<\ tmp\_Node-\/>NID\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Node-\/>bp\_O();}
+\DoxyCodeLine{00450\ }
+\DoxyCodeLine{00451\ }
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Pattern.reset();}
+\DoxyCodeLine{00453\ }
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ pattern\ into\ a\ linked\ list}}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Node-\/>bp\_Trace\_O(\&tmp\_Pattern);}
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ NID:\ "{}}\ <<\ tmp\_Node-\/>NID;}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ tmp\_Pattern.Depth:\ "{}}\ <<\ tmp\_Pattern.Depth;}
+\DoxyCodeLine{00459\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Pattern.output();}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ tmp\_Pattern.Depth:\ "{}}\ <<\ tmp\_Pattern.Depth;}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Copy\ the\ pattern\ over}}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Depth(tmp\_Pattern.Depth);}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ Output["{}}\ <<\ tmp\_Current\_Index\ <<\ \textcolor{stringliteral}{"{}].Depth:\ "{}}\ <<\ Output[tmp\_Current\_Index].Depth;}
+\DoxyCodeLine{00466\ }
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ tmp\_Pattern.Depth:\ "{}}\ <<\ tmp\_Pattern.Depth;}
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_LL\_Pat\ =\ tmp\_Pattern.Root;}
+\DoxyCodeLine{00470\ }
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ can\ iterate\ through\ given\ we\ know\ how\ big\ the\ linked\ list\ is.}}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Pattern.Depth;\ cou\_Index++)}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Pattern\_Index(tmp\_LL\_Pat-\/>Quanta,\ cou\_Index);}
+\DoxyCodeLine{00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_LL\_Pat\ =\ tmp\_LL\_Pat-\/>Next;}
+\DoxyCodeLine{00476\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00477\ }
+\DoxyCodeLine{00478\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ tmp\_Current\_LL-\/>NID-\/>Current\_Charge:\ "{}}\ <<\ tmp\_Node-\/>Current\_Charge;}
+\DoxyCodeLine{00479\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ tmp\_Current\_LL-\/>NID-\/>RC:\ "{}}\ <<\ tmp\_Node-\/>RC;}
+\DoxyCodeLine{00480\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Charge(tmp\_Node-\/>Current\_Charge);}
+\DoxyCodeLine{00481\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Output[tmp\_Current\_Index].set\_Charge(tmp\_Current\_LL-\/>NID-\/>Current\_Charge);}}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_RC(tmp\_Node-\/>RC);}
+\DoxyCodeLine{00483\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Treetop(tmp\_Node);}
+\DoxyCodeLine{00484\ }
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].output(0);}
+\DoxyCodeLine{00486\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].output(1);}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00488\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Current\_Index++;}
+\DoxyCodeLine{00489\ }
+\DoxyCodeLine{00490\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_Node\ =\ tmp\_Node-\/>Next;}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00492\ \ \ \ \ \}}
+\DoxyCodeLine{00493\ }
+\DoxyCodeLine{00494\ \ \ \ \ \textcolor{comment}{//Gets\ a\ single\ trace\ from\ a\ given\ node.\ Puts\ it\ into\ the\ output.}}
+\DoxyCodeLine{00495\ \ \ \ \ \textcolor{keywordtype}{void}\ gather\_Given\_Trace(uint64\_t\ p\_NID)}
+\DoxyCodeLine{00496\ \ \ \ \ \{}
+\DoxyCodeLine{00497\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\(\backslash\)n\ Gathering\ Given\ Trace\ "{}\ <<\ p\_NID\ <<\ "{}..."{};}}
+\DoxyCodeLine{00498\ }
+\DoxyCodeLine{00499\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___node}{c\_Node}}*\ tmp\_Node\ =\ NULL;}
+\DoxyCodeLine{00500\ \ \ \ \ \ \ \ \ tmp\_Node\ =\ NNet-\/>get\_Node\_Ref\_By\_NID(p\_NID);}
+\DoxyCodeLine{00501\ }
+\DoxyCodeLine{00502\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Output\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}[]\ Output;\ Output\ =\ NULL;\ \}}
+\DoxyCodeLine{00503\ }
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ Output\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classc___trace}{c\_Trace}}[1];}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ Output\_Depth\ =\ 1;}
+\DoxyCodeLine{00506\ }
+\DoxyCodeLine{00507\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ tmp\_Current\_Index\ =\ 0;}
+\DoxyCodeLine{00508\ }
+\DoxyCodeLine{00509\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___linked___list___handler}{c\_Linked\_List\_Handler}}\ tmp\_Pattern;}
+\DoxyCodeLine{00510\ }
+\DoxyCodeLine{00511\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classc___linked___list}{c\_Linked\_List}}*\ tmp\_LL\_Pat\ =\ NULL;}
+\DoxyCodeLine{00512\ }
+\DoxyCodeLine{00513\ \ \ \ \ \ \ \ \ tmp\_Pattern.reset();}
+\DoxyCodeLine{00514\ }
+\DoxyCodeLine{00515\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Get\ the\ pattern\ into\ a\ linked\ list}}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ tmp\_Node-\/>bp\_Trace\_O(\&tmp\_Pattern);}
+\DoxyCodeLine{00517\ }
+\DoxyCodeLine{00518\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ NID:\ "{}\ <<\ tmp\_Node-\/>NID;}}
+\DoxyCodeLine{00519\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Pattern.Depth:\ "{}\ <<\ tmp\_Pattern.Depth;}}
+\DoxyCodeLine{00520\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/tmp\_Pattern.output();}}
+\DoxyCodeLine{00521\ }
+\DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Copy\ the\ pattern\ over}}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Depth(tmp\_Pattern.Depth);}
+\DoxyCodeLine{00524\ }
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ Output["{}\ <<\ tmp\_Current\_Index\ <<\ "{}].Depth:\ "{}\ <<\ Output[tmp\_Current\_Index].Depth;}}
+\DoxyCodeLine{00526\ }
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Pattern.Depth:\ "{}\ <<\ tmp\_Pattern.Depth;}}
+\DoxyCodeLine{00528\ }
+\DoxyCodeLine{00529\ \ \ \ \ \ \ \ \ tmp\_LL\_Pat\ =\ tmp\_Pattern.Root;}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ can\ iterate\ through\ given\ we\ know\ how\ big\ the\ linked\ list\ is.}}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ tmp\_Pattern.Depth;\ cou\_Index++)}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00534\ \ \ \ \ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Pattern\_Index(tmp\_LL\_Pat-\/>Quanta,\ cou\_Index);}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ tmp\_LL\_Pat\ =\ tmp\_LL\_Pat-\/>Next;}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00537\ }
+\DoxyCodeLine{00538\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Node-\/>Current\_Charge:\ "{}\ <<\ tmp\_Node-\/>Current\_Charge;}}
+\DoxyCodeLine{00539\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/std::cout\ <<\ "{}\(\backslash\)n\ tmp\_Node-\/>RC:\ "{}\ <<\ tmp\_Node-\/>RC;}}
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Charge(tmp\_Node-\/>Current\_Charge);}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Output[tmp\_Current\_Index].set\_Charge(tmp\_Current\_LL-\/>NID-\/>Current\_Charge);}}
+\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_RC(tmp\_Node-\/>RC);}
+\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ Output[tmp\_Current\_Index].set\_Treetop(tmp\_Node);}
+\DoxyCodeLine{00544\ }
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/Output[tmp\_Current\_Index].output(0);}}
+\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \textcolor{comment}{//-\/-\/-\/Output[tmp\_Current\_Index].output(1);}}
+\DoxyCodeLine{00547\ }
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ tmp\_Current\_Index++;}
+\DoxyCodeLine{00549\ \ \ \ \ \}}
+\DoxyCodeLine{00550\ }
+\DoxyCodeLine{00551\ }
+\DoxyCodeLine{00552\ \ \ \ \ \textcolor{comment}{//Fills\ out\ the\ NULLCAN,\ does\ not\ forcibly\ encode,\ and\ then\ charges\ the\ network.}}
+\DoxyCodeLine{00553\ \ \ \ \ \textcolor{comment}{//Charging\ style\ determines\ leg\ charging.\ May\ move\ it\ to\ be\ a\ setting.}}
+\DoxyCodeLine{00554\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ -\/1:\ Charge\ by\ giving\ the\ input\ node\ the\ base\ charge,\ normal\ node\ charging.}}
+\DoxyCodeLine{00555\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ 1:\ Use\ leg\ specific\ charging\ to\ charge\ every\ node\ based\ on\ its\ position\ in\ the\ input\ array.\ Node[1]\ would\ charge\ axons\ on\ Axon[1][n].}}
+\DoxyCodeLine{00556\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ 2:\ Charge\ every\ input\ on\ the\ given\ p\_Leg,\ used\ mainly\ when\ inputing\ single\ values\ to\ charge.\ Allows\ you\ to\ input\ Node[x]\ as\ the\ only\ input\ to\ the\ Chrono\ and\ charge\ it\ using\ Axon[4][n],\ or\ any\ axon\ hillock\ you\ choose.}}
+\DoxyCodeLine{00557\ \ \ \ \ \textcolor{comment}{//\ \ \ \ \ \ \ This\ allows\ you\ to\ search\ forward\ by\ setting\ a\ node\ early\ in\ the\ time\ series\ and\ searching\ forwards,\ or\ setting\ it\ late\ in\ the\ time\ series\ and\ searching\ backwards.}}
+\DoxyCodeLine{00558\ \ \ \ \ \textcolor{keywordtype}{void}\ query(uint64\_t*\ p\_Input\ =\ NULL,\ \textcolor{keywordtype}{int}\ p\_Depth\ =\ 0,\ \textcolor{keywordtype}{int}\ p\_Charging\_Style\ =\ -\/1,\ \textcolor{keywordtype}{int}\ p\_Leg\ =\ 0,\ \textcolor{keywordtype}{int}\ *\ p\_Legs\ =\ NULL)}
+\DoxyCodeLine{00559\ \ \ \ \ \{}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Firstly\ we\ gather\ the\ inputly}}
+\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((p\_Input\ !=\ NULL)\ \&\&\ (p\_Depth\ >\ 0))\ \{\ set\_Input(p\_Input,\ p\_Depth);\ \}}
+\DoxyCodeLine{00562\ }
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ up\ the\ scaffold\ for\ the\ nodes\ to\ reside\ in\ as\ we\ build\ the\ trace.}}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ setup\_CAN\_Scaffold();}
+\DoxyCodeLine{00565\ }
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Work\ across\ the\ state\ tier\ to\ fill\ it\ out\ by\ requesting\ state\ nodes\ from\ the\ NNet,\ if\ not\ found\ they\ are\ created.}}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ fill\_State(\textcolor{stringliteral}{"{}Query"{}});}
+\DoxyCodeLine{00568\ }
+\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Fills\ the\ scaffold\ out\ by\ requesting\ nodes\ from\ the\ NNet\ and\ creating\ them\ if\ they\ aren't\ found.}}
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ fill\_Scaffold(\textcolor{stringliteral}{"{}Query"{}});}
+\DoxyCodeLine{00571\ }
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ charge\_Buffers(p\_Charging\_Style,\ p\_Leg,\ p\_Legs);}
+\DoxyCodeLine{00573\ }
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ gather\_Treetops();}
+\DoxyCodeLine{00575\ }
+\DoxyCodeLine{00576\ }
+\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \textcolor{comment}{//To\ be\ removed\ later\ after\ testing.}}
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ output\_Input();}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ output\_Scaffold();}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ output\_Scaffold\_Char();}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ output\_Output();}
+\DoxyCodeLine{00582\ \ \ \ \ \}}
+\DoxyCodeLine{00583\ }
+\DoxyCodeLine{00584\ \ \ \ \ \textcolor{comment}{//This\ allows\ for\ passing\ unordered\ sets\ of\ nodes}}
+\DoxyCodeLine{00585\ \ \ \ \ \textcolor{keywordtype}{void}\ submit\_Set(uint64\_t*\ p\_Input,\ \textcolor{keywordtype}{int}\ p\_Depth)}
+\DoxyCodeLine{00586\ \ \ \ \ \{}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Firstly\ we\ gather\ the\ inputly}}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ set\_Input(p\_Input,\ p\_Depth);}
+\DoxyCodeLine{00589\ }
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ only\ do\ the\ query\ on\ the\ state\ tier.\ This\ is\ because\ the\ nodes\ will\ not\ be\ in\ a\ coherent\ relationship\ to\ each\ other,\ only\ their\ presence\ is\ important.}}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \textcolor{comment}{//The\ node\ adress\ being\ read\ in\ as\ the\ state\ means\ that\ the\ unordered\ set\ can\ be\ read\ in\ to\ the\ state\ tier\ because\ the\ shared\ memory\ space\ precludes\ duplicates,\ you\ just\ ignore\ any\ higher\ tiers\ than\ 0.}}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Work\ across\ the\ state\ tier\ to\ fill\ it\ out\ by\ requesting\ state\ nodes\ from\ the\ NNet,\ if\ not\ found\ they\ are\ created.}}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ fill\_State(\textcolor{stringliteral}{"{}Query"{}});}
+\DoxyCodeLine{00594\ }
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Then\ charge\ the\ buffers\ as\ normal.}}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ charge\_Buffers();}
+\DoxyCodeLine{00597\ \ \ \ \ \}}
+\DoxyCodeLine{00598\ }
+\DoxyCodeLine{00599\ \ \ \ \ \textcolor{comment}{//Gets\ the\ current\ treetop\ at\ the\ given\ index.}}
+\DoxyCodeLine{00600\ \ \ \ \ \mbox{\hyperlink{classc___node}{c\_Node}}*\ get\_Treetop(\textcolor{keywordtype}{int}\ p\_Index\ =\ -\/1)}
+\DoxyCodeLine{00601\ \ \ \ \ \{}
+\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Top\_Tier\ >\ 0)}
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Index\ ==\ -\/1)}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Scaffold[Top\_Tier\ -\/\ 1][0][0][0];}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00608\ }
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//This\ construct\ is\ 4d\ which\ means\ at\ the\ highest\ point\ of\ 8\ legged\ nodes\ before\ it\ turns\ to\ 2D\ then\ the\ dimension\ which\ is\ longer\ than\ the\ pyramid\ is\ tall\ will\ have\ treetops\ in\ a\ 1D\ line,\ like\ if\ you\ took\ a\ pyramid\ of\ Gaza\ and\ click-\/dragged\ it\ sideways\ with\ tracers\ on.\ Same\ with\ this\ 3D\ object\ except\ describing\ dragging\ a\ 3D\ 0bject\ is\ not\ intuitive\ to\ monke\ brayne.}}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (State\_Depth\_X\ >=\ Top\_Tier)}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Scaffold[Top\_Tier\ -\/\ 1][p\_Index][0][0];}
+\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//>=\ in\ case\ X\ ==\ Y\ and\ we\ don't\ want\ fall-\/through\ on\ a\ perfect\ one.}}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (State\_Depth\_Y\ >=\ Top\_Tier)}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Scaffold[Top\_Tier\ -\/\ 1][0][p\_Index][0];}
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//>=\ in\ case\ X\ ==\ Y\ ==\ Z\ and\ we\ don't\ want\ fall-\/through\ on\ a\ perfect\ one.}}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (State\_Depth\_Z\ >=\ Top\_Tier)}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Scaffold[Top\_Tier\ -\/\ 1][0][0][p\_Index];}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00626\ \ \ \ \ \}}
+\DoxyCodeLine{00627\ }
+\DoxyCodeLine{00628\ \ \ \ \ \textcolor{comment}{//Outputs\ the\ scaffold.}}
+\DoxyCodeLine{00629\ \ \ \ \ \textcolor{keywordtype}{void}\ output\_Scaffold()}
+\DoxyCodeLine{00630\ \ \ \ \ \{}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ -\/-\/==\ \ \ CAN\_Scaffold\ \ \ ==-\/-\/"{}};}
+\DoxyCodeLine{00632\ }
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_T\ =\ 0;\ cou\_T\ <\ Top\_Tier;\ cou\_T++)}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ <-\/\ Tier["{}}\ <<\ cou\_T\ <<\ \textcolor{stringliteral}{"{}]\ -\/>"{}};}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ (State\_Depth\_X\ -\/\ cou\_T);\ cou\_X++)}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ (State\_Depth\_Y\ -\/\ cou\_T);\ cou\_Y++)}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ (State\_Depth\_Z\ -\/\ cou\_T);\ cou\_Z++)}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ [("{}}\ <<\ cou\_X\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ cou\_Y\ <<\ \textcolor{stringliteral}{"{},\ "{}}\ <<\ cou\_Z\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z]\ !=\ NULL)\ \{\ std::cout\ <<\ Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z]-\/>NID;\ \}\ \textcolor{keywordflow}{else}\ \{\ std::cout\ <<\ \textcolor{stringliteral}{"{}NULL"{}};\ \}}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00651\ \ \ \ \ \}}
+\DoxyCodeLine{00652\ }
+\DoxyCodeLine{00653\ \ \ \ \ \textcolor{comment}{//Outputs\ the\ scaffold\ as\ character\ representing\ the\ address.}}
+\DoxyCodeLine{00654\ \ \ \ \ \textcolor{keywordtype}{void}\ output\_Scaffold\_Char()}
+\DoxyCodeLine{00655\ \ \ \ \ \{}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n("{}}\ <<\ \textcolor{keyword}{this}\ <<\ \textcolor{stringliteral}{"{})\(\backslash\)n"{}};}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_T\ =\ 0;\ cou\_T\ <\ Top\_Tier;\ cou\_T++)}
+\DoxyCodeLine{00658\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_X\ =\ 0;\ cou\_X\ <\ (State\_Depth\_X\ -\/\ cou\_T);\ cou\_X++)}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00662\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00663\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Y\ =\ 0;\ cou\_Y\ <\ (State\_Depth\_Y\ -\/\ cou\_T);\ cou\_Y++)}
+\DoxyCodeLine{00664\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00665\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n["{}};}
+\DoxyCodeLine{00666\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Z\ =\ 0;\ cou\_Z\ <\ (State\_Depth\_Z\ -\/\ cou\_T);\ cou\_Z++)}
+\DoxyCodeLine{00667\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00668\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ char(Scaffold[cou\_T][cou\_X][cou\_Y][cou\_Z]);}
+\DoxyCodeLine{00669\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00670\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}]"{}};}
+\DoxyCodeLine{00671\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00672\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00673\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00674\ \ \ \ \ \}}
+\DoxyCodeLine{00675\ \};}
+
+\end{DoxyCode}

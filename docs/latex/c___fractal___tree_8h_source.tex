@@ -1,0 +1,302 @@
+\doxysection{c\+\_\+\+Fractal\+\_\+\+Tree.\+h}
+\hypertarget{c___fractal___tree_8h_source}{}\label{c___fractal___tree_8h_source}\index{include/NT4/c\_Fractal\_Tree.h@{include/NT4/c\_Fractal\_Tree.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00005\ \textcolor{comment}{\ \ \ \ \ \ \ \ When\ I\ was\ building\ the\ networks\ I\ ran\ into\ the\ problem\ of\ searching\ them\ for\ existing\ state\ nodes.\ A\ state}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ \ \ \ node\ is\ the\ node\ that\ associates\ an\ input\ with\ a\ node.\ State\ nodes\ allows\ for\ storing\ information\ in\ the\ networks\ and}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ \ \ \ subsequently\ retrieving\ information\ from\ them.\ With\ the\ higher\ networks\ that\ used\ node\ IDs\ (NAdd)s\ from\ the\ lower}}
+\DoxyCodeLine{00008\ \textcolor{comment}{\ \ \ \ constructs\ this\ became\ an\ issue\ because\ the\ number\ of\ unique\ nodes\ input\ into\ the\ network\ could\ get\ into\ the\ millions.}}
+\DoxyCodeLine{00009\ \textcolor{comment}{\ \ \ \ \ \ \ \ In\ building\ a\ network\ you\ have\ to\ first\ take\ an\ input\ and\ search\ the\ network\ to\ see\ if\ that\ state\ was\ already}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ \ \ \ associated\ with\ a\ node.\ Originally\ this\ was\ done\ with\ binary\ trees.\ The\ millions\ of\ unique\ inputs\ into\ these\ binary}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ \ \ \ trees\ caused\ long\ search\ times.\ When\ it\ came\ to\ reading\ the\ nodes\ in\ there\ was\ another\ issue\ with\ the\ NAdds\ being}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ sequential\ leading\ to\ extremely\ long\ branches\ in\ the\ binary\ tree\ that\ stored\ almost\ all\ of\ the\ nodes.\ This\ led\ to}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ stack\ corruption\ with\ recusive\ searches.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ \ \ \ \ \ \ \ The\ first\ thing\ done\ was\ changing\ the\ recursive\ searches\ to\ an\ iterative\ one.\ This\ solved\ the\ issue\ of\ stack}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ \ \ \ corruption\ but\ did\ nothing\ to\ solve\ the\ long\ search\ times.\ So\ then\ an\ optimization\ function\ was\ created\ which}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ redistributed\ the\ nodes\ evenly\ along\ the\ branches.\ This\ function\ helped\ but\ did\ not\ fix\ the\ issue\ as\ the\ optimization}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ had\ to\ be\ done\ frequently\ and\ was\ costly\ in\ and\ of\ itself.}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ \ \ \ \ In\ the\ end\ I\ used\ a\ trinary\ tree\ combined\ with\ bit\ shifting\ the\ query.\ This\ allowed\ for\ a\ tree\ that\ has\ branches}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ with\ fixed\ lengths.\ With\ the\ branches\ not\ getting\ excessive\ it\ does\ not\ run\ into\ the\ problem\ of\ stack\ corruptions}}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ even\ with\ millions\ of\ entries.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{*/}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{comment}{//This\ class\ forms\ the\ basic\ node\ on\ which\ the\ fractal\ tree\ is\ built.}}
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classc___fractal___tree}{c\_Fractal\_Tree}};}
+\DoxyCodeLine{00028\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//Legs\ of\ the\ node.}}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}*\ Right;}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}*\ Center;}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}*\ Left;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//This\ stores\ the\ state||node\ ID}}
+\DoxyCodeLine{00038\ \ \ \ \ uint64\_t\ Data;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//Pointer\ to\ the\ actual\ node.}}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classc___node}{c\_Node}}*\ NAdd;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}()}
+\DoxyCodeLine{00044\ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ Right\ =\ NULL;}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ Center\ =\ NULL;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ Left\ =\ NULL;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ Data\ =\ 0;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ NAdd\ =\ NULL;}
+\DoxyCodeLine{00050\ \ \ \ \ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classc___fractal___node}{\string~c\_Fractal\_Node}}()}
+\DoxyCodeLine{00053\ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ NAdd\ =\ NULL;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Right\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}\ Right;\ Right\ =\ NULL;\ \}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Center\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}\ Center;\ Center\ =\ NULL;\ \}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Left\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}\ Left;\ Left\ =\ NULL;\ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{comment}{//The\ fractal\ state\ tree\ is\ a\ trinary\ tree\ that\ uses\ a\ bitshifted\ input\ to\ dtermine\ which\ nodes\ to\ assign.}}
+\DoxyCodeLine{00063\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classc___fractal___tree}{c\_Fractal\_Tree}}}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{comment}{//The\ root\ node.}}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}*\ Root;}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{comment}{//the\ current\ node\ that\ will\ allow\ referencing\ outside\ of\ the\ search\ function.}}
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}**\ Current;}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//the\ flag\ that\ set\ when\ a\ node\ is\ found\ already\ set}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ flg\_Foundit;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//Holds\ the\ bitshifted\ data\ to\ compare\ to\ the\ nodes\ data.}}
+\DoxyCodeLine{00080\ \ \ \ \ uint64\_t\ tmp\_Data;}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{comment}{//This\ is\ used\ for\ saving\ and\ loading,\ tracks\ the\ number\ of\ nodes\ in\ the\ tree\ so\ the\ system\ knows\ how\ many\ nodes\ to\ expect\ during\ loading.}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{int}\ State\_Count;}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classc___fractal___tree}{c\_Fractal\_Tree}}()}
+\DoxyCodeLine{00086\ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ Root\ =\ NULL;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ Current\ =\ NULL;}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ flg\_Foundit\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ State\_Count\ =\ 0;}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ tmp\_Data\ =\ 0;}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{classc___fractal___tree}{\string~c\_Fractal\_Tree}}()}
+\DoxyCodeLine{00097\ \ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Root\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}\ Root;\ Root\ =\ NULL;\ \}}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ \ \ \ \ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{comment}{//Resets\ the\ tree.}}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ reset()}
+\DoxyCodeLine{00103\ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (Root\ !=\ NULL)\ \{\ \textcolor{keyword}{delete}\ Root;\ Root\ =\ NULL;\ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{comment}{//Search\ for\ a\ state.}}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ search(uint64\_t\ p\_Data)}
+\DoxyCodeLine{00109\ \ \ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ flag\ to\ indicate\ that\ the\ data\ was\ not\ found.}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ flg\_Foundit\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ tmp\_Data\ =\ 0;}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//The\ data\ is\ 64\ bits\ deep.\ So\ start\ the\ shift\ at\ 63.}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ query\_Node(Root,\ p\_Data,\ 63);}
+\DoxyCodeLine{00117\ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{comment}{//Queries\ a\ node.\ }}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{//p\_Node\ is\ the\ node\ to\ check\ against\ the\ query\ value.}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{//p\_Data\ is\ the\ data\ that\ is\ checked\ against.}}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{comment}{//p\_Shift\ is\ the\ number\ of\ bits\ to\ extract\ for\ comparison.}}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{int}\ query\_Node(\mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}*\&\ p\_Node,\ uint64\_t\ p\_Data,\ \textcolor{keywordtype}{int}\ p\_Shift)}
+\DoxyCodeLine{00124\ \ \ \ \ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Shift\ the\ data\ to\ get\ the\ temporary\ value.}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ tmp\_Data\ =\ p\_Data\ >>\ p\_Shift;}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ passed\ node\ is\ NULL\ create\ it.}}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node\ ==\ NULL)}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ p\_Node\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}};}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ p\_Node-\/>Right\ =\ NULL;}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ p\_Node-\/>Center\ =\ NULL;}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ p\_Node-\/>Left\ =\ NULL;}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ p\_Node-\/>NAdd\ =\ NULL;}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Shift\ >=\ 1)}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ query\ is\ not\ at\ the\ end\ set\ the\ data\ to\ tmp\_Data\ rather\ than\ p\_Data.}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p\_Node-\/>Data\ =\ tmp\_Data;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ query\ has\ reached\ the\ end\ set\ the\ data\ to\ the\ full\ query\ data.}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ p\_Node-\/>Data\ =\ p\_Data;}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ current\ node\ to\ the\ newly\ created\ node.}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Current\ =\ \&p\_Node;}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//The\ node\ was\ not\ found,\ one\ had\ to\ be\ created.}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ flg\_Foundit\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ have\ registered\ a\ new\ leaf.}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ State\_Count++;}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Return\ as\ we\ are\ done\ here.}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ current\ data\ matches\ the\ tmp\ data\ then\ another\ depth\ is\ explored.}}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node-\/>Data\ ==\ tmp\_Data\ \&\&\ p\_Shift\ >=\ 1)}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Shift\ ==\ 1)\ \{\ query\_Node(p\_Node-\/>Center,\ p\_Data,\ 0);\ \textcolor{keywordflow}{return}\ 0;\ \}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ query\_Node(p\_Node-\/>Center,\ p\_Data,\ (p\_Shift\ -\/\ 2));}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ node\ data\ matches\ the\ given\ data\ exactly\ the\ node\ has\ been\ found.}}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ Current\ to\ the\ current\ node.}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ the\ flg\_Foundit\ to\ true\ as\ the\ node\ was\ found\ without\ creating\ it.}}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node-\/>Data\ ==\ p\_Data)}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ Current\ =\ \&p\_Node;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node-\/>NAdd\ !=\ NULL)\ \{\ flg\_Foundit\ =\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ tmp\_Data\ is\ less\ than\ the\ nodes\ data\ then\ look\ on\ the\ left\ leg.}}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Data\ <\ p\_Node-\/>Data)}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ query\_Node(p\_Node-\/>Left,\ p\_Data,\ p\_Shift);}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ tmp\_Data\ is\ more\ than\ the\ nodes\ data\ then\ look\ on\ the\ right\ leg.}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tmp\_Data\ >\ p\_Node-\/>Data)}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ query\_Node(p\_Node-\/>Right,\ p\_Data,\ p\_Shift);}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{comment}{//Outputs\ the\ tree\ starting\ at\ the\ root\ node.}}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{void}\ output\_Tree()}
+\DoxyCodeLine{00197\ \ \ \ \ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ output\_Node(Root,\ 0);}
+\DoxyCodeLine{00199\ \ \ \ \ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{comment}{//Outputs\ a\ given\ node.\ p\_Tab\ determines\ an\ offset\ during\ output.}}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{void}\ output\_Node(\mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}\ *\ \&p\_Node,\ \textcolor{keywordtype}{int}\ p\_Tab)}
+\DoxyCodeLine{00203\ \ \ \ \ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node\ ==\ NULL)\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ output\_Node(p\_Node-\/>Left,\ (p\_Tab));}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ cou\_Index\ =\ 0;\ cou\_Index\ <\ p\_Tab;\ cou\_Index++)}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ "{}};}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ std::cout\ <<\ (p\_Node-\/>Data)\ <<\ \textcolor{stringliteral}{"{}-\/>"{}};}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node-\/>NAdd\ !=\ NULL)\ }
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ p\_Node-\/>NAdd;\ }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ (p\_Node-\/>NAdd)-\/>output\_Node\_Raw();}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{\ std::cout\ <<\ \textcolor{stringliteral}{"{}NULL"{}};\ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ output\_Node(p\_Node-\/>Center,\ (p\_Tab\ +\ 1));}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ output\_Node(p\_Node-\/>Right,\ (p\_Tab));}
+\DoxyCodeLine{00221\ \ \ \ \ \}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{comment}{//Outputs\ the\ tree\ with\ the\ backpropagation\ from\ the\ nodes\ starting\ at\ the\ root\ node.}}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{void}\ output\_Tree\_BP()}
+\DoxyCodeLine{00225\ \ \ \ \ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)t\ Fractal\ Tree\ Backpropagation\ Station"{}};}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ output\_Node\_BP(Root);}
+\DoxyCodeLine{00228\ \ \ \ \ \}}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{comment}{//Outputs\ a\ given\ node\ and\ backpropagates\ the\ node\ it\ is\ linked\ to.}}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordtype}{void}\ output\_Node\_BP(\mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}\ *\ \&p\_Node)}
+\DoxyCodeLine{00232\ \ \ \ \ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node\ ==\ NULL)\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ output\_Node\_BP(p\_Node-\/>Left);}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((p\_Node-\/>NAdd)\ !=\ NULL)\ \{\ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)t"{}}\ <<\ (p\_Node-\/>Data)\ <<\ \textcolor{stringliteral}{"{}-\/>"{}}\ <<\ (p\_Node-\/>NAdd);\ (p\_Node-\/>NAdd)-\/>bp\_O();\ \}}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ output\_Node\_BP(p\_Node-\/>Center);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ output\_Node\_BP(p\_Node-\/>Right);}
+\DoxyCodeLine{00238\ \ \ \ \ \}}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{comment}{//Retrieves\ the\ NAdd\ from\ a\ given\ node.}}
+\DoxyCodeLine{00241\ \ \ \ \ \mbox{\hyperlink{classc___node}{c\_Node}}*\ get\_Node\_NAdd(\mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}\ *\ \&p\_Node)}
+\DoxyCodeLine{00242\ \ \ \ \ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node\ !=\ NULL)}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p\_Node-\/>NAdd;}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ NULL;}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00250\ \ \ \ \ \}}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{comment}{//Sets\ a\ node\ NAdd.}}
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{keywordtype}{void}\ set\_Node\_NAdd(\mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}\ *\ \&p\_Node,\ \mbox{\hyperlink{classc___node}{c\_Node}}\ *\ p\_NAdd)}
+\DoxyCodeLine{00254\ \ \ \ \ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node\ !=\ NULL)}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ p\_Node-\/>NAdd\ =\ p\_NAdd;}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00259\ \ \ \ \ \}}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{comment}{//Sets\ the\ current\ nodes\ NAdd.}}
+\DoxyCodeLine{00262\ \ \ \ \ \mbox{\hyperlink{classc___node}{c\_Node}}*\ set\_Current\_Node\_NAdd(\mbox{\hyperlink{classc___node}{c\_Node}}\ *\ p\_NAdd)}
+\DoxyCodeLine{00263\ \ \ \ \ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ set\_Node\_NAdd(*Current,\ p\_NAdd);}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ p\_NAdd;}
+\DoxyCodeLine{00266\ \ \ \ \ \}}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{comment}{//Gets\ the\ current\ nodes\ NAdd.}}
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{classc___node}{c\_Node}}*\ get\_Current\_Node\_NAdd()}
+\DoxyCodeLine{00270\ \ \ \ \ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ get\_Node\_NAdd(*Current);}
+\DoxyCodeLine{00272\ \ \ \ \ \}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{comment}{//Saves\ the\ tree\ as\ a\ list\ of\ nodes\ and\ the\ state\ associated.}}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{void}\ save\_Tree(std::ofstream*\ p\_SF)}
+\DoxyCodeLine{00276\ \ \ \ \ \{}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ *p\_SF\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}}\ <<\ State\_Count;}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ save\_Tree\_Node(Root,\ p\_SF);}
+\DoxyCodeLine{00279\ \ \ \ \ \}}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{comment}{//Outputs\ a\ given\ node\ and\ backpropagates\ the\ node\ it\ is\ linked\ to.}}
+\DoxyCodeLine{00282\ \ \ \ \ \textcolor{keywordtype}{void}\ save\_Tree\_Node(\mbox{\hyperlink{classc___fractal___node}{c\_Fractal\_Node}}\ *\ \&p\_Node,\ std::ofstream*\ p\_SF)}
+\DoxyCodeLine{00283\ \ \ \ \ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p\_Node\ ==\ NULL)\ \{\ \textcolor{keywordflow}{return};\ \}}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ save\_Tree\_Node(p\_Node-\/>Left,\ p\_SF);}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((p\_Node-\/>NAdd)\ !=\ NULL)\ }
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \{\ }
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ *p\_SF\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ "{}}\ <<\ (p\_Node-\/>NAdd)-\/>NID\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ (p\_Node-\/>NAdd)-\/>State;}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ save\_Tree\_Node(p\_Node-\/>Center,\ p\_SF);}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ save\_Tree\_Node(p\_Node-\/>Right,\ p\_SF);}
+\DoxyCodeLine{00294\ \ \ \ \ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \};}
+
+\end{DoxyCode}

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.10.0" xml:lang="en-US">
+  <compounddef id="unionc___base___c_a_n_1_1tmp___union" kind="union" language="C++" prot="public">
+    <compoundname>c_Base_CAN::tmp_Union</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="unionc___base___c_a_n_1_1tmp___union_1a0c900ce9e6cfe11543d8f2e000ceba46" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char c_Base_CAN::tmp_Union::C</definition>
+        <argsstring></argsstring>
+        <name>C</name>
+        <qualifiedname>c_Base_CAN::tmp_Union::C</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="85" column="6" bodyfile="include/NT4/c_CAN.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="unionc___base___c_a_n_1_1tmp___union_1a3b07ec2bfbbc3ef7671fbb4cf7e7d25e" prot="public" static="no" mutable="no">
+        <type>uint64_t</type>
+        <definition>uint64_t c_Base_CAN::tmp_Union::U</definition>
+        <argsstring></argsstring>
+        <name>U</name>
+        <qualifiedname>c_Base_CAN::tmp_Union::U</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="include/NT4/c_CAN.h" line="86" column="10" bodyfile="include/NT4/c_CAN.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="include/NT4/c_CAN.h" line="83" column="1" bodyfile="include/NT4/c_CAN.h" bodystart="84" bodyend="87"/>
+    <listofallmembers>
+      <member refid="unionc___base___c_a_n_1_1tmp___union_1a0c900ce9e6cfe11543d8f2e000ceba46" prot="public" virt="non-virtual"><scope>c_Base_CAN::tmp_Union</scope><name>C</name></member>
+      <member refid="unionc___base___c_a_n_1_1tmp___union_1a3b07ec2bfbbc3ef7671fbb4cf7e7d25e" prot="public" virt="non-virtual"><scope>c_Base_CAN::tmp_Union</scope><name>U</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
