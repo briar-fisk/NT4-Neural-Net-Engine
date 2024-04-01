@@ -11,6 +11,8 @@
 	- The interface contains an "interpreter" that allows for "running" the config and control_panel files as sequential system calls to the ML engine, we'll call this interpreter eval()
 	- The reason for this is for integration into shell scripts, and to be able to easily prototype networks, workflows, and configurations using the live shell engine, and then when ready you go implement the design by transliterating the code from text to C++.
 	- This system is the highest abstraction of the engine, expected to be the lowest barrier of entry so it is presented as the 'face' of the engine, though the C++ pure interface has advantages to those who can C++.
+
+	
 */
 
 
@@ -36,6 +38,8 @@ namespace NT4
 	#include "NT4/c_Trace.h"
 
 	#include "NT4/c_Fractal_Tree.h"
+
+	#include "NT4/c_Lookup_Tree.h"
 
 	#include "NT4/c_Node_Network.h"
 

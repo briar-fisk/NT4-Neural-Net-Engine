@@ -51,13 +51,17 @@
 const std::string RETURN_FILE = "./Output/returned.ssv";
 class c_Construct_Text_Server
 {
-private:
-
     //The construct to hook into.
     NT4::c_Construct_API API;
     
     //Current server tick.
     int Tick;
+
+    //Exit flag to allow for exit after startup if the user puts 'exit' into the autoexec file, needed for CLI capabilities.
+    bool flg_Exit;
+
+private:
+
 
     //    ---==  write_to_output  ==---
     int write_to_output(std::string p_FName, uint64_t p_Data)
@@ -102,6 +106,8 @@ private:
 
     int eval_Command(std::string p_Command, std::ifstream* p_File)
     {
+        //==--  Basic Command List  --=//
+        // 
         //Meta commands for the engine rather than the nodes and internal structures.
         if (p_Command == "exit") { return -1; }
 
@@ -114,14 +120,92 @@ private:
         if (p_Command == "load_Input") { load_Input(p_File); return 1; }
         if (p_Command == "load_Input_uint") { load_Input_uint(p_File); return 1; }
 
-        //Neural Network Construction and Initialization:
-        if (p_Command == "register_New_Construct") { register_New_Construct(); return 1; }
-        if (p_Command == "register_Assembly") { register_Assembly(p_File); return 1; }
-        if (p_Command == "set_State_Nodes_Index") { set_State_Nodes_Index(p_File); return 1; }
+        if (p_Command == "round_Up_Input") { round_Up_Input(p_File); return 1; }
+        if (p_Command == "pull_From_Lower_Connections") { pull_From_Lower_Connections(p_File); return 1; }
+        if (p_Command == "pull_From_Lower_Connection") { pull_From_Lower_Connection(p_File); return 1; }
+
+        //Construct manipulation
+        if (p_Command == "register_Construct") { register_Construct(p_File); return 1; }
+        if (p_Command == "create_Construct_Connection") { create_Construct_Connection(p_File); return 1; }
+        if (p_Command == "output_Construct_Connections") { output_Construct_Connections(p_File); return 1; }
+        if (p_Command == "pull_From_Upper_Index") { pull_From_Upper_Index(p_File); return 1; }
 
         //Saving and loading the whole thing.
         if (p_Command == "save") { save(p_File); return 1; }
         if (p_Command == "load") { load(p_File); return 1; }
+
+        //Config
+        if (p_Command == "save_Config") { save_Config(p_File); return 1; }
+        if (p_Command == "update_Config") { update_Config(p_File); return 1; }
+
+        if (p_Command == "set_Base_Charge") { set_Base_Charge(p_File); return 1; }
+        if (p_Command == "set_Modifier_Charge") { set_Modifier_Charge(p_File); return 1; }
+        if (p_Command == "set_Action_Potential_Threshold") { set_Action_Potential_Threshold(p_File); return 1; }
+        if (p_Command == "set_Charging_Tier") { set_Charging_Tier(p_File); return 1; }
+
+        //Node Manipulations
+        if (p_Command == "bp_O") { bp_O(p_File); return 1; }
+
+        //Evaluation
+        if (p_Command == "query") { query(p_File); return 1; }
+
+        //Network Encoding
+        if (p_Command == "encode") { encode(p_File); return 1; }
+
+        //File Output:
+        if (p_Command == "clear_Output") { clear_Output(p_File); return 1; }
+        if (p_Command == "write_Newline") { output_Newline(p_File); return 1; }
+        if (p_Command == "write_Text"){ write_Text(p_File); return 1; }
+
+        //Network Output Gathering
+        if (p_Command == "write_Given_Trace") { gather_Given_Trace(p_File); return 1; }
+        if (p_Command == "write_Given_Trace_uint") { write_Given_Pattern_As_Number(p_File); return 1; }
+        if (p_Command == "write_All_Traces") { gather_All_Traces(p_File); return 1; }
+        if (p_Command == "write_All_Traces_uint") { gather_All_Traces_uint(p_File); return 1; }
+
+        if (p_Command == "write_Node_Info") { gather_Given_Node(p_File); return 1; }
+        if (p_Command == "write_Node_Info_As_Numbers") { gather_Given_Node_uint(p_File); return 1; }
+
+        if (p_Command == "write_All_Nodes") { gather_All_Nodes(p_File); return 1; }
+        if (p_Command == "write_All_Nodes_As_Numbers") { gather_All_Nodes_uint(p_File); return 1; }
+
+        if (p_Command == "write_Output") { gather_Output(p_File); return 1; }
+        if (p_Command == "write_Output_uint") { gather_Output_uint(p_File); return 1; }
+
+        if (p_Command == "write_Treetop_Node") { gather_Treetop_Node(p_File); return 1; }
+        if (p_Command == "write_Treetop_Node_Numbers") { gather_Treetop_Node_uint(p_File); return 1; }
+        if (p_Command == "write_Treetop_NID_Only") { gather_Treetop_NID(p_File); return 1; }
+        if (p_Command == "write_Treetop_NID") { get_Treetop_NID(p_File); return 1; }
+        //if (p_Command == "write_Treetop_NID_To_Other_Input") { write_Treetop_NID_To_Other_Input(p_File); return 1; }
+
+        //Console Output:
+        if (p_Command == "output_Node_Raw") { output_Node_Raw(p_File); return 1; }
+        if (p_Command == "output_Node_Network") { output_Node_Network(); return 1; }
+        if (p_Command == "output_Backpropagated_Symbol_NID") { output_Backpropagated_Symbol_NID(p_File); return 1; }
+        if (p_Command == "output_Backpropagated_Symbols") { output_Backpropagated_Symbols(); return 1; }
+        if (p_Command == "output_Input") { output_Input(p_File); return 1; }
+        if (p_Command == "output_Input_uint") { output_Input_uint(p_File); return 1; }
+        if (p_Command == "output_Output") { output_Output(p_File); return 1; }
+        if (p_Command == "output_Output_uint") { output_Output_uint(p_File); return 1; }
+        if (p_Command == "output_Scaffold_Char") { output_Scaffold_Char(p_File); return 1; }
+        if (p_Command == "output_Node") { output_Node(p_File); return 1; }
+        if (p_Command == "output_Constructs") { output_Constructs(); return 1; }
+
+        //==--  Advanced Command List  --=//
+        if (p_Command == "output_Node_Char") { output_Node_Char(p_File); return 1; }
+        if (p_Command == "output_Scaffold") { output_Scaffold(p_File); return 1; }
+
+        //Console Output:
+        // 
+        //Evaluation
+        if (p_Command == "query_Spacial") { query_Spacial(p_File); return 1; }
+        if (p_Command == "query_Given_Index") { query_Given_Index(p_File); return 1; }
+        if (p_Command == "query_Given_Legs") { query_Given_Legs(p_File); return 1; }
+        if (p_Command == "gather_Treetops") { gather_Treetops(p_File); return 1; }
+        
+
+        //Neural Network Construction and Initialization:
+        if (p_Command == "set_State_Nodes_Index") { set_State_Nodes_Index(p_File); return 1; }
 
         //Node Manipulations
         if (p_Command == "set_Type") { set_Type(p_File); return 1; }
@@ -130,7 +214,6 @@ private:
         if (p_Command == "does_Upper_Tier_Connection_Exist") { does_Upper_Tier_Connection_Exist(p_File); return 1; }
         if (p_Command == "does_Lower_Connection_Exist") { does_Lower_Connection_Exist(p_File); return 1; }
         if (p_Command == "bind_State") { bind_State(p_File); return 1; }
-        if (p_Command == "bp_O") { bp_O(p_File); return 1; }
 
         //Network Manipulations
         if (p_Command == "get_Upper_Tier_Node") { get_Upper_Tier_Node(p_File); return 1; }
@@ -141,48 +224,8 @@ private:
         if (p_Command == "new_State_Node") { new_State_Node(p_File); return 1; }
         if (p_Command == "create_Connections") { create_Connections(p_File); return 1; }
 
-        //Network Encoding
-        if (p_Command == "encode") { encode(p_File); return 1; }
-
         //Network Evaluation and Inference:
-        if (p_Command == "query") { query(p_File); return 1; }
-        if (p_Command == "query_Spacial") { query_Spacial(p_File); return 1; }
-        if (p_Command == "query_Given_Index") { query_Given_Index(p_File); return 1; }
-        if (p_Command == "query_Given_Legs") { query_Given_Legs(p_File); return 1; }
         if (p_Command == "submit_Set") { submit_Set(p_File); return 1; }
-
-        //Network Output Gathering
-        if (p_Command == "get_Treetop_NID") { get_Treetop_NID(p_File); return 1; }
-        if (p_Command == "gather_Given_Trace") { gather_Given_Trace(p_File); return 1; }
-        if (p_Command == "gather_All_Traces") { gather_All_Traces(p_File); return 1; }
-        if (p_Command == "gather_Given_Node") { gather_Given_Node(p_File); return 1; }
-        if (p_Command == "gather_Given_Node_uint") { gather_Given_Node_uint(p_File); return 1; }
-        if (p_Command == "gather_All_Nodes") { gather_All_Nodes(p_File); return 1; }
-        if (p_Command == "gather_All_Nodes_uint") { gather_All_Nodes_uint(p_File); return 1; }
-        if (p_Command == "gather_Output") { gather_Output(p_File); return 1; }
-        if (p_Command == "gather_Output_uint") { gather_Output_uint(p_File); return 1; }
-        if (p_Command == "gather_Treetop_Node") { gather_Treetop_Node(p_File); return 1; }
-        if (p_Command == "gather_Treetop_Node_uint") { gather_Treetop_Node_uint(p_File); return 1; }
-        if (p_Command == "gather_Treetop_NID") { gather_Treetop_NID(p_File); return 1; }
-
-        //File Output:
-        if (p_Command == "clear_Output") { clear_Output(p_File); return 1; }
-        if (p_Command == "output_Newline") { output_Newline(p_File); return 1; }
-
-        //Console Output:
-        if (p_Command == "output_Node_Raw") { output_Node_Raw(p_File); return 1; }
-        if (p_Command == "output_Node_Char") { output_Node_Char(p_File); return 1; }
-        if (p_Command == "output_BP") { output_BP(); return 1; }
-        if (p_Command == "output_BP_NID") { output_BP_NID(p_File); return 1; }
-        if (p_Command == "output_Scaffold") { output_Scaffold(p_File); return 1; }
-        if (p_Command == "output_Input") { output_Input(p_File); return 1; }
-        if (p_Command == "output_Input_uint") { output_Input_uint(p_File); return 1; }
-        if (p_Command == "output_Output") { output_Output(p_File); return 1; }
-        if (p_Command == "output_Output_uint") { output_Output_uint(p_File); return 1; }
-        if (p_Command == "output_Scaffold_Char") { output_Scaffold_Char(p_File); return 1; }
-        if (p_Command == "output_Node_Network") { output_Node_Network(); return 1; }
-        if (p_Command == "output_Node") { output_Node(p_File); return 1; }
-        if (p_Command == "output_Assemblies") { output_Assemblies(); return 1; }
 
         //See if they submitted a command, these scripts are retrieved from the ./Scripts/ dir.
         std::string tmp_Command = "./Scripts/" + p_Command;
@@ -230,7 +273,7 @@ private:
         }
 
 
-        return 0;
+        return 1;
     }
 
 
@@ -295,7 +338,7 @@ private:
 
         if (tmp_Result == 0)
         {
-            std::cerr << "\n\n >>==-- ERROR: Unable to interpret the control panel file... --==<<\n";
+            std::cerr << "\n\n   ERROR: Unable to interpret the control panel file...  \n";
 
             return 0;
         }
@@ -316,15 +359,15 @@ private:
         }
 
 
-        std::ofstream clsFlagFile("Control_Panel_Flag.ssv", std::ios::ate);
+        std::ofstream file_Object("Control_Panel_Flag.ssv", std::ios::ate);
 
         //Make sure the file was opened.
-        if (!clsFlagFile.is_open())
+        if (!file_Object.is_open())
         {
-            std::cerr << "\n\n >>==-- ERROR: Unable to interpret the clsFlagFile file for truncation!... --==<<\n";
+            std::cerr << "\n\n   ERROR: Unable to interpret the file_Object file for truncation!...  \n";
         }
 
-        clsFlagFile.close();
+        file_Object.close();
 
         return 1;
     }
@@ -362,23 +405,115 @@ private:
 
 public:
 
-    c_Construct_Text_Server()
+    //The default of the ../ is so that is navigates up from the scripts folder when finding boot status. It's so dumb I find it funny so now this engine's default autoexec file is "./scripts/../autoexec.ssv" lmao. If it doesn't work on other systems I'll have to change it but on windows it works (o.O)
+    c_Construct_Text_Server(std::string p_Autoexec = "../autoexec.ssv")
     {
         Tick = 0;
+        flg_Exit = false;
 
-        std::cout << "\n\n --==<< BOOTING UP >>==--";
+        std::cout << "\n\n   (~.~) BOOTING UP  ";
+        //See if they submitted a command, these scripts are retrieved from the ./Scripts/ dir.
+        std::string tmp_Autoexec_FName = "./Scripts/" + p_Autoexec;
+        std::cout << "\n\n   (o.o) LOADING BOOT FILE " << tmp_Autoexec_FName << "  \n\n";
+
+        int tmp_Boot_Status = interpret_File(tmp_Autoexec_FName);
 
         //Load the boot sequence 
-        if (interpret_File("autoexec.ssv"))
+        if (tmp_Boot_Status)
         {
-            std::cout << "\n\n --==<< SUCCESSFULLLY BOOTED >>==--";
+            std::cout << "\n\n   \\(^-^)/ SUCCESSFULLLY BOOTED  \n\n";
         }
         else
         {
-            std::cout << "\n\n >>==-- FAILED TO BOOT PROPERLY --==<<";
+            std::cout << "\n\n   (;_;) < FAILED TO BOOT PROPERLY  \n\n";
         }
+
+        if (tmp_Boot_Status == -1) { flg_Exit = true; }
     }
 
+
+    void save_Config(std::ifstream * p_File)
+    {
+        std::cout << "\n\n --> save_Config CONSTRUCT_ID |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        API.save_Config(tmp_Construct);
+    }
+
+    void update_Config(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> update_Config CONSTRUCT_ID |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        API.update_Config(tmp_Construct);
+    }
+
+    //Hyperparams
+    void set_Base_Charge(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> set_Base_Charge |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        double tmp_Base_Charge = 0.0;
+
+        *p_File >> tmp_Base_Charge;
+
+        API.set_Base_Charge(tmp_Construct, tmp_Base_Charge);
+    }
+
+    void set_Modifier_Charge(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> set_Modifier_Charge |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        double tmp_Modifier_Charge = 0.0;
+
+        *p_File >> tmp_Modifier_Charge;
+
+        API.set_Modifier_Charge(tmp_Construct, tmp_Modifier_Charge);
+    }
+
+    void set_Action_Potential_Threshold(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> set_Action_Potential_Threshold |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        double tmp_Action_Potential_Threshold = 0.0;
+
+        *p_File >> tmp_Action_Potential_Threshold;
+
+        API.set_Action_Potential_Threshold(tmp_Construct, tmp_Action_Potential_Threshold);
+    }
+
+    void set_Charging_Tier(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> set_Charging_Tier |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        int  tmp_Charging_Tier = 0;
+
+        *p_File >> tmp_Charging_Tier;
+
+        API.set_Charging_Tier(tmp_Construct, tmp_Charging_Tier);
+    }
 
     //        ---==================---
     //       ---====================---
@@ -390,6 +525,91 @@ public:
     //       ---====================---
     //        ---==================---
 
+    void create_Construct_Connection(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> create_Construct_Connection |";
+
+        std::string tmp_Construct_From = "";
+
+        *p_File >> tmp_Construct_From;
+
+        std::cout << " " << tmp_Construct_From << " |";
+        
+        std::string tmp_Construct_To = "";
+
+        *p_File >> tmp_Construct_To;
+
+        std::cout << " " << tmp_Construct_To << " |";
+
+        API.create_Construct_Connection(tmp_Construct_From, tmp_Construct_To);
+    }
+
+    void output_Construct_Connections(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> output_Construct_Connections |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        API.output_Construct_Connections(tmp_Construct);
+    }
+
+    void round_Up_Input(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> round_Up_Input |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        API.round_Up_Input(tmp_Construct);
+    }
+
+    void pull_From_Lower_Connection(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> pull_From_Lower_Connection |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        int tmp_Lower_Connection = 0;
+
+        *p_File >> tmp_Lower_Connection;
+
+        API.pull_From_Lower_Connection(tmp_Construct, tmp_Lower_Connection);
+    }
+
+    void pull_From_Lower_Connections(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> pull_From_Lower_Connections |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        API.pull_From_Lower_Connections(tmp_Construct);
+    }
+
+    void pull_From_Upper_Index(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> pull_From_Upper_Index |";
+
+        std::string tmp_Construct_To = "";
+
+        *p_File >> tmp_Construct_To;
+
+        std::string tmp_Construct_From = "";
+
+        *p_File >> tmp_Construct_From;
+
+        int tmp_Index = 0;
+
+        *p_File >> tmp_Index;
+
+        API.pull_From_Upper_Index(tmp_Construct_To, tmp_Construct_From, tmp_Index);
+    }
 
     //      ---==========---
     //     ---============---
@@ -430,7 +650,7 @@ public:
     */
     void set_Type(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| set_Type NID TYPE |";
+        std::cout << "\n\n --> set_Type NID TYPE |";
 
         int tmp_NID = 0;
 
@@ -441,6 +661,8 @@ public:
         *p_File >> tmp_Type;
 
         API.set_Type(tmp_NID, tmp_Type);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -479,31 +701,39 @@ public:
     */
     void add_Axon_Index(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| add_axon_index NID Axon_NID HILLOCK_INDEX |";
+        std::cout << "\n\n --> add_axon_index NID Axon_NID HILLOCK_INDEX |";
 
         uint64_t tmp_NID = 0;
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         uint64_t tmp_Axon_NID = 0;
 
         *p_File >> tmp_Axon_NID;
+
+        std::cout << " " << tmp_Axon_NID << " |";
 
         int tmp_Index = 0;
 
         *p_File >> tmp_Index;
 
+        std::cout << " " << tmp_Index << " |";
+
         API.add_Axon_Index(tmp_NID, tmp_Axon_NID, tmp_Index);
+
+        //std::cout << " [|x|]";
     }
 
 
 
     /** Sets the dendrites of the node.
 
-        set_Dendrites NID COUNT DENDRITE_IDS[]
+        set_Dendrites NID COUNT DENDRITE_IDS 
     \param uint64_t NID The Node ID of the node being manipulated.
-    \param int COUNT The number of dendrites in the array DENDRITE_IDS[]
-    \param uint64_t DENDRITE_IDS[] An array of NIDs that represent the dendritic connections.
+    \param int COUNT The number of dendrites in the array DENDRITE_IDS 
+    \param uint64_t DENDRITE_IDS  An array of NIDs that represent the dendritic connections.
     \retval None This function doesn't return any values.
 
     The choice of encoding method will determine dendrite count. This is left with a dynamic leg count though so that bespoke networks can be created with ease. It is dangerous, but that is up to the user to handle.
@@ -533,15 +763,19 @@ public:
     */
     void set_Dendrites(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| set_Dendrites NID COUNT DENDRITES[] |";
+        std::cout << "\n\n --> set_Dendrites NID COUNT DENDRITES  |";
 
         uint64_t tmp_NID = 0;
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         int tmp_Count = 0;
 
         *p_File >> tmp_Count;
+
+        std::cout << " " << tmp_Count << " |";
 
         uint64_t * tmp_Dendrites = NULL;
         tmp_Dendrites = new uint64_t [tmp_Count];
@@ -549,19 +783,23 @@ public:
         for (int cou_Index = 0; cou_Index < tmp_Count; cou_Index++)
         {
             *p_File >> tmp_Dendrites[cou_Index];
+
+            std::cout << " " << tmp_Dendrites[cou_Index] << " |";
         }
 
         API.set_Dendrites(tmp_NID, tmp_Count, tmp_Dendrites);
 
-        if (tmp_Dendrites != NULL) { delete[] tmp_Dendrites; tmp_Dendrites = NULL; }
+        if (tmp_Dendrites != NULL) { delete [] tmp_Dendrites; tmp_Dendrites = NULL; }
+
+        //std::cout << " [|x|]";
     }
 
 
     /** Searches the axons to see if an upper tier connection exists, if found returns the NID, if not returns 0.
 
-        does_Upper_Tier_Connection_Exist NODE_COUNT NODES[]
+        does_Upper_Tier_Connection_Exist NODE_COUNT NODES 
     \param int NODE_COUNT The number of nodes to use in the check for an upper tier node symbol.
-    \param uint64_t NODES[] The array of NIDs to look for.
+    \param uint64_t NODES  The array of NIDs to look for.
     \retval uint64_t NID This function return the NID of a node matching the description, returns 0 if none are found.
 
     This is used during encoding and performing a query. It traverses the connections in the given NID's first axon hillock. For each of these connections it does a does_Lower_Connection_Exist to see if that node matches. By searching the first legs we keep the search limited to only those with the possiblity to match the search string of connections. We know this is the case because if the first node in a string of nodes has an upper tier connection then that gives us a connection to a node that at least shares index[0] with our current lower-tier node and by checking every other dendrite index of the upper tier node against the respective index in the passed node array we can know for sure if our current pattern exists yet. After checking all of the upper tier connections on axon hillock 0 if we come up with no confirmed connections we know that the current arrangement of nodes hasn't been encoded into a higher tier node symbol yet.
@@ -591,7 +829,7 @@ public:
     */
     uint64_t does_Upper_Tier_Connection_Exist(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| does_Upper_Tier_Connection_Exist NODE_COUNT NODES[] |";
+        std::cout << "\n\n --> does_Upper_Tier_Connection_Exist NODE_COUNT NODES  |";
 
         uint64_t tmp_Return_NID = 0;
 
@@ -599,30 +837,36 @@ public:
 
         *p_File >> tmp_Count;
 
+        std::cout << " " << tmp_Count << " |";
+
         uint64_t* tmp_Nodes = NULL;
         tmp_Nodes = new uint64_t[tmp_Count];
 
         for (int cou_Index = 0; cou_Index < tmp_Count; cou_Index++)
         {
             *p_File >> tmp_Nodes[cou_Index];
+
+            std::cout << " " << tmp_Nodes[cou_Index] << " |";
         }
 
         tmp_Return_NID = API.does_Upper_Tier_Connection_Exist(tmp_Count, tmp_Nodes);
 
-        if (tmp_Nodes != NULL) { delete[] tmp_Nodes; tmp_Nodes = NULL; }
+        if (tmp_Nodes != NULL) { delete [] tmp_Nodes; tmp_Nodes = NULL; }
 
         write_to_output(RETURN_FILE, tmp_Return_NID);
 
         return tmp_Return_NID;
+
+        //std::cout << " [|x|]";
     }
 
 
     /** Checks if the given node has dendrites that match the given nodes in the given order.
 
-        does_Lower_Connection_Exist NID NODE_COUNT NODES[]
+        does_Lower_Connection_Exist NID NODE_COUNT NODES 
     \param uint64_t NID The Node ID of the node being manipulated.
     \param uint64_t NODE_COUNT The number of nodes to use in the check for an upper tier node symbol.
-    \param uint64_t NODES[] The array of NIDs to look for.
+    \param uint64_t NODES  The array of NIDs to look for.
     \retval bool This function returns a 1 (true) or 0 (false) depending on whether the dendrites match the given nodes or not.
 
     This takes a given node and a set of node IDs (NIDs) to check. It checks each dendrite leg against the given node list to see if they all match or not. If one is found that doesn't match it return 0 immediately. Used during encoding to find out whether a compound higher tier symbol has been encoded yet.
@@ -658,7 +902,7 @@ public:
     */
     bool does_Lower_Connection_Exist(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| does_Lower_Connection_Exist NID NODE_COUNT NODES[] |";
+        std::cout << "\n\n --> does_Lower_Connection_Exist NID NODE_COUNT NODES  |";
 
         bool tmp_Return_Result = 0;
 
@@ -666,9 +910,13 @@ public:
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         int tmp_Count = 0;
 
         *p_File >> tmp_Count;
+
+        std::cout << " " << tmp_Count << " |";
 
         uint64_t* tmp_Nodes = NULL;
         tmp_Nodes = new uint64_t[tmp_Count];
@@ -676,15 +924,19 @@ public:
         for (int cou_Index = 0; cou_Index < tmp_Count; cou_Index++)
         {
             *p_File >> tmp_Nodes[cou_Index];
+
+            std::cout << " " << tmp_Nodes[cou_Index] << " |";
         }
 
         tmp_Return_Result = API.does_Lower_Connection_Exist(tmp_NID, tmp_Count, tmp_Nodes);
 
-        if (tmp_Nodes != NULL) { delete[] tmp_Nodes; tmp_Nodes = NULL; }
+        if (tmp_Nodes != NULL) { delete [] tmp_Nodes; tmp_Nodes = NULL; }
 
         write_to_output(RETURN_FILE, tmp_Return_Result);
 
         return tmp_Return_Result;
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -728,12 +980,18 @@ public:
         uint64_t tmp_NID = 0;
 
         *p_File >> tmp_NID;
+
+        std::cout << " " << tmp_NID << " |";
         
         uint64_t tmp_State = 0;
 
-        *p_File >> tmp_NID;
+        *p_File >> tmp_State;
+
+        std::cout << " " << tmp_State << " |";
 
         API.bind_State(tmp_NID, tmp_State);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -785,7 +1043,11 @@ public:
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         API.bp_O(tmp_NID);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -859,13 +1121,17 @@ public:
     */
     void output_Node_Raw(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| output_Node_Raw NID |";
+        std::cout << "\n\n --> output_Node_Raw NID |";
 
         uint64_t tmp_NID = 0;
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         API.output_Node_Raw(tmp_NID);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -901,13 +1167,17 @@ public:
     */
     void output_Node_Char(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| output_Node_Char NID |";
+        std::cout << "\n\n --> output_Node_Char NID |";
 
         uint64_t tmp_NID = 0;
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         API.output_Node_Char(tmp_NID);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -921,42 +1191,6 @@ public:
     //    ---==================---
   
 	/** Used to differentiate a new construct, allocates a state tree to handle a state-node space.
-
-        register_New_Construct
-    \retval None This function returns the ID of the construct created, this is the index for the state ndoe arrays and such.
-
-    The node network is shared among all the constructs, however, it is typically desirable for each construct to have its own state nodes separate from others. This is done by having an array of fractal state trees on the bottom, one fractal tree for each node network. Or in some cases, for each input index, or sub-set of the input.
-
-    Example Usage:
-
-    In this example there are three constructs already declared, meaning the depth of the fractal state tree array is 3. This is with one state tree per construct, so the newly registered one will return the index of [3] for the new construct and the new depth of the fractal state tree array will be 4.
-
-        register_New_Construct
-
-    Output:
-    
-    Contents of the RETURN_FILE:
-
-        3
-
-    Error Handling:
-
-    - No error handling is implemented in this function.
-
-    Additional Notes:
-
-    - In the class c_Construct you'll find the continued abstraction of the networks by assigning names to constructs for each index and such. These may get misaligned due to some networks using more than one state fractal tree per network, so don't rely on the alignment of the fractal state tree indexes and the abstraction in the c_Construct.
-    */
-    int register_New_Construct()
-    {
-        std::cout << "\n __COMMAND__| register_New_Construct |";
-
-        int tmp_Construct_Return_ID = API.register_New_Construct();
-
-        write_to_output(RETURN_FILE, tmp_Construct_Return_ID);
-
-        return tmp_Construct_Return_ID;
-    }
 
 
     /** Creates a new node in the shared node network.
@@ -988,20 +1222,22 @@ public:
     */
     uint64_t new_Node()
     {
-        std::cout << "\n __COMMAND__| new_Node |";
+        std::cout << "\n\n --> new_Node |";
 
         uint64_t tmp_Return_NID = API.new_Node();
 
         write_to_output(RETURN_FILE, tmp_Return_NID);
 
         return tmp_Return_NID;
+
+        //std::cout << " [|x|]";
     }
 
 
     /** Creates a new node, binds it to a state, sets the type to 0 or 3 depending, and adds the node to the state tree with the state registered. 
 
         new_State_Node CONSTRUCT_ID STATE
-    \param uint64_t CONSTRUCT_ID This is the assembly to use when creating the state node.
+    \param uint64_t CONSTRUCT_ID This is the Construct to use when creating the state node.
     \param uint64_t STATE The state to bind to the node.
     \retval uint64_t Returns the NID of the newly minted state node.
 
@@ -1029,30 +1265,36 @@ public:
     */
     uint64_t new_State_Node(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| new_State_Node CONSTRUCT_ID STATE |";
+        std::cout << "\n\n --> new_State_Node CONSTRUCT_ID STATE |";
 
-        uint64_t tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
         
         uint64_t tmp_State = 0;
 
         *p_File >> tmp_State;
+
+        std::cout << " " << tmp_State << " |";
 
         uint64_t tmp_Return_NID = API.new_State_Node(tmp_Construct, tmp_State);
 
         write_to_output(RETURN_FILE, tmp_Return_NID);
 
         return tmp_Return_NID;
+
+        //std::cout << " [|x|]";
     }
 
 
     /** Creates a connection between nodes.
 
-        create_Connections TO_NID COUNT FROM_NIDS[]
+        create_Connections TO_NID COUNT FROM_NIDS 
     \param uint64_t TO_NID This is the node that all the lower nodes connect to, the one that receives the dendritic connections.
     \param uint64_t NODE_COUNT The number of nodes to connect to the upper tier node.
-    \param uint64_t NODES[] The array of node NIDs that are the lower nodes, they receive the axonic connections.
+    \param uint64_t NODES  The array of node NIDs that are the lower nodes, they receive the axonic connections.
     \retval None This function doesn't return any values.
 
     p_To forms dendritic connections to p_From, and on p_From you have the axonic connections. This function uses set_Dendrites on the upper tier node and sets the axon for the lower nodes to create the two way connection. The doubly linked tiered nodes.
@@ -1105,15 +1347,19 @@ public:
     */
     void create_Connections(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| create_Connections TO_NID COUNT FROM_NIDS[] |";
+        std::cout << "\n\n --> create_Connections TO_NID COUNT FROM_NIDS  |";
 
         uint64_t tmp_To_NID = 0;
 
         *p_File >> tmp_To_NID;
 
+        std::cout << " " << tmp_To_NID << " |";
+
         int tmp_Count = 0;
 
         *p_File >> tmp_Count;
+
+        std::cout << " " << tmp_Count << " |";
 
         uint64_t* tmp_Nodes = NULL;
         tmp_Nodes = new uint64_t[tmp_Count];
@@ -1121,19 +1367,23 @@ public:
         for (int cou_Index = 0; cou_Index < tmp_Count; cou_Index++)
         {
             *p_File >> tmp_Nodes[cou_Index];
+
+            std::cout << " " << tmp_Nodes[cou_Index] << " |";
         }
 
         API.create_Connections(tmp_To_NID, tmp_Count, tmp_Nodes);
 
-        if (tmp_Nodes != NULL) { delete[] tmp_Nodes; tmp_Nodes = NULL; }
+        if (tmp_Nodes != NULL) { delete [] tmp_Nodes; tmp_Nodes = NULL; }
+
+        //std::cout << " [|x|]";
     }
 
 
     /** Checks if an upper tier node exists, functionally the same as does_Upper_Tier_Connection_Exist on the node, but this includes error handling.
 
-        does_Upper_Tier_Connection_Exist_Network NODE_COUNT NODES[]
+        does_Upper_Tier_Connection_Exist_Network NODE_COUNT NODES 
     \param int NODE_COUNT The number of nodes to use in the check for an upper tier node symbol.
-    \param uint64_t NODES[] The array of NIDs to look for.
+    \param uint64_t NODES  The array of NIDs to look for.
     \retval uint64_t NID This function return the NID of a node matching the description, returns 0 if none are found.
 
     This is used during encoding and performing a query. It traverses the connections in the given NID's first axon hillock. For each of these connections it does a does_Lower_Connection_Exist to see if that node matches. By searching the first legs we keep the search limited to only those with the possiblity to match the search string of connections. We know this is the case because if the first node in a string of nodes has an upper tier connection then that gives us a connection to a node that at least shares index[0] with our current lower-tier node and by checking every other dendrite index of the upper tier node against the respective index in the passed node array we can know for sure if our current pattern exists yet. After checking all of the upper tier connections on axon hillock 0 if we come up with no confirmed connections we know that the current arrangement of nodes hasn't been encoded into a higher tier node symbol yet.
@@ -1163,7 +1413,7 @@ public:
     */
     uint64_t does_Upper_Tier_Connection_Exist_Network(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| does_Upper_Tier_Connection_Exist_Network NODE_COUNT NODES[] |";
+        std::cout << "\n\n --> does_Upper_Tier_Connection_Exist_Network NODE_COUNT NODES  |";
 
         uint64_t tmp_Return_NID = 0;
 
@@ -1171,9 +1421,13 @@ public:
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         int tmp_Count = 0;
 
         *p_File >> tmp_Count;
+
+        std::cout << " " << tmp_Count << " |";
 
         uint64_t* tmp_Nodes = NULL;
         tmp_Nodes = new uint64_t[tmp_Count];
@@ -1181,23 +1435,27 @@ public:
         for (int cou_Index = 0; cou_Index < tmp_Count; cou_Index++)
         {
             *p_File >> tmp_Nodes[cou_Index];
+
+            std::cout << " " << tmp_Nodes[cou_Index] << " |";
         }
 
         tmp_Return_NID = API.does_Upper_Tier_Connection_Exist_Network(tmp_Count, tmp_Nodes);
 
-        if (tmp_Nodes != NULL) { delete[] tmp_Nodes; tmp_Nodes = NULL; }
+        if (tmp_Nodes != NULL) { delete [] tmp_Nodes; tmp_Nodes = NULL; }
 
         write_to_output(RETURN_FILE, tmp_Return_NID);
 
         return tmp_Return_NID;
+
+        //std::cout << " [|x|]";
     }
 
 
     /** Gets an upper tier node based on the given legs, will create it if not found.
 
-        get_Upper_Tier_Node NODE_COUNT NODES[]
+        get_Upper_Tier_Node NODE_COUNT NODES 
     \param int NODE_COUNT The number of nodes to use in the check for an upper tier node symbol.
-    \param uint64_t NODES[] The array of NIDs to look for.
+    \param uint64_t NODES  The array of NIDs to look for.
     \retval uint64_t NID The node that represents the symbol containing the lower nodes passed to this function. Passes the NID back whether found or newly minted.
 
     This function uses 'does_Upper_Tier_Node_Exist' to find if the node exists or not. If the node is not found then this function creates the node, assigns the connections, and passes the prepared NID back.
@@ -1227,7 +1485,7 @@ public:
     */
     uint64_t get_Upper_Tier_Node(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| get_Upper_Tier_Node NODE_COUNT NODES[] |";
+        std::cout << "\n\n --> get_Upper_Tier_Node NODE_COUNT NODES  |";
 
         uint64_t tmp_Return_NID = 0;
 
@@ -1235,9 +1493,13 @@ public:
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         int tmp_Count = 0;
 
         *p_File >> tmp_Count;
+
+        std::cout << " " << tmp_Count << " |";
 
         uint64_t* tmp_Nodes = NULL;
         tmp_Nodes = new uint64_t[tmp_Count];
@@ -1245,15 +1507,19 @@ public:
         for (int cou_Index = 0; cou_Index < tmp_Count; cou_Index++)
         {
             *p_File >> tmp_Nodes[cou_Index];
+
+            std::cout << " " << tmp_Nodes[cou_Index] << " |";
         }
 
         tmp_Return_NID = API.get_Upper_Tier_Node(tmp_Count, tmp_Nodes);
 
-        if (tmp_Nodes != NULL) { delete[] tmp_Nodes; tmp_Nodes = NULL; }
+        if (tmp_Nodes != NULL) { delete [] tmp_Nodes; tmp_Nodes = NULL; }
 
         write_to_output(RETURN_FILE, tmp_Return_NID);
 
         return tmp_Return_NID;
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -1287,25 +1553,31 @@ public:
     */
     uint64_t does_State_Node_Exist(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| does_State_Node_Exist CONSTRUCT_ID STATE |";
+        std::cout << "\n\n --> does_State_Node_Exist CONSTRUCT_ID STATE |";
 
-        uint64_t p_Assembly = 0;
+        std::string tmp_Construct = "";
 
-        *p_File >> p_Assembly;
+        *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         uint64_t tmp_State = 0;
 
         *p_File >> tmp_State;
 
-        uint64_t tmp_Return_NID = API.does_State_Node_Exist(p_Assembly, tmp_State);
+        std::cout << " " << tmp_State << " |";
+
+        uint64_t tmp_Return_NID = API.does_State_Node_Exist(tmp_Construct, tmp_State);
 
         write_to_output(RETURN_FILE, tmp_Return_NID);
 
         return tmp_Return_NID;
+
+        //std::cout << " [|x|]";
     }
 
 
-    /** Checks to see if a node in the given assembly is bound to the given state, if not the node is created & the NID returned, if found the NID is returned..
+    /** Checks to see if a node in the given Construct is bound to the given state, if not the node is created & the NID returned, if found the NID is returned..
 
         get_State_Node CONSTRUCT_ID STATE
     \param int CONSTRUCT_ID The construct that encapsulates the state space to search.
@@ -1336,21 +1608,27 @@ public:
     */
     uint64_t get_State_Node(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| get_State_Node CONSTRUCT_ID STATE |";
+        std::cout << "\n\n --> get_State_Node CONSTRUCT_ID STATE |";
 
-        uint64_t p_Assembly = 0;
+        std::string tmp_Construct = "";
 
-        *p_File >> p_Assembly;
+        *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         uint64_t tmp_State = 0;
 
         *p_File >> tmp_State;
 
-        uint64_t tmp_Return_NID = API.get_State_Node(p_Assembly, tmp_State);
+        std::cout << " " << tmp_State << " |";
+
+        uint64_t tmp_Return_NID = API.get_State_Node(tmp_Construct, tmp_State);
 
         write_to_output(RETURN_FILE, tmp_Return_NID);
 
         return tmp_Return_NID;
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -1385,11 +1663,13 @@ public:
 
     - None.
     */
-    void output_BP()
+    void output_Backpropagated_Symbols()
     {
-        std::cout << "\n __COMMAND__| output_BP |";
+        std::cout << "\n\n --> output_Backpropagated_Symbols |";
 
-        API.output_BP();
+        API.output_Backpropagated_Symbols();
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -1419,15 +1699,19 @@ public:
 
     - None.
     */
-    void output_BP_NID(std::ifstream* p_File)
+    void output_Backpropagated_Symbol_NID(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| output_BP_NID NID |";
+        std::cout << "\n\n --> output_Backpropagated_Symbol_NID   NID |";
 
         uint64_t tmp_NID = 0;
 
         *p_File >> tmp_NID;
 
-        API.output_BP_NID(tmp_NID);
+        std::cout << " " << tmp_NID << " |";
+
+        API.output_Backpropagated_Symbol_NID(tmp_NID);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -1439,10 +1723,10 @@ public:
     //    ---=========---
 
     //   ---=============================================---
-    //  ---==   Encoding and querying the assemblies.   ==---
+    //  ---==   Encoding and querying the constructs.   ==---
     //   ---=============================================---
 
-	/** Encodes the current input of the given assembly.
+	/** Encodes the current input of the given Construct.
 
         encode CONSTRUCT_ID
     \param int CONSTRUCT_ID The construct that encapsulates the state space to use when encoding.
@@ -1464,7 +1748,7 @@ public:
     - We then use output_Scaffold to view the encoded trace.
     - This example is a Many_To_One, which means all state nodes (Tier[0]) are connected to a single upper tier (Tier[1]) treetop node.
         
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input_uint 0 5 3 10 15 20
         encode 0
         output_Scaffold 0
@@ -1491,7 +1775,7 @@ public:
 
     - Here is another example, except this time we're encoding the phrase "the quick brown fox jumped over the lazy dog" to show language being encoded.
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 the quick brown fox jumps over the lazy dog
         encode 0
         output_Scaffold 0
@@ -1539,19 +1823,23 @@ public:
     */
     void encode(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| encode CONSTRUCT_ID |";
+        std::cout << "\n\n --> encode CONSTRUCT_ID |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.encode(tmp_Construct);
+
+        //std::cout << " [|x|]";
     }
 
 
     
     //		
-        //Passes the values to an assembly to encode.
+        //Passes the values to an Construct to encode.
     /** Queries the network with the current input set for the given construct, evaluates the input set and stores the results in the output traces, gathered using 'gather_Output'.
 
         query CONSTRUCT_ID
@@ -1578,7 +1866,7 @@ public:
 
     First we create a construct of the type Many_To_One named ExaCon for Example Construct.
     
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
 
     Then we use set_Input + encode to load several character names into the network and encode them as a base set, see encode for further details.
     
@@ -1639,7 +1927,7 @@ public:
 
     Here is the above code in completion if you want to copy/paste:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 randolph carter /end/ encode 0
         set_Input 0 harley warren /end/ encode 0
         set_Input 0 herbert west /end/ encode 0
@@ -1775,16 +2063,18 @@ public:
     */
     void query(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| query CONSTRUCT_ID |";
+        std::cout << "\n\n --> query CONSTRUCT_ID |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         API.query(tmp_Construct);
     }
 
-    /** Queries the network with the current input set of the given assembly, but the input index determines what leg is charged. Meaning if an input at index [3] is charged then only upper tier nodes connected on axon hillock [3] will be charged.
+    /** Queries the network with the current input set of the given Construct, but the input index determines what leg is charged. Meaning if an input at index [3] is charged then only upper tier nodes connected on axon hillock [3] will be charged.
 
         query_Spacial CONSTRUCT_ID
     \param int CONSTRUCT_ID The construct that encapsulates the state space to search.
@@ -1806,7 +2096,7 @@ public:
 
     We'll do this by encoding 3 temperatures at a time starting at the beginning of the sample history.
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input_uint 0 5 3 50 55 60
         encode 0
         set_Input_uint 0 5 3 55 60 65
@@ -1854,7 +2144,7 @@ public:
 
     - Example 2.
 
-    For an example that hopefully illistrates the purpose of this function we can walk through searching for a string when you know only a couple characters and their position in the string. Pretend you are sleuthing around online hunting down pedo scum, suddenly discord dings, a message! One of your contacts has a lead, a screenshot from a twitch stream with the kingpin distributor you've been tracking for a while now. He's in this twitch chat, you know that avatar, but there's a problem. The chat animations have caused a cloud of emoji to be floating over the name right as the screenshot was taken. You have only the second and third characters, 'aw', but it is a lead.
+    For an example that hopefully illistrates the purpose of this function we can walk through searching for a string when you know only a couple characters and their position in the string. Pretend you are sleuthing around online hunting down pedo scum, suddenly discord dings, a message! One of your contacts has a lead, a screenshot from a twitch stream with the kingpin distributor you've been tracking for a while now. He's in this twitch chat, you know that avatar, but there's a problem. The chat animations have caused a cloud of emoji to be doubleing over the name right as the screenshot was taken. You have only the second and third characters, 'aw', but it is a lead.
 
     So we have the clue to work on [ '?' 'a' 'w' '?' ]. We know 'aw' are the second and third character, and the first char is a mystery, as are the rest if they even exist, which is liklely given how short that username would be.
 
@@ -1864,7 +2154,7 @@ public:
 
     Code for our initial dataset, notice some names such as Flawless1337 do not have the 'aw' in the right spot:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 SawBones9000 /end/ encode 0
         set_Input 0 MawOfD00M /end/ encode 0
         set_Input 0 PawPatriot1337 /end/ encode 0
@@ -1951,7 +2241,7 @@ public:
 
     Full code for the previous example if you wish to copy/paste:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 SawBones9000 /end/ encode 0
         set_Input 0 MawOfD00M /end/ encode 0
         set_Input 0 PawPatriot1337 /end/ encode 0
@@ -1995,7 +2285,7 @@ public:
 
     So you encode each list, each snapshot, once every hour or so as your standard datakeeping, in fact it is automated. We'll use these made up snapshots for an example dataset:
 
-        register_Assembly Many_To_One ExaCon <- Don't forget to register the construct.
+        register_Construct Many_To_One ExaCon <- Don't forget to register the construct.
         set_Input 0 3 2 4 1 5 /end/ encode 0
         set_Input 0 2 3 3 2 4 /end/ encode 0
         set_Input 0 4 1 2 5 3 /end/ encode 0
@@ -2080,11 +2370,15 @@ public:
     */
     void query_Spacial(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.query_Spacial(tmp_Construct);
+
+        //std::cout << " [|x|]";
     }
 
     /** Queries the network with the current input set, however, every input node is charged using the given index.
@@ -2118,7 +2412,7 @@ public:
 
     So you encode each list, for this example we'll say your greenhouse controller automatically logs these input lists. We'll use some of this log data for an example dataset:
 
-        register_Assembly Many_To_One ExaCon <- Don't forget to register the construct.
+        register_Construct Many_To_One ExaCon <- Don't forget to register the construct.
         set_Input 0 3 2 4 1 5 /end/ encode 0
         set_Input 0 2 3 3 2 4 /end/ encode 0
         set_Input 0 4 1 2 5 3 /end/ encode 0
@@ -2153,7 +2447,7 @@ public:
 
     This 45 is represented as a string internally so each digit is a separate integer value even though a human reads it as forty-five.
 
-    Then formulate it into the set_Input string for the construct 0 (ExaCon as defined using 'register_Assembly Many_To_One ExaCon' above) we are working with:
+    Then formulate it into the set_Input string for the construct 0 (ExaCon as defined using 'register_Construct Many_To_One ExaCon' above) we are working with:
 
         set_Input 0 45 /end/
 
@@ -2217,9 +2511,9 @@ public:
 
     In this example we basically redo the same environmental search again, but this time we'll use the uint interface.
 
-    Start with encoding, but with uint and the syntax that requires (set_Input_uint CONSTRUCT_ID COUNT INPUT[]):
+    Start with encoding, but with uint and the syntax that requires (set_Input_uint CONSTRUCT_ID COUNT INPUT ):
 
-        register_Assembly Many_To_One ExaCon <- Don't forget to register the construct.
+        register_Construct Many_To_One ExaCon <- Don't forget to register the construct.
         set_Input_uint 0 5 3 2 4 1 5 encode 0
         set_Input_uint 0 5 2 3 3 2 4 encode 0
         set_Input_uint 0 5 4 1 2 5 3 encode 0
@@ -2309,23 +2603,29 @@ public:
     */
     void query_Given_Index(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         int tmp_Index = 0;
 
         *p_File >> tmp_Index;
 
+        std::cout << " " << tmp_Index << " |";
+
         API.query_Given_Index(tmp_Construct, tmp_Index);
+
+        //std::cout << " [|x|]";
     }
 
-    /** Queries the network using the current input set of the given assembly, however, an array of legs is passed that signifies whether or not each individual leg is to be charged and every input queried to all axon_hillocks/legs set to fire. 
+    /** Queries the network using the current input set of the given Construct, however, an array of legs is passed that signifies whether or not each individual leg is to be charged and every input queried to all axon_hillocks/legs set to fire. 
 
-        query_Given_Legs CONSTRUCT_ID LEG_COUNT LGS[]
+        query_Given_Legs CONSTRUCT_ID LEG_COUNT LGS 
     \param int CONSTRUCT_ID The construct that encapsulates the state space to search.
     \param int LEG_COUNT The number of legs you are passing.
-    \param bool LEGS[] The array of legs as boolean values used to determine whether or not to charge nodes connected on that axon_hillock/dendrite_index.
+    \param bool LEGS  The array of legs as boolean values used to determine whether or not to charge nodes connected on that axon_hillock/dendrite_index.
     \retval None This function doesn't return any values, the data resulting from this function is handled through traces.
 
     This function works by taking this set of 'legs' which is a boolean array. It then takes every input of the construct and puts them in a pool of unorganized nodes. It then steps through the boolean array checking whether that step needs to be charged or not. If it needs charged the program then steps through every node in the pool having it charge any axons on the current index, which would be the axon_hillock to the node.
@@ -2342,7 +2642,7 @@ public:
 
     Using this function we can search for { 'X', 'Z', 'x','z' } on the first 4 characters of each name. So to start we need to encode the database of names by formatting them with the set_Input command:
 
-        register_Assembly Many_To_One ExaCon /end/ encode 0
+        register_Construct Many_To_One ExaCon /end/ encode 0
         set_Input 0 PotatoChipCrunch /end/ encode 0
         set_Input 0 NotARealIdentity /end/ encode 0
         set_Input 0 BabyDollXOXO /end/ encode 0
@@ -2445,13 +2745,17 @@ public:
     */
     void query_Given_Legs(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         int tmp_Count = 0;
 
         *p_File >> tmp_Count;
+
+        std::cout << " " << tmp_Count << " |";
 
         int* tmp_Legs = NULL;
         tmp_Legs = new int[tmp_Count];
@@ -2459,21 +2763,25 @@ public:
         for (int cou_Index = 0; cou_Index < tmp_Count; cou_Index++)
         {
             *p_File >> tmp_Legs[cou_Index];
+
+            std::cout << " " << tmp_Legs[cou_Index] << " |";
         }
 
         API.query_Given_Legs(tmp_Construct, tmp_Count, tmp_Legs);
 
-        if (tmp_Legs != NULL) { delete[] tmp_Legs; tmp_Legs = NULL; }
+        if (tmp_Legs != NULL) { delete [] tmp_Legs; tmp_Legs = NULL; }
+
+        //std::cout << " [|x|]";
     }
 
 
     //Disabled this doxygen for the moment, I suspect this function was accidentally brought to the surface while high.
     /* This allows for passing unordered sets of node IDs to be charged. 
 
-        submit_Set CONSTRUCT_ID COUNT INPUT_UINT[]
+        submit_Set CONSTRUCT_ID COUNT INPUT_UINT 
     \param int CONSTRUCT_ID The construct who's charging buffer and output will be used.
     \param COUNT The number of node IDs (NIDs) being passed.
-    \param INPUT_UINT[] The array of NIDs to charge.
+    \param INPUT_UINT  The array of NIDs to charge.
     \retval None This function doesn't return any values.
 
     This function takes a set of NIDs and then directly submits them to the charging buffers, no input, query, scaffold, etc. If you have the ID of the node(s) and want to directly charge them you can use this function.
@@ -2496,13 +2804,17 @@ public:
     */
     void submit_Set(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         int tmp_Count = 0;
 
         *p_File >> tmp_Count;
+
+        std::cout << " " << tmp_Count << " |";
 
         uint64_t* tmp_Input = NULL;
         tmp_Input = new uint64_t[tmp_Count];
@@ -2510,11 +2822,15 @@ public:
         for (int cou_Index = 0; cou_Index < tmp_Count; cou_Index++)
         {
             *p_File >> tmp_Input[cou_Index];
+
+            std::cout << " " << tmp_Input[cou_Index] << " |";
         }
 
         API.submit_Set(tmp_Construct, tmp_Count, tmp_Input);
 
         if (tmp_Input != NULL) { delete[] tmp_Input; tmp_Input = NULL; }
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -2523,7 +2839,7 @@ public:
         get_Treetop CONSTRUCT_ID
 
     \param CONSTRUCT_ID The construct you want the treetop from.
-    \retval uint64_t Treetop[] The treetop is output to the return.ssv file.
+    \retval uint64_t Treetop  The treetop is output to the return.ssv file.
 
     This returns the treetop node for a given construct and outputs it to the RETURN_FILE. If you instead want it to output to the construct output then you use gather_Output_Node instead of this function.
 
@@ -2533,7 +2849,7 @@ public:
 
     First we encode a string into a Many_To_One:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 Pull Your Circuit Breaker /end/
         encode 0
 
@@ -2588,15 +2904,39 @@ public:
     */
     uint64_t get_Treetop_NID(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::cout << "\n\n --> get_Treetop_NID CONSTRUCT_ID |";
+
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         uint64_t tmp_Return_Node = API.get_Treetop_NID(tmp_Construct);
 
         write_to_output(RETURN_FILE, tmp_Return_Node);
 
         return tmp_Return_Node;
+
+        //std::cout << " [|x|]";
+    }
+
+    void write_Treetop_NID_To_Other_Input(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> write_Treetop_NID_To_Other_Input CONSTRUCT_ID_FROM CONSTRUCT_ID_TO |";
+
+        std::string tmp_Construct_From = "";
+        std::string tmp_Construct_To = "";
+
+        *p_File >> tmp_Construct_From;
+
+        std::cout << " " << tmp_Construct_From << " |";
+
+        *p_File >> tmp_Construct_To;
+
+        std::cout << " " << tmp_Construct_To << " |";
+
+        API.write_Treetop_NID_To_Other_Input(tmp_Construct_From, tmp_Construct_To);
     }
 
 
@@ -2616,7 +2956,7 @@ public:
 
     First we encode some information.
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 THE GAME /end/
         encode 0
         output_Scaffold 0
@@ -2654,15 +2994,46 @@ public:
     */
     void gather_Given_Trace(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::cout << "\n| gather_Given_Trace   CONSTRUCT_ID   NID |";
+
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
         
         int tmp_NID = 0;
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         API.gather_Given_Trace(tmp_Construct, tmp_NID);
+
+        //std::cout << " [|x|]";
+    }
+
+
+
+    void write_Given_Pattern_As_Number(std::ifstream* p_File)
+    {
+        std::cout << "\n| write_Given_Pattern_As_Number |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        std::cout << " CONSTRUCT_ID " << tmp_Construct << " |";
+        
+        int tmp_NID = 0;
+
+        *p_File >> tmp_NID;
+
+        std::cout << " NID " << tmp_NID << " |";
+
+        API.write_Given_Pattern_As_Number(tmp_Construct, tmp_NID);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -2680,7 +3051,7 @@ public:
 
     We encode some data into our newly minted construct, and then get the traces from it:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 ABRACADABRA /end/ encode 0
         set_Input 0 FIREBALL /end/ encode 0
         gather_All_Traces 0
@@ -2712,11 +3083,33 @@ public:
     */
     void gather_All_Traces(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::cout << "\n\n --> gather_All_Traces   CONSTRUCT_ID |";
+
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.gather_All_Traces(tmp_Construct);
+
+        //std::cout << " [|x|]";
+    }
+
+
+    void gather_All_Traces_uint(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> gather_All_Traces_uint   CONSTRUCT_ID |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
+
+        API.gather_All_Traces_uint(tmp_Construct);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -2732,7 +3125,7 @@ public:
 
     Let's setup a construct, set the input, output the input (lel), wipe the input, and output it again to confirm:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 This is amazing wheee /end/ encode 0
         output_Input 0
 
@@ -2780,11 +3173,15 @@ public:
     */
     void reset_Input(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.reset_Input(tmp_Construct);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -2795,7 +3192,7 @@ public:
     \param INDEX The index you are setting the state tree to.
     \retval None This function doesn't return any values.
 
-    Sets the index for the given Construct state_Node_Tree in the c_Node_Network::State_Nodes[] fractal state tree array. This keeps the state spaces separate and discrete. Most networks you don't want to share state nodes. Some you do, that's where this function comes in, allows you to point a construct to the state tree you want.
+    Sets the index for the given Construct state_Node_Tree in the c_Node_Network::State_Nodes  fractal state tree array. This keeps the state spaces separate and discrete. Most networks you don't want to share state nodes. Some you do, that's where this function comes in, allows you to point a construct to the state tree you want.
 
     It is important to remember that the state tree indices and the constructs don't line up. Construct[1] likely doesn't have State_Tree[1]!
 
@@ -2803,8 +3200,8 @@ public:
 
     Create 2 constructs to work with, we'll be pointing ConExa's State Tree at ExaCon's State Tree:
 
-        register_Assembly Many_To_One ExaCon
-        register_Assembly Many_To_One ConExa
+        register_Construct Many_To_One ExaCon
+        register_Construct Many_To_One ConExa
 
     Set the ConExa to ExaCon:
 
@@ -2894,15 +3291,21 @@ public:
     */
     void set_State_Nodes_Index(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
         
         int tmp_Index = 0;
 
         *p_File >> tmp_Index;
 
+        std::cout << " " << tmp_Index << " |";
+
         API.set_State_Nodes_Index(tmp_Construct, tmp_Index);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -2928,7 +3331,7 @@ public:
 
     We'll register a construct, then set the input, then output the input so we can see it.
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 Careful lads, I think there's a sni- /end/
         output_Input 0
 
@@ -2976,7 +3379,7 @@ public:
 
     We're going to show what happens if you forget the '/end/' on a compound statement with set_Input in it.
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 Example_Text encode 0
         output_Input 0
 
@@ -3036,15 +3439,17 @@ public:
     */
     int set_Input(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| set_Input CONSTRUCT_ID INPUT |";
+        std::cout << "\n\n --> set_Input CONSTRUCT_ID INPUT |";
 
         std::string tmp_In = "";
         std::string tmp_In_Full = "";
         int tmp_Count = 0;
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         bool flg_Gather_Input = true;
 
@@ -3053,7 +3458,7 @@ public:
             tmp_In = "";
             *p_File >> tmp_In;
 
-            std::cout << "\n I - [ " << tmp_Count << " ]: >" << tmp_In << "<";
+            std::cout << " " << tmp_In << " |";
 
             if (tmp_In == "/end/")
             {
@@ -3081,19 +3486,20 @@ public:
                 flg_Gather_Input = (!p_File->eof());
             }
         }
-        std::cout << "\n Input_Full: " << tmp_In_Full;
         API.set_Input(tmp_Construct, tmp_In_Full);
-        std::cerr << "\n Done Input Setting String";
+
+        //std::cout << " [|x|]";
+
         return 1;
     }
 
     /** Sets the input of a given construct to the given array of uint64_t values.
 
-        set_Input_uint CONSTRUCT_ID COUNT INPUT[]
+        set_Input_uint CONSTRUCT_ID COUNT INPUT 
 
     \param CONSTRUCT_ID The construct who's input will be getting set.
-    \param COUNT The number of elements to expect in the Input[] array.
-    \param INPUT[] The uint64_t array that will be read into the input of the given construct.
+    \param COUNT The number of elements to expect in the Input  array.
+    \param INPUT  The uint64_t array that will be read into the input of the given construct.
     \retval None This function doesn't return any values.
 
     This function is used when you have arrays of unsigned integer values to work with. Used for handling nodes with multi-sensory constructs and others that use nodes as their I/O states.
@@ -3104,7 +3510,7 @@ public:
 
     Imagine we have an array of unsigned integers representing the number of deaths a team has in a video game. Say 4 players:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input_uint 0 4 3 10 12 87
         output_Input_uint 0
 
@@ -3126,17 +3532,21 @@ public:
     */
     void set_Input_uint(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| set_Input_uint CONSTRUCT_ID COUNT INPUT[] |";
+        std::cout << "\n\n --> set_Input_uint CONSTRUCT_ID COUNT INPUT  |";
 
         int tmp_Depth = 0;
         uint64_t* tmp_In_Full = NULL;
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         //Get the depth
         *p_File >> tmp_Depth;
+
+        std::cout << " " << tmp_Depth << " |";
 
         tmp_In_Full = new uint64_t[tmp_Depth];
 
@@ -3145,30 +3555,38 @@ public:
             tmp_In_Full[cou_Index] = 0;
             *p_File >> tmp_In_Full[cou_Index];
 
-            std::cout << "\n I - [ " << cou_Index << " ]: >" << tmp_In_Full[cou_Index] << "<";
+            std::cout << " " << tmp_In_Full[cou_Index] << " |";
         }
 
         API.set_Input_uint(tmp_Construct, tmp_Depth, tmp_In_Full);
+
+        //std::cout << " [|x|]";
     }
 
 
     void set_2D_Input_uint(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| set_2D_Input_uint CONSTRUCT_ID X_COUNT Y_COUNT INPUT[][] |";
+        std::cout << "\n\n --> set_2D_Input_uint CONSTRUCT_ID X_COUNT Y_COUNT INPUT   |";
 
         int tmp_X_Depth = 0;
         int tmp_Y_Depth = 0;
         uint64_t** tmp_In_Full = NULL;
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         //Get the depth
         *p_File >> tmp_X_Depth;
 
+        std::cout << " " << tmp_X_Depth << " |";
+
         //Get the depth
         *p_File >> tmp_Y_Depth;
+
+        std::cout << " " << tmp_Y_Depth << " |";
 
         tmp_In_Full = new uint64_t*[tmp_X_Depth];
         for (int cou_X = 0; cou_X < tmp_X_Depth; cou_X++)
@@ -3180,35 +3598,47 @@ public:
                 tmp_In_Full[cou_X][cou_Y] = 0;
                 *p_File >> tmp_In_Full[cou_X][cou_Y];
 
+                std::cout << " " << tmp_In_Full[cou_X][cou_Y] << " |";
+
                 //std::cout << "\n I - [ " << cou_X << " ][ " << cou_Y << " ]: >" << tmp_In_Full[cou_X][cou_Y] << "<";
             }
         }
 
         API.set_2D_Input_uint(tmp_Construct, tmp_X_Depth, tmp_Y_Depth, tmp_In_Full);
+
+        //std::cout << " [|x|]";
     }
 
 
     void set_3D_Input_uint(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| set_2D_Input_uint CONSTRUCT_ID X_COUNT Y_COUNT Z_COUNT INPUT[][] |";
+        std::cout << "\n\n --> set_3D_Input_uint CONSTRUCT_ID X_COUNT Y_COUNT Z_COUNT INPUT   |";
 
         int tmp_X_Depth = 0;
         int tmp_Y_Depth = 0;
         int tmp_Z_Depth = 0;
         uint64_t*** tmp_In_Full = NULL;
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         //Get the depth
         *p_File >> tmp_X_Depth;
 
+        std::cout << " " << tmp_X_Depth << " |";
+
         //Get the depth
         *p_File >> tmp_Y_Depth;
 
+        std::cout << " " << tmp_Y_Depth << " |";
+
         //Get the depth
         *p_File >> tmp_Z_Depth;
+
+        std::cout << " " << tmp_Z_Depth << " |";
 
         tmp_In_Full = new uint64_t**[tmp_X_Depth];
         for (int cou_X = 0; cou_X < tmp_X_Depth; cou_X++)
@@ -3224,12 +3654,16 @@ public:
                     tmp_In_Full[cou_X][cou_Y][cou_Z] = 0;
                     *p_File >> tmp_In_Full[cou_X][cou_Y][cou_Z];
 
-                    std::cout << "\n I - [ " << cou_X << " ][ " << cou_Y << " ][ " << cou_Z << " ]: >" << tmp_In_Full[cou_X][cou_Y][cou_Z] << "<";
+                    std::cout << " " << tmp_In_Full[cou_X][cou_Y][cou_Z] << " |";
+
+                    //std::cout << "\n I - [ " << cou_X << " ][ " << cou_Y << " ][ " << cou_Z << " ]: >" << tmp_In_Full[cou_X][cou_Y][cou_Z] << "<";
                 }
             }
         }
 
         API.set_3D_Input_uint(tmp_Construct, tmp_X_Depth, tmp_Y_Depth, tmp_Z_Depth, tmp_In_Full);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -3247,7 +3681,7 @@ public:
 
     We'll encode a string into a many to one and output the scaffold:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 supersymbol
         encode 0
         output_Scaffold 0
@@ -3280,13 +3714,17 @@ public:
     */
     void output_Scaffold(std::ifstream* p_File)
     {
-        std::cout << "\n __COMMAND__| output_Scaffold CONSTRUCT_ID |";
+        std::cout << "\n\n --> output_Scaffold CONSTRUCT_ID |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.output_Scaffold(tmp_Construct);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -3303,7 +3741,7 @@ public:
 
     Let us create a construct, then set the input, then output the input which shall be 'kaput'.
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 kaput /end/
         output_Input 0
 
@@ -3326,11 +3764,17 @@ public:
     */
     void output_Input(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::cout << "\n\n --> output_Input CONSTRUCT_ID |";
+
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.output_Input(tmp_Construct);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -3347,7 +3791,7 @@ public:
 
     Let us create a construct, then set the input, then output the input:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input_uint 0 3 8999 9000 9001
         output_Input_uint 0
 
@@ -3368,9 +3812,13 @@ public:
     */
     void output_Input_uint(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::cout << "\n\n --> output_Input_uint CONSTRUCT_ID |";
+
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         API.output_Input_uint(tmp_Construct);
     }
@@ -3391,7 +3839,7 @@ public:
 
     Register, encode:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 01234 /end/
         encode 0
         set_Input 0 56789 /end/
@@ -3422,9 +3870,13 @@ public:
     */
     void output_Output(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::cout << "\n\n --> output_Output |";
+
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         API.output_Output(tmp_Construct);
     }
@@ -3445,7 +3897,7 @@ public:
 
     Register, encode:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input_uint 0 5 0 1 2 3 4
         encode 0
         set_Input_uint 0 5 5 6 7 8 9
@@ -3475,9 +3927,13 @@ public:
     */
     void output_Output_uint(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::cout << "\n\n --> output_Output_uint |";
+
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         API.output_Output_uint(tmp_Construct);
     }
@@ -3497,7 +3953,7 @@ public:
 
     We'll encode a string into a many to one and output the scaffold:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 supersymbol
         encode 0
         output_Scaffold_Char 0
@@ -3520,11 +3976,17 @@ public:
     */
     void output_Scaffold_Char(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::cout << "\n\n --> output_Scaffold_Char |";
+
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.output_Scaffold_Char(tmp_Construct);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -3545,14 +4007,14 @@ public:
 
     //    ---======================================---
     //   ---========================================---
-    //  ---==   Used to register new assemblies.   ==---
+    //  ---==   Used to register new constructs.   ==---
     //   ---========================================---
     //    ---======================================---
 
 
     /** Registers a Construct with the neural net engine of the given architecture and name desired.
 
-        register_Assembly TYPE NAME
+        register_Construct TYPE NAME
 
     \param TYPE The node network architecture, Many_To_One, pyramidal, etc.
     \retval int Outputs the ID of the newly constructed construct to "./Output/returns.ssv".
@@ -3573,17 +4035,17 @@ public:
 
     Example Usage:
 
-    We'll register 3 constructs, then output the assemblies:
+    We'll register 3 constructs, then output the constructs:
 
-        register_Assembly Many_To_One ExaCon
-        register_Assembly Many_To_One ConExa
-        register_Assembly Many_To_One ExaMSC
+        register_Construct Many_To_One ExaCon
+        register_Construct Many_To_One ConExa
+        register_Construct Many_To_One ExaMSC
 
-        output_Assemblies
+        output_constructs
 
     Output:
 
-        __COMMAND__| output_assemblies |
+        __COMMAND__| output_constructs |
         [0]: ExaCon
         [1]: ConExa
         [2]: ExaMSC
@@ -3596,21 +4058,27 @@ public:
 
     - None.
     */
-    int register_Assembly(std::ifstream* p_File)
+    int register_Construct(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| register_assembly |";
+        std::cout << "\n\n --> register_Construct |";
 
-        //int add_Assembly(std::string p_Assembly_Name)
+        //int add_Construct(std::string p_Construct_Name)
 
         std::string tmp_Construct_Type = "";
 
         *p_File >> tmp_Construct_Type;
 
+        std::cout << " " << tmp_Construct_Type << " |";
+
         std::string tmp_Construct_Name = "";
 
         *p_File >> tmp_Construct_Name;
 
-        return API.register_Assembly(tmp_Construct_Type, tmp_Construct_Name);
+        std::cout << " " << tmp_Construct_Name << " |";
+
+        return API.register_Construct(tmp_Construct_Type, tmp_Construct_Name);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -3634,7 +4102,7 @@ public:
 
     To start with we register our construct:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
 
     We create the input file for it and put our sample data into the file:
 
@@ -3675,16 +4143,20 @@ public:
     */
     int load_Input(std::ifstream* p_File)
     {
-        std::cout << "\n| load_Input |";
+        std::cout << "\n\n --> load_Input |";
 
-        //Outputs the input for the Assembly.
-        //output_Input(int p_Assembly)
+        //Outputs the input for the Construct.
+        //output_Input(int p_Construct)
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         return API.load_Input(tmp_Construct);
+
+        //std::cout << " [|x|]";
     }
 
     /** Loads the input file associated with the given construct into the input array as uint.
@@ -3700,7 +4172,7 @@ public:
 
     To start with we register our construct:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
 
     We create the input file for it and put our sample data into the file:
 
@@ -3734,13 +4206,17 @@ public:
     */
     int load_Input_uint(std::ifstream* p_File)
     {
-        std::cout << "\n| load_Input_uint |";
+        std::cout << "\n\n --> load_Input_uint |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         return API.load_Input_uint(tmp_Construct);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -3764,7 +4240,7 @@ public:
 
     The first step is to encode a pattern, into a newly minted construct for this example though it doesn't have to be new, it can be an old heirloom construct passed down through the generations:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 The Dream Quest of Unkown Kadath /end/
         encode 0
         output_Scaffold
@@ -3812,7 +4288,7 @@ public:
 
     From this we can see the upper tier node is '21'. So we tell it to retrieve that node, however, we create a new construct and get the node through that construct to show that as long as the construct is the same type we can retrieve patterns encoded into the nodes:
 
-        register_Assembly Many_To_One RandomCon
+        register_Construct Many_To_One RandomCon
         gather_Given_Node 1 21
 
     For an output of:
@@ -3831,17 +4307,24 @@ public:
     */
     int gather_Given_Node(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| gather_given_node |";
+        std::cout << "\n\n --> gather_Given_Node   CONSTRUCT_ID |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         int tmp_NID = 0;
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         API.gather_Given_Node(tmp_Construct, tmp_NID);
+
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -3863,9 +4346,9 @@ public:
 
     3 networks must be crafted with care, two raw tier constructs, and one higher multi-sensory construct (MSC):
 
-        register_Assembly Many_To_One ExaCon
-        register_Assembly Many_To_One ConExa
-        register_Assembly Many_To_One ExaMSC
+        register_Construct Many_To_One ExaCon
+        register_Construct Many_To_One ConExa
+        register_Construct Many_To_One ExaMSC
 
     Now we'll encode the two raw constructs ExaCon and ConExa. ExaCon will be temperature, and ConExa will be oxygen:
 
@@ -3953,17 +4436,23 @@ public:
     */
     int gather_Given_Node_uint(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| gather_Given_Node_uint |";
+        std::cout << "\n\n --> gather_Given_Node_uint |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
 
         int tmp_NID = 0;
 
         *p_File >> tmp_NID;
 
+        std::cout << " " << tmp_NID << " |";
+
         API.gather_Given_Node_uint(tmp_Construct, tmp_NID);
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -3981,7 +4470,7 @@ public:
 
     Register a construct and encode the string 'qwerty':
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 qwerty /end/
         encode 0
 
@@ -4013,13 +4502,17 @@ public:
     */
     int gather_All_Nodes(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| gather_all_nodes |";
+        std::cout << "\n\n --> gather_All_Nodes |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.gather_All_Nodes(tmp_Construct);
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -4038,7 +4531,7 @@ public:
 
     Register a construct and encode the array { 499, 500, 501 }:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input_uint 0 3 499 500 501
         encode 0
 
@@ -4067,13 +4560,17 @@ public:
     */
     int gather_All_Nodes_uint(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| gather_all_nodes_uint |";
+        std::cout << "\n\n --> gather_All_Nodes_uint |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.gather_All_Nodes_uint(tmp_Construct);
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -4081,7 +4578,7 @@ public:
 
     //    ---==================================================================---
     //   ---====================================================================---
-    //  ---==   The output of a given assembly is read into the output file.   ==---
+    //  ---==   The output of a given Construct is read into the output file.   ==---
     //   ---====================================================================---
     //    ---==================================================================---
 
@@ -4099,7 +4596,7 @@ public:
 
     First we register our construct & encode a series of +- strings:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 --- /end/ encode 0
         set_Input 0 --+ /end/ encode 0
         set_Input 0 -+- /end/ encode 0
@@ -4138,9 +4635,9 @@ public:
     */
     int gather_Output(std::ifstream* p_File)
     {
-        std::cout << "\n| gather_Output |";
+        std::cout << "\n\n --> gather_Output |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
@@ -4148,7 +4645,7 @@ public:
 
         API.gather_Output(tmp_Construct);
 
-        //Neuralman.set_Input_1D_string(tmp_Construct, tmp_In_Full);
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -4166,7 +4663,7 @@ public:
 
     First we register our construct & encode a series of 3 item arrays:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input_uint 0 3 11 11 11 encode 0
         set_Input_uint 0 3 11 11 99 encode 0
         set_Input_uint 0 3 11 99 11 encode 0
@@ -4205,9 +4702,9 @@ public:
     */
     int gather_Output_uint(std::ifstream* p_File)
     {
-        std::cout << "\n| gather_Output_uint |";
+        std::cout << "\n\n --> gather_Output_uint |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
@@ -4215,7 +4712,7 @@ public:
 
         API.gather_Output_uint(tmp_Construct);
 
-        //Neuralman.set_Input_1D_string(tmp_Construct, tmp_In_Full);
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -4232,7 +4729,7 @@ public:
         gather_Treetop_Node CONSTRUCT_ID
 
     \param CONSTRUCT_ID The construct you want the treetop from.
-    \retval c_Node Treetop[] The treetop is output to the output file associated with the given construct.
+    \retval c_Node Treetop  The treetop is output to the output file associated with the given construct.
 
     This returns the treetop node for a given construct and outputs it to the output file for the given construct.
 
@@ -4242,7 +4739,7 @@ public:
 
     First we encode a string into a Many_To_One:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 Pull Your Circuit Breaker /end/
         encode 0
 
@@ -4266,14 +4763,18 @@ public:
     */
     int gather_Treetop_Node(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| gather_treetop_node |";
+        std::cout << "\n\n --> gather_treetop_node |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         //Gathers the treetop node.
         API.gather_Treetop_Node(tmp_Construct);
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -4283,7 +4784,7 @@ public:
         gather_Treetop_Node_uint CONSTRUCT_ID
 
     \param CONSTRUCT_ID The construct you want the treetop from.
-    \retval c_Node Treetop[] The treetop is output to the output file associated with the given construct.
+    \retval c_Node Treetop  The treetop is output to the output file associated with the given construct.
 
     This returns the treetop node for a given construct and outputs it to the output file for the given construct.
 
@@ -4293,7 +4794,7 @@ public:
 
     First we encode a string into a Many_To_One:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input_uint 0 3 111 222 333
         encode 0
 
@@ -4317,13 +4818,17 @@ public:
     */
     int gather_Treetop_Node_uint(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| gather_treetop_node_uint |";
+        std::cout << "\n\n --> gather_treetop_node_uint |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         API.gather_Treetop_Node_uint(tmp_Construct);
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -4345,9 +4850,9 @@ public:
 
     First we create 3 networks, our old fren ExaCon, the somewhat familiar ConExa, and the rarely seen ExaMSC.
 
-        register_Assembly Many_To_One ExaCon
-        register_Assembly Many_To_One ConExa
-        register_Assembly Many_To_One ExaMSC
+        register_Construct Many_To_One ExaCon
+        register_Construct Many_To_One ConExa
+        register_Construct Many_To_One ExaMSC
 
     Now we'll encode the two raw constructs ExaCon and ConExa. ExaCon will be temperature, and ConExa will be oxygen:
 
@@ -4445,24 +4950,40 @@ public:
     */
     int gather_Treetop_NID(std::ifstream* p_File)
     {
-        std::cout << "\n\n __COMMAND__| gather_Treetop_NID |";
+        std::cout << "\n\n --> gather_Treetop_NID |";
 
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
-        //Passes the values to an assembly to encode.
+        std::cout << " " << tmp_Construct << " |";
+
+        //Passes the values to an Construct to encode.
         API.gather_Treetop_NID(tmp_Construct);
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
 
 
+    void gather_Treetops(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> gather_Treetops |";
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
+
+        API.gather_Treetops(tmp_Construct);
+    }
 
 
     //    ---======================================================================---
     //   ---========================================================================---
-    //  ---==   Output the assembly input, output, scaffolds, node network, etc.   ==---
+    //  ---==   Output the Construct input, output, scaffolds, node network, etc.   ==---
     //   ---========================================================================---
     //    ---======================================================================---
 
@@ -4478,7 +4999,7 @@ public:
 
     First we register the construct, then we encode a series of binary values just because:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 000 /end/ encode 0
         set_Input 0 001 /end/ encode 0
         set_Input 0 010 /end/ encode 0
@@ -4517,10 +5038,12 @@ public:
     */
     int output_Node_Network()
     {
-        std::cout << "\n| output_Node_Network |";
+        std::cout << "\n\n --> output_Node_Network |";
 
-        //Passes the values to an assembly to encode.
+        //Passes the values to an Construct to encode.
         API.output_Node_Network();
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -4538,7 +5061,7 @@ public:
 
     First we'll register a construct, then set & encode a string, then output the scaffold so we can see the nodes:
     
-		register_Assembly Many_To_One ExaCon
+		register_Construct Many_To_One ExaCon
         set_Input 0 T-800 /end/
 		encode 0
 		output_Scaffold 0
@@ -4574,7 +5097,7 @@ public:
     */
     int output_Node(std::ifstream* p_File)
     {
-        std::cout << "\n| output_Node |";
+        std::cout << "\n\n --> output_Node |";
 
         int tmp_Node = 0;
 
@@ -4582,14 +5105,16 @@ public:
 
         std::cout << " " << tmp_Node << " |";
 
-        API.output_BP_NID(tmp_Node);
+        API.output_Backpropagated_Symbol_NID(tmp_Node);
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
 
     /** Outputs the constructs currently registered.
 
-        output_Assemblies
+        output_constructs
     \retval None This function doesn't return any values.
 
     Outputs the list of currently registered constructs to the console.
@@ -4598,14 +5123,14 @@ public:
 
     We'll register some constructs, then output them:
 
-        register_Assembly Many_To_One First_Conman
-        register_Assembly Many_To_One Second_Conman
-        register_Assembly Many_To_One Third_Conman
-        output_Assemblies
+        register_Construct Many_To_One First_Conman
+        register_Construct Many_To_One Second_Conman
+        register_Construct Many_To_One Third_Conman
+        output_constructs
 
     Output:
 
-        __COMMAND__| output_assemblies |
+        __COMMAND__| output_constructs |
         [0]: First_Conman
         [1]: Second_Conman
         [2]: Third_Conman
@@ -4618,11 +5143,13 @@ public:
 
     - None.
     */
-    int output_Assemblies()
+    int output_Constructs()
     {
-        std::cout << "\n| output_Assemblies |";
+        std::cout << "\n\n --> output_Constructs |";
 
-        API.output_Assemblies();
+        API.output_Constructs();
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -4654,7 +5181,7 @@ public:
 
     Here we setup a construct, encode a string, gather the treetop node into the output file, output the output, wipe the output using this function, then recheck the output file to make sure:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 Night Gaunt /end/
         encode 0
         gather_Treetop_Node 0
@@ -4684,12 +5211,16 @@ public:
     */
     int clear_Output(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         //Gathers the treetop node.
         API.clear_Output(tmp_Construct);
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
@@ -4705,9 +5236,9 @@ public:
 
     Example Usage:
 
-    For an example we will register an assembly, encode several items, then output them one by one with two newlines betwixt them:
+    For an example we will register an Construct, encode several items, then output them one by one with two newlines betwixt them:
 
-        register_Assembly Many_To_One ExaCon
+        register_Construct Many_To_One ExaCon
         set_Input 0 Night Gaunt /end/
         encode 0
         gather_Treetop_Node 0
@@ -4740,20 +5271,108 @@ public:
     */
     int output_Newline(std::ifstream* p_File)
     {
-        int tmp_Construct = 0;
+        std::cout << "\n\n --> write_Newline   CONSTRUCT_ID |";
+
+        std::string tmp_Construct = "";
 
         *p_File >> tmp_Construct;
 
+        std::cout << " " << tmp_Construct << " |";
+
         //Gathers the treetop node.
         API.output_Newline(tmp_Construct);
+
+        //std::cout << " [|x|]";
 
         return 1;
     }
 
 
+    int write_Text(std::ifstream* p_File)
+    {
+        std::cout << "\n\n --> write_Text   CONSTRUCT_ID   TEXT |";
+
+        std::string tmp_In = "";
+        std::string tmp_In_Full = "";
+        int tmp_Count = 0;
+
+        std::string tmp_Construct = "";
+
+        *p_File >> tmp_Construct;
+
+        std::cout << " " << tmp_Construct << " |";
+
+        bool flg_Gather_Input = true;
+
+        while (flg_Gather_Input)
+        {
+            tmp_In = "";
+            *p_File >> tmp_In;
+
+            std::cout << " " << tmp_In << " |";
+
+            if (tmp_In == "/end/")
+            {
+                flg_Gather_Input = false;
+                continue;
+            }
+
+            if (tmp_In != "")
+            {
+
+                tmp_Count++;
+
+                if (tmp_In_Full != "")
+                {
+                    tmp_In_Full = tmp_In_Full + " " + tmp_In;
+                }
+                else
+                {
+                    tmp_In_Full = tmp_In;
+                }
+            }
+
+            if (flg_Gather_Input)
+            {
+                flg_Gather_Input = (!p_File->eof());
+            }
+        }
+
+        API.write_Text(tmp_Construct, tmp_In_Full);
+
+
+        //std::cout << " [|x|]";
+
+        return 1;
+    }
+
+    /** brief
+
+        function_name params
+    \param 
+    \retval None This function doesn't return any values.
+	
+	Describe behavior and side-effects. What it basically does and if it touches any globals.
+	
+	Example Usage:
+	
+	    function_name params
+	
+	Output:
+	
+	    output
+	
+	Error Handling:
+	
+	- No error handling is implemented in this function.
+	
+	Additional Notes:
+	
+	- None.
+    */
     void save(std::ifstream* p_File)
     {
-        std::cout << "\n| save |";
+        std::cout << "\n\n --> save |";
 
         std::string tmp_FName;
 
@@ -4761,13 +5380,18 @@ public:
 
         std::cout << " " << tmp_FName << " |";
 
+        tmp_FName = "./cores/" + tmp_FName;
+        std::cout << " " << tmp_FName << " |";
+
         API.save(tmp_FName);
+
+        //std::cout << " [|x|]";
     }
 
 
     void load(std::ifstream* p_File)
     {
-        std::cout << "\n| load |";
+        std::cout << "\n\n --> load |";
 
         std::string tmp_FName;
 
@@ -4775,7 +5399,12 @@ public:
 
         std::cout << " " << tmp_FName << " |";
 
+        tmp_FName = "./cores/" + tmp_FName;
+        std::cout << " " << tmp_FName << " |";
+
         API.load(tmp_FName);
+
+        //std::cout << " [|x|]";
     }
 
 
@@ -4799,6 +5428,13 @@ public:
     */
     int run()
     {
+        if (flg_Exit) 
+        {
+            std::cout << "\n\n --> exit |";
+            std::cerr << "\n\n   (o~o) It's been fun anon...goodbye...  \n\n";
+            return 1; 
+        }
+
         int flg_Direction = 1;
         int tmp_Distance = -250;
         int tmp_MAX = 250;
@@ -4841,10 +5477,13 @@ public:
 
                 if (execute_Control_Panel_Buffer() == -1)
                 {
+                    std::cout << "\n\n --> exit |";
+                    std::cerr << "\n\n   (o~o) It's been fun anon...goodbye...  \n\n";
+
                     return 1;
                 }
 
-                std::cout << "\n\n    (o.O)";
+                std::cout << "\n\n (o.O)";
 
                 std::cout << tmp_Message;
 

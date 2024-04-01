@@ -1,0 +1,687 @@
+
+Sat 02/10/2024  7:13:59.39:
+   Began work on porting over NT4 to a standalone wrapped in a text based interface to a looping server. So far I have the CMake project building, I can run a server, and use a flag file to call a command. Currently the only working command the add_assembly, but that will change sson.
+
+Sun 02/11/2024  0:40:23.83:
+   Added the boot loader, config also interprets each command. The commands existing, limited and needs expanded, are added as empty functions that only output the command name when called atm.
+
+Tue 02/13/2024  2:24:29.00:
+   ALrighty, have some commands fleshed out. Mostly outputs. Can now set the input to a given assembly though. Built the batch control panel super basic version
+
+Tue 02/13/2024  3:37:18.02:
+   Success in encoding and node network output
+
+Tue 02/13/2024 22:44:05.28:
+   Made a batch program that puts a command into the control panel file, sets the flag, then goes red while it wats for the finished flag file to go high. Once it is back to the  main loop it goes green again. Stupid but I think it is cool. Reminds me of my first batch scripts, just loops with color changes.
+
+Wed 02/14/2024  8:32:58.29:
+   Note to self, nodes are stored and passed between constructs as uint states, not direct reference
+
+Wed 02/14/2024  8:58:25.28:
+   Lmao, was accidentally deleting the array when I output the tmp variable for the linked list handler. That is why the output traces weren't encoding
+
+Wed 02/14/2024  9:09:34.64:
+   Alrighty, got to the point where I just need to pipe the output to the output file. Then I will have the bindertwine and wire version done
+
+Thu 02/15/2024  1:55:47.73:
+   FUck yeah, got the output outputting to the file. Bit messed up atm, but the patterns are there, the unique node ID's, so tidy up and this section will be complete. Tidy up as in figure out why there are two back to back patterns for one.
+
+Fri 02/16/2024  2:55:45.63:
+   Fixed bug in the charge_Buffers that typecasted the double charge to an unsigned long long int
+
+Fri 02/16/2024  4:07:19.22:
+   Tomorrow looking to add the differentiated state trees so the raw networks many 2 many have discrete quanta to search
+
+Sat 03/02/2024  7:06:07.24:
+   Oof, been way to long since I've updated this.
+
+Sat 03/02/2024  7:07:39.64:
+   Have the base network done, the differentiated state, the base API interface, the ID API, the Text API. Well, still finishing up the API's, but the majority is there. Now to document and get this out there. Still need to implement the multidimensional networks, the pyramidal ones, also stiched base networks.
+
+Sat 03/02/2024  7:12:50.89:
+   Just rearranged the argument list in the API that put the arrays before the array index counter, such as when passed an array of integers for IDs and the count. The text API is basic atm, and this means I load the counter then the elements in a for loop.
+
+Sat 03/02/2024  7:13:38.48:
+   Also, there is a huge issue atm with NID 0 as that is used to check for invalid nodes in many functions. So it needs written into the network to handle node zero.
+
+Sat 03/02/2024  7:15:31.67:
+   Probably just create one on initiation and start the regular node creation at 1. Output functions such sa saving and loading (shit, need to write them yet), need adjusted to start on node 1. Might be able to get away with just throwing a new_Node() into the constructor.
+
+Sat 03/02/2024  7:20:58.99:
+   I made an exception for the query when it comes to putting the array before the count because it needs refactored overall and currently is distinct from the ID based interface and text one above that, the ID level splits the query call into several different api hooks which internally reference query but with different parameters sent for different functionality. May split the query into several, or build them into the construct base level interface just to keep things coherent, then the raw query will dangle from the structure but the interface stemming from it will tendril coherently.
+
+Sat 03/02/2024  7:29:29.19:
+   Build all succeeded, best feel
+
+Sat 03/02/2024  7:37:42.18:
+   I therew the new_Node() into the constructor. Looking it over this should work, just need to remember to skip it during holistic node handling.
+
+Sat 03/02/2024 15:36:49.89:
+   If I make the tokenizer search for files with the fallthrough token in a subdir then scripting custom commands is as simple as dropping the file with the extension in the correct dir and the engine will pick it up.
+
+Sat 03/02/2024 21:44:39.42:
+   I have everything for doxygen, going to use that as it seems to be the industry standard for C++ documentation
+
+Sat 03/02/2024 23:30:33.56:
+   Success, got some doxygen working. Going to proceed to document the interfaces now. Going to be tedious but worth it.
+
+Sun 03/03/2024  3:55:50.63:
+   Alrighty, got a template hammered out for the classes and functions. Now to just brute force my way through documenting the entire thing.
+
+I'm manually editing this file to include the template I worked out to document each function in markup:
+
+    /** brief
+
+        function_name params
+    \param 
+    \retval None This function doesn't return any values.
+	
+	Describe behavior and side-effects. What it basically does and if it touches any globals.
+	
+	Example Usage:
+	
+	    function_name params
+	
+	Output:
+	
+	    output
+	
+	Error Handling:
+	
+	No error handling is implemented in this function.
+	
+	Additional Notes:
+	
+	-None.
+    */
+Sun 03/03/2024  3:57:58.84:
+   Edited the file directly to include the template.
+
+Sun 03/03/2024  4:09:55.78:
+   I have to remember to remove all the brackets otherwise it will look like all my arguments are optional when many are not optional.
+
+Sun 03/03/2024 13:03:42.20:
+   Currently writing the comments for does_Lower_Node_Exist and need to remember to update both newline and space and cls with the syntax "newline [OUTPUT] [ID]". Where OUTPUT can be construct or return or other. Construct looks for an int after "construct", "return" just drops it into the return file without reading any more, and other allows you to specify a filename.
+
+Sun 03/03/2024 23:54:36.87:
+   The comments are about 2x the length of the actual functions they are documenting lmao
+
+Mon 03/04/2024  4:19:34.45:
+   The conversion between uint64_t and double loses data when typecasting, need to build different overloads for the input functions for the different datatypes and use the conversion using a union at the construct level so it is the same through all the levels of interfaces.
+
+Mon 03/04/2024  4:58:17.38:
+   Oof, it's slow going. Just got through the node network section, when I wake up I'll start on the CAN section.
+
+Mon 03/04/2024 23:47:15.90:
+   Good lord, going to need to go back through and redo the examples up to CAN so that they can follow along with the text server itself
+
+Tue 03/05/2024  1:46:50.06:
+
+Tue 03/05/2024  8:55:21.72:
+   I need to go back through all examples anyway, I'm fixing tons of minor errors in spelling, output, etc along the way. For example I just noticed that the raw output for uint doesn't output the node type.
+
+Tue 03/05/2024  8:56:42.32:
+   My bad, it's a construct level member called write_Node_To_File, not raw output
+
+Fri 03/08/2024 21:51:30.26:
+   The comments I'm writing in doxygen are dwarfind the interface members, no surprise, but still coming out to more than expected.
+
+Sat 03/09/2024 19:26:04.70:
+   Updated a bug in the query_Given_Legs function. It assumed the given leg array was of equal depth to the input.
+
+Sat 03/09/2024 19:26:19.91:
+   Now you pass the number of legs as p_Leg
+
+Sun 03/10/2024 13:52:56.11:
+   An advanced feature will be the ability to toggle manual treetop collection for queries. This unlocks the ability to perform multiple queries on a network with the results of each query being superimposed. The value in this is that you can use query_Spacial in a normal time-series search but then use query_Given_Legs to search for a set of inputs on a given leg or to work as a focus mechanism
+
+Sun 03/10/2024 13:54:09.66:
+   So, I'll have the base API documentation which goes over how to use each function, parameters, etc. Then we'll have the documentation for the higher level, how to do time series searches, network stacking, compound searches, focus mechanisms, etc.
+
+Sun 03/10/2024 13:58:24.40:
+   Wait, this higher level documentation would be the how-to section
+
+Sun 03/10/2024 14:03:12.36:
+   toggle_Autoharvesting is what I will call the function to turn the treetop gathering on and off for the compound searches. That sounds cool.
+
+Sun 03/10/2024 14:19:30.49:
+   I might be wrong, but I don't see a readon for submit_Set to be in the interface. I think I just brought it to the surface while high as it does not belong or make sense to be a hook.
+
+Sun 03/10/2024 14:35:38.44:
+   Ok, looking into it a bit more and I don't see anywhere the submit_Set is even used other than the interface. I believe it is a leftover from earlier dev before I handled string and uint separate and was intending to do direct connections from the MSC and others to higher networks.
+
+Sun 03/10/2024 14:36:02.80:
+   So, note to self, remove submit_Setabob
+
+Sun 03/10/2024 17:25:57.34:
+   So I had it to where the get_Treetop did not use the index parameter. For in the future when pyramidal, stich based, and other multi-treetop CAN structures are implemented there is now at the construct level get_Treetop_NID_At_Given_Index ready to be wired in.
+
+Sun 03/10/2024 17:47:27.48:
+   Found an error that isn't an error. I was trying to figure out why the get_Treetop_NID wasn't outputting to the file correctly. Turned out it was, to the "returned.ssv" file. I had assumed, since I forgot it did that, that the output would go to construct I called for the ID. So I will change the behavior to reflect this assumption under the belief that it is more intuitive.
+
+Sun 03/10/2024 17:50:46.10:
+   Actually nvm, because get_Treetop_NID is meant to be the equivelant of using the function call and handling a return value, to write the NID to the output file of the construct we have gather_Treetop_NID. So get outputs to return.ssv and gather outputs to the output.ssv.
+
+Mon 03/11/2024  1:26:52.23:
+   I think a few functions should be made before the how-to on time series and otherwise. Saving/loading, and append_Output_To_Input which copies an output file from one construct into the input of another.
+
+Mon 03/11/2024  1:26:58.89:
+   Oh, and eval
+
+Mon 03/11/2024  1:33:59.38:
+   Oh, and eval
+
+Mon 03/11/2024  1:33:59.51:
+           register_Assembly Many_To_One ExaCon
+
+Mon 03/11/2024  1:33:59.61:
+           set_Input 0 The Dream Quest of Unkown Kadath /end/
+
+Mon 03/11/2024  1:33:59.71:
+
+Mon 03/11/2024  1:33:59.81:
+           output_Scaffold
+
+Mon 03/11/2024  1:34:13.40:
+   Whoops, wrong console window.
+
+Mon 03/11/2024  2:51:32.33:
+   Holy good lords above and below and inside and without, this is taking forever. Almost done though with the base document! Only 8 more members to document, though I'll be adding more before I'm done that's all good.
+
+Mon 03/11/2024 14:11:47.33:
+   Alrighty, so I'm going to clean up the interface a bit. From here on out part of the format will be to have the printed command text formatted different, and mainly reduce the bullshit output like all the file confirmations for the handshake protocol and whatnot.
+
+Mon 03/11/2024 14:23:59.31:
+   Alrighty, so I'm going to clean up the interface a bit. From here on out part of the format will be to have the printed command text formatted different, and mainly reduce the bullshit output like all the file confirmations for the handshake protocol and whatnot.
+
+Mon 03/11/2024 14:25:05.42:
+   Fuck, tried control c to change color of console, that's why double input, didn't work. I come really close to pasting to this console a lot when writing control strings. The color of this and control.bat are the same. I'll change control.bat
+
+Mon 03/11/2024 14:30:36.30:
+   Nvm, chanced journal.bat instead
+
+Mon 03/11/2024 16:23:55.25:
+   Almost done with documentation on the initial members. Then need to implement the other couple I want. Then go through and redo the output for each command. After the output is cleaned up and where I want it then I can go back through all the members again doing the final formatting and example run through.
+
+Mon 03/11/2024 17:20:56.63:
+   And so finishes the first stretch, base documentation!
+
+Mon 03/11/2024 17:21:04.26:
+   Also I added load_Input_uint
+
+Tue 03/12/2024  0:58:55.47:
+   Saving is done I think. Went easy, but saving the networks always does compared to loading. Much easier to write the node data rather than load and rebuild them.
+
+Tue 03/12/2024  1:41:04.78:
+   Ok, assemblies are loading and registering, now for nodes.
+
+Tue 03/12/2024  1:53:22.54:
+   There's no fucking way. No. The node network just loaded flawlessly?
+
+Tue 03/12/2024  1:59:35.67:
+   I need to implement getters and setters for the lower classes and go back through to integrate them to decouple the classes.
+
+Tue 03/12/2024  2:00:00.93:
+   Specifically looking at saving and loading atm, RC and State are set directly from c_Construct.
+
+Tue 03/12/2024  2:10:47.79:
+   Yeah, I'll be damned. It seems to load properly. Rebuild the network properly, I can even save the network again and the resulting file is identical.
+
+Tue 03/12/2024 15:10:22.83:
+   I'm an idiot. State trees need rebuilt.
+
+Tue 03/12/2024 16:38:25.71:
+   w00t w00t! Saving and loading now ACTUALLY works. I can save, load, and query.
+
+Tue 03/12/2024 16:42:11.05:
+   Now to make the eval command and start prepping for Thursday. I think the goal will be packaged and ready for testing with Stuart and MiKayla to build on linux and Mac. If we can do that, and run some commands, I'll setup a workshop so I can teach them and anyone who wants to join how to use it.
+
+Tue 03/12/2024 18:00:51.14:
+   About to test the eval functionality for the first time. If a command token falls through it should try to interpret the token as a script frile from ./Scripts/
+
+Tue 03/12/2024 18:02:40.06:
+   The test script is... "159.txt" because it has been my faithful companion. I've been posting the code as I develop the engine into 159.txt so it seems only right to allow its legacy to live on this temporary notepad++ file.
+
+Tue 03/12/2024 18:05:31.33:
+   Holy man, damn, ain't no sham I feel like having a jam as that worked with no issues whatsoever. Crazy.
+
+Wed 03/13/2024  1:03:09.53:
+   I just copied the Many_To_One, went through it converting it to 1D_Pyramid in one go, and it supposedly compiled fine... we'll see... we'll see...
+
+Wed 03/13/2024  1:07:55.67:
+   Ahhh, it crashed on encoding, but compiled! So syntax is correct lol.
+
+Wed 03/13/2024  1:09:50.57:
+   Output of the scaffold shows that is constructed properly so that is cool. It crashes on the fill
+
+Wed 03/13/2024  1:11:30.68:
+   State seems to fill fine. I bet it is when I pass the array for the get_Upper_Tier_Nodes
+
+Wed 03/13/2024 23:27:49.82:
+   Well.. Huh. I'm actually shocked. It works. It builds. I can see the CAN structure, everything. Query works too.
+
+Wed 03/13/2024 23:29:16.78:
+   That last comment is old, forgot to hit enter whenever that was. Anyhow, working on building 2d and 3d c_IO_Input variations. Once those are complete I'm building the 2D and 3D pyramidal networks. May or may not get to the double legged node issue,  could do it through a node creation parameter.
+
+Thu 03/14/2024  0:45:09.39:
+   Alright, got them done. I think, haven't tested them fully, that comes when I hook them up.
+
+Thu 03/14/2024  0:45:31.26:
+   The inputs, I have the base input classes written for 2d and 3d now. I'll do the multi in the future.
+
+Thu 03/14/2024  1:57:08.42:
+   2D and 3D input setting with uint is now done. It's actually pretty neat, can just straight up draw the arrays in notepad using newlines and everything. Can I shift enter on here I wonder?
+
+Thu 03/14/2024  1:57:10.05:
+   NOpe
+
+Thu 03/14/2024  3:30:22.30:
+   Alrighty, got 2D construct created from the 1D pyramid construct. Compiles, now to wire it into the text engine and see where it crashes at.
+
+Thu 03/14/2024  3:48:11.68:
+   2D constructs appear to encode and query correctly, but the output traces are 1D and so gotta take care of that. One interesting thing is that you can use the 1D query commands to query the networks since the only requirement for the charging buffers to work correctly is consistent leg count. Soon I'll be able to tell if backpropagation worked to retrieve the patterns, it should, but we'll see lol.
+
+Thu 03/14/2024  3:50:17.59:
+   Backpropagation most definitely is not working correctly. I kind of wanted to implement the XY torchbearer anyway. That way I can map to output traces to make the IO pretty, well clean.
+
+Thu 03/14/2024 13:51:17.57:
+   Alrighty, I've got 4 hours to get 2D working, figure out the make builds for other systems, and get an example working for the pmeeting. Going to show the basic setup, and see about setting up a meeting to teach ti.
+
+Thu 03/14/2024 13:54:28.83:
+   Ackshually, I think I'll get the 3D building then move to doing the CMAke stuff.
+
+Thu 03/14/2024 13:54:48.21:
+   The only part not working on the 2D is the BP of the patterns, node order is messed up.
+
+Thu 03/14/2024 14:30:33.52:
+   "Build All Succeeded" makes me happy. Doesn't mean it will run correctly, but the logic errors are the level of abstraction we want to work, not tying up syntax.
+
+Thu 03/14/2024 14:44:22.96:
+   Sweet it is building!
+
+Thu 03/14/2024 14:44:39.36:
+   If I have time I'll do stiched based one's as well.
+
+Thu 03/14/2024 14:45:06.27:
+   Time to switch to setting up the example and getting the CMake build on linux and mac figured out so I can host it for Stuart and MiKayla
+
+Thu 03/14/2024 16:38:01.19:
+   Alrighty, CMake is building, used ChatGPT to make a build script for linux and mac which idk if that works but we'll see. Now to upload to GitHub and see about getting the documentation working.
+
+Fri 03/15/2024 17:59:44.32:
+   I should be able to input a 2x2 with 1 2 3 4 and then see how the bp outputs them to get an idea of the mapping error.
+
+Sat 03/16/2024  1:08:33.03:
+   Gave the output labels for human readability. If you're scripting you'll just have to get used to skipping those keyworks like Dendrite_Count
+
+Sat 03/16/2024  1:26:00.43:
+   I just built the 2D trace, now to hook it up.
+
+Sun 03/17/2024  1:42:35.34:
+   Sweet, just got the 3D trace to bp correctly. Been a moment since I reported in. Just been hooking up the 2D and 3D stuff.
+
+Sun 03/17/2024  4:14:51.85:
+   Alrighty, got rid of the absurd number of bp_nD_Trace and routes the bp function to bp_M when needed.
+
+Sun 03/17/2024  6:02:07.15:
+   Implemented dendrite checking in the bp. That way if your 3D network tries to bp a 1d or 2D trace it won't crash
+
+Sun 03/17/2024 22:03:26.13:
+   I think it would be best to put all of the configurations into files. Each construct, a config file, the server itself; config.
+
+Sun 03/17/2024 22:09:23.65:
+   For tier normalization I will run through and collect the highest charge during the charging, then on the next iteration, the next tier, I wil normalize according to the last highest charge before actuating. Instead of getting the highest charge and walking the entire buffer just to adjust charge, do it when already there, just wait until it is needed.
+
+Mon 03/18/2024 14:38:06.29:
+   fixed a bug where the load file would resubmit an input since I wasn't wiping tmp_In between each line.
+
+Mon 03/18/2024 20:16:30.63:
+   Ok sweet, did like 5 minutes of work and now you can pass the name of a script for it to load instead of autoexec.ssv, meaning you can CLI it and run multiple configurations in the same folder for extra headache.
+
+Wed 03/20/2024  4:38:02.53:
+   Adding a config file to the Assemblies file list, this will be used to control all parameters and hyperparameters
+
+Thu 03/21/2024 11:49:05.34:
+   Been sick. Redid the NeuroTox language to reflect natural language more. Going to look into getting 2D and 3D going, plus stiched bas, and then polish the engine as that should be most of the base functionality, well and adding a config and tying it in.
+
+Thu 03/21/2024 14:20:27.86:
+   Working no 2d right now, been fixing up the encode function and eval. They seem to be working but the output is messed up, investigating that.
+
+Thu 03/21/2024 14:24:13.47:
+   I think I found the issue, it is using 1D trace output so the x,y is not being mapped correctly.
+
+Thu 03/21/2024 14:24:47.95:
+   Also the insane jumble from before was likely from the BP algos walking the same traces twice with _M
+
+Fri 03/22/2024  8:23:52.84:
+   Finally got 2D working. Did a dum dum diddly shiddly, forgot to do the tmp_Current_LL = tmp_Current_LL.next and was instead trying to hunt down a pointer error that wasn't there. I think it's time for bed lmao
+
+Fri 03/22/2024 22:53:12.17:
+   Alrighty, now that 2D is working on bp, charges are being passed from the treetop buffer to the output traces, I need to track down why the charges are funky
+
+Sat 03/23/2024  2:43:51.51:
+   Lmao, I'm trying to figure out why the nodes aren't passing charges correctly to the top tier. A 2D node with 3 charged legs keeps coming up 10, but looking close I ralize I already implemented treetop normalization
+
+Sat 03/23/2024  2:44:40.80:
+   Remember to put into the documentation that due to tier by tier normalization you don't want to put a bunch of nodes in at different tiers at once, otherwise the chages will be normalized up down left right and fucked.
+
+Sat 03/23/2024  2:57:39.51:
+   Adding weights to the legs, don't want to, ton of extra memory, but to deal with the double legged node charging issue I see no choice. It is that or calculate it for every node every time they charge and holy no, only if processor is infinite and memory is limited. Maybe parallelization someday but that is a problem for a mature engine, MVP ATM MF
+
+Sat 03/23/2024  3:28:34.69:
+   The damned double legged node charging problem has haunted me everytime I implement a new iteration of this engine. Bah, nature of the beast I suppose. I will slay it regardless, feast upon it's corpse, make a hat from its face, dance upon its bones.
+
+Sat 03/23/2024  3:36:25.45:
+   Adding the weights to the dendrites, this will limit the memory used to the lower legs of which there are a known amount depending on the type of CAN Scaffold used. Adding it to the axons would be more intuitive for charging but for saving and loading only the dendrites are saved and the axonic sets rebuilt during loading.
+
+Sat 03/23/2024  3:46:59.30:
+   Oh yeah, I need to remember to go through and abstract the interfaces between the lower level classes, except for node creation and charging where the overhead may not be worth the sacrifice in encapsulation.
+
+Sat 03/23/2024  3:49:28.77:
+   The double legged charging issue isn't limited to 2 legs, but that is the nomenclature that developed before the higher dimensional networks were explored.
+
+Sat 03/23/2024  4:10:30.80:
+   fdklsjfewoifnewoij wtf, I just learned that the STD has things like doubly linked lists and stacks and sorting algorithms. Well, in the future we can retroactively remove my hand rolled stuff to simplify the codebase, for now I'll continue with MVP. After this project I'll have to take the time to learn this stuff. Auto-didact is bestdact but you do miss some stuff. Especially if you learned with no internet and a corrupted pdf that cut off at the part on delete [].
+
+Sat 03/23/2024  4:51:51.99:
+   I have to go do stuff like clean and whatnot, when I get back I need to do the testing on the new rectify_Double_Legged_Nodes function and incorporate it into the Pyramidal CAN scaffolds, plus work it into the activation function
+
+Sat 03/23/2024  4:52:50.31:
+   I need to make the activation function a module that users can swap out, maybe extend that to the scripting portion so people can write custom ones with NeuroTox, idk, that might be impractical but if not I'll do it.
+
+Sat 03/23/2024  7:31:51.60:
+   Alrighty, got it hooked into the 2D can fill_State, looks a bit funky but I need to go to bed so I'll check it out when I get moving tonight after I sleep today.
+
+Sat 03/23/2024 16:35:08.38:
+   Ah, I was setting the tmp_Count initial value to 0 like a fool of a took, for you see it should be initialized to 1 as there is one dendrite to start with, not 0. So if two dendrites matched it would divide the weight by 1 and not two.
+
+Sat 03/23/2024 16:38:16.77:
+   In the future I may split the nodes into three, state, sub-sym, and weighted sub-sym. State nodes don't need legs. sub-syms don't need states, and not all types of sub-syms need weights as right now it is only for the pyramidal current active node scaffolds (CANs)
+
+Sat 03/23/2024 17:00:04.66:
+   Awesome, charging with leg weight is implemented. Though looking at the trace output I realize I forgot to collapse the traces so I have multiple of the same with different charges.
+
+Sat 03/23/2024 17:03:31.16:
+   Also I think redoing the node normalization is in order. The lower pattern that mathced exactly has the... wait.. nvm, anyway the lower one has the expected charge of ten (the magic number atm, need to make the config here soon) while the upper tier treetops have charges much higher, but I cannot normalize across treetops without stomping on the lower ones. 
+
+Sat 03/23/2024 17:07:11.21:
+   Oh, wait, looks like I only normalize during treetop collection, so I'll track the highest charge as the buffer charges, then when it is done I will normalize the charges when they are used in the next charging cycle instead of looping through them. I will need to make a temporary treetop buffer that collects from the current charging buffer for nodes with no axonic processes so that it can be normalized locally then added to the other treetop buffer.
+
+Sat 03/23/2024 17:10:37.92:
+   I've got to go hit the defecation station and I'll think on it, but that should be all I need to do to get this part working properly. This way when you have it evaluate word symbols and others with different lengths you can get the association to the input pattern correctly, otherwise shorter symbols will always get less charge even if more appropriate due to the symbol height in the hierarchy of symbols being determined by the number of quanta in the input pattern. 
+
+Sat 03/23/2024 17:30:33.69:
+   Note to self - neural pruning in the future, I'll need to write a delete for nodes, then just loop through and delete every node under a certain reinforcement, this should simulate the neural pruning humans undergo to clean up weak connections and leave only meaninful patterns. Hmm, this could be used to search for stable patterns in large datasets. Train it on a bunch of noisy data and prune it iteratively revealing the patterns. Though tbh a node network output function that only output ones over the RC value woudl give the same result if pattern searching was all you were going for. The benefit of the pruning would be a reduced number of connections to evaluate, fewer output traces to sort through when doing trace selection, and memory savings.
+
+Sat 03/23/2024 18:44:05.02:
+   Looks like I'll be able to modify the existing gather_Treetops in the charging buffer to do this. It is where the current normalization happens at the end across all treetops, which was fine for the flat Many_To_One CAN structures but gets fucky with the pyramidal ones as previously mentioned. So I'll move the tmp_Highest_Charge to the class scope, update this with each treetop submission to the Treetop_Holding_Pen linked list, then I don't have to rewalk the list when normalizing the local tier. While I walk and normalize the local I will submit the node ID (NID) and the charges to the final Treetops list.
+
+Sat 03/23/2024 20:36:51.28:
+   Hmm, ignore all of that. Looks like it was a simple stupid on my part, I'm already doing all of that, but forgot to pass tmp_Charge and I'm instead passing tmp_LL::Charge.
+
+Sat 03/23/2024 20:41:29.68:
+   Sometimes... I get ahead of myself kek. The system seems to be working and charging correctly, still not superimposing the traces, but that is a feature I'll implement later. Going to do a bit more testing and then move on if it still looks good.
+
+Sun 03/24/2024  1:38:16.53:
+   3D trace output to file is now correct for the gather_Treetops function.
+
+Sun 03/24/2024  2:29:45.77:
+   Sweet 3D is working as well.
+
+Sun 03/24/2024  2:30:59.07:
+   I think I'll move on now to finishing the command interface, tidying up commands, formatted output, and finishing the ones I missed. Getting it ready to deploy v0. Then documentation and tutorials will be redone.
+
+Sun 03/24/2024  5:05:12.34:
+   Doing some refactor in the CAN structures atm, there are several spots I repeat myself more than twoce.
+
+Sun 03/24/2024  6:23:58.41:
+   Finished refactoring a bit ago, made a generic function to take an LL that had spatial data from the backpropagation and returns the biggest number +1. I watched a primogen video a bit ago, amusing dude, but he had a rule I thought was pretty good, if you write the same thing 3 times then refactor.
+
+Sun 03/24/2024  7:09:49.17:
+   Whoops, forgot to add the double legged node rectification to the fill_Scaffold in 1D and 2D
+
+Sun 03/24/2024 22:05:56.03:
+   Alrighty, did some cleaning up in all the debug cout comments. Work might be slow for a couple days, it's 50 degrees in here, fingers get slow and cold after not too long typing.
+
+Mon 03/25/2024  0:51:32.27:
+   Need to go back through and decouple everything as well.
+
+Mon 03/25/2024  0:55:04.06:
+   Originally I thought the charging buffers may not work for every CAN structure so I put them in the CANs themselves, however, They should work as long as you go tier by tier starting at the bottom. So I'm moving the Charging buffer declaration to the main polymorphic CAN base class and giving an update function through that for the hyperparameters so I can access them through the Construct with teh config loading function to expose the hyperparamters to the user. If in the future someone wants to write a custom CAN they can overload these setters and getters.
+
+Mon 03/25/2024  1:35:44.32:
+   Exposed the hyperparameters to the construct, now to load the config and begin on the parsing as well as initial creation.
+
+Mon 03/25/2024  5:32:32.79:
+   Alrighty, going with a rude-n-crude if parser, this lets the config be unorganized and evaluates it token by toke. 
+
+Mon 03/25/2024  5:33:56.01:
+   Base_Charge, Modifier_Charge, and Action_Potential_Threshold hooked up. They are only exposed to the construct level, the upper interface abstraction layers only have save_Config and update_Config. M
+
+Mon 03/25/2024  8:22:06.15:
+   Alright, got sidetracked for a bit, might need to sleep. But, I will implement rcon functionality in the future. That way the engine has asynchronous mode, CLI mode, and manual input mode.
+
+Mon 03/25/2024  8:26:49.70:
+   Alright, hyperparameter control is done through config file now, each construct has an input file, config file, and output file. This allows the hyperparamters to be tuned from outside the server in asynchronous mode.
+
+Tue 03/26/2024  4:50:41.08:
+   Running out of propane, house temp LSS 50, couldn't type so moved into another tiny room and got a small heater to keep it working temps. Work resumes now.
+
+Tue 03/26/2024  4:53:23.90:
+   Good good, the setting file is crudely interpreted so no strict index dependent vars, meaning users can modify and use it as they please.
+
+Tue 03/26/2024  5:06:30.16:
+   Alright, will need to do a twice over after MVP obviously but I am almost certain the 10.0 on the CAN charge submissions were the only magic numbers I irrationaly threw in there.
+
+Tue 03/26/2024  5:07:15.12:
+   I have purged them like the HERESY they are, the corrupting taint of chaos creeping in, Tzeesnatch in ma weed
+
+Tue 03/26/2024  5:09:10.14:
+   Making it so that the fall through on construct creation is Many_To_One, throws a cout warning when it defaults.
+
+Tue 03/26/2024  5:11:35.44:
+   Well shit, I just realized I need to do the treetop trace superimposition otherwise the action potential threshold can filter out some of the smaller charges for the real top returned traces.
+
+Tue 03/26/2024  7:02:45.88:
+   Adding submit_Treetop to the charging array. Plus another tree called Treetops_Tree so that superimposition will be easy. I guarentee there is some serious low-hanging optimization here for someone who is good with such a thing.
+
+Tue 03/26/2024  7:22:27.54:
+   Seems to be working?
+
+Tue 03/26/2024  7:26:21.61:
+   Comparison of before and after shows the same charges for the same nodes correctly superimposed
+
+Tue 03/26/2024  7:28:08.29:
+   Definitely need to implement the stiched base CAN as the pyrmamidal constructs favor matching patterns towards their center
+
+Tue 03/26/2024  9:28:25.10:
+   Added saving and loading config, though that one is direct in and out and not interpreted. The save and load files atm aren't meant to be human edited
+
+Tue 03/26/2024 11:18:32.62:
+   Hmm, I broke something. When I charge the 2D arrays twice in a row the second time doesn't return anything.
+
+Tue 03/26/2024 19:58:07.25:
+   *facepalm* forgot to add the Treetops_Tree to the reset() function in the charging buffer lol
+
+Tue 03/26/2024 20:08:26.49:
+   Thought of a new possibly useful mode this morning in bed, 'dropdown' mode. It fills the NULLCAN, tracks the highest tier node found, and begins charging on that tier.
+
+Tue 03/26/2024 23:25:01.66:
+   The Charging_Tier was easier to implement than I thought, adding it to the load and save then moving on
+
+Tue 03/26/2024 23:44:31.03:
+   Going to convert the uint input to use 0 as the delim since node 0 is not valid. This will allow users to just write a bunch of NIDs without knowing ahead of time how many.
+
+Wed 03/27/2024  0:09:32.59:
+   Charging tier added to config save-load and general save-load
+
+Wed 03/27/2024  5:55:04.83:
+   Alright, took a shower and thought about it, did some work on paper. I am going to implement a 'connection' feature, which means I need some extra databits to hold the connection info in the MSC. It will be setup as each connection is an index. This way encoding lower treetops is as simple as iterating through each connection calling get_Treetop_NID, and backprop can be done by calling bp_NID for each index of each output pattern
+
+Wed 03/27/2024  5:56:05.92:
+   Making a struct for the constructs, this function is getting absurd with each piece of data I add.
+
+Wed 03/27/2024  6:42:50.51:
+   Much cleaner. Caused 190+ errors when I did it lmao
+
+Wed 03/27/2024  7:01:11.17:
+   Man, she is messy under the hood now. The refactoring and cleanup will take a week. I think MVP, then mock up Gaia, and see if I can't train whatshisface on it, parsons, so that he and Colin can operate independently, or hire someone to implement it in C++.
+
+Wed 03/27/2024 12:22:48.37:
+   Alrighty, Have implemented construct connections. These will be iterated through and used to draw the NIDs up the tiers to the higher construct, and they will be used in conjunction with the index of the data pattern to distribute the NIDs to the proper lower constructs for bp to the output files
+
+Wed 03/27/2024 23:07:09.14:
+   Construct linking from lower to upper implemented. Now to get the construct to work with these values correctly
+
+Wed 03/27/2024 23:35:23.89:
+   Working behind an interface is awesome. Just wrote a barebones "roung_Up_Input" which gathers up the lower tier networks treetop NIDs into the input. In the future this will be more complex as some may have truncated top levels with multiple treetops, for example when reducing dimension down with asymmetric dimensions. 
+
+Wed 03/27/2024 23:36:38.91:
+   Given that every node has a unique ID and are read in deterministically based on the index of the connection then when charging time comes we should be able to just dump them into the upper tier networks
+
+Thu 03/28/2024  0:44:46.63:
+   Alrighty, looks like that work
+
+Thu 03/28/2024  1:09:42.06:
+   Trying to make the most intuitive and easy to understand scripting language is really hampering my efforts. So, taking a different route. Users will have a config file which has every command where they can map custom strings over, so instead of set_Input they can have lolcheckthisout or something.
+
+Thu 03/28/2024  1:10:36.25:
+   I will write the 'base' language as I am familiar with, and provide tools to convert their custom scripts to this language, and to convert scripts in this language to their custom mapping.
+
+Thu 03/28/2024  4:25:24.51:
+   Adding upper connetions for the constructs. This way they can iterate through every trace in the higher construct and using a function I'll write called pull_From_Index
+
+Thu 03/28/2024  4:47:41.22:
+   Added get_Output to return traces from the CAN, used in the pull_From_Upper_Index function
+
+Thu 03/28/2024  4:53:20.95:
+   Added allocate output to the CAN so I can set them up for pull_From_Upper index and iterate through all the upper tier traces backpropagating them down into the lower construct.
+
+Thu 03/28/2024  8:46:24.03:
+   Can now iterate through upper tier construct traces and extract the appropriate index with pull_From_Upper_Index, now to add these to the construct outptu and bp_O them
+
+Thu 03/28/2024  8:46:39.57:
+   Though I'm going to bed for now.
+
+Thu 03/28/2024  8:49:19.08:
+   Need to figure out what is up with 1D_Pyramid and why index 3 had a charge way off, should have been 10s across the board, last one was a funky exponent tiny num
+
+Fri 03/29/2024 18:31:53.34:
+   Weeellll now, looks like I might have a dangler, on this run to investigate the off charge it appears fine, 10's across the board, not acceptable
+
+Fri 03/29/2024 23:36:06.37:
+   Hmm, think I'm going to move forward with functionality, then switch my codebase over to use the visual studio debugger and track down the danglers
+
+Sat 03/30/2024  2:14:57.35:
+   AAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHH, it works. Can now pull_From_Upper and it backpropagates the traces.
+
+Sat 03/30/2024  2:15:26.57:
+   Or rather, puts them into the output trace index of a construct
+
+Sat 03/30/2024  2:20:38.29:
+   Now to make it work for 2D, and 3D
+
+Sat 03/30/2024  2:22:42.10:
+   Then to make Chrono_Shift which shifts the current input array without changing the length, but bumping off the last index and setting the 0th to 0 so it is ready for a new input.
+
+Sat 03/30/2024  3:09:50.26:
+   Ahhh, I changed the 1D_Pyramid to Many_To_One, that's why I didn't get the error on the charging index.
+
+Sat 03/30/2024  3:11:03.38:
+   Excellent, the charging error is reproducable. 
+
+Sat 03/30/2024  4:38:58.64:
+   Ok, so found the error, not a jangler, it was calling the dendrite weight by axon, not axon hillock, which slipped by in the many_To_One, but in the pyramidal network I had reached #3 and there were only two legs so it was pulling ranshitdata from a non-existent leg
+
+Sat 03/30/2024  4:39:36.26:
+   Fuck yeah, always a really good fealing to squish a bug. I made a fucking mess of the output though, cout debugging for the win amirite?
+
+Sat 03/30/2024  5:01:49.03:
+   I fucking love programming. To see a system run, to know every nuance of it, a creation of automata the likes Homer would shit himself over. Intangible, but intricate, like a cognitive clockwork made manifest in the bits and bytes, encoded into delicious data.
+
+Sat 03/30/2024  8:46:40.85:
+   Alrighty, got the mock up of a prediction engine, builds, using Many_To_One, 1D, 2D, 3D, MSC, and Chrono. Thinking about making whipping up a mock 'lunar' base so we can build 'mike' to demonstrate the system.
+
+Sun 03/31/2024  5:21:57.00:
+   Redid the round up to do query, took longer than it should have. Need to change the output counts to a single array for the CAN outputs.
+
+Sun 03/31/2024  6:03:14.96:
+   Added get_Dimension to the CAN, that way I can select which output to get the trace from whe rounding them up for charging.
+
+Sun 03/31/2024  6:16:07.77:
+   Sweet, think I got it working. 
+
+Sun 03/31/2024  6:16:48.52:
+   So I can now draw up charged treetops from lower constructs. Meaning I can do a high level fuzzy dropdown seach on a desired feature, then use those to search the next higher construct.
+
+Sun 03/31/2024 18:17:56.56:
+   After I get this part done, and tested, I'll put an array that you can specify the sequence of pull up and push down and run the system with a single command. 
+
+Sun 03/31/2024 18:53:55.09:
+   Going to convert the construct index referencing to named reference after this step. Confusing af having 'pull_From_Upper_Index 2 1 0' and whatnot
+
+Sun 03/31/2024 19:49:32.76:
+   Scratch the pulling/pushing array. Once someone has their order down they can put it into a script. The fine grained control would lead to a lot of different use cases I'd have to write, and anytime a new CAN is added the function would need updated if new methods of query are implemented.
+
+Sun 03/31/2024 19:52:35.54:
+   Half success! It's a start, querying the Chrono, then pulling from the chrono to MSC, then from MSC to Raw, the many to one and 1D are fine, crashes on 2D, so fuck yeah, just got to get 2D and 3D then the core functionality is done (o.O) That is crazy, so close.
+
+Sun 03/31/2024 22:29:49.16:
+   Sweet, 2D works now, just need 3D. The bug was that it was allocating the 1D trace output, not the 2D or 3D ones.
+
+Sun 03/31/2024 22:52:58.78:
+   3D is now working, looks like a good refactor in the future will be to move the dimensional trace manipulations to their own section in the main CAN. 
+
+Sun 03/31/2024 22:54:08.12:
+   Alrighty, going to implement the thing to reference constructs by name, not by ID. Should be able to use the same data structure to handle the variables when I implement the interpreter.
+
+Mon 04/01/2024  0:12:41.31:
+   Looking at my old code all I did for the lookup tree was a binary tree and having each node contain a value.
+
+Mon 04/01/2024  0:13:17.03:
+   Forgot to hit enter on that lol. Anyhow, got the lookup tree built, now to test it, then integrate it with the construct name lookup.
+
+Mon 04/01/2024  0:26:52.83:
+   Sweet, that works. Can now look up constructs and find their IDs.
+
+Mon 04/01/2024  0:29:57.17:
+   If you try to make a construct twice (same name) then it refuses and returns without making one.
+
+Mon 04/01/2024  0:40:20.64:
+   I'm pulling the functionality of swippy swapping names for IDs to the API level, this way if someone wants to direct connect they can do so without the overhead of searching the tree.
+
+Mon 04/01/2024  1:25:28.20:
+   Gotta take care of some stuff around the house, then it's sitting down and going through converting everything to use the construct name instead of ID, and then documentation and stepping through each command in turn writing the doc, making examples, ironing out the output format, and looking for bugs.
+
+Mon 04/01/2024  1:57:42.52:
+   Back to her, nose the grindstone as Uncle Chet used to say.
+
+Mon 04/01/2024  2:17:20.00:
+   removed register_New_Construct, register_Construct(p_Name) exists and wraps it and it only breaks things to use register.
+
+Mon 04/01/2024  2:23:47.73:
+   Hell yeah, find and replace ftw. Compiled, built, evything looking good, now to test and crash. Or, assuming I will.
+
+Mon 04/01/2024  3:39:24.80:
+   Oh hellz yeah, the conversion works! It is actually really fucking nice to write the names and not constantly try to remember indexes. Especially since it allows for dynamic registration and users can shuffle the order around without breaking their program.
+
+Mon 04/01/2024  6:06:25.69:
+   Changing the round_Up_Inputs to pull_From_Lower_Connections, then adding pull_From_Lower_Connection(p_Index). This way I can select which networks to feed into the upper ones.
+
+Mon 04/01/2024  6:08:02.39:
+   To extend the functionality I think I'll make a push_To_Lower_Connection, and push_To_Lower_Connections, which will just use pull_From_Upper_Index for the lower constructs.
+
+Mon 04/01/2024  6:16:06.59:
+   I'll get the single index pull done, this pulls the NIDs from the lower treetops of a given connection into the input. Right now that would limit you to one lower construct. I am going to decouple the treetop gathering from eval function, this will allow for complex queries using multiple eval types to get compound results.
+
+Mon 04/01/2024  6:54:40.57:
+   Had to fix a bug where the portion that detected an existing construct would return 0, causing index 0 in the consructs to be partially overwritten. Watching the return from add_Construct to see if it returns -1 now to then skip the rest of construct creation, before it just charged ahead.
+
+Mon 04/01/2024  6:56:46.78:
+   Alrighty, appears to be fixed. Holy moly we're getting close. Running out of time though.
+
+Mon 04/01/2024  7:34:37.85:
+   Going to bed for now, will resume on reboot
+
+Mon 04/01/2024  7:46:30.87:
+   Alright, may have sneaked a small feature update in before bed, just decoupled the treetop charging and brought the gather_Treetops() up through the polymorphic base class, through the construct, through the API, and to the text script.

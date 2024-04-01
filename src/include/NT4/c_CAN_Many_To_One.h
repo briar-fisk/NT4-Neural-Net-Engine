@@ -12,22 +12,16 @@ public:
 	c_Node** Scaffold[2];
 	int State_Depth; //We track this so that if the input is changed we can still properly delete the scaffold.
 
-	//The temporary buffer used during charging.
-	c_Charging_Buffer tmp_Buffman;
-
 	c_CAN_Many_To_One()
 	{
-		NNet = NULL;
-
-		Input.reset();
-		Output = NULL;
-		Output_Depth = 0;
+		init();
 
 		Scaffold[0] = NULL;
-		State_Depth = 0;
 		Scaffold[1] = new c_Node * [1];
+		Scaffold[1][0] = NULL;
 
-		State_Nodes_Index = 0;
+		State_Depth = 0;
+
 	}
 
 	~c_CAN_Many_To_One()
@@ -79,7 +73,6 @@ public:
 	//p_How: "Encode" == Create the nodes if they aren't found, "Query" == Returns NULL if they aren't found, used for checking if something has been encoded without modifying the network.
 	void fill_State(std::string p_How = "Encode")
 	{
-		std::cout << "\n Encoding with State_Nodes_Index: " << State_Nodes_Index;
 		if (p_How == "Encode")
 		{
 			for (int cou_Index = 0; cou_Index < State_Depth; cou_Index++)
@@ -133,8 +126,6 @@ public:
 	//Encodes a single trace, forcibly.
 	void encode(uint64_t* p_Input = NULL, int p_Depth = 0)
 	{
-		std::cout << "\n\n<<-- Begin Encoding -->>\n\n";
-
 		//Firstly we gather the inputly
 		if ((p_Input != NULL) && (p_Depth > 0)) { set_Input(p_Input, p_Depth); }
 
@@ -147,12 +138,15 @@ public:
 		//Fills the scaffold out by requesting nodes from the NNet and creating them if they aren't found.
 		fill_Scaffold("Encode");
 
-		//To be removed later after testing.
-		//output_Input();
-		output_Scaffold();
-		output_Scaffold_Char();
-
-		std::cout << "\n\n-- End Encoding --\n\n";
+		//output_Scaffold_Char(); 
+		if (Scaffold[1][0] != NULL)
+		{
+			std::cout << "\nTreetop: " << Scaffold[1][0]->NID;
+		}
+		else
+		{
+			std::cout << "\nTreetop: NULL";
+		}
 	}
 
 	//Style determines whether it charges with normal submission of raw, or if it does the specific leg charging for Chrono.
@@ -169,75 +163,42 @@ public:
 		{
 			if (Scaffold[0][cou_Input] != NULL)
 			{
-				std::cout << "\n\n ~~++==++~~ Charging Node: CAN[0][" << cou_Input << "]: " << Scaffold[0][cou_Input] << " ~ " << Scaffold[0][cou_Input]->NID;
-
-				//tmp_Buffman.submit(Scaffold[0][cou_Input], (1.0));
 				if (p_Style == -1)
 				{
-					tmp_Buffman.submit(Scaffold[0][cou_Input], (10.0));
+					tmp_Buffman.submit(Scaffold[0][cou_Input], (tmp_Buffman.get_Base_Charge()));
 				}
 				if (p_Style == 1)
 				{
-					tmp_Buffman.charge_Given_Leg(Scaffold[0][cou_Input], (10.0), cou_Input);
+					tmp_Buffman.charge_Given_Leg(Scaffold[0][cou_Input], (tmp_Buffman.get_Base_Charge()), cou_Input);
 				}
 				if (p_Style == 2)
 				{
 					//p_Leg specifies which leg to charge in this function, p_Legs[] being unused.
-					tmp_Buffman.charge_Given_Leg(Scaffold[0][cou_Input], (10.0), p_Leg);
+					tmp_Buffman.charge_Given_Leg(Scaffold[0][cou_Input], (tmp_Buffman.get_Base_Charge()), p_Leg);
 				}
 				if (p_Style == 3)
 				{
 					//p_Leg is used here as the count of elements in p_Legs[].
-					tmp_Buffman.charge_Given_Legs(Scaffold[0][cou_Input], p_Leg, p_Legs, (10.0));
+					tmp_Buffman.charge_Given_Legs(Scaffold[0][cou_Input], p_Leg, p_Legs, (tmp_Buffman.get_Base_Charge()));
 				}
 			}
 		}
 
-		//std::cout << "\n\n++++++++++++++++++++++++++++++ Before ++++++++++++++++++++++++++++++ \n\n";
-
-		//tmp_Buffman.output_All_Buffers();
-
 		tmp_Buffman.gather();
-
-		//std::cout << "\n\n++++++++++++++++++++++++++++++ After ++++++++++++++++++++++++++++++ \n\n";
-
-		//tmp_Buffman.output_All_Buffers();
 
 		while (tmp_Buffman.flg_Not_Done)
 		{
-			std::cout << "\n\n flg_Not_Done\n";
-
 			tmp_Buffman.charge_Outputs();
 
 			tmp_Buffman.gather();
-
-			//tmp_Buffman.output_All_Buffers();
 		}
-
-		std::cout << "\n\n Completed:\n";
-
-		//tmp_Buffman.output_All_Buffers();
-
-		std::cout << "\n\n Treetops:\n";
-		tmp_Buffman.output_Treetops();
 
 		c_Charging_Linked_List * tmp_Current_LL = NULL;
 		tmp_Current_LL = tmp_Buffman.Treetops.Root;
-
-		/*
-		while (tmp_Current_LL != NULL)
-		{
-			tmp_Current_LL->NID->bp_O();
-
-			tmp_Current_LL = tmp_Current_LL->Next;
-		}
-		*/
 	}
 
 	void gather_Treetops()
 	{
-		std::cout << "\n\n Gathering Treetops...";
-
 		c_Charging_Linked_List* tmp_Current_LL = NULL;
 		tmp_Current_LL = tmp_Buffman.Treetops.Root;
 
@@ -259,17 +220,8 @@ public:
 			//Get the pattern into a linked list
 			tmp_Current_LL->NID->bp_Trace_O(&tmp_Pattern);
 
-			std::cout << "\n NID: " << tmp_Current_LL->NID->NID;
-			std::cout << "\n tmp_Pattern.Depth: " << tmp_Pattern.Depth;
-			tmp_Pattern.output();
-
-			std::cout << "\n tmp_Pattern.Depth: " << tmp_Pattern.Depth;
 			//Copy the pattern over
 			Output[tmp_Current_Index].set_Depth(tmp_Pattern.Depth);
-
-			std::cout << "\n Output[" << tmp_Current_Index << "].Depth: " << Output[tmp_Current_Index].Depth;
-
-			std::cout << "\n tmp_Pattern.Depth: " << tmp_Pattern.Depth;
 
 			tmp_LL_Pat = tmp_Pattern.Root;
 
@@ -280,21 +232,48 @@ public:
 				tmp_LL_Pat = tmp_LL_Pat->Next;
 			}
 
-			std::cout << "\n tmp_Current_LL->NID->Current_Charge: " << tmp_Current_LL->NID->Current_Charge;
-			std::cout << "\n tmp_Current_LL->Charge: " << tmp_Current_LL->Charge;
-			std::cout << "\n tmp_Current_LL->NID->RC: " << tmp_Current_LL->NID->RC;
 			Output[tmp_Current_Index].set_Charge(tmp_Current_LL->Charge);
-			//Output[tmp_Current_Index].set_Charge(tmp_Current_LL->NID->Current_Charge);
+
 			Output[tmp_Current_Index].set_RC(tmp_Current_LL->NID->RC);
 			Output[tmp_Current_Index].set_Treetop(tmp_Current_LL->NID);
 
 			tmp_Current_LL = tmp_Current_LL->Next;
 			
-			Output[tmp_Current_Index].output(0);
-			Output[tmp_Current_Index].output(1);
-
 			tmp_Current_Index++;
 		}
+	}
+
+	void backpropagate_NID_Into_Given_Index(uint64_t p_NID, int p_Index, double p_Charge)
+	{
+		c_Linked_List_Handler tmp_Pattern;
+
+		c_Linked_List* tmp_LL_Pat = NULL;
+
+		tmp_Pattern.reset();
+
+		c_Node* tmp_Node = NNet->get_Node_Ref_By_NID(p_NID);
+
+		if (tmp_Node == NULL) { std::cerr << "\n\n   v(o.O)V   Error in backpropagage_NID_Into_Given_Index, Node " << p_NID << " not found!"; }
+
+		//Get the pattern into a linked list
+		tmp_Node->bp_Trace_O(&tmp_Pattern);
+
+		//Copy the pattern over
+		Output[p_Index].set_Depth(tmp_Pattern.Depth);
+
+		tmp_LL_Pat = tmp_Pattern.Root;
+
+		//We can iterate through given we know how big the linked list is.
+		for (int cou_Index = 0; cou_Index < tmp_Pattern.Depth; cou_Index++)
+		{
+			Output[p_Index].set_Pattern_Index(tmp_LL_Pat->Quanta, cou_Index);
+			tmp_LL_Pat = tmp_LL_Pat->Next;
+		}
+
+		Output[p_Index].set_Charge(p_Charge);
+
+		Output[p_Index].set_RC(tmp_Node->RC);
+		Output[p_Index].set_Treetop(tmp_Node);
 	}
 
 	//Gets a single trace from a given node. Puts it into the output.
@@ -310,7 +289,7 @@ public:
 		if (Output != NULL) { delete[] Output; Output = NULL; }
 
 		Output = new c_Trace[NNet->Node_Count];
-		Output_Depth = NNet->Node_Count;
+		Output_Depth = int(NNet->Node_Count);
 
 		int tmp_Current_Index = 0;
 
@@ -350,9 +329,9 @@ public:
 				tmp_LL_Pat = tmp_LL_Pat->Next;
 			}
 
-			std::cout << "\n tmp_Current_LL->NID->Current_Charge: " << tmp_Node->Current_Charge;
+			//std::cout << "\n tmp_Current_LL->NID->Current_Charge: " << tmp_Node->Current_Charge;
 			std::cout << "\n tmp_Current_LL->NID->RC: " << tmp_Node->RC;
-			Output[tmp_Current_Index].set_Charge(tmp_Node->Current_Charge);
+			//Output[tmp_Current_Index].set_Charge(tmp_Node->Current_Charge);
 			//Output[tmp_Current_Index].set_Charge(tmp_Current_LL->NID->Current_Charge);
 			Output[tmp_Current_Index].set_RC(tmp_Node->RC);
 			Output[tmp_Current_Index].set_Treetop(tmp_Node);
@@ -410,9 +389,9 @@ public:
 			tmp_LL_Pat = tmp_LL_Pat->Next;
 		}
 
-		std::cout << "\n tmp_Node->Current_Charge: " << tmp_Node->Current_Charge;
+		//std::cout << "\n tmp_Node->Current_Charge: " << tmp_Node->Current_Charge;
 		std::cout << "\n tmp_Node->RC: " << tmp_Node->RC;
-		Output[tmp_Current_Index].set_Charge(tmp_Node->Current_Charge);
+		//Output[tmp_Current_Index].set_Charge(tmp_Node->Current_Charge);
 		//Output[tmp_Current_Index].set_Charge(tmp_Current_LL->NID->Current_Charge);
 		Output[tmp_Current_Index].set_RC(tmp_Node->RC);
 		Output[tmp_Current_Index].set_Treetop(tmp_Node);
@@ -446,14 +425,8 @@ public:
 
 		charge_Buffers(p_Charging_Style, p_Leg, p_Legs);
 
-		gather_Treetops();
-
-
-		//To be removed later after testing.
-		output_Input();
-		output_Scaffold();
-		output_Scaffold_Char();
-		output_Output();
+		//Decoupling gather_Treetops so that complex queries can be done.
+		//gather_Treetops();
 	}
 
 	//This allows for passing unordered sets of nodes
@@ -478,6 +451,12 @@ public:
 		return Scaffold[1][0];
 	}
 
+	//Returns the dimension of the data.
+	int get_Dimension()
+	{
+		return 1;
+	}
+
 	//Outputs the scaffold.
 	void output_Scaffold()
 	{
@@ -497,11 +476,13 @@ public:
 	//Outputs the scaffold as character representing the address.
 	void output_Scaffold_Char()
 	{
-		std::cout << "\n\n(" << this << ")\n";
+		std::cout << "\n";
+		std::cout << "[";
 		for (int cou_Index = 0; cou_Index < State_Depth; cou_Index++)
 		{
 			std::cout << char(Scaffold[0][cou_Index]);
 		}
-		std::cout << "\n" << char(Scaffold[1][0]);
+		std::cout << "]";
+		std::cout << "\n[" << char(Scaffold[1][0]) << "]";
 	}
 };

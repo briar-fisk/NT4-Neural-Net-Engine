@@ -90,15 +90,12 @@ public:
 		{
 			State_Nodes[cou_Index] = tmp_State_Nodes[cou_Index];
 			tmp_State_Nodes[cou_Index] = NULL;
-
-			std::cout << "\nCon[" << cou_Index << "] " << State_Nodes[cou_Index];
 		}
 
 		if (tmp_State_Nodes != NULL) { delete[] tmp_State_Nodes; }
 		tmp_State_Nodes = NULL;
 
 		State_Nodes[State_Node_Tree_Count - 1] = new c_Fractal_Tree;
-		std::cout << "\nCon[" << (State_Node_Tree_Count - 1) << "] " << State_Nodes[State_Node_Tree_Count - 1];
 
 		return (State_Node_Tree_Count - 1);
 	}
@@ -131,7 +128,7 @@ public:
 
 	//Creates a new node, then adds it to the state tree.
 	//Assumes the construct is already registered so the index is valid.
-	c_Node* new_State_Node(int p_Construct, double p_State)
+	c_Node* new_State_Node(int p_Construct, uint64_t p_State)
 	{
 		c_Node* tmp_State_Node = new_Node();
 
@@ -149,7 +146,7 @@ public:
 	}
 
 	//This is used during loading when you have the node to bind to the state.
-	void assign_State_Node(int p_State_Tree, c_Node * p_Node, double p_State)
+	void assign_State_Node(int p_State_Tree, c_Node * p_Node, uint64_t p_State)
 	{
 		//Enter the state into the tree. The NNet node still needs linked to the pointer in the fractal node.
 		State_Nodes[p_State_Tree]->search(p_State);
@@ -296,6 +293,12 @@ public:
 	//Finds given NID and outputs the bp_O()
 	void output_BP_NID(uint64_t p_NID)
 	{
+		if (p_NID == 0)
+		{
+			std::cerr << "\n --== ERROR | Node[" << p_NID << "] is NULL node ==--";
+			return;
+		}
+
 		c_Node* tmp_Node = NULL;
 		tmp_Node = get_Node_Ref_By_NID(p_NID);
 		if (tmp_Node != NULL)
@@ -304,6 +307,10 @@ public:
 			std::cout << "Type: " << int(tmp_Node->Type) << " ";
 			std::cout << "Symbol: ";
 			tmp_Node->bp_O();
+		}
+		else
+		{
+			std::cerr << "\n --== ERROR | Node[" << p_NID << "] not found. ==--";
 		}
 	}
 

@@ -12,6 +12,12 @@ public:
 	{
 	}
 
+	//Checks for a construct by name, if found returns the ID, if not found returns -1
+	int get_Construct_ID(std::string p_Construct_Name)
+	{
+		//std::cout << "\n p_Construct_Name: " << p_Construct_Name << " ID: " << Base.get_Construct_ID(p_Construct_Name);
+		return Base.get_Construct_ID(p_Construct_Name);
+	}
 
 //      ---==================---
 //     ---====================---
@@ -23,7 +29,51 @@ public:
 //     ---====================---
 //      ---==================---
   
-  
+	void save_Config(std::string p_Construct)
+	{
+		Base.save_Config(get_Construct_ID(p_Construct));
+	}
+
+	void update_Config(std::string p_Construct)
+	{
+		Base.update_Config(get_Construct_ID(p_Construct));
+	}
+
+	//Hyperparams
+	void set_Base_Charge(std::string p_Construct, double p_Base_Charge)
+	{
+		Base.set_Base_Charge(get_Construct_ID(p_Construct), p_Base_Charge);
+	}
+
+	void set_Modifier_Charge(std::string p_Construct, double p_Modifier_Charge)
+	{
+		Base.set_Modifier_Charge(get_Construct_ID(p_Construct), p_Modifier_Charge);
+	}
+
+	void set_Action_Potential_Threshold(std::string p_Construct, double p_Action_Potential_Threshold)
+	{
+		Base.set_Action_Potential_Threshold(get_Construct_ID(p_Construct), p_Action_Potential_Threshold);
+	}
+
+	void set_Charging_Tier(std::string p_Construct, int p_Charging_Tier)
+	{
+		Base.set_Charging_Tier(get_Construct_ID(p_Construct), p_Charging_Tier);
+	}
+
+	double get_Base_Charge(std::string p_Construct)
+	{
+		return Base.get_Base_Charge(get_Construct_ID(p_Construct));
+	}
+
+	double get_Modifier_Charge(std::string p_Construct)
+	{
+		return Base.get_Modifier_Charge(get_Construct_ID(p_Construct));
+	}
+
+	double get_Action_Potential_Threshold(std::string p_Construct)
+	{
+		return Base.get_Action_Potential_Threshold(get_Construct_ID(p_Construct));
+	}
   
 //    ---==========---
 //   ---============---
@@ -172,13 +222,6 @@ public:
 //   ---====================---
 //    ---==================---
   
-	//---==  register_New_Construct  ==---//
-	int register_New_Construct()
-	{
-		return Base.register_New_Construct();
-	}
-
-  
 	//---==  new_Node  ==---//
 	//Creates a new node and adds it to the fractal tree.
 	//Each node is stored as a link in a linked list.
@@ -188,12 +231,12 @@ public:
 	}
   
 
-	//---==  new_State_Node [ASSEMBLY_ID] [STATE_DOUBLE]  ==---//
+	//---==  new_State_Node [Construct_ID] [STATE_DOUBLE]  ==---//
 	//Creates a new node, then adds it to the state tree.
 	//Assumes the construct is already registered so the index is valid.
-	uint64_t new_State_Node(int p_Assembly, double p_State)
+	uint64_t new_State_Node(std::string p_Construct, uint64_t p_State)
 	{
-		return (Base.new_State_Node(p_Assembly, p_State))->NID;
+		return (Base.new_State_Node(get_Construct_ID(p_Construct), p_State))->NID;
 	}
   
 
@@ -275,26 +318,26 @@ public:
 	}
 
   
-	//---==  does_State_Node_Exist [ASSEMBLY_ID] [STATE]  ==---//
+	//---==  does_State_Node_Exist [Construct_ID] [STATE]  ==---//
 	//If a state node exists in the given construct index then return it.
 	//Otherwise return NULL.
 	//This assumes the [Index] is valid
-	uint64_t does_State_Node_Exist(int p_Assembly, uint64_t p_State)
+	uint64_t does_State_Node_Exist(std::string p_Construct, uint64_t p_State)
 	{
 		c_Node* tmp_Node = NULL;
-		tmp_Node = Base.does_State_Node_Exist(p_Assembly, p_State);
+		tmp_Node = Base.does_State_Node_Exist(get_Construct_ID(p_Construct), p_State);
 
 		if (tmp_Node != NULL) { return tmp_Node->NID; }
 		return 0;
 	}
   
 
-	//---==  get_State_Node [ASSEMBLY_ID] [STATE]  ==---//
-	//Checks to see if a node in the given assembly is bound to the given state, if not the node is created.
-	uint64_t get_State_Node(int p_Assembly, uint64_t p_State)
+	//---==  get_State_Node [Construct_ID] [STATE]  ==---//
+	//Checks to see if a node in the given Construct is bound to the given state, if not the node is created.
+	uint64_t get_State_Node(std::string p_Construct, uint64_t p_State)
 	{
 		c_Node* tmp_Node = NULL;
-		tmp_Node = Base.get_State_Node(p_Assembly, p_State);
+		tmp_Node = Base.get_State_Node(get_Construct_ID(p_Construct), p_State);
 
 		if (tmp_Node != NULL) { return tmp_Node->NID; }
 		return 0;
@@ -303,17 +346,17 @@ public:
 
 	//---==  output_BP  ==---//
 	//Iterates through every node and outputs their bp_O()
-	void output_BP()
+	void output_Backpropagated_Symbols()
 	{
-		Base.output_BP();
+		Base.output_Backpropagated_Symbols();
 	}
 
   
 	//---==  output_BP_NID [NID]  ==---//
 	//Finds given NID and outputs the bp_O()
-	void output_BP_NID(int p_NID)
+	void output_Backpropagated_Symbol_NID(uint64_t p_NID)
 	{
-		Base.output_BP_NID(p_NID);
+		Base.output_Backpropagated_Symbol_NID(p_NID);
 	}
 
   
@@ -332,146 +375,178 @@ public:
 	//   ---===========---
 	//    ---=========---
 
-	//---==  encode [ASSEMBLY_ID]  ==---//
+	//---==  encode [Construct_ID]  ==---//
 	//This encodes the p_Input data, if the nodes aren't found they are created, used for training.
-	//Encodes the current input of the given assembly. How it does this is determined by what type of assembly it is.
-	void encode(int p_Assembly)
+	//Encodes the current input of the given Construct. How it does this is determined by what type of Construct it is.
+	void encode(std::string p_Construct)
 	{
-		Base.encode(p_Assembly);
+		Base.encode(get_Construct_ID(p_Construct));
 	}
 
 
-	//    ---==  query [ASSEMBLY_ID]  ==---
+	//    ---==  query [Construct_ID]  ==---
 	//This sets up the scaffold as encode does, but it doesn't create nodes if they aren't found, they remain NULL in the scaffold, this we call a NULLCAN
 	//Used for querying the network, you input, fill the NULLCAN, charge the network, then gather the outputs.
 	//Suggested for use before encoding (if using learning mode and not locked_to_initial_training_mode) otherwise it will also find the current trace as the perfect match.
-	//		Queries the network with the current input set for the given assembly.
-		//Passes the values to an assembly to encode.
-	void query(int p_Assembly)
+	//		Queries the network with the current input set for the given Construct.
+		//Passes the values to an Construct to encode.
+	void query(std::string p_Construct)
 	{
-		Base.query(p_Assembly);
+		Base.query(get_Construct_ID(p_Construct));
 	}
 
-	//    ---==  query_spacial [ASSEMBLY_ID]  ==---
-	//		Queries the network with the current input set of the given assembly, but the input index determines what leg is charged. Meaning if an input at index [3] is charged then only upper tier nodes connected on axon hillock [3] will be charged.
-		//Passes the values to an assembly to encode.
-	void query_Spacial(int p_Assembly)
+	//    ---==  query_spacial [Construct_ID]  ==---
+	//		Queries the network with the current input set of the given Construct, but the input index determines what leg is charged. Meaning if an input at index [3] is charged then only upper tier nodes connected on axon hillock [3] will be charged.
+		//Passes the values to an Construct to encode.
+	void query_Spacial(std::string p_Construct)
 	{
-		Base.query(p_Assembly, NULL, 0, 1);
+		Base.query(get_Construct_ID(p_Construct), NULL, 0, 1);
 	}
 
-	//    ---==  query_given_index [ASSEMBLY_ID] [INDEX]  ==---
+	//    ---==  query_given_index [Construct_ID] [INDEX]  ==---
 	//		Queries the network with the current input set, however, every input node is charged on the given index. If INDEX is [3] then all nodes in the input set will be charging using axon hillock [3].
-		//Passes the values to an assembly to encode.
-	void query_Given_Index(int p_Assembly, int p_Index)
+		//Passes the values to an Construct to encode.
+	void query_Given_Index(std::string p_Construct, int p_Index)
 	{
-		Base.query(p_Assembly, NULL, 0, 2, p_Index);
+		Base.query(get_Construct_ID(p_Construct), NULL, 0, 2, p_Index);
 	}
 
-	//    ---==  query_given_legs[ASSEMBLY_ID] [LEG_COUNT] [LEG_0] [LEG_1] [...]  ==---
-	void query_Given_Legs(int p_Assembly, int p_Leg_Count, int* p_Legs)
+	//    ---==  query_given_legs[Construct_ID] [LEG_COUNT] [LEG_0] [LEG_1] [...]  ==---
+	void query_Given_Legs(std::string p_Construct, int p_Leg_Count, int* p_Legs)
 	{
-		Base.query(p_Assembly, NULL, 0, 3, p_Leg_Count, p_Legs);
+		Base.query(get_Construct_ID(p_Construct), NULL, 0, 3, p_Leg_Count, p_Legs);
 	}
 
 
-	//---==  submit_Set [ASSEMBLY_ID] [INPUT_UINT[]] [DEPTH]  ==---//
+	//---==  submit_Set [Construct_ID] [INPUT_UINT[]] [DEPTH]  ==---//
 	//This allows for passing unordered sets of nodes
-	void submit_Set(int p_Assembly, int p_Depth, uint64_t* p_Input)
+	void submit_Set(std::string p_Construct, int p_Depth, uint64_t* p_Input)
 	{
-		Base.submit_Set(p_Assembly, p_Depth, p_Input);
+		Base.submit_Set(get_Construct_ID(p_Construct), p_Depth, p_Input);
 	}
 
+	void round_Up_Input(std::string p_Construct)
+	{
+		Base.round_Up_Input(get_Construct_ID(p_Construct));
+	}
 
-	//---==  get_Treetop [ASSEMBLY_ID]  ==---//
-	//Gets the treetop node for a given assembly.
+	void pull_From_Lower_Connections(std::string p_Construct)
+	{
+		Base.pull_From_Lower_Connections(get_Construct_ID(p_Construct));
+	}
+
+	void pull_From_Lower_Connection(std::string p_Construct, int p_Index)
+	{
+		Base.pull_From_Lower_Connection(get_Construct_ID(p_Construct), p_Index);
+	}
+
+	//Iterates through every output trace in the given index of the given upper tier construct.
+	void pull_From_Upper_Index(std::string p_Construct_To, std::string p_Construct_From, int p_Index)
+	{
+		Base.pull_From_Upper_Index(get_Construct_ID(p_Construct_To), get_Construct_ID(p_Construct_From), p_Index);
+	}
+
+	//---==  get_Treetop [Construct_ID]  ==---//
+	//Gets the treetop node for a given Construct.
 	//This returns the treetop node at a given index, for most structures this will be a single node, but for those like stiched-base networks with a treetop node count equal to the input node count then you can access them by index.
-	//Gets the treetop node for a given assembly.
-	uint64_t get_Treetop_NID(int p_Assembly)
+	//Gets the treetop node for a given Construct.
+	uint64_t get_Treetop_NID(std::string p_Construct)
 	{
-		return Base.get_Treetop_NID(p_Assembly);
+		return Base.get_Treetop_NID(get_Construct_ID(p_Construct));
 	}
 
 
-	//---==  gather_Given_Trace [ASSEMBLY_ID] [NID]  ==---//
+	//---==  gather_Given_Trace [Construct_ID] [NID]  ==---//
 	//Gets a single trace from a given node. Puts it into the output.
-	void gather_Given_Trace(int p_Assembly, uint64_t p_NID)
+	void gather_Given_Trace(std::string p_Construct, uint64_t p_NID)
 	{
-		Base.gather_Given_Trace(p_Assembly, p_NID);
+		Base.gather_Given_Trace(get_Construct_ID(p_Construct), p_NID);
+	}
+
+	void write_Given_Pattern_As_Number(std::string p_Construct, uint64_t p_NID)
+	{
+		Base.write_Given_Pattern_As_Number(get_Construct_ID(p_Construct), p_NID);
 	}
 
 
-	//---==  gather_All_Traces [ASSEMBLY]  ==---//
+	//---==  gather_All_Traces [Construct]  ==---//
 	//Gathers all the traces as it says.
-	void gather_All_Traces(int p_Assembly)
+	void gather_All_Traces(std::string p_Construct)
 	{
-		Base.gather_All_Traces(p_Assembly);
+		Base.gather_All_Traces(get_Construct_ID(p_Construct));
+	}
+
+	//---==  gather_All_Traces [Construct]  ==---//
+	//Gathers all the traces as it says.
+	void gather_All_Traces_uint(std::string p_Construct)
+	{
+		Base.gather_All_Traces_uint(get_Construct_ID(p_Construct));
 	}
 
 
-	//---==  reset_Input [ASSEMBLY_ID]  ==---//
+	//---==  reset_Input [Construct_ID]  ==---//
 	//Wipe the input array.
-	void reset_Input(int p_Assembly)
+	void reset_Input(std::string p_Construct)
 	{
-		Base.reset_Input(p_Assembly);
+		Base.reset_Input(get_Construct_ID(p_Construct));
 	}
 
 
-	//---==  set_State_Nodes_Index [ASSEMBLY_ID] [INDEX]  ==---//
+	//---==  set_State_Nodes_Index [Construct_ID] [INDEX]  ==---//
 	//Sets the index for the state_Node_Tree in the c_Node_Network::State_Nodes[]
-	void set_State_Nodes_Index(int p_Assembly, int p_Index)
+	void set_State_Nodes_Index(std::string p_Construct, int p_Index)
 	{
-		Base.set_State_Nodes_Index(p_Assembly, p_Index);
+		Base.set_State_Nodes_Index(get_Construct_ID(p_Construct), p_Index);
 	}
 
 
 	
 
-	//---==  output_Scaffold [ASSEMBLY_ID]  ==---//
+	//---==  output_Scaffold [Construct_ID]  ==---//
 	//Outputs the scaffold as addresses.
-	void output_Scaffold(int p_Assembly)
+	void output_Scaffold(std::string p_Construct)
 	{
-		Base.output_Scaffold(p_Assembly);
+		Base.output_Scaffold(get_Construct_ID(p_Construct));
 	}
 
 
-	//---==  output_Input [ASSEMBLY_ID]  ==---//
-	//		Outputs the input of the given assembly to the console.
-	void output_Input(int p_Assembly)
+	//---==  output_Input [Construct_ID]  ==---//
+	//		Outputs the input of the given Construct to the console.
+	void output_Input(std::string p_Construct)
 	{
-		Base.output_Input(p_Assembly);
+		Base.output_Input(get_Construct_ID(p_Construct));
 	}
 
 
-	//---==  output_Input [ASSEMBLY_ID]  ==---//
-	//		Outputs the input of the given assembly to the console.
-	void output_Input_uint(int p_Assembly)
+	//---==  output_Input [Construct_ID]  ==---//
+	//		Outputs the input of the given Construct to the console.
+	void output_Input_uint(std::string p_Construct)
 	{
-		Base.output_Input_uint(p_Assembly);
+		Base.output_Input_uint(get_Construct_ID(p_Construct));
 	}
 
 
-	//---==  output_Output [ASSEMBLY_ID]  ==---//
+	//---==  output_Output [Construct_ID]  ==---//
 	//The output trace set is output.
-	void output_Output(int p_Assembly)
+	void output_Output(std::string p_Construct)
 	{
-		Base.output_Output(p_Assembly);
+		Base.output_Output(get_Construct_ID(p_Construct));
 	}
 
 
-	//---==  output_Output [ASSEMBLY_ID]  ==---//
+	//---==  output_Output [Construct_ID]  ==---//
 	//The output trace set is output.
-	void output_Output_uint(int p_Assembly)
+	void output_Output_uint(std::string p_Construct)
 	{
-		Base.output_Output_uint(p_Assembly);
+		Base.output_Output_uint(get_Construct_ID(p_Construct));
 	}
 
 
-	//---==  output_Scaffold_Char [ASSEMBLY_ID]  ==---//
+	//---==  output_Scaffold_Char [Construct_ID]  ==---//
 	//Each address is typecast to a char to give a pseudo-unique look to each node. For monke brain.
-	void output_Scaffold_Char(int p_Assembly)
+	void output_Scaffold_Char(std::string p_Construct)
 	{
-		Base.output_Scaffold_Char(p_Assembly);
+		Base.output_Scaffold_Char(get_Construct_ID(p_Construct));
 	}
 
 
@@ -492,20 +567,27 @@ public:
 
 	//    ---======================================---
 	//   ---========================================---
-	//  ---==   Used to register new assemblies.   ==---
+	//  ---==   Used to register/connect new Constructs.   ==---
 	//   ---========================================---
 	//    ---======================================---
 
-		//    ---==  register_assembly [ASSEMBLY_TYPE] [ASSEMBLY_NAME]  ==---
+		//    ---==  register_Construct [Construct_TYPE] [Construct_NAME]  ==---
 		//p_Type is the type of CAN to declare. 
 		// "Many_To_One" - The I/O tier has every node connected to a single upper tier node.
-	int register_Assembly(std::string p_Type, std::string p_Assembly_Name)
+	int register_Construct(std::string p_Type, std::string p_Construct_Name)
 	{
-		return Base.register_Assembly(p_Type, p_Assembly_Name);
+		return Base.register_Construct(p_Type, p_Construct_Name);
 	}
 
+	void create_Construct_Connection(std::string p_From, std::string p_To)
+	{
+		Base.create_Construct_Connection(get_Construct_ID(p_From), get_Construct_ID(p_To));
+	}
 
-
+	void output_Construct_Connections(std::string p_Construct)
+	{
+		Base.output_Construct_Connections(get_Construct_ID(p_Construct));
+	}
 
 	//    ---=====================---
 	//   ---=======================---
@@ -513,66 +595,66 @@ public:
 	//   ---=======================---
 	//    ---=====================---
 
-//    ---==  load_input  ==---
-	int load_Input(int p_Assembly)
+	//    ---==  load_input  ==---
+	int load_Input(std::string p_Construct)
 	{
-		return Base.load_Input(p_Assembly);
+		return Base.load_Input(get_Construct_ID(p_Construct));
 	}
 
-	int load_Input_uint(int p_Assembly)
+	int load_Input_uint(std::string p_Construct)
 	{
-		return Base.load_Input_uint(p_Assembly);
+		return Base.load_Input_uint(get_Construct_ID(p_Construct));
 	}
 
-	//    ---==  set_input [ASSEMBLY_ID] [INPUT_STRING]  ==---
+	//    ---==  set_input [Construct_ID] [INPUT_STRING]  ==---
 		//Set the value to the passed 1D string of uint64_t
-	void set_Input(int p_Assembly, std::string p_Input)
+	void set_Input(std::string p_Construct, std::string p_Input)
 	{
-		Base.set_Input(p_Assembly, p_Input);
+		Base.set_Input(get_Construct_ID(p_Construct), p_Input);
 	}
 
-	//    ---==  set_input_uint [ASSEMBLY_ID] [ARRAY_DEPTH] [UINT_ARRAY]  ==---
+	//    ---==  set_input_uint [Construct_ID] [ARRAY_DEPTH] [UINT_ARRAY]  ==---
 		//Set the value to the passed 1D string of uint64_t
-	void set_Input_uint(int p_Assembly, int p_Depth, uint64_t* p_Input)
+	void set_Input_uint(std::string p_Construct, int p_Depth, uint64_t* p_Input)
 	{
-		Base.set_Input_uint(p_Assembly, p_Depth, p_Input);
+		Base.set_Input_uint(get_Construct_ID(p_Construct), p_Depth, p_Input);
 	}
 
 
 
 
-	//---==  set_Input [ASSEMBLY_ID] [INPUT_UINT[]] [INPUT_DEPTH]  ==---//
+	//---==  set_Input [Construct_ID] [INPUT_UINT[]] [INPUT_DEPTH]  ==---//
 	//Sets the input to the given uint64_t array.
 	//The input array is 1D
-	void set_Input(int p_Assembly, int p_Input_Depth, uint64_t* p_Input)
+	void set_Input(std::string p_Construct, int p_Input_Depth, uint64_t* p_Input)
 	{
-		Base.set_Input(p_Assembly, p_Input_Depth, p_Input);
+		Base.set_Input(get_Construct_ID(p_Construct), p_Input_Depth, p_Input);
 	}
 
 
 
 	//Sets the input to the given uint64_t 2d array.
 	//The input array is 2D
-	void set_2D_Input_uint(int p_Assembly, int p_X_Depth, int p_Y_Depth, uint64_t** p_Input)
+	void set_2D_Input_uint(std::string p_Construct, int p_X_Depth, int p_Y_Depth, uint64_t** p_Input)
 	{
-		Base.set_2D_Input(p_Assembly, p_X_Depth, p_Y_Depth, p_Input);
+		Base.set_2D_Input(get_Construct_ID(p_Construct), p_X_Depth, p_Y_Depth, p_Input);
 	}
 
 
 	//Sets the input to the given uint64_t 3d array.
 	//The input array is 3D
-	void set_3D_Input_uint(int p_Assembly, int p_X_Depth, int p_Y_Depth, int p_Z_Depth, uint64_t*** p_Input)
+	void set_3D_Input_uint(std::string p_Construct, int p_X_Depth, int p_Y_Depth, int p_Z_Depth, uint64_t*** p_Input)
 	{
-		Base.set_3D_Input(p_Assembly, p_X_Depth, p_Y_Depth, p_Z_Depth, p_Input);
+		Base.set_3D_Input(get_Construct_ID(p_Construct), p_X_Depth, p_Y_Depth, p_Z_Depth, p_Input);
 	}
 
 
 
-	//---==  set_Input_String [ASSEMBLY_ID] [INPUT_STR]  ==---//
+	//---==  set_Input_String [Construct_ID] [INPUT_STR]  ==---//
 	//This is used for setting the input array to reflect a sequence of characters.
-	void set_Input_String(int p_Assembly, std::string p_Input)
+	void set_Input_String(std::string p_Construct, std::string p_Input)
 	{
-		Base.set_Input_String(p_Assembly, p_Input);
+		Base.set_Input_String(get_Construct_ID(p_Construct), p_Input);
 	}
 
 	//    ---==========================================================================---
@@ -581,54 +663,54 @@ public:
 	//   ---============================================================================---
 	//    ---==========================================================================---
 
-	//    ---==  gather_given_node [ASSEMBLY_ID] [NID]  ==---
-	//		Writes the given node's data down in the Assembly_Output_Files[p_Assembly] file.
-	void gather_Given_Node(int p_Assembly, uint64_t p_NID)
+	//    ---==  gather_given_node [Construct_ID] [NID]  ==---
+	//		Writes the given node's data down in the Construct_Output_Files[get_Construct_ID(p_Construct)] file.
+	void gather_Given_Node(std::string p_Construct, uint64_t p_NID)
 	{
-		Base.gather_Given_Node(p_Assembly, p_NID);
+		Base.gather_Given_Node(get_Construct_ID(p_Construct), p_NID);
 	}
 
-	//		Writes the given node's data down in the Assembly_Output_Files[p_Assembly] file.
-	void gather_Given_Node_uint(int p_Assembly, uint64_t p_NID)
+	//		Writes the given node's data down in the Construct_Output_Files[get_Construct_ID(p_Construct)] file.
+	void gather_Given_Node_uint(std::string p_Construct, uint64_t p_NID)
 	{
-		Base.gather_Given_Node_uint(p_Assembly, p_NID);
+		Base.gather_Given_Node_uint(get_Construct_ID(p_Construct), p_NID);
 	}
 
-	//    ---==  gather_all_nodes [ASSEMBLY_ID]  ==---
-	//		This writes the entire network to the Assembly_Output_Files[p_Assembly] file. Note, the output patterns are treated as character.
-		//It uses the passed assembly to output the nodes by putting it into the output of that assembly, then into the file.
-	void gather_All_Nodes(int p_Assembly)
+	//    ---==  gather_all_nodes [Construct_ID]  ==---
+	//		This writes the entire network to the Construct_Output_Files[get_Construct_ID(p_Construct)] file. Note, the output patterns are treated as character.
+		//It uses the passed Construct to output the nodes by putting it into the output of that Construct, then into the file.
+	void gather_All_Nodes(std::string p_Construct)
 	{
-		Base.gather_All_Nodes(p_Assembly);
+		Base.gather_All_Nodes(get_Construct_ID(p_Construct));
 	}
 
-	//    ---==  gather_all_nodes_uint [ASSEMBLY_ID]  ==---
-	//		This writes the entire network to the Assembly_Output_Files[p_Assembly] file. Note, the output patterns are treated as uint.
-	void gather_All_Nodes_uint(int p_Assembly)
+	//    ---==  gather_all_nodes_uint [Construct_ID]  ==---
+	//		This writes the entire network to the Construct_Output_Files[get_Construct_ID(p_Construct)] file. Note, the output patterns are treated as uint.
+	void gather_All_Nodes_uint(std::string p_Construct)
 	{
-		Base.gather_All_Nodes_uint(p_Assembly);
+		Base.gather_All_Nodes_uint(get_Construct_ID(p_Construct));
 	}
 
 
 	//    ---==================================================================---
 	//   ---====================================================================---
-	//  ---==   The output of a given assembly is read into the output file.   ==---
+	//  ---==   The output of a given Construct is read into the output file.   ==---
 	//   ---====================================================================---
 	//    ---==================================================================---
 
 
-	//    ---==  gather_output [ASSEMBLY_ID]  ==---
-	//		Takes every trace in the given Assemblies output trace array and writes them to the Assembly_Output_Files[p_Assembly] file, note the output state patterns are treated as char.
-	void gather_Output(int p_Assembly)
+	//    ---==  gather_output [Construct_ID]  ==---
+	//		Takes every trace in the given Constructs output trace array and writes them to the Construct_Output_Files[get_Construct_ID(p_Construct)] file, note the output state patterns are treated as char.
+	void gather_Output(std::string p_Construct)
 	{
-		Base.gather_Output(p_Assembly);
+		Base.gather_Output(get_Construct_ID(p_Construct));
 	}
 
-	//    ---==  gather_output_uint [ASSEMBLY_ID]  ==---
-	//		Takes every trace in the given Assemblies output trace array and writes them to the Assembly_Output_Files[p_Assembly] file, note the output state patterns are treated as uint.
-	void gather_Output_uint(int p_Assembly)
+	//    ---==  gather_output_uint [Construct_ID]  ==---
+	//		Takes every trace in the given Constructs output trace array and writes them to the Construct_Output_Files[get_Construct_ID(p_Construct)] file, note the output state patterns are treated as uint.
+	void gather_Output_uint(std::string p_Construct)
 	{
-		Base.gather_Output_uint(p_Assembly);
+		Base.gather_Output_uint(get_Construct_ID(p_Construct));
 	}
 
 
@@ -638,40 +720,49 @@ public:
 	//   ---===============================---
 	//    ---=============================---
 
-	//    ---==  gather_treetop_node [ASSEMBLY_ID]  ==---
-	//		This writes the current treetop node of the given assembly to the Assembly_Output_Files[p_Assembly] file. This does not erase the file.
-	void gather_Treetop_Node(int p_Assembly)
+	//    ---==  gather_treetop_node [Construct_ID]  ==---
+	//		This writes the current treetop node of the given Construct to the Construct_Output_Files[get_Construct_ID(p_Construct)] file. This does not erase the file.
+	void gather_Treetop_Node(std::string p_Construct)
 	{
-		Base.gather_Treetop_Node(p_Assembly);
+		Base.gather_Treetop_Node(get_Construct_ID(p_Construct));
 	}
 
-	//    ---==  gather_treetop_node_uint [ASSEMBLY_ID]  ==---
-	//		This writes the current treetop node of the given assembly to the Assembly_Output_Files[p_Assembly] file. This does not erase the file.
-	void gather_Treetop_Node_uint(int p_Assembly)
+	//    ---==  gather_treetop_node_uint [Construct_ID]  ==---
+	//		This writes the current treetop node of the given Construct to the Construct_Output_Files[get_Construct_ID(p_Construct)] file. This does not erase the file.
+	void gather_Treetop_Node_uint(std::string p_Construct)
 	{
-		Base.gather_Treetop_Node_uint(p_Assembly);
+		Base.gather_Treetop_Node_uint(get_Construct_ID(p_Construct));
 	}
 
-	//    ---==  gather_treetop_NID [ASSEMBLY_ID]  ==---
+	//    ---==  gather_treetop_NID [Construct_ID]  ==---
 	//		This writes only the NID of the current treetop to the file. Does not erase the file.
-	void gather_Treetop_NID(int p_Assembly)
+	void gather_Treetop_NID(std::string p_Construct)
 	{
-		Base.gather_Treetop_NID(p_Assembly);
+		Base.gather_Treetop_NID(get_Construct_ID(p_Construct));
+	}
+
+	void write_Treetop_NID_To_Other_Input(std::string p_Construct_From, std::string p_Construct_To)
+	{
+		Base.write_Treetop_NID_To_Other_Input(get_Construct_ID(p_Construct_From), get_Construct_ID(p_Construct_To));
+	}
+
+	void gather_Treetops(std::string p_Construct)
+	{
+		Base.gather_Treetops(get_Construct_ID(p_Construct));
 	}
 
 
-
 	//    ---======================================================================---
 	//   ---========================================================================---
-	//  ---==   Output the assembly input, output, scaffolds, node network, etc.   ==---
+	//  ---==   Output the Construct input, output, scaffolds, node network, etc.   ==---
 	//   ---========================================================================---
 	//    ---======================================================================---
 
-	//    ---==  output_assemblies  ==---
-	//		Outputs the assemblies currently registered.
-	void output_Assemblies()
+	//    ---==  output_Constructs  ==---
+	//		Outputs the Constructs currently registered.
+	void output_Constructs()
 	{
-		Base.output_Assemblies();
+		Base.output_Constructs();
 	}
 
 	//      ---==================================---
@@ -687,16 +778,21 @@ public:
 
 
 	//    ---==  clear_output  ==---
-	int clear_Output(int p_Assembly)
+	int clear_Output(std::string p_Construct)
 	{
-		return Base.clear_Output(p_Assembly);
+		return Base.clear_Output(get_Construct_ID(p_Construct));
 	}
 
 
 	//    ---==  output_newline  ==---
-	int output_Newline(int p_Assembly)
+	int output_Newline(std::string p_Construct)
 	{
-		return Base.output_Newline(p_Assembly);
+		return Base.output_Newline(get_Construct_ID(p_Construct));
+	}	
+	
+	int write_Text(std::string p_Construct, std::string p_Text)
+	{
+		return Base.write_Text(get_Construct_ID(p_Construct), p_Text);
 	}
 
 

@@ -102,17 +102,81 @@ public:
 
 		tmp_F << "\n";
 		tmp_F << "\noutput_newline";
-		tmp_F << "\nset_input 0 O2 " << O2 << " /end/ encode 0 gather_treetop_node 0 ";
-		tmp_F << "\nset_input 0 O2_Delta " << O2_Delta << " /end/ encode 0 gather_treetop_node 0 ";
+		tmp_F << "\nset_input 0 ar_O2 " << O2 << " /end/ encode 0 gather_treetop_node 0 ";
+		tmp_F << "\nset_input 1 ac_O2_Delta " << O2_Delta << " /end/ encode 1 gather_treetop_node 1 ";
+		tmp_F << "\nset_input 2 em_O2_Pump " << O2_Pump << " /end/ encode 2 gather_treetop_node 2 ";
 
-		tmp_F << "\nset_input 0 Temp " << Temp << " /end/ encode 0 gather_treetop_node 0 ";
-		tmp_F << "\nset_input 0 Temp_Delta " << Temp_Delta << " /end/ encode 0 gather_treetop_node 0 ";
-
-		tmp_F << "\nset_input 0 O2_Pump " << O2_Pump << " /end/ encode 0 gather_treetop_node 0 ";
-		tmp_F << "\nset_input 0 Heater " << Heater << " /end/ encode 0 gather_treetop_node 0 ";
+		tmp_F << "\nset_input 3 ar_Temp " << Temp << " /end/ encode 3 gather_treetop_node 3 ";
+		tmp_F << "\nset_input 4 ac_Temp_Delta " << Temp_Delta << " /end/ encode 4 gather_treetop_node 4 ";
+		tmp_F << "\nset_input 5 em_Heater " << Heater << " /end/ encode 5 gather_treetop_node 5 ";
 
 		tmp_F.close();
 	}
 };
 
  
+
+class c_Map_Sim
+{
+	char** Map;
+
+	int Width;
+
+	int Height;
+
+	int Frame;
+
+	std::string Filename;
+
+public:
+
+	c_Map_Sim(int p_Width, int p_Height)
+	{
+		Map = NULL;
+
+		Filename = "./Scripts/";
+
+		new_Map(p_Width, p_Height);
+	}
+
+	void new_Map(int p_Width, int p_Height)
+	{
+		Width = p_Width;
+		Height = p_Height;
+
+		std::cout << "\n Creating Map(" << Width << ", " << Height << ")";
+		Map = new char*[Width];
+
+		for (int cou_X = 0; cou_X < Width; cou_X++)
+		{
+			Map[cou_X] = new char[Height];
+
+			for (int cou_Y = 0; cou_Y < Height; cou_Y++)
+			{
+				Map[cou_X][cou_Y] = ' ';
+				std::cout << Map[cou_X][cou_Y];
+			}
+		}
+		std::cout << "\n Finished Map";
+	}
+
+	void set_Pixel(int p_X, int p_Y, char p_Pixel)
+	{
+		Map[p_X][p_Y] = p_Pixel;
+	}
+
+	void view_Map()
+	{
+		for (int cou_X = 0; cou_X < Width; cou_X++)
+		{
+			std::cout << "\n[";
+			for (int cou_Y = 0; cou_Y < Height; cou_Y++)
+			{
+				//std::cout << int(Map[cou_X][cou_Y]) << " ";
+				std::cout << Map[cou_X][cou_Y] << " ";
+			}
+			std::cout << "]";
+		}
+		std::cout << "\n";
+	}
+};

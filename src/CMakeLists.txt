@@ -10,3 +10,9 @@ add_executable (NT4 "NT4.cpp" "NT4.h")
 
 # TODO: Add tests and install targets if needed.
 target_include_directories(NT4 PUBLIC "include")
+
+# Set compiler options for profiling
+target_compile_options(NT4 PUBLIC "-pg")
+
+# TODO: Add tests and install targets if needed.
+target_include_directories(NT4 PUBLIC "include")

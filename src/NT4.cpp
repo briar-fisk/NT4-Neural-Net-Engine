@@ -73,9 +73,41 @@ void generate_Test_Data()
     }
 }
 
-int main()
+void runmap()
 {
-    NT4::c_Construct_Text_Server Serverman;
+    c_Map_Sim Map(50, 50);
+
+    int tmp_X = 0;
+    int tmp_Y = 0;
+    char tmp_Char = ' ';
+
+
+    while (1)
+    {
+        tmp_X = 0;
+        tmp_Y = 0;
+        tmp_Char = ' ';
+
+        Map.view_Map();
+
+        std::cin >> tmp_X;
+        std::cin >> tmp_Y;
+
+        std::cin >> tmp_Char;
+
+        Map.set_Pixel(tmp_X, tmp_Y, tmp_Char);
+    }
+
+}
+
+int main(int argc, char** argv)
+{
+    //runmap();
+
+    std::string tmp_Autoexec = "../autoexec.ssv";
+    if (argc > 1) { tmp_Autoexec = argv[1]; }
+    NT4::c_Construct_Text_Server Serverman(tmp_Autoexec);
+
     //generate_Test_Data();
     //system("PAUSE");
 

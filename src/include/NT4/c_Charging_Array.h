@@ -32,8 +32,8 @@ public:
     //-- !WARNING! RECURSIVE FUNCTION ON LINKED LIST! CALLING THIS WILL CAUSE STACK CORRUPTION ERROR WITH ENOUGH NODES!
     void output_LL()
     {
-        //---std::cout << " [";
-        if (NID != NULL) { NID->bp_O(); }
+        std::cout << "\n [";
+        if (NID != NULL) { NID->bp_O(1); }
         std::cout << " $" << Charge << "]  ";
         if (Next != NULL) { Next->output_LL(); }
     }
@@ -194,6 +194,9 @@ public:
         Root = NULL;
         Current = NULL;
         flg_Foundit = false;
+
+        tmp_Data = 0;
+        tmp_SData = 0;
     }
 
     ~c_Charging_Buffer_Tree()
@@ -388,6 +391,9 @@ public:
 
     c_Charging_Linked_List_Handler Treetops;
 
+    //The treetop tree. What a stupid name.
+    c_Charging_Buffer_Tree Treetop_Tree;
+
     //Flags
     bool flg_Not_Done;
 
@@ -407,8 +413,8 @@ public:
         Input_Position = 0;
 
         Current_Highest_Charge = 0;
-        Previous_Highest_Charge = 0;
         Base_Charge = 10.00;
+        Previous_Highest_Charge = Base_Charge;
         Modifier_Charge = 1.0f;
         Action_Potential_Threshold = 0.0f;
     }
@@ -418,6 +424,7 @@ public:
         Current_Charge.reset();
         Output.reset();
         Treetops.reset();
+        Treetop_Tree.reset();
     }
 
     void reset()
@@ -425,9 +432,41 @@ public:
         Current_Charge.reset();
         Output.reset();
         Treetops.reset();
+        Treetop_Tree.reset();
 
         flg_Not_Done = 0;
         Input_Position = 0;
+    }
+
+    //Hyperparameters
+    void set_Base_Charge(double p_Base_Charge)
+    {
+        Base_Charge = p_Base_Charge;
+    }
+
+    void set_Modifier_Charge(double p_Modifier_Charge)
+    {
+        Modifier_Charge = p_Modifier_Charge;
+    }
+
+    void set_Action_Potential_Threshold(double p_Action_Potential_Threshold)
+    {
+        Action_Potential_Threshold = p_Action_Potential_Threshold;
+    }
+
+    double get_Base_Charge()
+    {
+        return Base_Charge;
+    }
+
+    double get_Modifier_Charge()
+    {
+        return Modifier_Charge;
+    }
+
+    double get_Action_Potential_Threshold()
+    {
+        return Action_Potential_Threshold;
     }
 
     //=====--            --=====//
@@ -456,17 +495,18 @@ public:
 
         while (tmp_LL != NULL)
         {
-            //---std::cout << "\n " << tmp_LL->NID->NID << " T->" << tmp_LL->NID->Type << " ";
-            //---tmp_LL->NID->bp_O();
+            tmp_Charge = 0.0;
+            tmp_Charge_Percentage = 0.0;
 
             if (tmp_LL->NID == NULL) { tmp_LL = tmp_LL->Next; continue; }
 
-            //---std::cout << " tmp_Charge = " << " (((" << tmp_LL->Charge << " * " << Modifier_Charge << ") / " << Previous_Highest_Charge << ") * " << Base_Charge << ")";
+            //---std::cout << "\n tmp_Charge_Percentage " << tmp_Charge_Percentage << " = ((tmp_LL->Charge " << tmp_LL->Charge << "  * Modifier_Charge " << Modifier_Charge << " ) / Previous_Highest_Charge " << Previous_Highest_Charge << " );";
 
             tmp_Charge_Percentage = ((tmp_LL->Charge * Modifier_Charge) / Previous_Highest_Charge);
+            
+            //---std::cout << "\n --- tmp_Charge_Percentage " << tmp_Charge_Percentage << " = ((tmp_LL->Charge " << tmp_LL->Charge << "  * Modifier_Charge " << Modifier_Charge << " ) / Previous_Highest_Charge " << Previous_Highest_Charge << " );";
+            
             tmp_Charge = double(tmp_Charge_Percentage * Base_Charge);
-
-            //---std::cout << " c->" << tmp_Charge;
 
             if (tmp_Charge < (Base_Charge * Action_Potential_Threshold)) { tmp_LL = tmp_LL->Next; continue; }
 
@@ -475,18 +515,20 @@ public:
             {
                 for (int cou_A = 0; cou_A < tmp_LL->NID->Axon_Count[cou_H]; cou_A++)
                 {
-                    submit(tmp_LL->NID->Axons[cou_H][cou_A], tmp_Charge);
-                    //---std::cout << "\n ~[" << cou_H << "][" << cou_A << "]~  A->" << tmp_LL->NID->Axons[cou_H][cou_A];
-                    //---tmp_LL->NID->Axons[cou_H][cou_A]->bp_O();
+                    //submit(tmp_LL->NID->Axons[cou_H][cou_A], tmp_Charge);
+
+                    //---std::cout << "\n NID " << tmp_LL->NID->NID << " Axons[ " << cou_H << " ][ " << cou_A << " ]->Dendrite_Weights[ " << cou_A << " ] " << tmp_LL->NID->Axons[cou_H][cou_A]->Dendrite_Weights[cou_H];
+
+                    //This is for the double legged node charging, may separate out in the future as not all nodes need to do this.
+                    submit(tmp_LL->NID->Axons[cou_H][cou_A], (tmp_Charge * tmp_LL->NID->Axons[cou_H][cou_A]->Dendrite_Weights[cou_H]));
                 }
             }
 
             if (tmp_LL->NID->Axon_Hillock_Count == 0)
             {
-                Treetops.new_LL((tmp_LL->NID), (tmp_LL->Charge));
-            }
+                submit_Treetop((tmp_LL->NID), (tmp_Charge));
 
-            tmp_LL->NID->output_Node_Raw();
+            }
 
             tmp_LL = tmp_LL->Next;
         }
@@ -513,7 +555,7 @@ public:
         }
         else
         {
-            std::cerr << "\n  Error: p_Leg Exceeds p_Node::Axon_Hillock_Count...";
+            std::cerr << "\n \\(o.O)--  Error: p_Leg (" << p_Leg << ") Exceeds p_Node::Axon_Hillock_Count...";
         }
     }
 
@@ -550,6 +592,8 @@ public:
     //Accepts a submission of nodes to charge, used for CAN.
     void submit(c_Node* p_Node, double p_Charge = 10.00)
     {
+        if (p_Node == NULL) { std::cerr << "\n (o.O) Error! p_Node is NULL to submit!"; }
+
         //Search for the submitted node, if found add the charge.
         Tree.search(p_Node);
 
@@ -565,6 +609,28 @@ public:
 
             Tree.set_Current_Node_LL(Current_Charge.new_LL(p_Node, p_Charge));
         }
+    }
+    
+    void submit_Treetop(c_Node* p_Node, double p_Charge)
+    {
+        if (p_Node == NULL) { std::cerr << "\n (O.O) Error! p_Node is NULL to submit_Treetop!"; }
+
+        //---std::cout << "\n [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ] [ ]  ~~~ submit_Treetop " << p_Node << " p_Charge " << p_Charge;
+
+        //Search for the submitted node, if found add the charge.
+        Treetop_Tree.search(p_Node);
+
+        if (Treetop_Tree.flg_Foundit)
+        {
+            (Treetop_Tree.get_Current_Node_LL())->Charge += p_Charge;
+        }
+
+        if (!Treetop_Tree.flg_Foundit && p_Node != NULL)
+        {
+            Treetop_Tree.set_Current_Node_LL(Treetops.new_LL(p_Node, p_Charge));
+        }
+
+        //---std::cout << "   ~~~ flg_foundit " << Treetop_Tree.flg_Foundit << " Treetops.charge " << (Treetop_Tree.get_Current_Node_LL())->Charge;
     }
 
     //=====--             --=====//
@@ -601,6 +667,7 @@ public:
     //Charges the outputs back into the charging buffer.
     double gather_Treetops()
     {
+        std::cout << "\n\n\n\n\n\n gather_Treetops()";
         c_Charging_Linked_List* tmp_LL = Treetops.Root;
         c_Charging_Linked_List_Handler tmp_Treetops_LLH;;
         tmp_Treetops_LLH.Root = Treetops.Root;
@@ -620,16 +687,19 @@ public:
         }
 
         Treetops.Root = NULL;
-        Treetops.reset();
         tmp_LL = tmp_Treetops_LLH.Root;
 
         while (tmp_LL != NULL)
         {
             if (tmp_LL->NID == NULL) { tmp_LL = tmp_LL->Next; continue; }
 
+            std::cout << "\n  ------------ [" << tmp_LL->NID->NID << "] " << tmp_LL->Charge;
+
             tmp_Charge = (((tmp_LL->Charge * Modifier_Charge) / tmp_Current_Highest_Charge) * Base_Charge);
 
             if (tmp_Charge < (Base_Charge * Action_Potential_Threshold)) { tmp_LL = tmp_LL->Next; continue; }
+
+            std::cout << "\n  ------- " << tmp_LL->Charge;
 
             Treetops.new_LL(tmp_LL->NID, (tmp_Charge));
 
@@ -637,6 +707,8 @@ public:
         }
 
         tmp_Treetops_LLH.reset();
+        Treetop_Tree.reset();
+        Treetops.reset();
 
         return tmp_Current_Highest_Charge;
     }
@@ -667,12 +739,20 @@ public:
         output_Output_LL();
         std::cout << "\n Treetops->" << Treetops.Depth << " ->";
         output_Treetops();
+        std::cout << "\n Treetop_Tree: \n";
+        output_Treetop_Tree();
     }
 
     //Outputs the buffer.
     void output_Tree()
     {
         Tree.output_Tree();
+    }
+
+    //Outputs the buffer.
+    void output_Treetop_Tree()
+    {
+        Treetop_Tree.output_Tree();
     }
 
     //Outputs the Current_Charge_LL.

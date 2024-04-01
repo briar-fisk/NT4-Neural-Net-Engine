@@ -27,10 +27,20 @@ public:
 	c_IO_Set Input;
 	c_2D_IO_Set Input_2D;
 	c_3D_IO_Set Input_3D;
-	
+
 	//The output is an array of traces retrieved from charging the buffers.
 	c_Trace* Output;
+	c_2D_Trace* Output_2D;
+	c_3D_Trace* Output_3D;
 	int Output_Depth;
+	int Output_Depth_2D;
+	int Output_Depth_3D;
+
+	//The buffer used during charging.
+	c_Charging_Buffer tmp_Buffman;
+
+	//This hyperparameter is used for the pyramidal constructs, or those with multiple layers. The network will start charging on this tier to filter out less associated dirty sub-symbols.
+	int Charging_Tier;
 
 	//These may vary wildly depending on the CAN structure, the scaffold will be completely internal.
 	//Because of this we will declare the actual scaffold in the derived classes rather than here.
@@ -38,6 +48,63 @@ public:
 	//int State_Depth; //We track this so that if the input is changed we can still properly delete the scaffold.
 
 	//==--   Member functions   --==//
+
+	//This is called in the CAN constructor when you write it, this initializes all shared vars.
+	void init()
+	{
+		NNet = NULL;
+
+		Input.reset();
+		Input_2D.reset();
+		Input_3D.reset();
+
+		Output = NULL;
+		Output_Depth = 0;
+		Output_2D = NULL;
+		Output_Depth_2D = 0;
+		Output_3D = NULL;
+		Output_Depth_3D = 0;
+
+		State_Nodes_Index = 0;
+
+		//HYPERRRRRRRRRRRRRRRRRRRRRRRRRR
+		Charging_Tier = 0;
+	}
+
+	int get_Output_Depth()
+	{
+		return Output_Depth;
+	}
+
+	c_Trace * get_Output(const int p_Output)
+	{
+		return &(Output[p_Output]);
+	}
+
+	void allocate_Output(const int p_Output_Depth, const int p_Dimension)
+	{
+		if (p_Dimension == 1)
+		{
+			if (Output != NULL) { delete[] Output; Output = NULL; }
+
+			Output = new c_Trace[p_Output_Depth];
+			Output_Depth = p_Output_Depth;
+		}
+		if (p_Dimension == 2)
+		{
+			if (Output_2D != NULL) { delete[] Output_2D; Output_2D = NULL; }
+
+			Output_2D = new c_2D_Trace[p_Output_Depth];
+			Output_Depth_2D = p_Output_Depth;
+		}
+		if (p_Dimension == 3)
+		{
+			if (Output_3D != NULL) { delete[] Output_3D; Output_3D = NULL; }
+
+			Output_3D = new c_3D_Trace[p_Output_Depth];
+			Output_Depth_3D = p_Output_Depth;
+		}
+	}
 
 	//This encodes the p_Input data, if the nodes aren't found they are created, used for training.
 	virtual void encode(uint64_t* p_Input = NULL, int p_Depth = 0)=0;
@@ -53,10 +120,26 @@ public:
 	//This returns the treetop node at a given index, for most structures this will be a single node, but for those like stiched-base networks with a treetop node count equal to the input node count then you can access them by index.
 	virtual c_Node* get_Treetop(int p_Index = 0)=0;
 	
+	//Calculates and returns the number of current treetops.
+	int get_Output_Depth(int p_Index, int p_Dimension)
+	{
+		if (p_Dimension == 1) { return Output_Depth; }
+		if (p_Dimension == 2) { return Output_Depth_2D; }
+		if (p_Dimension == 3) { return Output_Depth_3D; }
+	}
+
+	//Returns the dimension of the data.
+	virtual int get_Dimension() = 0;
+	
 	//Gets a single trace from a given node. Puts it into the output.
 	virtual void gather_Given_Trace(uint64_t p_NID)=0;
 	
 	virtual void gather_All_Traces()=0;
+
+	//Gathers the treetops, used to be at the end of query but decoupled for complex searches.
+	virtual void gather_Treetops()=0;
+
+	virtual void backpropagate_NID_Into_Given_Index(uint64_t p_NID, int p_Index, double p_Charge) = 0;
 
 	//Wipe the input array.
 	void reset_Input()
@@ -64,6 +147,47 @@ public:
 		Input.reset();
 		Input_2D.reset();
 		Input_3D.reset();
+	}
+
+	//Hyperparams
+	void set_Base_Charge(double p_Base_Charge)
+	{
+		tmp_Buffman.set_Base_Charge(p_Base_Charge);
+	}
+
+	void set_Modifier_Charge(double p_Modifier_Charge)
+	{
+		tmp_Buffman.set_Modifier_Charge(p_Modifier_Charge);
+	}
+
+	void set_Action_Potential_Threshold(double p_Action_Potential_Threshold)
+	{
+		tmp_Buffman.set_Action_Potential_Threshold(p_Action_Potential_Threshold);
+	}
+
+	void set_Charging_Tier(int p_Charging_Tier)
+	{
+		Charging_Tier = p_Charging_Tier;
+	}
+
+	double get_Base_Charge()
+	{
+		return tmp_Buffman.get_Base_Charge();
+	}
+
+	double get_Modifier_Charge()
+	{
+		return tmp_Buffman.get_Modifier_Charge();
+	}
+
+	double get_Action_Potential_Threshold()
+	{
+		return tmp_Buffman.get_Action_Potential_Threshold();
+	}
+
+	double get_Charging_Tier()
+	{
+		return Charging_Tier;
 	}
 
 	//Associate the CAN with a network from which to draw nodes.
@@ -222,6 +346,27 @@ public:
 		tmp_Input_U = NULL;
 	}
 
+
+	int get_Top(c_Linked_List_Handler* p_Pattern_N)
+	{
+		int tmp_Top_X = 0;
+
+		//We can iterate through given we know how big the linked list is.
+		c_Linked_List* tmp_LL_Pat_X = p_Pattern_N->Root;
+
+		for (int cou_Index = 0; cou_Index < p_Pattern_N->Depth; cou_Index++)
+		{
+			if (tmp_LL_Pat_X->Quanta >= tmp_Top_X)
+			{
+				//+1 as we want the depth, not the furthest index.
+				tmp_Top_X = int(tmp_LL_Pat_X->Quanta + 1);
+			}
+			tmp_LL_Pat_X = tmp_LL_Pat_X->Next;
+		}
+
+		return tmp_Top_X;
+	}
+
 	//==--   Output Functions   --==//
 
 	//Outputs the scaffold as addresses.
@@ -247,12 +392,39 @@ public:
 	void output_Output(int p_Type = 0)
 	{
 		std::cout << "\n  --==   Output_Traces [" << Output_Depth << "]   ==--";
+		std::cout << "\n 1D: " << Output_Depth << " 2D: " << Output_Depth_2D << " 3D: " << Output_Depth_3D;
 		for (int cou_Output = 0; cou_Output < Output_Depth; cou_Output++)
 		{
 			std::cout << "\n  Trace[" << cou_Output << "]: ";
 
 			std::cout << " Pat_Depth: " << Output[cou_Output].Depth;
 			Output[cou_Output].output(p_Type);
+			/*
+			for (int cou_Index = 0; cou_Index < Output[cou_Output].Depth; cou_Index++)
+			{
+				//std::cout << "\n [" << cou_Index << "] ";
+				std::cout << " " << Output[cou_Output].Pattern[cou_Index];
+			}
+			*/
+		}
+		for (int cou_Output = 0; cou_Output < Output_Depth_2D; cou_Output++)
+		{
+			std::cout << "\n  2D_Trace[" << cou_Output << "]: ";
+
+			Output_2D[cou_Output].output(p_Type);
+			/*
+			for (int cou_Index = 0; cou_Index < Output[cou_Output].Depth; cou_Index++)
+			{
+				//std::cout << "\n [" << cou_Index << "] ";
+				std::cout << " " << Output[cou_Output].Pattern[cou_Index];
+			}
+			*/
+		}
+		for (int cou_Output = 0; cou_Output < Output_Depth_3D; cou_Output++)
+		{
+			std::cout << "\n  3D_Trace[" << cou_Output << "]: ";
+
+			Output_3D[cou_Output].output(p_Type);
 			/*
 			for (int cou_Index = 0; cou_Index < Output[cou_Output].Depth; cou_Index++)
 			{

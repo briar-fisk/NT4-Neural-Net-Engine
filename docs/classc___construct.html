@@ -72,6 +72,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classc___construct-members.html">List of all members</a>  </div>
@@ -84,11 +85,28 @@ $(function() {
 
 <p><code>#include &lt;<a class="el" href="c___construct_8h_source.html">c_Construct.h</a>&gt;</code></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structc___construct_1_1s___construct.html">s_Construct</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:add6a1e5603263055644c3de7ebebde11" id="r_add6a1e5603263055644c3de7ebebde11"><td class="memItemLeft" align="right" valign="top"><a id="add6a1e5603263055644c3de7ebebde11" name="add6a1e5603263055644c3de7ebebde11"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>add_Assembly</b> (std::string p_Assembly_Name)</td></tr>
-<tr class="separator:add6a1e5603263055644c3de7ebebde11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a05eb34b8ee1c1159180f2618d7850f" id="r_a0a05eb34b8ee1c1159180f2618d7850f"><td class="memItemLeft" align="right" valign="top"><a id="a0a05eb34b8ee1c1159180f2618d7850f" name="a0a05eb34b8ee1c1159180f2618d7850f"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>add_Construct</b> (std::string p_Construct_Name)</td></tr>
+<tr class="separator:a0a05eb34b8ee1c1159180f2618d7850f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c75a63023cd242d2e2e2651ea545739" id="r_a2c75a63023cd242d2e2e2651ea545739"><td class="memItemLeft" align="right" valign="top"><a id="a2c75a63023cd242d2e2e2651ea545739" name="a2c75a63023cd242d2e2e2651ea545739"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>get_Construct_ID</b> (std::string p_Construct_Name)</td></tr>
+<tr class="separator:a2c75a63023cd242d2e2e2651ea545739"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96e3e33610d7587c4b7297f4ba620484" id="r_a96e3e33610d7587c4b7297f4ba620484"><td class="memItemLeft" align="right" valign="top"><a id="a96e3e33610d7587c4b7297f4ba620484" name="a96e3e33610d7587c4b7297f4ba620484"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>add_Connection_Index</b> (int p_Construct)</td></tr>
+<tr class="separator:a96e3e33610d7587c4b7297f4ba620484"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b0c0288f252b110c3b04dadc1db38e1" id="r_a9b0c0288f252b110c3b04dadc1db38e1"><td class="memItemLeft" align="right" valign="top"><a id="a9b0c0288f252b110c3b04dadc1db38e1" name="a9b0c0288f252b110c3b04dadc1db38e1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>create_Construct_Connection</b> (int p_From, int p_To)</td></tr>
+<tr class="separator:a9b0c0288f252b110c3b04dadc1db38e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af87b6a5fc5dce18e867fef077c736a31" id="r_af87b6a5fc5dce18e867fef077c736a31"><td class="memItemLeft" align="right" valign="top"><a id="af87b6a5fc5dce18e867fef077c736a31" name="af87b6a5fc5dce18e867fef077c736a31"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Construct_Connections</b> (int p_Construct)</td></tr>
+<tr class="separator:af87b6a5fc5dce18e867fef077c736a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9dada342148caa20b8847f71f94ee99" id="r_ad9dada342148caa20b8847f71f94ee99"><td class="memItemLeft" align="right" valign="top"><a id="ad9dada342148caa20b8847f71f94ee99" name="ad9dada342148caa20b8847f71f94ee99"></a>
 <a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_Node_Ref_By_NID</b> (uint64_t p_NID)</td></tr>
 <tr class="separator:ad9dada342148caa20b8847f71f94ee99"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -122,15 +140,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Node_Raw</b> (
 <tr class="memitem:abc5f45554d19b49107b988c157d1a484" id="r_abc5f45554d19b49107b988c157d1a484"><td class="memItemLeft" align="right" valign="top"><a id="abc5f45554d19b49107b988c157d1a484" name="abc5f45554d19b49107b988c157d1a484"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Node_Char</b> (<a class="el" href="classc___node.html">c_Node</a> *p_Node)</td></tr>
 <tr class="separator:abc5f45554d19b49107b988c157d1a484"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4f012aae3556df88a6387e29ced87ea3" id="r_a4f012aae3556df88a6387e29ced87ea3"><td class="memItemLeft" align="right" valign="top"><a id="a4f012aae3556df88a6387e29ced87ea3" name="a4f012aae3556df88a6387e29ced87ea3"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>register_New_Construct</b> ()</td></tr>
-<tr class="separator:a4f012aae3556df88a6387e29ced87ea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6cde3a9428417d58a569ebad05e50ed9" id="r_a6cde3a9428417d58a569ebad05e50ed9"><td class="memItemLeft" align="right" valign="top"><a id="a6cde3a9428417d58a569ebad05e50ed9" name="a6cde3a9428417d58a569ebad05e50ed9"></a>
 <a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>new_Node</b> ()</td></tr>
 <tr class="separator:a6cde3a9428417d58a569ebad05e50ed9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5096bb0e07823624b6e948fa8c678e4" id="r_ad5096bb0e07823624b6e948fa8c678e4"><td class="memItemLeft" align="right" valign="top"><a id="ad5096bb0e07823624b6e948fa8c678e4" name="ad5096bb0e07823624b6e948fa8c678e4"></a>
-<a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>new_State_Node</b> (int p_Assembly, double p_State)</td></tr>
-<tr class="separator:ad5096bb0e07823624b6e948fa8c678e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2171f90c3047205a009b4c8edd0a06e3" id="r_a2171f90c3047205a009b4c8edd0a06e3"><td class="memItemLeft" align="right" valign="top"><a id="a2171f90c3047205a009b4c8edd0a06e3" name="a2171f90c3047205a009b4c8edd0a06e3"></a>
+<a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>new_State_Node</b> (int p_Construct, uint64_t p_State)</td></tr>
+<tr class="separator:a2171f90c3047205a009b4c8edd0a06e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d8611febc794ff9185703b2c3da7763" id="r_a5d8611febc794ff9185703b2c3da7763"><td class="memItemLeft" align="right" valign="top"><a id="a5d8611febc794ff9185703b2c3da7763" name="a5d8611febc794ff9185703b2c3da7763"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>create_Connections</b> (<a class="el" href="classc___node.html">c_Node</a> *p_To, int p_Count, <a class="el" href="classc___node.html">c_Node</a> **p_From)</td></tr>
 <tr class="separator:a5d8611febc794ff9185703b2c3da7763"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -140,138 +155,168 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>create_Connections</b
 <tr class="memitem:aae1a3496eb950e8ae73765c6b90215cc" id="r_aae1a3496eb950e8ae73765c6b90215cc"><td class="memItemLeft" align="right" valign="top"><a id="aae1a3496eb950e8ae73765c6b90215cc" name="aae1a3496eb950e8ae73765c6b90215cc"></a>
 <a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_Upper_Tier_Node</b> (int p_Count, <a class="el" href="classc___node.html">c_Node</a> **p_Legs)</td></tr>
 <tr class="separator:aae1a3496eb950e8ae73765c6b90215cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a659d81986ab7711766daa5bf3b6185a1" id="r_a659d81986ab7711766daa5bf3b6185a1"><td class="memItemLeft" align="right" valign="top"><a id="a659d81986ab7711766daa5bf3b6185a1" name="a659d81986ab7711766daa5bf3b6185a1"></a>
-<a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>does_State_Node_Exist</b> (int p_Assembly, uint64_t p_State)</td></tr>
-<tr class="separator:a659d81986ab7711766daa5bf3b6185a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acd79f30f72c3610706fba2aec2754bd2" id="r_acd79f30f72c3610706fba2aec2754bd2"><td class="memItemLeft" align="right" valign="top"><a id="acd79f30f72c3610706fba2aec2754bd2" name="acd79f30f72c3610706fba2aec2754bd2"></a>
-<a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_State_Node</b> (int p_Assembly, uint64_t p_State)</td></tr>
-<tr class="separator:acd79f30f72c3610706fba2aec2754bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a323c1c287ef20362d0f44ea10a820051" id="r_a323c1c287ef20362d0f44ea10a820051"><td class="memItemLeft" align="right" valign="top"><a id="a323c1c287ef20362d0f44ea10a820051" name="a323c1c287ef20362d0f44ea10a820051"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_BP</b> ()</td></tr>
-<tr class="separator:a323c1c287ef20362d0f44ea10a820051"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b764bec6e7f716936c25c617208b250" id="r_a5b764bec6e7f716936c25c617208b250"><td class="memItemLeft" align="right" valign="top"><a id="a5b764bec6e7f716936c25c617208b250" name="a5b764bec6e7f716936c25c617208b250"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_BP_NID</b> (int p_NID)</td></tr>
-<tr class="separator:a5b764bec6e7f716936c25c617208b250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a882a97c391f5a7ef76feee8b2d5f1f" id="r_a5a882a97c391f5a7ef76feee8b2d5f1f"><td class="memItemLeft" align="right" valign="top"><a id="a5a882a97c391f5a7ef76feee8b2d5f1f" name="a5a882a97c391f5a7ef76feee8b2d5f1f"></a>
+<a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>does_State_Node_Exist</b> (int p_Construct, uint64_t p_State)</td></tr>
+<tr class="separator:a5a882a97c391f5a7ef76feee8b2d5f1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61f77db5d3a42364aab664f4d215776" id="r_ac61f77db5d3a42364aab664f4d215776"><td class="memItemLeft" align="right" valign="top"><a id="ac61f77db5d3a42364aab664f4d215776" name="ac61f77db5d3a42364aab664f4d215776"></a>
+<a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_State_Node</b> (int p_Construct, uint64_t p_State)</td></tr>
+<tr class="separator:ac61f77db5d3a42364aab664f4d215776"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac97f4a30c36958f68847f3ab8bfc6320" id="r_ac97f4a30c36958f68847f3ab8bfc6320"><td class="memItemLeft" align="right" valign="top"><a id="ac97f4a30c36958f68847f3ab8bfc6320" name="ac97f4a30c36958f68847f3ab8bfc6320"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Backpropagated_Symbols</b> ()</td></tr>
+<tr class="separator:ac97f4a30c36958f68847f3ab8bfc6320"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4d0ae41e6f9bb37aacb795c5032eda6e" id="r_a4d0ae41e6f9bb37aacb795c5032eda6e"><td class="memItemLeft" align="right" valign="top"><a id="a4d0ae41e6f9bb37aacb795c5032eda6e" name="a4d0ae41e6f9bb37aacb795c5032eda6e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Backpropagated_Symbol_NID</b> (uint64_t p_NID)</td></tr>
+<tr class="separator:a4d0ae41e6f9bb37aacb795c5032eda6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade886a683faf904aa3999e5180eab761" id="r_ade886a683faf904aa3999e5180eab761"><td class="memItemLeft" align="right" valign="top"><a id="ade886a683faf904aa3999e5180eab761" name="ade886a683faf904aa3999e5180eab761"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Node_Network</b> ()</td></tr>
 <tr class="separator:ade886a683faf904aa3999e5180eab761"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fd8943d282f9ff2879c81854f6435f4" id="r_a7fd8943d282f9ff2879c81854f6435f4"><td class="memItemLeft" align="right" valign="top"><a id="a7fd8943d282f9ff2879c81854f6435f4" name="a7fd8943d282f9ff2879c81854f6435f4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>encode</b> (int p_Assembly, int p_Depth=0, uint64_t *p_Input=NULL)</td></tr>
-<tr class="separator:a7fd8943d282f9ff2879c81854f6435f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a069522c548cd131b484a17141a79f00a" id="r_a069522c548cd131b484a17141a79f00a"><td class="memItemLeft" align="right" valign="top"><a id="a069522c548cd131b484a17141a79f00a" name="a069522c548cd131b484a17141a79f00a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>query</b> (int p_Assembly, uint64_t *p_Input=NULL, int p_Depth=0, int p_Charging_Style=-1, int p_Leg=0, int *p_Legs=NULL)</td></tr>
-<tr class="separator:a069522c548cd131b484a17141a79f00a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a821693a2b5fe12a021bfd26c015fd22e" id="r_a821693a2b5fe12a021bfd26c015fd22e"><td class="memItemLeft" align="right" valign="top"><a id="a821693a2b5fe12a021bfd26c015fd22e" name="a821693a2b5fe12a021bfd26c015fd22e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>submit_Set</b> (int p_Assembly, int p_Depth, uint64_t *p_Input)</td></tr>
-<tr class="separator:a821693a2b5fe12a021bfd26c015fd22e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e9351e49ce5017d1b1eba2b31698e08" id="r_a7e9351e49ce5017d1b1eba2b31698e08"><td class="memItemLeft" align="right" valign="top"><a id="a7e9351e49ce5017d1b1eba2b31698e08" name="a7e9351e49ce5017d1b1eba2b31698e08"></a>
-<a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_Treetop</b> (int p_Assembly)</td></tr>
-<tr class="separator:a7e9351e49ce5017d1b1eba2b31698e08"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a837337574b4d519746350303790de97b" id="r_a837337574b4d519746350303790de97b"><td class="memItemLeft" align="right" valign="top"><a id="a837337574b4d519746350303790de97b" name="a837337574b4d519746350303790de97b"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>get_Treetop_NID</b> (int p_Assembly)</td></tr>
-<tr class="separator:a837337574b4d519746350303790de97b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af346b5f2a12fe0072fae3ad10b90343e" id="r_af346b5f2a12fe0072fae3ad10b90343e"><td class="memItemLeft" align="right" valign="top"><a id="af346b5f2a12fe0072fae3ad10b90343e" name="af346b5f2a12fe0072fae3ad10b90343e"></a>
-uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>get_Treetop_NID_At_Given_Index</b> (int p_Assembly, int p_Index)</td></tr>
-<tr class="separator:af346b5f2a12fe0072fae3ad10b90343e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9de611765d531f505f3322179b474dbf" id="r_a9de611765d531f505f3322179b474dbf"><td class="memItemLeft" align="right" valign="top"><a id="a9de611765d531f505f3322179b474dbf" name="a9de611765d531f505f3322179b474dbf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Given_Trace</b> (int p_Assembly, uint64_t p_NID)</td></tr>
-<tr class="separator:a9de611765d531f505f3322179b474dbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a04157fee15c249e016c04229e1fcd005" id="r_a04157fee15c249e016c04229e1fcd005"><td class="memItemLeft" align="right" valign="top"><a id="a04157fee15c249e016c04229e1fcd005" name="a04157fee15c249e016c04229e1fcd005"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Given_Trace_uint</b> (int p_Assembly, uint64_t p_NID)</td></tr>
-<tr class="separator:a04157fee15c249e016c04229e1fcd005"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af7a78c4b068881619ec3eefe5c4a4e90" id="r_af7a78c4b068881619ec3eefe5c4a4e90"><td class="memItemLeft" align="right" valign="top"><a id="af7a78c4b068881619ec3eefe5c4a4e90" name="af7a78c4b068881619ec3eefe5c4a4e90"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_All_Traces</b> (int p_Assembly)</td></tr>
-<tr class="separator:af7a78c4b068881619ec3eefe5c4a4e90"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad0ea7cf620c35c0c2cf4db0b1b80274a" id="r_ad0ea7cf620c35c0c2cf4db0b1b80274a"><td class="memItemLeft" align="right" valign="top"><a id="ad0ea7cf620c35c0c2cf4db0b1b80274a" name="ad0ea7cf620c35c0c2cf4db0b1b80274a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_All_Traces_uint</b> (int p_Assembly)</td></tr>
-<tr class="separator:ad0ea7cf620c35c0c2cf4db0b1b80274a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85e1edbb0b60af93844a5ce65dea7049" id="r_a85e1edbb0b60af93844a5ce65dea7049"><td class="memItemLeft" align="right" valign="top"><a id="a85e1edbb0b60af93844a5ce65dea7049" name="a85e1edbb0b60af93844a5ce65dea7049"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_Input</b> (int p_Assembly)</td></tr>
-<tr class="separator:a85e1edbb0b60af93844a5ce65dea7049"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00654447b2cac1713c19ef133a66f3c7" id="r_a00654447b2cac1713c19ef133a66f3c7"><td class="memItemLeft" align="right" valign="top"><a id="a00654447b2cac1713c19ef133a66f3c7" name="a00654447b2cac1713c19ef133a66f3c7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_NNet</b> (int p_Assembly, <a class="el" href="classc___node___network.html">c_Node_Network</a> *p_NNet)</td></tr>
-<tr class="separator:a00654447b2cac1713c19ef133a66f3c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a529371e93777e43ea632af55810859e0" id="r_a529371e93777e43ea632af55810859e0"><td class="memItemLeft" align="right" valign="top"><a id="a529371e93777e43ea632af55810859e0" name="a529371e93777e43ea632af55810859e0"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_State_Nodes_Index</b> (int p_Assembly, int p_Index)</td></tr>
-<tr class="separator:a529371e93777e43ea632af55810859e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a215bc9a1f4d8b480a81607f5e9e80209" id="r_a215bc9a1f4d8b480a81607f5e9e80209"><td class="memItemLeft" align="right" valign="top"><a id="a215bc9a1f4d8b480a81607f5e9e80209" name="a215bc9a1f4d8b480a81607f5e9e80209"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Input</b> (int p_Assembly, int p_Input_Depth, uint64_t *p_Input)</td></tr>
-<tr class="separator:a215bc9a1f4d8b480a81607f5e9e80209"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a45ce6db14aae2ae4b190792954b9ec81" id="r_a45ce6db14aae2ae4b190792954b9ec81"><td class="memItemLeft" align="right" valign="top"><a id="a45ce6db14aae2ae4b190792954b9ec81" name="a45ce6db14aae2ae4b190792954b9ec81"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_2D_Input</b> (int p_Assembly, int p_X_Depth, int p_Y_Depth, uint64_t **p_Input)</td></tr>
-<tr class="separator:a45ce6db14aae2ae4b190792954b9ec81"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5feccb2cc5e0bc75ac4aed0193ba17d" id="r_ad5feccb2cc5e0bc75ac4aed0193ba17d"><td class="memItemLeft" align="right" valign="top"><a id="ad5feccb2cc5e0bc75ac4aed0193ba17d" name="ad5feccb2cc5e0bc75ac4aed0193ba17d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_3D_Input</b> (int p_Assembly, int p_X_Depth, int p_Y_Depth, int p_Z_Depth, uint64_t ***p_Input)</td></tr>
-<tr class="separator:ad5feccb2cc5e0bc75ac4aed0193ba17d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08b8780287a791c9cad2ebef90e4051a" id="r_a08b8780287a791c9cad2ebef90e4051a"><td class="memItemLeft" align="right" valign="top"><a id="a08b8780287a791c9cad2ebef90e4051a" name="a08b8780287a791c9cad2ebef90e4051a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Input_String</b> (int p_Assembly, std::string p_Input)</td></tr>
-<tr class="separator:a08b8780287a791c9cad2ebef90e4051a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acda17aed39bf9fe6c2e70090fcfb2408" id="r_acda17aed39bf9fe6c2e70090fcfb2408"><td class="memItemLeft" align="right" valign="top"><a id="acda17aed39bf9fe6c2e70090fcfb2408" name="acda17aed39bf9fe6c2e70090fcfb2408"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Scaffold</b> (int p_Assembly)</td></tr>
-<tr class="separator:acda17aed39bf9fe6c2e70090fcfb2408"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aceae3b75e1c7e211ce144a245898d6f9" id="r_aceae3b75e1c7e211ce144a245898d6f9"><td class="memItemLeft" align="right" valign="top"><a id="aceae3b75e1c7e211ce144a245898d6f9" name="aceae3b75e1c7e211ce144a245898d6f9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Input</b> (int p_Assembly)</td></tr>
-<tr class="separator:aceae3b75e1c7e211ce144a245898d6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab28d7a390ed5c3fe8e58c564b7fab2c9" id="r_ab28d7a390ed5c3fe8e58c564b7fab2c9"><td class="memItemLeft" align="right" valign="top"><a id="ab28d7a390ed5c3fe8e58c564b7fab2c9" name="ab28d7a390ed5c3fe8e58c564b7fab2c9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Input_uint</b> (int p_Assembly)</td></tr>
-<tr class="separator:ab28d7a390ed5c3fe8e58c564b7fab2c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d23d4db83075b3e51707a360b928f58" id="r_a8d23d4db83075b3e51707a360b928f58"><td class="memItemLeft" align="right" valign="top"><a id="a8d23d4db83075b3e51707a360b928f58" name="a8d23d4db83075b3e51707a360b928f58"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Output</b> (int p_Assembly)</td></tr>
-<tr class="separator:a8d23d4db83075b3e51707a360b928f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e1712eb8a71f046e3145b67e388ad6f" id="r_a9e1712eb8a71f046e3145b67e388ad6f"><td class="memItemLeft" align="right" valign="top"><a id="a9e1712eb8a71f046e3145b67e388ad6f" name="a9e1712eb8a71f046e3145b67e388ad6f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Output_uint</b> (int p_Assembly)</td></tr>
-<tr class="separator:a9e1712eb8a71f046e3145b67e388ad6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5b618ceafb910cd00e862010eca6bb2" id="r_ab5b618ceafb910cd00e862010eca6bb2"><td class="memItemLeft" align="right" valign="top"><a id="ab5b618ceafb910cd00e862010eca6bb2" name="ab5b618ceafb910cd00e862010eca6bb2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Scaffold_Char</b> (int p_Assembly)</td></tr>
-<tr class="separator:ab5b618ceafb910cd00e862010eca6bb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a8c062fda52d91a2e8e084c15a9d2b5" id="r_a5a8c062fda52d91a2e8e084c15a9d2b5"><td class="memItemLeft" align="right" valign="top"><a id="a5a8c062fda52d91a2e8e084c15a9d2b5" name="a5a8c062fda52d91a2e8e084c15a9d2b5"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>register_Assembly</b> (std::string p_Type, std::string p_Assembly_Name)</td></tr>
-<tr class="separator:a5a8c062fda52d91a2e8e084c15a9d2b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2c23de265899048cbc3d93ee1b128415" id="r_a2c23de265899048cbc3d93ee1b128415"><td class="memItemLeft" align="right" valign="top"><a id="a2c23de265899048cbc3d93ee1b128415" name="a2c23de265899048cbc3d93ee1b128415"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>load_Input</b> (int p_Assembly)</td></tr>
-<tr class="separator:a2c23de265899048cbc3d93ee1b128415"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a61d42e63a0c51cd38a970356fd1fe642" id="r_a61d42e63a0c51cd38a970356fd1fe642"><td class="memItemLeft" align="right" valign="top"><a id="a61d42e63a0c51cd38a970356fd1fe642" name="a61d42e63a0c51cd38a970356fd1fe642"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>load_Input_uint</b> (int p_Assembly)</td></tr>
-<tr class="separator:a61d42e63a0c51cd38a970356fd1fe642"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acff1234f0ddc37fcdf98a9c0d003ccef" id="r_acff1234f0ddc37fcdf98a9c0d003ccef"><td class="memItemLeft" align="right" valign="top"><a id="acff1234f0ddc37fcdf98a9c0d003ccef" name="acff1234f0ddc37fcdf98a9c0d003ccef"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Input</b> (int p_Assembly, std::string p_Input)</td></tr>
-<tr class="separator:acff1234f0ddc37fcdf98a9c0d003ccef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a21eaad6d92f475ce0b51e327f3892beb" id="r_a21eaad6d92f475ce0b51e327f3892beb"><td class="memItemLeft" align="right" valign="top"><a id="a21eaad6d92f475ce0b51e327f3892beb" name="a21eaad6d92f475ce0b51e327f3892beb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Input_uint</b> (int p_Assembly, int p_Depth, uint64_t *p_Input)</td></tr>
-<tr class="separator:a21eaad6d92f475ce0b51e327f3892beb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03c2a9f95c7823e6f85a64127fb13650" id="r_a03c2a9f95c7823e6f85a64127fb13650"><td class="memItemLeft" align="right" valign="top"><a id="a03c2a9f95c7823e6f85a64127fb13650" name="a03c2a9f95c7823e6f85a64127fb13650"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Given_Node</b> (int p_Assembly, uint64_t p_NID)</td></tr>
-<tr class="separator:a03c2a9f95c7823e6f85a64127fb13650"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ab87cd5986ecb040c0b0bfc7f871bd3" id="r_a0ab87cd5986ecb040c0b0bfc7f871bd3"><td class="memItemLeft" align="right" valign="top"><a id="a0ab87cd5986ecb040c0b0bfc7f871bd3" name="a0ab87cd5986ecb040c0b0bfc7f871bd3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Given_Node_uint</b> (int p_Assembly, uint64_t p_NID)</td></tr>
-<tr class="separator:a0ab87cd5986ecb040c0b0bfc7f871bd3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae09398816a66beda26f5eb8e179e2e42" id="r_ae09398816a66beda26f5eb8e179e2e42"><td class="memItemLeft" align="right" valign="top"><a id="ae09398816a66beda26f5eb8e179e2e42" name="ae09398816a66beda26f5eb8e179e2e42"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_All_Nodes</b> (int p_Assembly)</td></tr>
-<tr class="separator:ae09398816a66beda26f5eb8e179e2e42"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a423ee90b98892ae07bdfeed68041105e" id="r_a423ee90b98892ae07bdfeed68041105e"><td class="memItemLeft" align="right" valign="top"><a id="a423ee90b98892ae07bdfeed68041105e" name="a423ee90b98892ae07bdfeed68041105e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_All_Nodes_uint</b> (int p_Assembly)</td></tr>
-<tr class="separator:a423ee90b98892ae07bdfeed68041105e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2018e3779272dce95a47080591246357" id="r_a2018e3779272dce95a47080591246357"><td class="memItemLeft" align="right" valign="top"><a id="a2018e3779272dce95a47080591246357" name="a2018e3779272dce95a47080591246357"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>encode</b> (int p_Construct, int p_Depth=0, uint64_t *p_Input=NULL)</td></tr>
+<tr class="separator:a2018e3779272dce95a47080591246357"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab783107a197b72fe56df2c266531827b" id="r_ab783107a197b72fe56df2c266531827b"><td class="memItemLeft" align="right" valign="top"><a id="ab783107a197b72fe56df2c266531827b" name="ab783107a197b72fe56df2c266531827b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>query</b> (int p_Construct, uint64_t *p_Input=NULL, int p_Depth=0, int p_Charging_Style=-1, int p_Leg=0, int *p_Legs=NULL)</td></tr>
+<tr class="separator:ab783107a197b72fe56df2c266531827b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0af4d83cbce1ce9b0b812f5273ae7ee" id="r_af0af4d83cbce1ce9b0b812f5273ae7ee"><td class="memItemLeft" align="right" valign="top"><a id="af0af4d83cbce1ce9b0b812f5273ae7ee" name="af0af4d83cbce1ce9b0b812f5273ae7ee"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>submit_Set</b> (int p_Construct, int p_Depth, uint64_t *p_Input)</td></tr>
+<tr class="separator:af0af4d83cbce1ce9b0b812f5273ae7ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a995afda0b6ecaa9844e4807141530494" id="r_a995afda0b6ecaa9844e4807141530494"><td class="memItemLeft" align="right" valign="top"><a id="a995afda0b6ecaa9844e4807141530494" name="a995afda0b6ecaa9844e4807141530494"></a>
+<a class="el" href="classc___node.html">c_Node</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_Treetop</b> (int p_Construct)</td></tr>
+<tr class="separator:a995afda0b6ecaa9844e4807141530494"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add5de46fa1b6e9c76c07ca8b8cdc15b7" id="r_add5de46fa1b6e9c76c07ca8b8cdc15b7"><td class="memItemLeft" align="right" valign="top"><a id="add5de46fa1b6e9c76c07ca8b8cdc15b7" name="add5de46fa1b6e9c76c07ca8b8cdc15b7"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>get_Treetop_NID</b> (int p_Construct)</td></tr>
+<tr class="separator:add5de46fa1b6e9c76c07ca8b8cdc15b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72ff3780a058d1bceab13039393a4a1d" id="r_a72ff3780a058d1bceab13039393a4a1d"><td class="memItemLeft" align="right" valign="top"><a id="a72ff3780a058d1bceab13039393a4a1d" name="a72ff3780a058d1bceab13039393a4a1d"></a>
+uint64_t&#160;</td><td class="memItemRight" valign="bottom"><b>get_Treetop_NID_At_Given_Index</b> (int p_Construct, int p_Index)</td></tr>
+<tr class="separator:a72ff3780a058d1bceab13039393a4a1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aade75bcf656c7924b062f582c9160c70" id="r_aade75bcf656c7924b062f582c9160c70"><td class="memItemLeft" align="right" valign="top"><a id="aade75bcf656c7924b062f582c9160c70" name="aade75bcf656c7924b062f582c9160c70"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Given_Trace</b> (int p_Construct, uint64_t p_NID)</td></tr>
+<tr class="separator:aade75bcf656c7924b062f582c9160c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5cf2d191a3b78814d443e24042fe7fe" id="r_af5cf2d191a3b78814d443e24042fe7fe"><td class="memItemLeft" align="right" valign="top"><a id="af5cf2d191a3b78814d443e24042fe7fe" name="af5cf2d191a3b78814d443e24042fe7fe"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>write_Given_Pattern_As_Number</b> (int p_Construct, uint64_t p_NID)</td></tr>
+<tr class="separator:af5cf2d191a3b78814d443e24042fe7fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdf2ac6913e00cff89b5a83c6e821b11" id="r_acdf2ac6913e00cff89b5a83c6e821b11"><td class="memItemLeft" align="right" valign="top"><a id="acdf2ac6913e00cff89b5a83c6e821b11" name="acdf2ac6913e00cff89b5a83c6e821b11"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Given_Trace_uint</b> (int p_Construct, uint64_t p_NID)</td></tr>
+<tr class="separator:acdf2ac6913e00cff89b5a83c6e821b11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0391cec5cc6c33ee8b5ec3032ce880a8" id="r_a0391cec5cc6c33ee8b5ec3032ce880a8"><td class="memItemLeft" align="right" valign="top"><a id="a0391cec5cc6c33ee8b5ec3032ce880a8" name="a0391cec5cc6c33ee8b5ec3032ce880a8"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_All_Traces</b> (int p_Construct)</td></tr>
+<tr class="separator:a0391cec5cc6c33ee8b5ec3032ce880a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a417a4ad6170bfa4a2c34e7a632de4e82" id="r_a417a4ad6170bfa4a2c34e7a632de4e82"><td class="memItemLeft" align="right" valign="top"><a id="a417a4ad6170bfa4a2c34e7a632de4e82" name="a417a4ad6170bfa4a2c34e7a632de4e82"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_All_Traces_uint</b> (int p_Construct)</td></tr>
+<tr class="separator:a417a4ad6170bfa4a2c34e7a632de4e82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1dd32702454df4292479319366a8579" id="r_af1dd32702454df4292479319366a8579"><td class="memItemLeft" align="right" valign="top"><a id="af1dd32702454df4292479319366a8579" name="af1dd32702454df4292479319366a8579"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>reset_Input</b> (int p_Construct)</td></tr>
+<tr class="separator:af1dd32702454df4292479319366a8579"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad93ce78781af9a50a5240b28d80e4aa1" id="r_ad93ce78781af9a50a5240b28d80e4aa1"><td class="memItemLeft" align="right" valign="top"><a id="ad93ce78781af9a50a5240b28d80e4aa1" name="ad93ce78781af9a50a5240b28d80e4aa1"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_NNet</b> (int p_Construct, <a class="el" href="classc___node___network.html">c_Node_Network</a> *p_NNet)</td></tr>
+<tr class="separator:ad93ce78781af9a50a5240b28d80e4aa1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a857f18d82e6c69afcb320417917ded29" id="r_a857f18d82e6c69afcb320417917ded29"><td class="memItemLeft" align="right" valign="top"><a id="a857f18d82e6c69afcb320417917ded29" name="a857f18d82e6c69afcb320417917ded29"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_State_Nodes_Index</b> (int p_Construct, int p_Index)</td></tr>
+<tr class="separator:a857f18d82e6c69afcb320417917ded29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10300b3d76d908059242ddf12e7c938a" id="r_a10300b3d76d908059242ddf12e7c938a"><td class="memItemLeft" align="right" valign="top"><a id="a10300b3d76d908059242ddf12e7c938a" name="a10300b3d76d908059242ddf12e7c938a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Input</b> (int p_Construct, int p_Input_Depth, uint64_t *p_Input)</td></tr>
+<tr class="separator:a10300b3d76d908059242ddf12e7c938a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb45ac362b11c9691c03b78e0795aa15" id="r_adb45ac362b11c9691c03b78e0795aa15"><td class="memItemLeft" align="right" valign="top"><a id="adb45ac362b11c9691c03b78e0795aa15" name="adb45ac362b11c9691c03b78e0795aa15"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_2D_Input</b> (int p_Construct, int p_X_Depth, int p_Y_Depth, uint64_t **p_Input)</td></tr>
+<tr class="separator:adb45ac362b11c9691c03b78e0795aa15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e7b90c933d9d5242d7e5863e2187a7f" id="r_a4e7b90c933d9d5242d7e5863e2187a7f"><td class="memItemLeft" align="right" valign="top"><a id="a4e7b90c933d9d5242d7e5863e2187a7f" name="a4e7b90c933d9d5242d7e5863e2187a7f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_3D_Input</b> (int p_Construct, int p_X_Depth, int p_Y_Depth, int p_Z_Depth, uint64_t ***p_Input)</td></tr>
+<tr class="separator:a4e7b90c933d9d5242d7e5863e2187a7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19fe95d9bd6e4535b11b7aec11ad0439" id="r_a19fe95d9bd6e4535b11b7aec11ad0439"><td class="memItemLeft" align="right" valign="top"><a id="a19fe95d9bd6e4535b11b7aec11ad0439" name="a19fe95d9bd6e4535b11b7aec11ad0439"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Input_String</b> (int p_Construct, std::string p_Input)</td></tr>
+<tr class="separator:a19fe95d9bd6e4535b11b7aec11ad0439"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa053dc05c566a14e2e08a346faf042ef" id="r_aa053dc05c566a14e2e08a346faf042ef"><td class="memItemLeft" align="right" valign="top"><a id="aa053dc05c566a14e2e08a346faf042ef" name="aa053dc05c566a14e2e08a346faf042ef"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Scaffold</b> (int p_Construct)</td></tr>
+<tr class="separator:aa053dc05c566a14e2e08a346faf042ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a388f6abeb033243e43cf7185c6ce1abc" id="r_a388f6abeb033243e43cf7185c6ce1abc"><td class="memItemLeft" align="right" valign="top"><a id="a388f6abeb033243e43cf7185c6ce1abc" name="a388f6abeb033243e43cf7185c6ce1abc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Input</b> (int p_Construct)</td></tr>
+<tr class="separator:a388f6abeb033243e43cf7185c6ce1abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a986ae9daf2b9c626295351f0cfdbaaf7" id="r_a986ae9daf2b9c626295351f0cfdbaaf7"><td class="memItemLeft" align="right" valign="top"><a id="a986ae9daf2b9c626295351f0cfdbaaf7" name="a986ae9daf2b9c626295351f0cfdbaaf7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Input_uint</b> (int p_Construct)</td></tr>
+<tr class="separator:a986ae9daf2b9c626295351f0cfdbaaf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14ef834cecbc93b7fb828f728ef53f9f" id="r_a14ef834cecbc93b7fb828f728ef53f9f"><td class="memItemLeft" align="right" valign="top"><a id="a14ef834cecbc93b7fb828f728ef53f9f" name="a14ef834cecbc93b7fb828f728ef53f9f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Output</b> (int p_Construct)</td></tr>
+<tr class="separator:a14ef834cecbc93b7fb828f728ef53f9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a856511b529c481d03d82041d44d81223" id="r_a856511b529c481d03d82041d44d81223"><td class="memItemLeft" align="right" valign="top"><a id="a856511b529c481d03d82041d44d81223" name="a856511b529c481d03d82041d44d81223"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Output_uint</b> (int p_Construct)</td></tr>
+<tr class="separator:a856511b529c481d03d82041d44d81223"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac46d870080fd44384af732c369675595" id="r_ac46d870080fd44384af732c369675595"><td class="memItemLeft" align="right" valign="top"><a id="ac46d870080fd44384af732c369675595" name="ac46d870080fd44384af732c369675595"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Scaffold_Char</b> (int p_Construct)</td></tr>
+<tr class="separator:ac46d870080fd44384af732c369675595"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22c38d187a40deda2a098bf995426ff3" id="r_a22c38d187a40deda2a098bf995426ff3"><td class="memItemLeft" align="right" valign="top"><a id="a22c38d187a40deda2a098bf995426ff3" name="a22c38d187a40deda2a098bf995426ff3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>register_Construct</b> (std::string p_Type, std::string p_Construct_Name)</td></tr>
+<tr class="separator:a22c38d187a40deda2a098bf995426ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4e7209b1d1e97f80cf3451c26185bdf3" id="r_a4e7209b1d1e97f80cf3451c26185bdf3"><td class="memItemLeft" align="right" valign="top"><a id="a4e7209b1d1e97f80cf3451c26185bdf3" name="a4e7209b1d1e97f80cf3451c26185bdf3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>load_Input</b> (int p_Construct)</td></tr>
+<tr class="separator:a4e7209b1d1e97f80cf3451c26185bdf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe53de554fb66622fe7eeda738273f2d" id="r_abe53de554fb66622fe7eeda738273f2d"><td class="memItemLeft" align="right" valign="top"><a id="abe53de554fb66622fe7eeda738273f2d" name="abe53de554fb66622fe7eeda738273f2d"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>load_Input_uint</b> (int p_Construct)</td></tr>
+<tr class="separator:abe53de554fb66622fe7eeda738273f2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71bf2ceb3bfed5bdc053f172e2a3ac1e" id="r_a71bf2ceb3bfed5bdc053f172e2a3ac1e"><td class="memItemLeft" align="right" valign="top"><a id="a71bf2ceb3bfed5bdc053f172e2a3ac1e" name="a71bf2ceb3bfed5bdc053f172e2a3ac1e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>round_Up_Input</b> (int p_Construct)</td></tr>
+<tr class="separator:a71bf2ceb3bfed5bdc053f172e2a3ac1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75669d0000952d0219c48ee82a5ebed7" id="r_a75669d0000952d0219c48ee82a5ebed7"><td class="memItemLeft" align="right" valign="top"><a id="a75669d0000952d0219c48ee82a5ebed7" name="a75669d0000952d0219c48ee82a5ebed7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>pull_From_Lower_Connections</b> (int p_Construct)</td></tr>
+<tr class="separator:a75669d0000952d0219c48ee82a5ebed7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88b6b4a5f87730ab4c400852dff8cee2" id="r_a88b6b4a5f87730ab4c400852dff8cee2"><td class="memItemLeft" align="right" valign="top"><a id="a88b6b4a5f87730ab4c400852dff8cee2" name="a88b6b4a5f87730ab4c400852dff8cee2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>pull_From_Lower_Connection</b> (const int p_Construct, const int p_Lower_Connection)</td></tr>
+<tr class="separator:a88b6b4a5f87730ab4c400852dff8cee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4550c09ac24c5c8faa983b17577d028f" id="r_a4550c09ac24c5c8faa983b17577d028f"><td class="memItemLeft" align="right" valign="top"><a id="a4550c09ac24c5c8faa983b17577d028f" name="a4550c09ac24c5c8faa983b17577d028f"></a>
+<a class="el" href="classc___trace.html">c_Trace</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_Output_Trace</b> (int p_Construct, int p_Index)</td></tr>
+<tr class="separator:a4550c09ac24c5c8faa983b17577d028f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c7f2e09b0b463b357f7c0d243d0453f" id="r_a3c7f2e09b0b463b357f7c0d243d0453f"><td class="memItemLeft" align="right" valign="top"><a id="a3c7f2e09b0b463b357f7c0d243d0453f" name="a3c7f2e09b0b463b357f7c0d243d0453f"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>pull_From_Upper_Index</b> (int p_Construct_To, int p_Construct_From, int p_Index)</td></tr>
+<tr class="separator:a3c7f2e09b0b463b357f7c0d243d0453f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4753e509dd9d6a456c1ef4a9cf3aeba7" id="r_a4753e509dd9d6a456c1ef4a9cf3aeba7"><td class="memItemLeft" align="right" valign="top"><a id="a4753e509dd9d6a456c1ef4a9cf3aeba7" name="a4753e509dd9d6a456c1ef4a9cf3aeba7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Input</b> (int p_Construct, std::string p_Input)</td></tr>
+<tr class="separator:a4753e509dd9d6a456c1ef4a9cf3aeba7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3af42e4b174f3aeca600f0a307e361e9" id="r_a3af42e4b174f3aeca600f0a307e361e9"><td class="memItemLeft" align="right" valign="top"><a id="a3af42e4b174f3aeca600f0a307e361e9" name="a3af42e4b174f3aeca600f0a307e361e9"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Input_uint</b> (int p_Construct, int p_Depth, uint64_t *p_Input)</td></tr>
+<tr class="separator:a3af42e4b174f3aeca600f0a307e361e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ec656f2679eb7c04cc8a96e9f26710b" id="r_a7ec656f2679eb7c04cc8a96e9f26710b"><td class="memItemLeft" align="right" valign="top"><a id="a7ec656f2679eb7c04cc8a96e9f26710b" name="a7ec656f2679eb7c04cc8a96e9f26710b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Given_Node</b> (int p_Construct, uint64_t p_NID)</td></tr>
+<tr class="separator:a7ec656f2679eb7c04cc8a96e9f26710b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29888a9ae69d3796235fcb72495b453e" id="r_a29888a9ae69d3796235fcb72495b453e"><td class="memItemLeft" align="right" valign="top"><a id="a29888a9ae69d3796235fcb72495b453e" name="a29888a9ae69d3796235fcb72495b453e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Given_Node_uint</b> (int p_Construct, uint64_t p_NID)</td></tr>
+<tr class="separator:a29888a9ae69d3796235fcb72495b453e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18afb89a30b95ae2c26dde12dd8be01e" id="r_a18afb89a30b95ae2c26dde12dd8be01e"><td class="memItemLeft" align="right" valign="top"><a id="a18afb89a30b95ae2c26dde12dd8be01e" name="a18afb89a30b95ae2c26dde12dd8be01e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_All_Nodes</b> (int p_Construct)</td></tr>
+<tr class="separator:a18afb89a30b95ae2c26dde12dd8be01e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac398a503403acbe07605041a163c0d4" id="r_aac398a503403acbe07605041a163c0d4"><td class="memItemLeft" align="right" valign="top"><a id="aac398a503403acbe07605041a163c0d4" name="aac398a503403acbe07605041a163c0d4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_All_Nodes_uint</b> (int p_Construct)</td></tr>
+<tr class="separator:aac398a503403acbe07605041a163c0d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab24e984aa56fe7f9275ce50682c3956d" id="r_ab24e984aa56fe7f9275ce50682c3956d"><td class="memItemLeft" align="right" valign="top"><a id="ab24e984aa56fe7f9275ce50682c3956d" name="ab24e984aa56fe7f9275ce50682c3956d"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Treetops</b> (int p_Construct)</td></tr>
+<tr class="separator:ab24e984aa56fe7f9275ce50682c3956d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a923cb23516bb895c085091bb5edee447" id="r_a923cb23516bb895c085091bb5edee447"><td class="memItemLeft" align="right" valign="top"><a id="a923cb23516bb895c085091bb5edee447" name="a923cb23516bb895c085091bb5edee447"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Trace_To_File</b> (std::ofstream *p_SF, <a class="el" href="classc___trace.html">c_Trace</a> *p_Trace, int p_Output_Type)</td></tr>
 <tr class="separator:a923cb23516bb895c085091bb5edee447"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3f15d11f6118f49d67cfd01975f43c95" id="r_a3f15d11f6118f49d67cfd01975f43c95"><td class="memItemLeft" align="right" valign="top"><a id="a3f15d11f6118f49d67cfd01975f43c95" name="a3f15d11f6118f49d67cfd01975f43c95"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Output_To_File</b> (int p_Assembly, int p_Output_Type=0)</td></tr>
-<tr class="separator:a3f15d11f6118f49d67cfd01975f43c95"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a414c232ca29b470341a445ba6ed6d1a2" id="r_a414c232ca29b470341a445ba6ed6d1a2"><td class="memItemLeft" align="right" valign="top"><a id="a414c232ca29b470341a445ba6ed6d1a2" name="a414c232ca29b470341a445ba6ed6d1a2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Output</b> (int p_Assembly)</td></tr>
-<tr class="separator:a414c232ca29b470341a445ba6ed6d1a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af870efb15a7eaffcfaac1836fe4afb78" id="r_af870efb15a7eaffcfaac1836fe4afb78"><td class="memItemLeft" align="right" valign="top"><a id="af870efb15a7eaffcfaac1836fe4afb78" name="af870efb15a7eaffcfaac1836fe4afb78"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Output_uint</b> (int p_Assembly)</td></tr>
-<tr class="separator:af870efb15a7eaffcfaac1836fe4afb78"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af47ce563ab9fb8fe3e6fd1ba454d6d9d" id="r_af47ce563ab9fb8fe3e6fd1ba454d6d9d"><td class="memItemLeft" align="right" valign="top"><a id="af47ce563ab9fb8fe3e6fd1ba454d6d9d" name="af47ce563ab9fb8fe3e6fd1ba454d6d9d"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>write_Node_To_File</b> (int p_Assembly, std::ofstream *p_SF, <a class="el" href="classc___node.html">c_Node</a> *p_Node, int p_Output_Type=0)</td></tr>
-<tr class="separator:af47ce563ab9fb8fe3e6fd1ba454d6d9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8a9c43906873aaf0affa6e254756116" id="r_aa8a9c43906873aaf0affa6e254756116"><td class="memItemLeft" align="right" valign="top"><a id="aa8a9c43906873aaf0affa6e254756116" name="aa8a9c43906873aaf0affa6e254756116"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_3D_Trace_To_File</b> (std::ofstream *p_SF, <a class="el" href="classc__3_d___trace.html">c_3D_Trace</a> *p_Trace, int p_Output_Type)</td></tr>
+<tr class="separator:aa8a9c43906873aaf0affa6e254756116"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8c1f35042b55043af2442ba35874ea7" id="r_af8c1f35042b55043af2442ba35874ea7"><td class="memItemLeft" align="right" valign="top"><a id="af8c1f35042b55043af2442ba35874ea7" name="af8c1f35042b55043af2442ba35874ea7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_2D_Trace_To_File</b> (std::ofstream *p_SF, <a class="el" href="classc__2_d___trace.html">c_2D_Trace</a> *p_Trace, int p_Output_Type)</td></tr>
+<tr class="separator:af8c1f35042b55043af2442ba35874ea7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7697fd97eac370d40bdd7d2a02b9e8b7" id="r_a7697fd97eac370d40bdd7d2a02b9e8b7"><td class="memItemLeft" align="right" valign="top"><a id="a7697fd97eac370d40bdd7d2a02b9e8b7" name="a7697fd97eac370d40bdd7d2a02b9e8b7"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Output_To_File</b> (int p_Construct, int p_Output_Type=0)</td></tr>
+<tr class="separator:a7697fd97eac370d40bdd7d2a02b9e8b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9862564cece793cd39ef7db9c5d8b4e" id="r_ac9862564cece793cd39ef7db9c5d8b4e"><td class="memItemLeft" align="right" valign="top"><a id="ac9862564cece793cd39ef7db9c5d8b4e" name="ac9862564cece793cd39ef7db9c5d8b4e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Output</b> (int p_Construct)</td></tr>
+<tr class="separator:ac9862564cece793cd39ef7db9c5d8b4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44d794d806bc3489323906daa54fd884" id="r_a44d794d806bc3489323906daa54fd884"><td class="memItemLeft" align="right" valign="top"><a id="a44d794d806bc3489323906daa54fd884" name="a44d794d806bc3489323906daa54fd884"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Output_uint</b> (int p_Construct)</td></tr>
+<tr class="separator:a44d794d806bc3489323906daa54fd884"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e102fbe5c06f472256455167867896e" id="r_a8e102fbe5c06f472256455167867896e"><td class="memItemLeft" align="right" valign="top"><a id="a8e102fbe5c06f472256455167867896e" name="a8e102fbe5c06f472256455167867896e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>write_Node_To_File</b> (int p_Construct, std::ofstream *p_SF, <a class="el" href="classc___node.html">c_Node</a> *p_Node, int p_Output_Type=0)</td></tr>
+<tr class="separator:a8e102fbe5c06f472256455167867896e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bf840c08ca0e093e39f45b0fcce9d78" id="r_a3bf840c08ca0e093e39f45b0fcce9d78"><td class="memItemLeft" align="right" valign="top"><a id="a3bf840c08ca0e093e39f45b0fcce9d78" name="a3bf840c08ca0e093e39f45b0fcce9d78"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>write_Node_To_File_2D</b> (int p_Construct, std::ofstream *p_SF, <a class="el" href="classc___node.html">c_Node</a> *p_Node, int p_Output_Type=0)</td></tr>
+<tr class="separator:a3bf840c08ca0e093e39f45b0fcce9d78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab60e4474a13c6159f05eafe8511c4225" id="r_ab60e4474a13c6159f05eafe8511c4225"><td class="memItemLeft" align="right" valign="top"><a id="ab60e4474a13c6159f05eafe8511c4225" name="ab60e4474a13c6159f05eafe8511c4225"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>save_Node_To_File</b> (std::ofstream *p_SF, <a class="el" href="classc___node.html">c_Node</a> *p_Node, int p_Output_Type=0)</td></tr>
 <tr class="separator:ab60e4474a13c6159f05eafe8511c4225"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace5d7063d4f8d0fcea34dc91b17aea54" id="r_ace5d7063d4f8d0fcea34dc91b17aea54"><td class="memItemLeft" align="right" valign="top"><a id="ace5d7063d4f8d0fcea34dc91b17aea54" name="ace5d7063d4f8d0fcea34dc91b17aea54"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>save_Assemblies</b> (std::ofstream *p_SF)</td></tr>
-<tr class="separator:ace5d7063d4f8d0fcea34dc91b17aea54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3efceda07d194101be2cea011b6bd825" id="r_a3efceda07d194101be2cea011b6bd825"><td class="memItemLeft" align="right" valign="top"><a id="a3efceda07d194101be2cea011b6bd825" name="a3efceda07d194101be2cea011b6bd825"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>save_Constructs</b> (std::ofstream *p_SF)</td></tr>
+<tr class="separator:a3efceda07d194101be2cea011b6bd825"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0f792baa761ef3cde50becf08c060ad" id="r_af0f792baa761ef3cde50becf08c060ad"><td class="memItemLeft" align="right" valign="top"><a id="af0f792baa761ef3cde50becf08c060ad" name="af0f792baa761ef3cde50becf08c060ad"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>save_Node_Network</b> (std::ofstream *p_SF)</td></tr>
 <tr class="separator:af0f792baa761ef3cde50becf08c060ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -281,12 +326,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>save_State_Trees</b> 
 <tr class="memitem:a7a4ad83d3eda0dc3626ed9e74706ea51" id="r_a7a4ad83d3eda0dc3626ed9e74706ea51"><td class="memItemLeft" align="right" valign="top"><a id="a7a4ad83d3eda0dc3626ed9e74706ea51" name="a7a4ad83d3eda0dc3626ed9e74706ea51"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (std::string p_FName)</td></tr>
 <tr class="separator:a7a4ad83d3eda0dc3626ed9e74706ea51"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac86220f0aa80a5e4feb1196f548ad437" id="r_ac86220f0aa80a5e4feb1196f548ad437"><td class="memItemLeft" align="right" valign="top"><a id="ac86220f0aa80a5e4feb1196f548ad437" name="ac86220f0aa80a5e4feb1196f548ad437"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>load_Assemblies</b> (std::ifstream *p_SF)</td></tr>
-<tr class="separator:ac86220f0aa80a5e4feb1196f548ad437"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a405dbe55fdda91bf466689d389b187ce" id="r_a405dbe55fdda91bf466689d389b187ce"><td class="memItemLeft" align="right" valign="top"><a id="a405dbe55fdda91bf466689d389b187ce" name="a405dbe55fdda91bf466689d389b187ce"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>load_Node</b> (std::ifstream *p_SF)</td></tr>
-<tr class="separator:a405dbe55fdda91bf466689d389b187ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed8f545563630cdbfac5852033e094cb" id="r_aed8f545563630cdbfac5852033e094cb"><td class="memItemLeft" align="right" valign="top"><a id="aed8f545563630cdbfac5852033e094cb" name="aed8f545563630cdbfac5852033e094cb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>load_Constructs</b> (std::ifstream *p_SF)</td></tr>
+<tr class="separator:aed8f545563630cdbfac5852033e094cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f5f4526a54057c553565ca5811823de" id="r_a7f5f4526a54057c553565ca5811823de"><td class="memItemLeft" align="right" valign="top"><a id="a7f5f4526a54057c553565ca5811823de" name="a7f5f4526a54057c553565ca5811823de"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>load_Node_Network</b> (std::ifstream *p_SF)</td></tr>
 <tr class="separator:a7f5f4526a54057c553565ca5811823de"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -296,48 +338,75 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>load_State_Trees</b> 
 <tr class="memitem:a583e20fc1f19e1c4fe4aeb526e0e67e6" id="r_a583e20fc1f19e1c4fe4aeb526e0e67e6"><td class="memItemLeft" align="right" valign="top"><a id="a583e20fc1f19e1c4fe4aeb526e0e67e6" name="a583e20fc1f19e1c4fe4aeb526e0e67e6"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> (std::string p_FName)</td></tr>
 <tr class="separator:a583e20fc1f19e1c4fe4aeb526e0e67e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2007beb7b2a4399c74a3254ff3ac7de7" id="r_a2007beb7b2a4399c74a3254ff3ac7de7"><td class="memItemLeft" align="right" valign="top"><a id="a2007beb7b2a4399c74a3254ff3ac7de7" name="a2007beb7b2a4399c74a3254ff3ac7de7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Treetop_Node</b> (int p_Assembly)</td></tr>
-<tr class="separator:a2007beb7b2a4399c74a3254ff3ac7de7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a9c2946badebf59f646233103dad1d9" id="r_a2a9c2946badebf59f646233103dad1d9"><td class="memItemLeft" align="right" valign="top"><a id="a2a9c2946badebf59f646233103dad1d9" name="a2a9c2946badebf59f646233103dad1d9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Treetop_Node_uint</b> (int p_Assembly)</td></tr>
-<tr class="separator:a2a9c2946badebf59f646233103dad1d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a685be2b7fc51cd2ef40615057f8b3953" id="r_a685be2b7fc51cd2ef40615057f8b3953"><td class="memItemLeft" align="right" valign="top"><a id="a685be2b7fc51cd2ef40615057f8b3953" name="a685be2b7fc51cd2ef40615057f8b3953"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Treetop_NID</b> (int p_Assembly)</td></tr>
-<tr class="separator:a685be2b7fc51cd2ef40615057f8b3953"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a238f8153e9b891ca53152124acc02760" id="r_a238f8153e9b891ca53152124acc02760"><td class="memItemLeft" align="right" valign="top"><a id="a238f8153e9b891ca53152124acc02760" name="a238f8153e9b891ca53152124acc02760"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Assemblies</b> ()</td></tr>
-<tr class="separator:a238f8153e9b891ca53152124acc02760"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a20fab111cb5c6699004465ba7ec3ee" id="r_a8a20fab111cb5c6699004465ba7ec3ee"><td class="memItemLeft" align="right" valign="top"><a id="a8a20fab111cb5c6699004465ba7ec3ee" name="a8a20fab111cb5c6699004465ba7ec3ee"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>clear_Output</b> (int p_Assembly)</td></tr>
-<tr class="separator:a8a20fab111cb5c6699004465ba7ec3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0ec304bb7d789cc019a508fb352e7efe" id="r_a0ec304bb7d789cc019a508fb352e7efe"><td class="memItemLeft" align="right" valign="top"><a id="a0ec304bb7d789cc019a508fb352e7efe" name="a0ec304bb7d789cc019a508fb352e7efe"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>output_Newline</b> (int p_Assembly)</td></tr>
-<tr class="separator:a0ec304bb7d789cc019a508fb352e7efe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38ae2dd3aa2a0dbad388c4e227e79d92" id="r_a38ae2dd3aa2a0dbad388c4e227e79d92"><td class="memItemLeft" align="right" valign="top"><a id="a38ae2dd3aa2a0dbad388c4e227e79d92" name="a38ae2dd3aa2a0dbad388c4e227e79d92"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Treetop_Node</b> (int p_Construct)</td></tr>
+<tr class="separator:a38ae2dd3aa2a0dbad388c4e227e79d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53d2b5256541403e94f0254402bb17ae" id="r_a53d2b5256541403e94f0254402bb17ae"><td class="memItemLeft" align="right" valign="top"><a id="a53d2b5256541403e94f0254402bb17ae" name="a53d2b5256541403e94f0254402bb17ae"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Treetop_Node_uint</b> (int p_Construct)</td></tr>
+<tr class="separator:a53d2b5256541403e94f0254402bb17ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9eae081de41a12d7134525b49c562e9a" id="r_a9eae081de41a12d7134525b49c562e9a"><td class="memItemLeft" align="right" valign="top"><a id="a9eae081de41a12d7134525b49c562e9a" name="a9eae081de41a12d7134525b49c562e9a"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>gather_Treetop_NID</b> (int p_Construct)</td></tr>
+<tr class="separator:a9eae081de41a12d7134525b49c562e9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6f88c7822751f24c313e8f54ed000a3" id="r_aa6f88c7822751f24c313e8f54ed000a3"><td class="memItemLeft" align="right" valign="top"><a id="aa6f88c7822751f24c313e8f54ed000a3" name="aa6f88c7822751f24c313e8f54ed000a3"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>write_Treetop_NID_To_Other_Input</b> (int p_Construct_From, int p_Construct_To)</td></tr>
+<tr class="separator:aa6f88c7822751f24c313e8f54ed000a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf4f07b551e18973826708d28f6e2690" id="r_acf4f07b551e18973826708d28f6e2690"><td class="memItemLeft" align="right" valign="top"><a id="acf4f07b551e18973826708d28f6e2690" name="acf4f07b551e18973826708d28f6e2690"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>save_Config</b> (int p_Construct)</td></tr>
+<tr class="separator:acf4f07b551e18973826708d28f6e2690"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a743032cce3cef5df824e7e70ab607bf2" id="r_a743032cce3cef5df824e7e70ab607bf2"><td class="memItemLeft" align="right" valign="top"><a id="a743032cce3cef5df824e7e70ab607bf2" name="a743032cce3cef5df824e7e70ab607bf2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>update_Config</b> (int p_Construct)</td></tr>
+<tr class="separator:a743032cce3cef5df824e7e70ab607bf2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a854ba76b0d2d7192d8de37444ab84172" id="r_a854ba76b0d2d7192d8de37444ab84172"><td class="memItemLeft" align="right" valign="top"><a id="a854ba76b0d2d7192d8de37444ab84172" name="a854ba76b0d2d7192d8de37444ab84172"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Base_Charge</b> (int p_Construct, double p_Base_Charge)</td></tr>
+<tr class="separator:a854ba76b0d2d7192d8de37444ab84172"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed4af1b937f45b639638728d78c76454" id="r_aed4af1b937f45b639638728d78c76454"><td class="memItemLeft" align="right" valign="top"><a id="aed4af1b937f45b639638728d78c76454" name="aed4af1b937f45b639638728d78c76454"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Modifier_Charge</b> (int p_Construct, double p_Modifier_Charge)</td></tr>
+<tr class="separator:aed4af1b937f45b639638728d78c76454"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3348df14526b1cb716e7f299d947313" id="r_ae3348df14526b1cb716e7f299d947313"><td class="memItemLeft" align="right" valign="top"><a id="ae3348df14526b1cb716e7f299d947313" name="ae3348df14526b1cb716e7f299d947313"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Action_Potential_Threshold</b> (int p_Construct, double p_Action_Potential_Threshold)</td></tr>
+<tr class="separator:ae3348df14526b1cb716e7f299d947313"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0648656dc6d8b92273bcd309b605f18" id="r_ab0648656dc6d8b92273bcd309b605f18"><td class="memItemLeft" align="right" valign="top"><a id="ab0648656dc6d8b92273bcd309b605f18" name="ab0648656dc6d8b92273bcd309b605f18"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>set_Charging_Tier</b> (int p_Construct, int p_Charging_Tier)</td></tr>
+<tr class="separator:ab0648656dc6d8b92273bcd309b605f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcdb27356d0b05dde5981a09fa9d2f36" id="r_adcdb27356d0b05dde5981a09fa9d2f36"><td class="memItemLeft" align="right" valign="top"><a id="adcdb27356d0b05dde5981a09fa9d2f36" name="adcdb27356d0b05dde5981a09fa9d2f36"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>get_Base_Charge</b> (int p_Construct)</td></tr>
+<tr class="separator:adcdb27356d0b05dde5981a09fa9d2f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00cc6b5f86d6c74836b544fe8057b8d5" id="r_a00cc6b5f86d6c74836b544fe8057b8d5"><td class="memItemLeft" align="right" valign="top"><a id="a00cc6b5f86d6c74836b544fe8057b8d5" name="a00cc6b5f86d6c74836b544fe8057b8d5"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>get_Modifier_Charge</b> (int p_Construct)</td></tr>
+<tr class="separator:a00cc6b5f86d6c74836b544fe8057b8d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf61af15c6d3c6c3609d36df2703e15c" id="r_abf61af15c6d3c6c3609d36df2703e15c"><td class="memItemLeft" align="right" valign="top"><a id="abf61af15c6d3c6c3609d36df2703e15c" name="abf61af15c6d3c6c3609d36df2703e15c"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>get_Action_Potential_Threshold</b> (int p_Construct)</td></tr>
+<tr class="separator:abf61af15c6d3c6c3609d36df2703e15c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24881d78a3a4a587b1adb3acb9fc9234" id="r_a24881d78a3a4a587b1adb3acb9fc9234"><td class="memItemLeft" align="right" valign="top"><a id="a24881d78a3a4a587b1adb3acb9fc9234" name="a24881d78a3a4a587b1adb3acb9fc9234"></a>
+double&#160;</td><td class="memItemRight" valign="bottom"><b>get_Charging_Tier</b> (int p_Construct)</td></tr>
+<tr class="separator:a24881d78a3a4a587b1adb3acb9fc9234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a382014907e9e371759d058e4b9e98fe2" id="r_a382014907e9e371759d058e4b9e98fe2"><td class="memItemLeft" align="right" valign="top"><a id="a382014907e9e371759d058e4b9e98fe2" name="a382014907e9e371759d058e4b9e98fe2"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>output_Constructs</b> ()</td></tr>
+<tr class="separator:a382014907e9e371759d058e4b9e98fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8d8c99f51e890a231dca763ce1e721c1" id="r_a8d8c99f51e890a231dca763ce1e721c1"><td class="memItemLeft" align="right" valign="top"><a id="a8d8c99f51e890a231dca763ce1e721c1" name="a8d8c99f51e890a231dca763ce1e721c1"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>clear_Output</b> (int p_Construct)</td></tr>
+<tr class="separator:a8d8c99f51e890a231dca763ce1e721c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a577f6ecbb36350a0a0f4e3085aaff8b3" id="r_a577f6ecbb36350a0a0f4e3085aaff8b3"><td class="memItemLeft" align="right" valign="top"><a id="a577f6ecbb36350a0a0f4e3085aaff8b3" name="a577f6ecbb36350a0a0f4e3085aaff8b3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>output_Newline</b> (int p_Construct)</td></tr>
+<tr class="separator:a577f6ecbb36350a0a0f4e3085aaff8b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada1df4a0da50734e7110c6b2d9a87e5b" id="r_ada1df4a0da50734e7110c6b2d9a87e5b"><td class="memItemLeft" align="right" valign="top"><a id="ada1df4a0da50734e7110c6b2d9a87e5b" name="ada1df4a0da50734e7110c6b2d9a87e5b"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>write_Text</b> (int p_Construct, std::string p_Text)</td></tr>
+<tr class="separator:ada1df4a0da50734e7110c6b2d9a87e5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a332982eaec8c14cfe05afd25361d8c2f" id="r_a332982eaec8c14cfe05afd25361d8c2f"><td class="memItemLeft" align="right" valign="top"><a id="a332982eaec8c14cfe05afd25361d8c2f" name="a332982eaec8c14cfe05afd25361d8c2f"></a>
 <a class="el" href="classc___node___network.html">c_Node_Network</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Nodes</b></td></tr>
 <tr class="separator:a332982eaec8c14cfe05afd25361d8c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23bb5cc9c1046a433e339729bdb645a8" id="r_a23bb5cc9c1046a433e339729bdb645a8"><td class="memItemLeft" align="right" valign="top"><a id="a23bb5cc9c1046a433e339729bdb645a8" name="a23bb5cc9c1046a433e339729bdb645a8"></a>
-std::string *&#160;</td><td class="memItemRight" valign="bottom"><b>Assembly_Names</b></td></tr>
-<tr class="separator:a23bb5cc9c1046a433e339729bdb645a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9db0b4fc23dfe4177390e0523382d80e" id="r_a9db0b4fc23dfe4177390e0523382d80e"><td class="memItemLeft" align="right" valign="top"><a id="a9db0b4fc23dfe4177390e0523382d80e" name="a9db0b4fc23dfe4177390e0523382d80e"></a>
-std::string *&#160;</td><td class="memItemRight" valign="bottom"><b>Assembly_Input_Files</b></td></tr>
-<tr class="separator:a9db0b4fc23dfe4177390e0523382d80e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad63306b04f47d901b273ad35e5f13361" id="r_ad63306b04f47d901b273ad35e5f13361"><td class="memItemLeft" align="right" valign="top"><a id="ad63306b04f47d901b273ad35e5f13361" name="ad63306b04f47d901b273ad35e5f13361"></a>
-std::string *&#160;</td><td class="memItemRight" valign="bottom"><b>Assembly_Output_Files</b></td></tr>
-<tr class="separator:ad63306b04f47d901b273ad35e5f13361"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa417d510d37c3cc41c4118084b3bf5cd" id="r_aa417d510d37c3cc41c4118084b3bf5cd"><td class="memItemLeft" align="right" valign="top"><a id="aa417d510d37c3cc41c4118084b3bf5cd" name="aa417d510d37c3cc41c4118084b3bf5cd"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>Assembly_Count</b></td></tr>
-<tr class="separator:aa417d510d37c3cc41c4118084b3bf5cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14fbbf8259e0c3b81499b1b73cdc63fe" id="r_a14fbbf8259e0c3b81499b1b73cdc63fe"><td class="memItemLeft" align="right" valign="top"><a id="a14fbbf8259e0c3b81499b1b73cdc63fe" name="a14fbbf8259e0c3b81499b1b73cdc63fe"></a>
-<a class="el" href="classc___base___c_a_n.html">c_Base_CAN</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>CAN</b></td></tr>
-<tr class="separator:a14fbbf8259e0c3b81499b1b73cdc63fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a790a069851ad565d36b554fc76076ac8" id="r_a790a069851ad565d36b554fc76076ac8"><td class="memItemLeft" align="right" valign="top"><a id="a790a069851ad565d36b554fc76076ac8" name="a790a069851ad565d36b554fc76076ac8"></a>
-std::string *&#160;</td><td class="memItemRight" valign="bottom"><b>CAN_Type</b></td></tr>
-<tr class="separator:a790a069851ad565d36b554fc76076ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cc2a2e27852b37b748d53a4dea00ae2" id="r_a3cc2a2e27852b37b748d53a4dea00ae2"><td class="memItemLeft" align="right" valign="top"><a id="a3cc2a2e27852b37b748d53a4dea00ae2" name="a3cc2a2e27852b37b748d53a4dea00ae2"></a>
+<a class="el" href="classc___lookup___tree.html">c_Lookup_Tree</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Construct_Name_Tree</b></td></tr>
+<tr class="separator:a3cc2a2e27852b37b748d53a4dea00ae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48b24b863cb72aa52b4b9f2609ad97f6" id="r_a48b24b863cb72aa52b4b9f2609ad97f6"><td class="memItemLeft" align="right" valign="top"><a id="a48b24b863cb72aa52b4b9f2609ad97f6" name="a48b24b863cb72aa52b4b9f2609ad97f6"></a>
+<a class="el" href="structc___construct_1_1s___construct.html">s_Construct</a> **&#160;</td><td class="memItemRight" valign="bottom"><b>Constructs</b></td></tr>
+<tr class="separator:a48b24b863cb72aa52b4b9f2609ad97f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae74e25016f9ce3fda13c6c77016268d3" id="r_ae74e25016f9ce3fda13c6c77016268d3"><td class="memItemLeft" align="right" valign="top"><a id="ae74e25016f9ce3fda13c6c77016268d3" name="ae74e25016f9ce3fda13c6c77016268d3"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Construct_Count</b></td></tr>
+<tr class="separator:ae74e25016f9ce3fda13c6c77016268d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class encapsulates and manipulates the Neural Network Engine directly while providing a public interface. </p>

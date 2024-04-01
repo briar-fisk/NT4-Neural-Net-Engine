@@ -24,7 +24,9 @@ public:
     int Axon_Hillock_Count;
 
     //Dendrites, lower connections, leg order is of highest importance.
+    //Each one has a weight, this is used in the pyramidal node networks and others with many layers to address the double legged node problem.
     c_Node** Dendrites;
+    double* Dendrite_Weights;
     int Dendrite_Count;
 
     //The reinforcement counter.
@@ -32,9 +34,6 @@ public:
     // exponential growth to reduce new trace impact, one offs and flukes get filtered
     // Sigmoid curve for the top end to prevent extreme bias in highly reinforced nodes.
     double RC;
-
-    //The current charge of the node.
-    double Current_Charge;
 
     //The quanta bound to the node.
     uint64_t State;
@@ -58,6 +57,7 @@ public:
 
         //Dendrites.
         Dendrites = NULL;
+        Dendrite_Weights = NULL;
         Dendrite_Count = 0;
 
         //Reinforcement Counters.
@@ -65,9 +65,6 @@ public:
 
         //The nodes state.
         State = 0;
-
-        //No charge atm.
-        Current_Charge = 0.0;
 
         //The type is 0 to start with.
         Type = 0;
@@ -156,15 +153,49 @@ public:
         Axon_Count[p_Index]++;
     }
 
+    //This checks for double legged nodes and adjusts the weights so the network doesn't favor repeating patterns.
+    //The double legged charging issue isn't limited to 2 legs, but that is the nomenclature that developed before the higher dimensional networks were explored.
+    void rectify_Double_Legged_Nodes()
+    {
+        double tmp_Count = 0;
+
+        //Step through each leg, comparing to the other legs, and then taking dividing the weight by the number of same legs, 3 same legs = 1/3 for each of the three resulting in 3 with .3333 you see?
+        for (int cou_D = 0; cou_D < Dendrite_Count - 1; cou_D++)
+        {
+            tmp_Count = 1;
+
+            if (Dendrite_Weights[cou_D] != 1.0) { continue; }
+
+            for (int cou_XD = (cou_D + 1); cou_XD < Dendrite_Count; cou_XD++)
+            {
+                if (Dendrites[cou_D] == Dendrites[cou_XD]) { tmp_Count++; }
+            }
+
+            if (tmp_Count > 1)
+            {
+                Dendrite_Weights[cou_D] = 1 / tmp_Count;
+
+                for (int cou_XD = (cou_D + 1); cou_XD < Dendrite_Count; cou_XD++)
+                {
+                    if (Dendrites[cou_D] == Dendrites[cou_XD]) { Dendrite_Weights[cou_XD] = 1 / tmp_Count; }
+                }
+            }
+        }
+    }
+
     //Sets the dendrites of the node.
     //This assumes the node has no dendrites yet, if it does you be dangling and jangling
+    //It checks to see if any legs match, if they do their charges are cut proportionatly. 
     void set_Dendrites(c_Node** p_Dendrites, int p_Count)
     {
         Dendrites = new c_Node * [p_Count];
+        Dendrite_Weights = new double[p_Count];
 
         for (int cou_D = 0; cou_D < p_Count; cou_D++)
         {
             Dendrites[cou_D] = p_Dendrites[cou_D];
+
+            Dendrite_Weights[cou_D] = 1.0;
         }
 
         Dendrite_Count = p_Count;
@@ -212,21 +243,20 @@ public:
     }
 
     //Initiates a backpropagation that outputs the pattern represented by this node.
-    void bp_O()
+    //p_Datatype: 0: String, 1: uint64_t
+    void bp_O(int p_Datatype = 0)
     {
-        std::cout << "<=- " << NID << " ";
+        std::cout << "<=- NID " << NID << " Pat [ ";
         //If a left leg exists then initiate a backpropagation along it, then along the right side.
         if (Dendrite_Count != 0)
         {
-            std::cout << "*";
             if (Dendrites[0] != NULL)
             {
                 //If not a treetop then call _F
                 if ((Dendrites[0]->Type != 2) && (Dendrites[0]->Type != 3))
                 {
-                    Dendrites[0]->bp_F();
+                    Dendrites[0]->bp_F(p_Datatype);
                 }
-
                 //If the dendritically connected node is a treetop then call the _O on it.
                 if ((Dendrites[0]->Type == 2) || (Dendrites[0]->Type == 3))
                 {
@@ -241,14 +271,14 @@ public:
                     //If not a treetop then call bp_M()
                     if ((Dendrites[cou_D]->Type != 2) && (Dendrites[cou_D]->Type != 3))
                     {
-                        Dendrites[cou_D]->bp_M();
+                        Dendrites[cou_D]->bp_M(p_Datatype);
                         continue;
                     }
 
-                    //If the dendritically connected node is a treetop then call the bp_O on it.
+                    //If the dendritically connected node is a treetop then call the _O on it.
                     if ((Dendrites[cou_D]->Type == 2) || (Dendrites[cou_D]->Type == 3))
                     {
-                        Dendrites[cou_D]->bp_O();
+                        Dendrites[cou_D]->bp_O(p_Datatype);
                     }
                 }
             }
@@ -260,38 +290,49 @@ public:
 
             //u_Tmp tmp_State; tmp_State.U = State;
             //std::cout << " [ " << tmp_State.D << ", " << State << " ] ";
-            std::cout << " [ " << char(State) << ", " << State << " ] ";
+            if (p_Datatype == 0) { std::cout << char(State); }
+            if (p_Datatype == 1) { std::cout << " " << State; }
         }
-        std::cout << " -=>";
+        std::cout << " ] -=>";
     }
 
     //bp_Output the left node.
-    void bp_F()
+    void bp_F(int p_Datatype)
     {
         //If a left leg exists then initiate a backpropagation along it, then along the right side.
         if (Dendrite_Count != 0)
         {
-            if (Dendrites[0] != NULL) { Dendrites[0]->bp_F(); }
+            if (Dendrites[0] != NULL) { Dendrites[0]->bp_F(p_Datatype); }
             for (int cou_D = 1; cou_D < Dendrite_Count; cou_D++)
             {
                 if (Dendrites[cou_D] != NULL) 
                 {
-                    Dendrites[cou_D]->bp_M();
+                    //If the dendritically connected node is a treetop then call the _O on it.
+                    if ((Dendrites[cou_D]->Type == 2) || (Dendrites[cou_D]->Type == 3))
+                    {
+                        Dendrites[cou_D]->bp_O(p_Datatype);
+                    }
+                    else
+                    {
+                        Dendrites[cou_D]->bp_M(p_Datatype);
+                    }
                 }
+
             }
         }
         else
         {
             //Output the state
             //std::cout << " <" << NID << " :: " << State << "> ";
-            u_Tmp tmp_State; tmp_State.U = State;
+            //u_Tmp tmp_State; tmp_State.U = State;
             //std::cout << " [ " << tmp_State.D << ", " << State << " ] ";
-            std::cout << " [ " << char(State) << ", " << State << " ] ";
+            if (p_Datatype == 0) { std::cout << char(State); }
+            if (p_Datatype == 1) { std::cout << " " << State; }
         }
     }
 
     //bp_Output the other nodes, M stands for many.
-    void bp_M()
+    void bp_M(int p_Datatype)
     {
         //If a left leg exists then initiate a backpropagation along it, then along the right side.
         if (Dendrite_Count != 0)
@@ -300,7 +341,15 @@ public:
             {
                 if (Dendrites[cou_D] != NULL)
                 {
-                    Dendrites[cou_D]->bp_M();
+                    //If the dendritically connected node is a treetop then call the _O on it.
+                    if ((Dendrites[cou_D]->Type == 2) || (Dendrites[cou_D]->Type == 3))
+                    {
+                        Dendrites[cou_D]->bp_O(p_Datatype);
+                    }
+                    else
+                    {
+                        Dendrites[cou_D]->bp_M(p_Datatype);
+                    }
                 }
             }
         }
@@ -308,9 +357,10 @@ public:
         {
             //Output the state
             //std::cout << " <" << NID << " :: " << State << "> ";
-            u_Tmp tmp_State; tmp_State.U = State;
+            //u_Tmp tmp_State; tmp_State.U = State;
             //std::cout << " [ " << tmp_State.D << ", " << State << " ] ";
-            std::cout << " [ " << char(State) << ", " << State << " ] ";
+            if (p_Datatype == 0) { std::cout << char(State); }
+            if (p_Datatype == 1) { std::cout << " " << State; }
         }
     }
 
@@ -320,7 +370,6 @@ public:
     //Initiates a backpropagation that 
     void bp_Trace_O(c_Linked_List_Handler * p_LL)
     {
-        //---std::cout << "\n bp_Trace_O <=- " << NID << " ";
         //If a left leg exists then initiate a backpropagation along it, then along the right side.
         if (Dendrite_Count != 0)
         {
@@ -362,10 +411,9 @@ public:
         else
         {
             //Output the state
-            std::cout << " <" << NID << " :: " << State << "> ";
+            std::cout << char(State);
             p_LL->new_LL(State);
         }
-        //---std::cout << " -=>";
     }
 
     //bp_Output the left node.
@@ -414,6 +462,384 @@ public:
     }
 
 
+    //Initiates a backpropagation that 
+    //If this is the first node then it starts at 0,0. Each step down the tree it tracks the direction and adjust the x,y going down according to a pre-determined matrix applied to it.
+    //Get the legs for the node, the 2x2
+    // 
+    //tmp_Nodes[0] = Scaffold[cou_T - 1][cou_X][cou_Y][cou_Z];
+    //tmp_Nodes[1] = Scaffold[cou_T - 1][cou_X + 1][cou_Y][cou_Z];
+    //tmp_Nodes[2] = Scaffold[cou_T - 1][cou_X][cou_Y + 1][cou_Z];
+    //tmp_Nodes[3] = Scaffold[cou_T - 1][cou_X + 1][cou_Y + 1][cou_Z];
+
+    //tmp_Nodes[4] = Scaffold[cou_T - 1][cou_X][cou_Y][cou_Z + 1];
+    //tmp_Nodes[5] = Scaffold[cou_T - 1][cou_X + 1][cou_Y][cou_Z + 1];
+    //tmp_Nodes[6] = Scaffold[cou_T - 1][cou_X][cou_Y + 1][cou_Z + 1];
+    //tmp_Nodes[7] = Scaffold[cou_T - 1][cou_X + 1][cou_Y + 1][cou_Z + 1];
+    void bp_3D_Trace_O(c_Linked_List_Handler * p_LL, c_Linked_List_Handler * p_LL_X, c_Linked_List_Handler * p_LL_Y, c_Linked_List_Handler * p_LL_Z, uint64_t p_X = 0, uint64_t p_Y = 0, uint64_t p_Z = 0)
+    {
+        //---std::cout << "\n bp_3D_Trace_O <=- " << NID << " " << p_X << " " << p_Y << " " << p_Z;
+        //If a left leg exists then initiate a backpropagation along it, then along the right side.
+        if (Dendrite_Count != 0)
+        {
+            //---std::cout << "*";
+            if (Dendrites[0] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[0]->Type != 2) && (Dendrites[0]->Type != 3))
+                {
+                    Dendrites[0]->bp_3D_Trace_F(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X, p_Y, p_Z);
+                }
+            }
+            bp_3D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X, p_Y, p_Z);
+        }
+        else
+        {
+            //Output the state
+            //---std::cout << " <" << NID << " :: " << State << "> ";
+            p_LL->new_LL(State);
+            p_LL_X->new_LL(p_X);
+            p_LL_Y->new_LL(p_Y);
+            p_LL_Z->new_LL(p_Z);
+        }
+        //---std::cout << " -=>";
+    }
+
+    //bp_Output the left node.
+    void bp_3D_Trace_F(c_Linked_List_Handler* p_LL, c_Linked_List_Handler* p_LL_X, c_Linked_List_Handler* p_LL_Y, c_Linked_List_Handler* p_LL_Z, uint64_t p_X = 0, uint64_t p_Y = 0, uint64_t p_Z = 0)
+    {
+
+        //---std::cerr << "\n bp_3D_Trace_F <=- " << NID << " " << p_X << " " << p_Y << " " << p_Z;
+
+        //If a left leg exists then initiate a backpropagation along it, then along the right side.
+        //tmp_Nodes[0] = Scaffold[cou_T - 1][cou_X][cou_Y][cou_Z]; //1
+        if (Dendrite_Count != 0)
+        {
+            //---std::cout << "*";
+            if (Dendrites[0] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[0]->Type != 2) && (Dendrites[0]->Type != 3))
+                {
+                    Dendrites[0]->bp_3D_Trace_F(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X, p_Y, p_Z);
+                }
+            }
+            bp_3D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X, p_Y, p_Z);
+        }
+        else
+        {
+            //Output the state
+            //---std::cout << " <" << NID << " :: " << State << "> ";
+            p_LL->new_LL(State);
+            p_LL_X->new_LL(p_X);
+            p_LL_Y->new_LL(p_Y);
+            p_LL_Z->new_LL(p_Z);
+        }
+        //---std::cout << " -=>";
+    }
+
+    //bp_Output the other nodes, M stands for many.
+    void bp_3D_Trace_M(c_Linked_List_Handler* p_LL, c_Linked_List_Handler* p_LL_X, c_Linked_List_Handler* p_LL_Y, c_Linked_List_Handler* p_LL_Z, uint64_t p_X = 0, uint64_t p_Y = 0, uint64_t p_Z = 0)
+    {
+        //---std::cout << "\n bp_3D_Trace_M <=- " << NID << " " << p_X << " " << p_Y << " " << p_Z;
+
+        if (Dendrite_Count != 0)
+        {
+            //I'm doing these by hand so hopefully it is more approachable to newbs, if not we can always refactor with a nicer way, this looks like shit, but it is readable.
+
+
+            //Scaffold[cou_T - 1][cou_X + 1][cou_Y][cou_Z];
+            if (Dendrite_Count > 1)
+            {
+                if (Dendrites[1] != NULL)
+                {
+                    if ((Dendrites[1]->Type != 2) && (Dendrites[1]->Type != 3))
+                    {
+                        Dendrites[1]->bp_3D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X + 1, p_Y, p_Z);
+                    }
+                }
+            }
+
+            //Scaffold[cou_T - 1][cou_X + 1][cou_Y][cou_Z];
+            if (Dendrite_Count > 2)
+            {
+                if (Dendrites[2] != NULL)
+                {
+                    if ((Dendrites[2]->Type != 2) && (Dendrites[2]->Type != 3))
+                    {
+                        Dendrites[2]->bp_3D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X, p_Y + 1, p_Z);
+                    }
+                }
+            }
+
+
+            //Scaffold[cou_T - 1][cou_X + 1][cou_Y + 1][cou_Z];
+            if (Dendrite_Count > 3)
+            {
+                if (Dendrites[3] != NULL)
+                {
+                    if ((Dendrites[3]->Type != 2) && (Dendrites[3]->Type != 3))
+                    {
+                        Dendrites[3]->bp_3D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X + 1, p_Y + 1, p_Z);
+                    }
+                }
+            }
+
+            //Scaffold[cou_T - 1][cou_X][cou_Y][cou_Z + 1];
+            if (Dendrite_Count > 4)
+            {
+                if (Dendrites[4] != NULL)
+                {
+                    if ((Dendrites[4]->Type != 2) && (Dendrites[4]->Type != 3))
+                    {
+                        Dendrites[4]->bp_3D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X, p_Y, p_Z + 1);
+                    }
+                }
+            }
+
+            //Scaffold[cou_T - 1][cou_X + 1][cou_Y][cou_Z + 1];
+            if (Dendrite_Count > 5)
+            {
+                if (Dendrites[5] != NULL)
+                {
+                    if ((Dendrites[5]->Type != 2) && (Dendrites[5]->Type != 3))
+                    {
+                        Dendrites[5]->bp_3D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X + 1, p_Y, p_Z + 1);
+                    }
+                }
+            }
+
+            //Scaffold[cou_T - 1][cou_X][cou_Y + 1][cou_Z + 1];
+            if (Dendrite_Count > 6)
+            {
+                if (Dendrites[6] != NULL)
+                {
+                    if ((Dendrites[6]->Type != 2) && (Dendrites[6]->Type != 3))
+                    {
+                        Dendrites[6]->bp_3D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X, p_Y + 1, p_Z + 1);
+                    }
+                }
+            }
+
+            //Scaffold[cou_T - 1][cou_X + 1][cou_Y + 1][cou_Z + 1];
+            if (Dendrite_Count > 7)
+            {
+                if (Dendrites[7] != NULL)
+                {
+                    if ((Dendrites[7]->Type != 2) && (Dendrites[7]->Type != 3))
+                    {
+                        Dendrites[7]->bp_3D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_LL_Z, p_X + 1, p_Y + 1, p_Z + 1);
+                    }
+
+                }
+            }
+        }
+        else
+        {
+            //Output the state
+            //---std::cout << " <" << NID << " :: " << State << "> ";
+            p_LL->new_LL(State);
+            p_LL_X->new_LL(p_X);
+            p_LL_Y->new_LL(p_Y);
+            p_LL_Z->new_LL(p_Z);
+        }
+    }
+
+
+    //Initiates a backpropagation that 
+    //If this is the first node then it starts at 0,0. Each step down the tree it tracks the direction and adjust the x,y going down according to a pre-determined matrix applied to it.
+    //Get the legs for the node, the 2x2
+    //tmp_Nodes[0] = Scaffold[cou_T - 1][cou_X][cou_Y]; //1
+    //tmp_Nodes[1] = Scaffold[cou_T - 1][cou_X][cou_Y + 1]; //2
+    //tmp_Nodes[2] = Scaffold[cou_T - 1][cou_X + 1][cou_Y]; //3
+    //tmp_Nodes[3] = Scaffold[cou_T - 1][cou_X + 1][cou_Y + 1]; //4
+    void bp_2D_Trace_O(c_Linked_List_Handler * p_LL, c_Linked_List_Handler * p_LL_X, c_Linked_List_Handler * p_LL_Y, uint64_t p_X = 0, uint64_t p_Y = 0)
+    {
+        //---std::cout << "\n bp_2D_Trace_O <=- " << NID << " " << p_X << " " << p_Y;
+        //If a left leg exists then initiate a backpropagation along it, then along the right side.
+        if (Dendrite_Count != 0)
+        {
+            //---std::cout << "*";
+            if (Dendrites[0] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[0]->Type != 2) && (Dendrites[0]->Type != 3))
+                {
+                    Dendrites[0]->bp_2D_Trace_F(p_LL, p_LL_X, p_LL_Y, p_X, p_Y);
+                }
+
+                //If the dendritically connected node is a treetop then call the _O on it.
+                if ((Dendrites[0]->Type == 2) || (Dendrites[0]->Type == 3))
+                {
+                    Dendrites[0]->bp_2D_Trace_O(p_LL, p_LL_X, p_LL_Y, p_X, p_Y);
+                }
+            }
+
+            //---std::cout << "*";
+            if (Dendrites[1] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[1]->Type != 2) && (Dendrites[1]->Type != 3))
+                {
+                    Dendrites[1]->bp_2D_Trace_F(p_LL, p_LL_X, p_LL_Y, p_X, p_Y + 1);
+                }
+
+                //If the dendritically connected node is a treetop then call the _O on it.
+                if ((Dendrites[1]->Type == 2) || (Dendrites[1]->Type == 3))
+                {
+                    Dendrites[1]->bp_2D_Trace_O(p_LL, p_LL_X, p_LL_Y, p_X, p_Y + 1);
+                }
+            }
+
+            //---std::cout << "*";
+            if (Dendrites[2] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[2]->Type != 2) && (Dendrites[2]->Type != 3))
+                {
+                    Dendrites[2]->bp_2D_Trace_F(p_LL, p_LL_X, p_LL_Y, p_X + 1, p_Y);
+                }
+
+                //If the dendritically connected node is a treetop then call the _O on it.
+                if ((Dendrites[2]->Type == 2) || (Dendrites[2]->Type == 3))
+                {
+                    Dendrites[2]->bp_2D_Trace_O(p_LL, p_LL_X, p_LL_Y, p_X + 1, p_Y);
+                }
+            }
+            //---std::cout << "*";
+            if (Dendrites[3] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[3]->Type != 2) && (Dendrites[3]->Type != 3))
+                {
+                    Dendrites[3]->bp_2D_Trace_F(p_LL, p_LL_X, p_LL_Y, p_X + 1, p_Y + 1);
+                }
+
+                //If the dendritically connected node is a treetop then call the _O on it.
+                if ((Dendrites[3]->Type == 2) || (Dendrites[3]->Type == 3))
+                {
+                    Dendrites[3]->bp_2D_Trace_O(p_LL, p_LL_X, p_LL_Y, p_X + 1, p_Y + 1);
+                }
+            }
+
+        }
+        else
+        {
+            //Output the state
+            //---std::cout << " <" << NID << " :: " << State << "> ";
+            p_LL->new_LL(State);
+            p_LL_X->new_LL(p_X);
+            p_LL_Y->new_LL(p_Y);
+        }
+        //---std::cout << " -=>";
+    }
+
+    //bp_Output the left node.
+    void bp_2D_Trace_F(c_Linked_List_Handler* p_LL, c_Linked_List_Handler* p_LL_X, c_Linked_List_Handler* p_LL_Y, uint64_t p_X = 0, uint64_t p_Y = 0)
+    {
+
+        //---std::cout << "\n bp_2D_Trace_F <=- " << NID << " " << p_X << " " << p_Y;
+
+        //If a left leg exists then initiate a backpropagation along it, then along the right side.
+        if (Dendrite_Count != 0)
+        {
+            //---std::cout << "*";
+            if (Dendrites[0] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[0]->Type != 2) && (Dendrites[0]->Type != 3))
+                {
+                    Dendrites[0]->bp_2D_Trace_F(p_LL, p_LL_X, p_LL_Y, p_X, p_Y);
+                }
+            }
+
+            //---std::cout << "*";
+            if (Dendrites[1] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[1]->Type != 2) && (Dendrites[1]->Type != 3))
+                {
+                    Dendrites[1]->bp_2D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_X, p_Y + 1);
+                }
+            }
+
+            //---std::cout << "*";
+            if (Dendrites[2] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[2]->Type != 2) && (Dendrites[2]->Type != 3))
+                {
+                    Dendrites[2]->bp_2D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_X + 1, p_Y);
+                }
+            }
+            //---std::cout << "*";
+            if (Dendrites[3] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[3]->Type != 2) && (Dendrites[3]->Type != 3))
+                {
+                    Dendrites[3]->bp_2D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_X + 1, p_Y + 1);
+                }
+            }
+
+        }
+        else
+        {
+            //Output the state
+            //---std::cout << " <" << NID << " :: " << State << "> ";
+            p_LL->new_LL(State);
+            p_LL_X->new_LL(p_X);
+            p_LL_Y->new_LL(p_Y);
+        }
+    }
+
+    //bp_Output the other nodes, M stands for many.
+    void bp_2D_Trace_M(c_Linked_List_Handler* p_LL, c_Linked_List_Handler* p_LL_X, c_Linked_List_Handler* p_LL_Y, uint64_t p_X = 0, uint64_t p_Y = 0)
+    {
+        //---std::cout << "\n bp_2D_Trace_M <=- " << NID << " " << p_X << " " << p_Y;
+
+        //If a left leg exists then initiate a backpropagation along it, then along the right side.
+        if (Dendrite_Count != 0)
+        {
+            //---std::cout << "*";
+            if (Dendrites[1] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[1]->Type != 2) && (Dendrites[1]->Type != 3))
+                {
+                    Dendrites[1]->bp_2D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_X, p_Y + 1);
+                }
+            }
+
+            //---std::cout << "*";
+            if (Dendrites[2] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[2]->Type != 2) && (Dendrites[2]->Type != 3))
+                {
+                    Dendrites[2]->bp_2D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_X + 1, p_Y);
+                }
+            }
+            //---std::cout << "*";
+            if (Dendrites[3] != NULL)
+            {
+                //If not a treetop then call _F
+                if ((Dendrites[3]->Type != 2) && (Dendrites[3]->Type != 3))
+                {
+                    Dendrites[3]->bp_2D_Trace_M(p_LL, p_LL_X, p_LL_Y, p_X + 1, p_Y + 1);
+                }
+            }
+        }
+        else
+        {
+            //Output the state
+            //---std::cout << " <" << NID << " :: " << State << "> ";
+            p_LL->new_LL(State);
+            p_LL_X->new_LL(p_X);
+            p_LL_Y->new_LL(p_Y);
+        }
+    }
+
+
     void output_Node_Raw()
     {
         std::cout << "\n Node_ID (NID): " << NID << " ";
@@ -423,7 +849,7 @@ public:
         std::cout << " --- Dendrites: ";
         for (int cou_D = 0; cou_D < Dendrite_Count; cou_D++)
         {
-            std::cout << " [" << cou_D << "] " << Dendrites[cou_D]->NID;
+            std::cout << " [" << cou_D << "] " << Dendrites[cou_D]->NID << " Weight: " << Dendrite_Weights[cou_D] << " | ";
         }
         std::cout << " --- Axon_Hillock_Count: " << Axon_Hillock_Count;
         for (int cou_H = 0; cou_H < Axon_Hillock_Count; cou_H++)
