@@ -8,3 +8,5 @@ The NT4.exe runs asynchronously as a standalone server. Use Control.py to intera
 
 The documentation for using the text-server can be currently (still figuring this out) found at:
 https://briar-fisk.github.io/NT4-Neural-Net-Engine/classc___construct___text___server.html
+
+This work is released to the public domain with no restrictions other than I cannot be held responsible for what you do with it.
